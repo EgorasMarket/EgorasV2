@@ -1,0 +1,24 @@
+.market_page_section {
+  padding: 8em 0em;
+  position: relative;
+  padding-bottom: 4em;
+  background: #f3f3f3;
+}
+.market_area {
+  margin-top: 0 !important;
+}
+.categories_page_area_non_dash {
+  margin-top: 0 !important;
+  gap: 10px !important;
+}
+@media (max-width: 422px) {
+  .market_page_section {
+    padding: 7em 0em;
+    position: relative;
+    padding-bottom: 4em;
+    background: #f3f3f3;
+  }
+  .market_page_section .custom_container {
+    padding: 0em 0em;
+  }
+}

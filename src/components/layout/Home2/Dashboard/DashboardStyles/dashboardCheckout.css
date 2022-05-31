@@ -1,0 +1,165 @@
+.checkout_main {
+  position: fixed;
+  top: 0;
+  background: #000000a1;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000000000;
+  left: 0;
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4em;
+}
+.checkout_page_section {
+  width: 100vw;
+  position: fixed;
+  z-index: 10000000;
+  top: 0;
+  background: #00000091;
+  left: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(6px);
+}
+.checkout_out_div {
+  background: #80808000;
+  width: 100vw;
+  position: absolute;
+  height: 100vh;
+  cursor: pointer;
+}
+.checkout_cont {
+  background: #fff;
+  width: 50%;
+  margin: auto;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px #404040;
+  z-index: 10000000000;
+  position: relative;
+  /* padding: 2em; */
+}
+.checkout_cont_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em 2em;
+  border-bottom: 1px solid #d7d7d7;
+}
+.checkout_header_img {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.egoras_logo_checkout {
+  width: 150px;
+}
+.checkout_modal_exit_icon {
+  background: #42a66c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  /* font-size: 10px; */
+}
+.checkout_total_balance {
+  padding: 1em 2em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 100;
+  color: black;
+  border-bottom: 1px solid #d7d7d7;
+}
+.balance_checkout {
+  color: #42a66c;
+  font-weight: 800;
+  font-size: 16px;
+}
+.card_details_title {
+  color: #fff;
+  background: #a1a1a1;
+  font-size: 12px;
+  padding: 1em 2em;
+  font-weight: 700;
+  text-align: center;
+}
+.card_details_inputs {
+  padding: 1em 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.card_details_input1 {
+  width: 100%;
+  padding: 1em 2em;
+  border-radius: 5px;
+  border: solid 1px #c7e5d4;
+  font-size: 14px;
+  font-weight: 500;
+  color: #799786;
+  padding-left: 3em;
+}
+.card_details_input1::placeholder {
+  color: #94ad9f;
+  font-size: 14px;
+  font-weight: 500;
+}
+.card_input_heading {
+  font-size: 14px;
+  color: #535353;
+  font-weight: 600;
+}
+.card_input_contss {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.card_input_cont {
+  width: 100%;
+}
+.card_details_titleww {
+  color: #ababab;
+  background: #dddddd;
+  font-size: 12px;
+  padding: 1em 2em;
+  font-weight: 700;
+  border-radius: 6px;
+  text-align: right;
+}
+.pay_now_btn {
+  background: #42a66c;
+  color: #fff;
+  border: none;
+  padding: 0.6em;
+  border-radius: 8px;
+  font-weight: 700;
+}
+.close_checkout_icon {
+  font-size: 16px !important;
+  background: #a1a1a1;
+  color: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.checkout_modal_out {
+  /* background: #fff; */
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 1000;
+  cursor: pointer;
+}
+.checkout_modal_out_signup {
+  /* background: #fff; */
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 3;
+  cursor: pointer;
+}

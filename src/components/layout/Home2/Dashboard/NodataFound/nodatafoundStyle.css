@@ -1,0 +1,27 @@
+.nodata_found_div {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  align-items: center !important;
+  gap: 0px !important;
+  padding: 1em !important;
+}
+
+.nodata_txt {
+  font-size: 18px;
+  color: #a1a1a1;
+  font-weight: 700;
+}
+.nodataImage {
+  width: 150px;
+}
+@media screen and (max-width: 991px) {
+  .nodataImage {
+    width: 80px;
+  }
+  .nodata_txt {
+    font-size: 14px;
+    color: #808080;
+    font-weight: 700;
+  }
+}

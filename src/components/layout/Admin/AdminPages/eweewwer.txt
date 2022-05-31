@@ -1,0 +1,52 @@
+BVN: "23456719152"
+InfoReason: "Referred"
+accountOfficer: null
+branch: null
+createdAt: "2022-01-23T17:33:20.000Z"
+dateOfBirth: "12/12/2012"
+email: "samuelify225@gmail.com"
+email_auth: "ead578ed-0771-400d-a000-8073c65c428d"
+fullname: "Samuel Ifeanyi"
+gender: "Male"
+id: "11da3308-6113-4f96-8c8b-8e6e5bd847f3"
+is_active: true
+password_hash: "$2a$10$t5ntsiy8ZUq8kUJAZUV9QeHSKZFHxubTU1yhwr/H60zirWem4rcIC"
+phoneNumber: "08164020234"
+ref_auth: "54ba6193-c48d-416a-910c-34a5782a7438"
+secondaryPhoneNumber: null
+updatedAt: "2022-01-25T09:41:31.000Z"
+userImage: "1643103691719.jpeg"
+
+
+
+{ successPop == true ? (
+                <div className="success_icon_div">
+                  <p>
+                    <SuccessIndicator
+                      size="96px"
+                      color="black"
+                      className="success_indic"
+                    />
+                  </p>
+
+                  <p className="acct_created_txt">Transaction Successful!</p>
+                </div>
+              ) :null}
+
+              customer_id: "11da3308-6113-4f96-8c8b-8e6e5bd847f3"
+id: "ALMHUI"
+image: "1642591690730.jpeg"
+item_amount: "20000"
+product_category_code: "NmCPfPsS25"
+product_details: "string string string string string"
+product_id: "42448ea3-03bc-49f1-b9ef-56c00ddc66bd"
+product_name: "Iphone 7 Pro"
+product_type: "MICRO"
+quantity: 1
+status: "NEW"
+sub_total: "20000"
+
+
+       Array(data.data.data.product_duration)
+            .fill(0)
+            .map((e, i) => i + 1)

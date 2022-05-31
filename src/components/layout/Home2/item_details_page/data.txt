@@ -1,0 +1,28 @@
+{
+    "product_specifications": [
+        "SKU: RANDOM",
+        " PRODUCT LINE: KP",
+        " MODEL: GROUP",
+        "SIZE: 10CM",
+        " COLOR: WHITE",
+        " MAIN MATERIAL: SOLID"
+    ],
+    "product_category_code": "2344w232ws",
+    "product_name": "MacBook Pro 2015",
+    "product_duration": 0,
+    "product_image": "1642591817841.jpeg",
+    "product_details": "string string string string string",
+    "unitCount": 0,
+    "amount": "200000",
+    "product_id": "0f0b504d-e633-4426-a640-705faeb2d6e6",
+    "percentage": null,
+    "total_amount": 200000,
+    "initial_deposit": null,
+    "amount_per_day": null,
+    "product_brand": "MacBook",
+    "rounded": null,
+    "no_of_days": 0,
+    "no_of_days_paid": null,
+    "days_left": null,
+    "payment_type": "OUTRIGHT"
+}

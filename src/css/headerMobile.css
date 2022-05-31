@@ -1,0 +1,238 @@
+/* mobile view code start */
+/* first break point ========================================= */
+@media screen and (max-width: 1245px) {
+  /* header Section Start */
+  /* .headerSection {
+    padding: 1em 1em;
+  } */
+  .egr-logo {
+    width: 130px;
+  }
+
+  .activeLink {
+    font-size: 13px;
+  }
+  .explore,
+  .docs,
+  .about,
+  .metrics {
+    font-size: 13px;
+  }
+
+  .getLoan {
+    font-size: 13px;
+  }
+
+  .connect {
+    font-size: 13px;
+  }
+  /* header Section end */
+}
+
+@media screen and (max-width: 1059px) {
+  .egr-logo {
+    margin-right: 0px;
+  }
+
+  .explore,
+  .docs,
+  .about,
+  .metrics {
+    font-size: 12px;
+  }
+  .docs,
+  .about {
+    margin-right: 35px;
+  }
+  .Line {
+    width: 67px;
+  }
+
+  .getLoan {
+    font-size: 12px;
+  }
+
+  .product {
+    font-size: 12px;
+  }
+  .company {
+    font-size: 12px;
+  }
+  .connect {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .headerButtons {
+    padding-left: 0;
+  }
+
+  .container.header {
+    max-width: 957px;
+  }
+}
+
+/* @media screen and (max-width: 950px) {
+  .explore,
+  .docs,
+  .about,
+  .metrics {
+    margin-right: 10px;
+  }
+} */
+
+@media screen and (max-width: 991px) {
+  .onMobile {
+    display: grid;
+    width: 10px !important;
+    padding: 0 !important;
+  }
+
+  .header-area {
+    display: none;
+  }
+
+  .header_mobile_view {
+    display: flex;
+    background: none;
+    padding: 0.5em 0em;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .explore,
+  .docs,
+  .about,
+  .metrics {
+    font-size: 14px;
+  }
+
+  .header_category_area {
+    background: #e5e5e5;
+    display: none;
+  }
+  .header_search {
+    width: 100%;
+    position: relative;
+  }
+  .hideNow {
+    display: grid !important;
+    width: 10px !important;
+    padding: 0 !important;
+  }
+  .menu_open_mui_icon {
+    font-size: 30px !important;
+  }
+
+  .header_mobile_view_area1_menu_icon {
+    font-size: 32px !important;
+  }
+
+  .header_mobile_view_area1 {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  #HideAgain {
+    width: 10px !important;
+    padding: 0 !important;
+  }
+  .egrLogo2Cont {
+    display: none;
+    flex-direction: column;
+    width: 50%;
+  }
+
+  /* .egr-logo2 {
+    display: block;
+    width: 130px;
+  } */
+  .header_search_bar {
+    width: 100%;
+    border-radius: 6px;
+    border: solid 1px #229e54;
+    padding: 0.8em 1em;
+    font-size: 12px;
+    transition: 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  }
+
+  .header_mobile_icons_cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .headerLinks {
+    display: none;
+  }
+  .headerButtons {
+    display: none;
+  }
+  /* 
+  .headerSection {
+    padding: 9px 0em;
+    padding-top: 0.5em;
+  } */
+  .on-mobile-navigators {
+    display: flex;
+    margin-top: 20px;
+  }
+
+  .show-header-links {
+    display: flex;
+  }
+  .header_search_icon {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    bottom: 50%;
+    margin: auto;
+    font-size: 4px !important;
+    color: #ffffff;
+    background: #229e54;
+    height: 100% !important;
+    width: 11% !important;
+    padding: 9px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    transition: 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  }
+  .headerSection {
+    background-color: #fff;
+    top: 0;
+    z-index: 100;
+    font-family: Roboto;
+    box-shadow: 0px 0px 15px #efefef;
+    /* padding: 0.5em 2em; */
+    background-color: #eaeaea;
+    position: fixed;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 0px;
+    gap: 0px;
+  }
+  .egr-logo {
+    width: 150px;
+  }
+}
+
+@media screen and (max-width: 645px) {
+  /* .headerSection {
+    padding: 9px 0em;
+    padding-top: 0.5em;
+  } */
+}
+
+@media screen and (max-width: 463px) {
+  .hamburgerOpen {
+    width: 5%;
+  }
+  .egr-logo {
+    width: 120px;
+  }
+  /* .egr-logo2 {
+    width: 100px;
+  } */
+}

@@ -1,0 +1,38 @@
+.error_link_div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  border: solid 1px #ffc3c3;
+  border-radius: 5px;
+  padding: 3em 2em;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0px 0px 10px #ffe1e1;
+}
+.error_link_div_title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #ed5555;
+}
+
+.error_link_btn_div {
+  width: 100%;
+  margin-top: 20px;
+}
+.error_lik__route {
+  width: 100%;
+}
+
+.error_link_btn {
+  width: 100%;
+  padding: 0.5em;
+  border-radius: 6px;
+  border: none;
+  background: #ed5555;
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0px 5px 10px #ecc4c4;
+}
