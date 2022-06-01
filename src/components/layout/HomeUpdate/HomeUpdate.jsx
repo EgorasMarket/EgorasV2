@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
@@ -562,8 +562,18 @@ const HomeUpdate = () => {
       "Content-Type": "application/json",
     },
   };
+  const Ref = useRef(null);
   const [aboutVideoModal, setAboutVideoModal] = useState(false);
   const [term, setTerm] = useState([]);
+  const [dumDay, setDumDay] = useState(new Date(2022, 5, 1, 0, 0, 0, 0));
+  const [expiryTime, setExpiryTime] = useState("5 jun 2022 00:00:00");
+  const [countdownTime, setCountdownTime] = useState({
+    countdownDays: "",
+    countdownHours: "",
+    countdownlMinutes: "",
+    countdownSeconds: "",
+  });
+
   const [activeTab, setActiveTab] = useState("computers");
   const toggleAboutVideoModal = () => {
     if (aboutVideoModal === true) {
@@ -635,6 +645,51 @@ const HomeUpdate = () => {
     console.log(trt);
     console.log(txt);
   };
+  const countdownTimer = () => {
+    const timeInterval = setInterval(() => {
+      const countdownDateTime = new Date(expiryTime).getTime();
+      const currentTime = new Date().getTime();
+      const remainingDayTime = countdownDateTime - currentTime;
+      const totalDays = Math.floor(remainingDayTime / (1000 * 60 * 60 * 24));
+      const totalHours = Math.floor(
+        (remainingDayTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const totalMinutes = Math.floor(
+        (remainingDayTime % (1000 * 60 * 60)) / (1000 * 60)
+      );
+      const totalSeconds = Math.floor((remainingDayTime % (1000 * 60)) / 1000);
+
+      const runningCountdownTime = {
+        countdownDays: totalDays,
+        countdownHours: totalHours,
+        countdownMinutes: totalMinutes,
+        countdownSeconds: totalSeconds,
+      };
+
+      setCountdownTime(runningCountdownTime);
+
+      if (remainingDayTime < 0) {
+        clearInterval(timeInterval);
+        setExpiryTime(false);
+      }
+    }, 1000);
+  };
+  useEffect(() => {
+    countdownTimer();
+  }, []);
+
+  useEffect(() => {
+    let newDate = new Date();
+    let endDate = new Date(2022, 5, 8, 0, 0, 0, 0);
+
+    endDate.setHours(endDate.getHours() + 168);
+    // return deadline;
+    const remainingDays = endDate - newDate;
+    console.log(endDate);
+    console.log(dumDay);
+    console.log(remainingDays);
+  }, []);
+
   return (
     <div style={{ overflow: "hidden" }}>
       <section className="h_update_hero_section">
@@ -870,6 +925,259 @@ const HomeUpdate = () => {
       {/* ================== */}
       {/* ================== */}
 
+      {/* ================== */}
+      {/* ================== */}
+      {/* ================== */}
+      {/* ================== */}
+      {/* ================== */}
+      {/* ================== */}
+
+      <section className="productsDisplaySection">
+        <div className="custom_container">
+          <div className="home_products_display_cont" id="computerAcc">
+            <div className="home_products_body_head">
+              <div className="shop_heading_body awoof_head_body">
+                <a href="/market" className="shop_arrow_div awoof_head">
+                  Awoof Sales
+                  <ArrowForwardIcon className="arrow_alt_forward" />
+                </a>
+                <div className="timer">
+                  {expiryTime !== false ? (
+                    <div className="timer_div">
+                      <p className="startsIn">Starts In:</p>
+                      <div className="countdownTime">
+                        {countdownTime.countdownDays}{" "}
+                        <span className="countdownTime_time_indicator">D</span>
+                      </div>
+                      <span>:</span>
+                      <div className="countdownTime">
+                        {countdownTime.countdownHours}{" "}
+                        <span className="countdownTime_time_indicator">H</span>
+                      </div>
+                      <span>:</span>
+                      <div className="countdownTime">
+                        {countdownTime.countdownMinutes}{" "}
+                        <span className="countdownTime_time_indicator">M</span>
+                      </div>
+                      <span>:</span>
+                      <div className="countdownTime">
+                        {countdownTime.countdownSeconds}{" "}
+                        <span className="countdownTime_time_indicator">S</span>
+                      </div>
+                    </div>
+                  ) : (
+                    <p>Deal has been Expired</p>
+                  )}
+                </div>
+                <span className="shop_heading_para">
+                  Opens Every Saturday by 12:00am and closes on Sunday 12:00am .
+                </span>
+              </div>
+            </div>
+            <div className="products_display_body_conts_pad">
+              {term.length <= 0 ? (
+                <NoDataFoundComponent text={text} />
+              ) : (
+                <>
+                  <div className="show_prods_on_mobile">
+                    {term.slice(0, 10).map(
+                      (asset) => (
+                        // if (product_category_desc === asset.product_category_desc) {
+                        // return (
+                        <a
+                          href={`/products/details/${
+                            asset.id
+                          }/${asset.product_name.replace(/\s+/g, "-")}`}
+                        >
+                          <li className="carous_list no_marg inventory_cards">
+                            <div
+                              className="storeTiles_storeTileContainer__HoGEa"
+                              style={{
+                                backgroundImage: `url(${asset.product_image})`,
+                                //           height: "200px",
+                                //           width: "100%",
+                                //           backgroundRepeat: "no-repeat",
+                                //           backgroundSize: "cover",
+                                //           borderRadius: "8px",
+                                //           borderBottomLeftRadius: "0px",
+                                //           borderBottomRightRadius: "0px",
+                                //   backgroundPositionY: "center",
+                              }}
+                            >
+                              <div className="out_right_install_tag">
+                                <button
+                                  className="out_right_install_tag_btn"
+                                  style={{
+                                    background: "#000",
+                                    borderColor: "#000",
+                                    color: "#fff",
+                                  }}
+                                >
+                                  Awoof
+                                </button>
+                              </div>
+
+                              <div className="storeTiles_storeTileBottomContainer__2sWHh">
+                                <div className="asset_name">
+                                  {asset.product_name}
+                                </div>
+                                <div class="asset_prices_div">
+                                  <div className="asset_title">
+                                    {asset.payment_type == "OUTRIGHT" ? (
+                                      <span className="init_amount">
+                                        <DisplayMoney amount={asset.amount} />
+                                      </span>
+                                    ) : (
+                                      <span className="init_amount">
+                                        <DisplayMoney
+                                          amount={asset.roundedAmount}
+                                        />
+                                      </span>
+                                    )}
+                                    {asset.payment_type == "OUTRIGHT" ? (
+                                      <span className="slashed_price">
+                                        <DisplayMoney
+                                          amount={asset.amount * 2}
+                                        />
+                                      </span>
+                                    ) : (
+                                      <span className="slashed_price">
+                                        <DisplayMoney
+                                          amount={asset.roundedAmount * 2}
+                                        />
+                                      </span>
+                                    )}
+                                  </div>
+                                  {asset.payment_type == "OUTRIGHT" ? null : (
+                                    <div className="amount_per_day_div">
+                                      <DisplayMoney
+                                        amount={
+                                          asset.amount / asset.product_duration
+                                        }
+                                      />
+
+                                      <span className="per_day_symbol">
+                                        {" "}
+                                        / perweek
+                                      </span>
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                              {/* </a> */}
+                            </div>
+                          </li>
+                        </a>
+                      )
+                      // );
+                    )}
+                  </div>
+                  <Carousel
+                    responsive={responsive8}
+                    className="partnerCards LEFTARROW market_carous"
+                    showDots={false}
+                    //   infinite={false}
+                    autoPlay={false}
+                    autoPlaySpeed={6000}
+                    transitionDelay={"2s"}
+                    infinite={false}
+                    draggable={true}
+                    // transitionDuration={500}
+                    swipeable={true}
+                    style={{ height: "25em" }}
+                  >
+                    {term.slice(0, 15).map((asset) => (
+                      <a
+                        href={`/products/details/${
+                          asset.id
+                        }/${asset.product_name.replace(/\s+/g, "-")}`}
+                      >
+                        <li className="carous_list">
+                          <div
+                            className="storeTiles_storeTileContainer__HoGEa"
+                            style={{
+                              backgroundImage: `url(${asset.product_image})`,
+                              //           height: "200px",
+                              //           width: "100%",
+                              //           backgroundRepeat: "no-repeat",
+                              //           backgroundSize: "cover",
+                              //           borderRadius: "8px",
+                              //           borderBottomLeftRadius: "0px",
+                              //           borderBottomRightRadius: "0px",
+                              //   backgroundPositionY: "center",
+                            }}
+                          >
+                            <div className="out_right_install_tag">
+                              <button
+                                className="out_right_install_tag_btn"
+                                style={{
+                                  background: "#000",
+                                  borderColor: "#000",
+                                  color: "#fff",
+                                }}
+                              >
+                                Awoof
+                              </button>
+                            </div>
+
+                            <div className="storeTiles_storeTileBottomContainer__2sWHh">
+                              <div className="asset_name">
+                                {asset.product_name}
+                              </div>
+                              <div class="asset_prices_div">
+                                <div className="asset_title">
+                                  {asset.payment_type == "OUTRIGHT" ? (
+                                    <span className="init_amount">
+                                      <DisplayMoney amount={asset.amount} />
+                                    </span>
+                                  ) : (
+                                    <span className="init_amount">
+                                      <DisplayMoney
+                                        amount={asset.roundedAmount}
+                                      />
+                                    </span>
+                                  )}
+                                  {asset.payment_type == "OUTRIGHT" ? (
+                                    <span className="slashed_price">
+                                      <DisplayMoney amount={asset.amount * 2} />
+                                    </span>
+                                  ) : (
+                                    <span className="slashed_price">
+                                      <DisplayMoney
+                                        amount={asset.roundedAmount * 2}
+                                      />
+                                    </span>
+                                  )}
+                                </div>
+                                {asset.payment_type == "OUTRIGHT" ? null : (
+                                  <div className="amount_per_day_div">
+                                    <DisplayMoney
+                                      amount={
+                                        asset.amount / asset.product_duration
+                                      }
+                                    />
+
+                                    <span className="per_day_symbol">
+                                      {" "}
+                                      / perweek
+                                    </span>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                            {/* </a> */}
+                          </div>
+                        </li>
+                      </a>
+                    ))}
+                  </Carousel>
+                </>
+              )}
+            </div>
+            {/* </div> */}
+          </div>
+        </div>
+      </section>
       {/* ================== */}
       {/* ================== */}
       {/* ================== */}
