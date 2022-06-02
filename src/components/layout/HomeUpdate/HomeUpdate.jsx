@@ -566,11 +566,13 @@ const HomeUpdate = () => {
   const [aboutVideoModal, setAboutVideoModal] = useState(false);
   const [term, setTerm] = useState([]);
   const [dumDay, setDumDay] = useState(new Date(2022, 5, 1, 0, 0, 0, 0));
-  const [expiryTime, setExpiryTime] = useState("5 jun 2022 00:00:00");
-  const [countdownTime, setCountdownTime] = useState({
+  const [countDownDate, setCountDownDate] = useState(
+    new Date("Jun 8, 2022 15:37:").getTime()
+  );
+  const [countDownDateTimes, setCountDownDateTimes] = useState({
     countdownDays: "",
     countdownHours: "",
-    countdownlMinutes: "",
+    countdownMinutes: "",
     countdownSeconds: "",
   });
 
@@ -639,43 +641,42 @@ const HomeUpdate = () => {
   }, []);
   const text = "No Products Found";
 
-  var txt = "My Name is Samuel";
-  const enCode = () => {
-    var trt = new TextEncoder(txt);
-    console.log(trt);
-    console.log(txt);
-  };
-  const countdownTimer = () => {
+  // Update the count down every 1 second
+  const countDownFunction = () => {
     const timeInterval = setInterval(() => {
-      const countdownDateTime = new Date(expiryTime).getTime();
-      const currentTime = new Date().getTime();
-      const remainingDayTime = countdownDateTime - currentTime;
-      const totalDays = Math.floor(remainingDayTime / (1000 * 60 * 60 * 24));
-      const totalHours = Math.floor(
-        (remainingDayTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      // Get today's date and time
+      const now = new Date().getTime();
+
+      // Find the distance between now and the count down date
+      const distance = countDownDate - now;
+
+      // Time calculations for days, hours, minutes and seconds
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
       );
-      const totalMinutes = Math.floor(
-        (remainingDayTime % (1000 * 60 * 60)) / (1000 * 60)
-      );
-      const totalSeconds = Math.floor((remainingDayTime % (1000 * 60)) / 1000);
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      const runningCountdownTime = {
-        countdownDays: totalDays,
-        countdownHours: totalHours,
-        countdownMinutes: totalMinutes,
-        countdownSeconds: totalSeconds,
-      };
+      // Output the result in an element with id="demo"
 
-      setCountdownTime(runningCountdownTime);
+      setCountDownDateTimes({
+        countdownDays: days,
+        countdownHours: hours,
+        countdownMinutes: minutes,
+        countdownSeconds: seconds,
+      });
 
-      if (remainingDayTime < 0) {
+      // If the count down is over, write some text
+      if (distance < 0) {
         clearInterval(timeInterval);
-        setExpiryTime(false);
+        setCountDownDate(false);
       }
     }, 1000);
   };
+
   useEffect(() => {
-    countdownTimer();
+    countDownFunction();
   }, []);
 
   useEffect(() => {
@@ -684,10 +685,11 @@ const HomeUpdate = () => {
 
     endDate.setHours(endDate.getHours() + 168);
     // return deadline;
-    const remainingDays = endDate - newDate;
+    const remainingDays = new Date(endDate - dumDay);
     console.log(endDate);
     console.log(dumDay);
     console.log(remainingDays);
+    // console.log(remainingDays);
   }, []);
 
   return (
@@ -942,26 +944,26 @@ const HomeUpdate = () => {
                   <ArrowForwardIcon className="arrow_alt_forward" />
                 </a>
                 <div className="timer">
-                  {expiryTime !== false ? (
+                  {countDownDate !== false ? (
                     <div className="timer_div">
                       <p className="startsIn">Starts In:</p>
                       <div className="countdownTime">
-                        {countdownTime.countdownDays}{" "}
+                        {countDownDateTimes.countdownDays}{" "}
                         <span className="countdownTime_time_indicator">D</span>
                       </div>
                       <span>:</span>
                       <div className="countdownTime">
-                        {countdownTime.countdownHours}{" "}
+                        {countDownDateTimes.countdownHours}{" "}
                         <span className="countdownTime_time_indicator">H</span>
                       </div>
                       <span>:</span>
                       <div className="countdownTime">
-                        {countdownTime.countdownMinutes}{" "}
+                        {countDownDateTimes.countdownMinutes}{" "}
                         <span className="countdownTime_time_indicator">M</span>
                       </div>
                       <span>:</span>
                       <div className="countdownTime">
-                        {countdownTime.countdownSeconds}{" "}
+                        {countDownDateTimes.countdownSeconds}{" "}
                         <span className="countdownTime_time_indicator">S</span>
                       </div>
                     </div>
