@@ -566,7 +566,7 @@ const HomeUpdate = () => {
   const [aboutVideoModal, setAboutVideoModal] = useState(false);
   const [term, setTerm] = useState([]);
   const [dumDay, setDumDay] = useState(new Date(2022, 5, 1, 0, 0, 0, 0));
-  const [countDownDate, setCountDownDate] = useState(
+  const [countDownDeadLine, setCountDownDeadLine] = useState(
     new Date("Jun 8, 2022 15:37:").getTime()
   );
   const [countDownDateTimes, setCountDownDateTimes] = useState({
@@ -648,7 +648,7 @@ const HomeUpdate = () => {
       const now = new Date().getTime();
 
       // Find the distance between now and the count down date
-      const distance = countDownDate - now;
+      const distance = countDownDeadLine - now;
 
       // Time calculations for days, hours, minutes and seconds
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -670,7 +670,7 @@ const HomeUpdate = () => {
       // If the count down is over, write some text
       if (distance < 0) {
         clearInterval(timeInterval);
-        setCountDownDate(false);
+        setCountDownDeadLine(false);
       }
     }, 1000);
   };
@@ -944,7 +944,7 @@ const HomeUpdate = () => {
                   <ArrowForwardIcon className="arrow_alt_forward" />
                 </a>
                 <div className="timer">
-                  {countDownDate !== false ? (
+                  {countDownDeadLine !== false ? (
                     <div className="timer_div">
                       <p className="startsIn">Starts In:</p>
                       <div className="countdownTime">
