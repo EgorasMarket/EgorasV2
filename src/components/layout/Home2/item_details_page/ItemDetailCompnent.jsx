@@ -406,13 +406,8 @@ const ItemDetailComponent = ({
               </div>
               <div className="offline_payment_para">
                 <CallIcon className="call_us_icon" />{" "}
-                <a href="https://web.whatsapp.com/send?phone=08164020234">
-                  091231183924
-                </a>
-                ,{" "}
-                <a href="https://web.whatsapp.com/send?phone=090234567893">
-                  09048834122
-                </a>
+                <a href="tel:{091231183924}">091231183924</a>,{" "}
+                <a href="tel:{09048834122}">09048834122</a>
               </div>
             </div>
             {payment_type === "INSTALLMENT" ? (

@@ -12,8 +12,6 @@ const way = window.location.pathname;
 const AdminShowOrder = () => {
   // const [searchTerm, setSearchTerm] = useState('');
   const [data, setData] = useState([]);
-  const [roleRemove, setRoleRemove] = useState("");
- 
 
   // const [allCustomers, setAllCustomers] = useState([]);
   const config = {
@@ -35,47 +33,22 @@ const AdminShowOrder = () => {
   }, []);
 
   const fulfilOrder = async (order_id) => {
-    // alert(order_id);
-    // const call = axios.post(api_url2 + "/v1/order/fulfil/" + order_id, null, config)
-    
-       await axios
-      .get(api_url2 + '/v1/order/fulfil/'+ order_id, null, config)
-         .then((data) => {
-           setRoleRemove(order_id);
-        console.log(data, 'line_ful');
-        // setData(data.data.payloads);
+    alert(order_id);
+    await axios
+      // .post(api_url2 + '/v1/order/fulfil/' + order_id, null, config)
+      .post(`${api_url2}/v1/order/fulfil/${order_id}`, null, config)
+      .then((response) => {
+        console.log(response);
+        if (response.data.success === true) {
+          // alert('successfully updated');
+        } else {
+          // alert('failure');
+        }
       })
       .catch((err) => {
-        console.log(err); // "oh, no!"
+        console.log(err.message); // "oh, no!"
       });
-    
-     
   };
-
-  useEffect(() => {
-    // function handleSubmit(event) {
-    //   event.preventDefault();
-    // }
-    if (roleRemove === "") {
-      setData(data);
-      //console.log("tttt");
-    } else {
-      console.log(data);
-      const results = data.filter(
-        (userInfo) =>
-          !userInfo.id
-            .toString()
-            .toLowerCase()
-            .includes(roleRemove.toLowerCase())
-      );
-      console.log(results);
-      setData(results);
-    }
-  }, [roleRemove, data]);
-
-
-
-   
 
   return (
     <>
@@ -180,7 +153,6 @@ const AdminShowOrder = () => {
                                   className="btn btn-success"
                                   onClick={() => {
                                     fulfilOrder(payload.order_id);
-                                    
                                   }}
                                 >
                                   FULFIL

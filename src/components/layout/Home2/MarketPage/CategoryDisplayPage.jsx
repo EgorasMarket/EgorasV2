@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import Carousel from 'react-multi-carousel';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import WidgetsIcon from '@mui/icons-material/Widgets';
-import SearchIcon from '@mui/icons-material/Search';
-import DisplayMoney from '../../../DisplayMoney';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import '../Dashboard/DashboardStyles/category.css';
-import './market.css';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import React, { useState, useEffect } from "react";
+import Carousel from "react-multi-carousel";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import WidgetsIcon from "@mui/icons-material/Widgets";
+import SearchIcon from "@mui/icons-material/Search";
+import DisplayMoney from "../../../DisplayMoney";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import "../Dashboard/DashboardStyles/category.css";
+import "./market.css";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import {
   PRODUCT_LOADED,
   API_URL2 as api_url2,
-} from '../../../../actions/types';
-import axios from 'axios';
-import { connect } from 'react-redux';
-import '../Dashboard/DashboardPages/CategoryPages/the.css';
-import { PaginatedItems } from '../AllProductsDisplayPage/AllProductsDisplayPage';
-import { numberWithCommas } from '../../../../static';
-import { NoDataFoundComponent } from '../Dashboard/NodataFound/NoDataFoundComponent';
+} from "../../../../actions/types";
+import axios from "axios";
+import { connect } from "react-redux";
+import "../Dashboard/DashboardPages/CategoryPages/the.css";
+import { PaginatedItems } from "../AllProductsDisplayPage/AllProductsDisplayPage";
+import { numberWithCommas } from "../../../../static";
+import { NoDataFoundComponent } from "../Dashboard/NodataFound/NoDataFoundComponent";
 
 const responsive8 = {
   superLargeDesktop: {
@@ -56,45 +56,25 @@ const responsive8 = {
 };
 
 const CategoryDisplayPage = ({ match }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   // const [brandCheck, setBrandCheck] = useState(null);
-  const [brandCheck, setBrandCheck] = useState('');
-  const [check, setCheck] = useState('');
+  const [brandCheck, setBrandCheck] = useState("");
+  const [check, setCheck] = useState("");
   // const [brandCheckArray, setBrandCheckArray] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [brands, setBrands] = useState([]);
   const [filteredArray, setFilteredArray] = useState([]);
 
-  const text = 'No products found yet.';
+  const text = "No products found yet.";
 
   const [seeAll, setSeeAll] = useState([]);
 
   const LinkCategory = match.params.category;
   // })
-  const [page, setPage] = useState({
-    categoryPhoneTablets: '',
-    categoryHomeAppliances: '',
-    categoryElectronics: '',
-    categoryComputerAccessories: '',
-    categoryFurniture: '',
-    categoryMusicalEquipment: '',
-    categoryIndustrialEquipment: '',
-  });
-  // let currencyConverter = CurrencyConverter;
-
-  const {
-    categoryPhoneTablets,
-    categoryHomeAppliances,
-    categoryElectronics,
-    categoryComputerAccessories,
-    categoryFurniture,
-    categoryMusicalEquipment,
-    categoryIndustrialEquipment,
-  } = page;
 
   const config = {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   };
   // useEffect(() => {
@@ -108,16 +88,16 @@ const CategoryDisplayPage = ({ match }) => {
   const handleFilterClick = (event) => {
     setBrandCheck(event.target.value);
 
-    if (brandCheck === '') {
+    if (brandCheck === "") {
       setBrandCheck(event.target.value);
       // setCheck(event.target.value);
 
       console.log(`checked ${event.target.value} box`);
       console.log(event.target.checked);
     } else if (brandCheck === event.target.value) {
-      setBrandCheck('');
+      setBrandCheck("");
       // setCheck("");
-      console.log('no brand checked here');
+      console.log("no brand checked here");
       console.log(event.target.checked);
     }
   };
@@ -136,14 +116,15 @@ const CategoryDisplayPage = ({ match }) => {
     axios
       .get(
         api_url2 +
-          '/v1/product/retrieve/products/byId/' +
+          "/v1/product/retrieve/products/byId/" +
           match.params.category,
         null,
         config
       )
       .then((data) => {
         //console.log("hello mr kingsley");
-        console.log(data.data.data, 'samuel_Chuks');
+        console.log(data.data.data, "samuel_Chuks");
+        console.log(data, "samuel_Chuksyyyyy");
 
         setSeeAll(data.data.data);
         const feed = data.data.data.product_image;
@@ -157,15 +138,13 @@ const CategoryDisplayPage = ({ match }) => {
   useEffect(() => {
     axios
       .get(
-        api_url2 +
-          '/v1/product/retrieve/brands/by/' +
-          match.params.category,
+        api_url2 + "/v1/product/retrieve/brands/by/" + match.params.category,
         null,
         config
       )
       .then((data) => {
         //console.log("hello mr kingsley");
-        console.log(data.data.data, 'samuel_Chuks');
+        console.log(data.data.data, "samuel_Chuks");
 
         setBrands(data.data.data);
       })
@@ -175,10 +154,7 @@ const CategoryDisplayPage = ({ match }) => {
   }, []);
   useEffect(() => {
     const results = brands.filter((name) =>
-      name.brand
-        .toString()
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase())
+      name.brand.toString().toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchResults(results);
   }, [searchTerm, brands]);
@@ -187,7 +163,7 @@ const CategoryDisplayPage = ({ match }) => {
       <section className="market_page_section">
         <div className="custom_container">
           <div className="categories_page_area categories_page_area_non_dash ">
-            {LinkCategory === 'Phones & Tablet' ? (
+            {LinkCategory === "Phones & Tablet" ? (
               <div className="cat_banner_heading">
                 Connect Your World
                 <img
@@ -197,7 +173,7 @@ const CategoryDisplayPage = ({ match }) => {
                 />
               </div>
             ) : null}
-            {LinkCategory === 'Fashion' ? (
+            {LinkCategory === "Fashion" ? (
               <div className="cat_banner_heading">
                 Connect Your World
                 <img
@@ -207,7 +183,7 @@ const CategoryDisplayPage = ({ match }) => {
                 />
               </div>
             ) : null}
-            {LinkCategory === 'Home Appliances' ? (
+            {LinkCategory === "Home Appliances" ? (
               <div className="cat_banner_heading">
                 Connect Your World
                 <img
@@ -217,7 +193,7 @@ const CategoryDisplayPage = ({ match }) => {
                 />
               </div>
             ) : null}
-            {LinkCategory === 'Electronics' ? (
+            {LinkCategory === "Electronics" ? (
               <div className="cat_banner_heading">
                 Electronics
                 <img
@@ -227,7 +203,7 @@ const CategoryDisplayPage = ({ match }) => {
                 />
               </div>
             ) : null}
-            {LinkCategory === 'Computer & Accessories' ? (
+            {LinkCategory === "Computer & Accessories" ? (
               <div className="cat_banner_heading">
                 Computer & accessories
                 <img
@@ -262,10 +238,7 @@ const CategoryDisplayPage = ({ match }) => {
                           <a
                             href={`/products/details/${
                               asset.id
-                            }/${asset.product_name.replace(
-                              /\s+/g,
-                              '-'
-                            )}`}
+                            }/${asset.product_name.replace(/\s+/g, "-")}`}
                             key={index5.toString()}
                           >
                             <li className="carous_list no_marg inventory_cards">
@@ -283,13 +256,13 @@ const CategoryDisplayPage = ({ match }) => {
                                   //   backgroundPositionY: "center",
                                 }}
                               >
-                                {asset.payment_type == 'OUTRIGHT' ? (
+                                {asset.payment_type == "OUTRIGHT" ? (
                                   <div className="out_right_install_tag">
                                     <button
                                       className="out_right_install_tag_btn"
                                       style={{
-                                        background: '#3ebc6e',
-                                        borderColor: '#3ebc6e',
+                                        background: "#3ebc6e",
+                                        borderColor: "#3ebc6e",
                                       }}
                                     >
                                       Outright
@@ -308,25 +281,19 @@ const CategoryDisplayPage = ({ match }) => {
                                   </div>
                                   <div class="asset_prices_div">
                                     <div className="asset_title">
-                                      {asset.payment_type ==
-                                      'OUTRIGHT' ? (
+                                      {asset.payment_type == "OUTRIGHT" ? (
                                         <span className="init_amount">
-                                          <DisplayMoney
-                                            amount={asset.amount}
-                                          />
+                                          <DisplayMoney amount={asset.amount} />
                                           {/* ₦{numberWithCommas(asset.amount)}{" "} */}
                                         </span>
                                       ) : (
                                         <span className="init_amount">
                                           <DisplayMoney
-                                            amount={
-                                              asset.roundedAmount
-                                            }
+                                            amount={asset.roundedAmount}
                                           />
                                         </span>
                                       )}
-                                      {asset.payment_type ==
-                                      'OUTRIGHT' ? (
+                                      {asset.payment_type == "OUTRIGHT" ? (
                                         <span className="slashed_price">
                                           <DisplayMoney
                                             amount={asset.amount * 2}
@@ -335,15 +302,12 @@ const CategoryDisplayPage = ({ match }) => {
                                       ) : (
                                         <span className="slashed_price">
                                           <DisplayMoney
-                                            amount={
-                                              asset.roundedAmount * 2
-                                            }
+                                            amount={asset.roundedAmount * 2}
                                           />
                                         </span>
                                       )}
                                     </div>
-                                    {asset.payment_type ==
-                                    'OUTRIGHT' ? null : (
+                                    {asset.payment_type == "OUTRIGHT" ? null : (
                                       <div className="amount_per_day_div">
                                         <DisplayMoney
                                           amount={
@@ -353,7 +317,7 @@ const CategoryDisplayPage = ({ match }) => {
                                         />
 
                                         <span className="per_day_symbol">
-                                          {' '}
+                                          {" "}
                                           / perday
                                         </span>
                                       </div>
@@ -374,22 +338,19 @@ const CategoryDisplayPage = ({ match }) => {
                       //   infinite={false}
                       autoPlay={false}
                       autoPlaySpeed={6000}
-                      transitionDelay={'2s'}
+                      transitionDelay={"2s"}
                       infinite={true}
                       draggable={true}
                       // transitionDuration={500}
                       swipeable={true}
-                      style={{ height: '25em' }}
+                      style={{ height: "25em" }}
                     >
                       {seeAll.slice(0, 10).map((asset, index5) => {
                         return (
                           <a
                             href={`/products/details/${
                               asset.id
-                            }/${asset.product_name.replace(
-                              /\s+/g,
-                              '-'
-                            )}`}
+                            }/${asset.product_name.replace(/\s+/g, "-")}`}
                             key={index5.toString()}
                           >
                             <li className="carous_list no_marg inventory_cards">
@@ -407,13 +368,13 @@ const CategoryDisplayPage = ({ match }) => {
                                   //   backgroundPositionY: "center",
                                 }}
                               >
-                                {asset.payment_type == 'OUTRIGHT' ? (
+                                {asset.payment_type == "OUTRIGHT" ? (
                                   <div className="out_right_install_tag">
                                     <button
                                       className="out_right_install_tag_btn"
                                       style={{
-                                        background: '#3ebc6e',
-                                        borderColor: '#3ebc6e',
+                                        background: "#3ebc6e",
+                                        borderColor: "#3ebc6e",
                                       }}
                                     >
                                       Outright
@@ -432,19 +393,14 @@ const CategoryDisplayPage = ({ match }) => {
                                   </div>
                                   <div class="asset_prices_div">
                                     <div className="asset_title">
-                                      {asset.payment_type ==
-                                      'OUTRIGHT' ? (
+                                      {asset.payment_type == "OUTRIGHT" ? (
                                         <span className="init_amount">
-                                          <DisplayMoney
-                                            amount={asset.amount}
-                                          />
+                                          <DisplayMoney amount={asset.amount} />
                                         </span>
                                       ) : (
                                         <span className="init_amount">
                                           <DisplayMoney
-                                            amount={
-                                              asset.roundedAmount
-                                            }
+                                            amount={asset.roundedAmount}
                                           />
                                           {/* ₦
                                           {numberWithCommas(
@@ -452,8 +408,7 @@ const CategoryDisplayPage = ({ match }) => {
                                           )}{" "} */}
                                         </span>
                                       )}
-                                      {asset.payment_type ==
-                                      'OUTRIGHT' ? (
+                                      {asset.payment_type == "OUTRIGHT" ? (
                                         <span className="slashed_price">
                                           <DisplayMoney
                                             amount={asset.amount * 2}
@@ -462,15 +417,12 @@ const CategoryDisplayPage = ({ match }) => {
                                       ) : (
                                         <span className="slashed_price">
                                           <DisplayMoney
-                                            amount={
-                                              asset.roundedAmount * 2
-                                            }
+                                            amount={asset.roundedAmount * 2}
                                           />
                                         </span>
                                       )}
                                     </div>
-                                    {asset.payment_type ==
-                                    'OUTRIGHT' ? null : (
+                                    {asset.payment_type == "OUTRIGHT" ? null : (
                                       <div className="amount_per_day_div">
                                         {/* ₦
                                         {numberWithCommas(
@@ -486,7 +438,7 @@ const CategoryDisplayPage = ({ match }) => {
                                           }
                                         />
                                         <span className="per_day_symbol">
-                                          {' '}
+                                          {" "}
                                           / perday
                                         </span>
                                       </div>
@@ -517,17 +469,26 @@ const CategoryDisplayPage = ({ match }) => {
             {/* =================+++++++++++++++ */}
             {/* =================+++++++++++++++ */}
 
-            {LinkCategory === 'Phones & Tablet' ? (
+            {LinkCategory === "Phones & Tablet" ? (
               <div className="cat_banner_group">
                 <div className="cat_banner_group1">
                   <img
                     src="/img/categorypageBanners/Web Banners c.jpg"
+                    // src={api_url2 + '/'+ seeAll[0].product_image}
+                    alt=""
+                    className="img_gr1"
+                  />
+                </div>
+                <div className="cat_banner_group1">
+                  <img
+                    src="/img/categorypageBanners/Web Banners d.jpg"
+                    alt=""
                     className="img_gr1"
                   />
                 </div>
               </div>
             ) : null}
-            {LinkCategory === 'Electronics' ? (
+            {LinkCategory === "Electronics" ? (
               <div className="cat_banner_group">
                 <div className="cat_banner_group1">
                   <img
@@ -546,7 +507,7 @@ const CategoryDisplayPage = ({ match }) => {
                 </div>
               </div>
             ) : null}
-            {LinkCategory === 'Computer & Accessories' ? (
+            {LinkCategory === "Computer & Accessories" ? (
               <div className="cat_banner_group">
                 <div className="cat_banner_group1">
                   <img
@@ -565,7 +526,7 @@ const CategoryDisplayPage = ({ match }) => {
                 </div>
               </div>
             ) : null}
-            {LinkCategory === 'Fashion' ? (
+            {LinkCategory === "Fashion" ? (
               <div className="cat_banner_group">
                 <div className="cat_banner_group1">
                   <img
@@ -598,7 +559,7 @@ const CategoryDisplayPage = ({ match }) => {
               <div className="filter_products_body">
                 <div className="filter_products_body_div">
                   <div className="cat_select_div2_head">
-                    Brand{' '}
+                    Brand{" "}
                     <div className="brand_search_area">
                       <input
                         type="search"
@@ -614,10 +575,7 @@ const CategoryDisplayPage = ({ match }) => {
                   </div>
                   <div className="cat_select_div2_body">
                     {searchResults.map((brand) => (
-                      <div
-                        className="select_brand_check_box"
-                        key={brand.id}
-                      >
+                      <div className="select_brand_check_box" key={brand.id}>
                         <label class="label_cont">
                           {brand.brand}
                           <input
@@ -628,11 +586,7 @@ const CategoryDisplayPage = ({ match }) => {
                             key={brand.id}
                             value={brand.brand}
                             onClick={handleFilterClick}
-                            checked={
-                              brandCheck === brand.brand
-                                ? true
-                                : false
-                            }
+                            checked={brandCheck === brand.brand ? true : false}
                             // checked={check}
                             // checked="true"
                           />

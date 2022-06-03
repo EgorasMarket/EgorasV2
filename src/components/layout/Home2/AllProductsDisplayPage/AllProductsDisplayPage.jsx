@@ -319,8 +319,8 @@ const AllProductsDisplayPage = ({ match }) => {
   console.log(match.params.tag);
   const [items, setItems] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
-  // const [searchVal, setSearchVal] = useState(match.params.tag);
-  const [searchVal, setSearchVal] = useState("n");
+  const [searchVal, setSearchVal] = useState(match.params.tag);
+  // const [searchVal, setSearchVal] = useState("n");
   const assetBrand = [
     {
       id: "apple",

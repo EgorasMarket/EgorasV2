@@ -21,6 +21,17 @@
   /* justify-content: space-between; */
 }
 
+<<<<<<< HEAD
+=======
+.swap_section {
+  padding: 10em 0em;
+  padding-bottom: 2em;
+  position: relative;
+  overflow: hidden;
+  background: #f7f7f7;
+}
+
+>>>>>>> 0509764233febfeb0ec1a7952c350a9a02bf7e74
 .generate_modal {
   width: 100vw;
   height: 100vh;

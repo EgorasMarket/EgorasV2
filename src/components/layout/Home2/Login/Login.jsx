@@ -67,8 +67,6 @@ const Login = ({ getLogin, isAuthenticated }) => {
     // }
   };
 
-  
-
   useEffect(() => {
     if (email === '') {
       setDisable(true);
@@ -86,13 +84,7 @@ const Login = ({ getLogin, isAuthenticated }) => {
       setDisable(false);
     }
   });
-
-   const text = "No item Locked yet";
-  const transText = "No transactions found";
-
-  
   const submitLogin = async (e) => {
-
     if (isLoading == true) {
       setDisable(true);
     } else if (isLoading == false) {
@@ -154,9 +146,7 @@ const Login = ({ getLogin, isAuthenticated }) => {
   // };
 
   return (
-    
     <div>
-    
       <section className="signup_section">
         <div className="container">
           <div className="signup_area">
@@ -285,18 +275,13 @@ const Login = ({ getLogin, isAuthenticated }) => {
 
     // :null}
   );
-  
 };
-if (navigator.onLine) {
 
 Login.propTypes = {
   getLogin: PropTypes.func.isRequired,
   setAlert: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
 };
-  } else {
-      //  <NoDataFoundComponent text={transText} />
-}
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,

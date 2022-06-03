@@ -110,7 +110,6 @@ export const Authenticate = (props) => {
         .then((blockNumber) => {
           if (!stale) {
             setBlockNumber(blockNumber);
-            console.log(blockNumber);
           }
         })
         .catch(() => {

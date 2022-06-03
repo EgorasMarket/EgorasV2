@@ -131,13 +131,6 @@ const useStyles2 = makeStyles((theme) => ({
   },
 }));
 
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     position: "relative",
-//   },
-
-// }));
-
 const Header = ({ isAuthenticated, auth }) => {
   const config = {
     headers: {
@@ -504,6 +497,55 @@ const Header = ({ isAuthenticated, auth }) => {
       setLoginDrop(false);
     }
   };
+
+  const links = [
+    {
+      id: "market",
+      href: "/market",
+      name: "Shop Now",
+      paragraph:
+        "Shop your favorite products on the egoras market at affordable prices.",
+      icon: <ShoppingCartIcon className="header_drop_icons" />,
+    },
+    {
+      id: "sell",
+      href: "https://sell.egoras.com/",
+      name: "Sell Now",
+      paragraph: "Sell your used items in minutes.",
+      icon: <SellIcon className="header_drop_icons" />,
+    },
+    {
+      id: "borrow",
+      href: "/loan",
+      name: "loan",
+      paragraph:
+        "Pledge your personal properties up as collateral and get an interest free loan.",
+      icon: <PaidIcon className="header_drop_icons" />,
+    },
+    {
+      id: "savings",
+      href: "/savings",
+      name: "Savings",
+      paragraph:
+        "Get to acquire your desired items with ease through our smart savings plan.",
+
+      icon: <SavingsIcon className="header_drop_icons" />,
+    },
+    {
+      id: "valid",
+      href: "/validator",
+      name: "Validator",
+      paragraph: "Earn over 20% APR for approving/declining collaterals.",
+      icon: <HowToRegIcon className="header_drop_icons" />,
+    },
+    {
+      id: "swap",
+      href: "/swap",
+      name: "Swap to Engn",
+      paragraph: "Easily swap your EGC to ENGN to access our services.",
+      icon: <SwapHorizontalCircleIcon className="header_drop_icons" />,
+    },
+  ];
   return (
     <div id="Header">
       <section className="headerSection" id="headerSection">
@@ -628,94 +670,32 @@ const Header = ({ isAuthenticated, auth }) => {
                       // onMouseOver={dropDownOpen1}
                       // onMouseOut={dropDownClose1}
                     >
-                      <a
-                        href="/loan"
-                        id="borrow"
-                        className={
-                          page1 === "/loan" ? "docs activeLink" : "about"
-                        }
-                        // onClick={clickMe1}
-                      >
-                        <div className="header_drop_txt_div">
-                          <PaidIcon className="header_drop_icons" />
-                          Loan
-                        </div>
-                        <ArrowForwardIosIcon className="header_drop_arrow_icon" />
+                      {links.map((data) => (
+                        <a
+                          href={data.href}
+                          id={data.id}
+                          className={
+                            page1 === data.href ? "docs activeLink" : "about"
+                          }
+                          // onClick={clickMe1}
+                        >
+                          <div className="header_drop_txt_div">
+                            {data.icon}
+                            <div className="header_links_tab_paragraph_cont">
+                              {data.name}
+                              <p className="header_links_tab_paragraph">
+                                {data.paragraph}
+                              </p>
+                            </div>
+                          </div>
+                          <ArrowForwardIosIcon className="header_drop_arrow_icon" />
+                          {page1 === data.href ? (
+                            <span className="Line"></span>
+                          ) : null}
+                        </a>
+                      ))}
 
-                        {page1 === "/loan" ? (
-                          <span className="Line"></span>
-                        ) : null}
-                      </a>
                       {/* <hr /> */}
-                      <a
-                        href="/savings"
-                        className={
-                          page1 === "/savings" ? "docs activeLink" : "about"
-                        }
-                        // onClick={clickMe2}
-                        id="savings"
-                      >
-                        <div className="header_drop_txt_div">
-                          <SavingsIcon className="header_drop_icons" />
-                          Savings
-                        </div>
-                        <ArrowForwardIosIcon className="header_drop_arrow_icon" />
-
-                        {page1 === "/savings" ? (
-                          <span className="Line"></span>
-                        ) : null}
-                      </a>
-                      {/* <hr /> */}
-                      <a
-                        href="/validator"
-                        className={
-                          page1 === "/validator" ? "docs activeLink" : "about"
-                        }
-                        // onClick={clickMe2}
-                        id="valid"
-                      >
-                        <div className="header_drop_txt_div">
-                          <HowToRegIcon className="header_drop_icons" />
-                          Validator
-                        </div>
-                        <ArrowForwardIosIcon className="header_drop_arrow_icon" />
-
-                        {page1 === "/validator" ? (
-                          <span className="Line"></span>
-                        ) : null}
-                      </a>
-                      {/* <hr /> */}
-                      <a
-                        href="/market"
-                        className={
-                          page1 === "/market" ? "docs activeLink" : "about"
-                        }
-                        // onClick={clickMe2}
-                        id="market"
-                      >
-                        <div className="header_drop_txt_div">
-                          <ShoppingCartIcon className="header_drop_icons" />
-                          Buy Now
-                        </div>
-                        <ArrowForwardIosIcon className="header_drop_arrow_icon" />
-                        {page1 === "/market" ? (
-                          <span className="Line"></span>
-                        ) : null}
-                      </a>
-                      <a href="https://sell.egoras.com/" className="about">
-                        <div className="header_drop_txt_div">
-                          <SellIcon className="header_drop_icons" />
-                          Sell Now
-                        </div>
-                        <ArrowForwardIosIcon className="header_drop_arrow_icon" />
-                      </a>
-                      <a href="/engn-token" className="about">
-                        <div className="header_drop_txt_div">
-                          <SwapHorizontalCircleIcon className="header_drop_icons" />
-                          Swap to engn
-                        </div>
-                        <ArrowForwardIosIcon className="header_drop_arrow_icon" />
-                      </a>
                     </div>
                   </>
                 ) : null}

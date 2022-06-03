@@ -182,7 +182,6 @@ export const activate = (email_auth) => async (dispatch) => {
   }
 };
 
-
 export const getLogin = (email) => async (dispatch) => {
   const config = {
     headers: {

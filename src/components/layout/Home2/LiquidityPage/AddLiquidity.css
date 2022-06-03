@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   position: relative;
 }
 .modal_bg {
@@ -168,11 +168,11 @@
   border-radius: 20px;
   border: none;
   font-weight: 600;
-    font-weight: 600;
-    background: #cdcdcd;
-    color: #919191;
+  font-weight: 600;
+  background: #cdcdcd;
+  color: #919191;
   cursor: not-allowed;
-    user-select: none;
+  user-select: none;
   pointer-events: none;
 }
 .connect_btn:hover {
@@ -187,13 +187,72 @@
   pointer-events: none;
 }
 .loading_div {
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    overflow: hidden;
-}.transacting_text {
-    font-size: 20px;
-    font-weight: 700;
-    color: #000;
-    position: relative;
-    z-index: 5;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #ffffff4a;
+  left: 0;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* z-index: 10000000000000000000000000000; */
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
+}
+.transacting_text {
+  font-size: 18px;
+  font-weight: 500;
+  color: rgb(19, 19, 19);
+  position: relative;
+  z-index: 5;
+  text-align: center;
+}
+
+/* ============ */
+/* ============ */
+/* ============ */
+.Jelly-module_container__LB5dG:after,
+.Jelly-module_container__LB5dG:before {
+  background: #229e54 !important;
+}
+.Jelly-module_container__LB5dG {
+  margin: auto !important;
+}
+.connect_btn_unlock {
+  width: 100%;
+  padding: 1em 0em;
+  border-radius: 20px;
+  border: none;
+  font-weight: 600;
+  background: #ddf2e5;
+  color: #1a7e42;
+  font-size: 18px;
+}
+.connect_btn_unlock:hover {
+  background: #c5e6d2;
+  color: #1a7e42;
+}
+.closeDiv {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  grid-gap: 0px;
+  gap: 3px;
+  font-size: 15px;
+  margin-bottom: 2em;
+}
+
+.closeProcessing_modal {
+  border: solid 2px #fff !important;
+  border-radius: 50% !important;
+  padding: 2px !important;
+  font-size: 29px !important;
+  background: #ffffff36 !important;
+  color: #fff !important;
+  cursor: pointer !important;
 }

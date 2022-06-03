@@ -63,9 +63,9 @@
 }
 
 .h_update_hero_area1_title {
-  font-size: 56px;
-  font-weight: 800;
-  line-height: 60px;
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 50px;
 }
 
 .h_update_hero_area1_para {
@@ -98,6 +98,14 @@
   box-shadow: 0px 0px 5px grey;
   left: 0;
 }
+
+.awoof_head {
+  font-size: 45px;
+  /* align-items: center; */
+}
+.awoof_head_body {
+  align-items: flex-start;
+}
 .home_page_carousel .react-multi-carousel-dot button {
   background: #d5d5d5;
   border: none;
@@ -111,7 +119,35 @@
   border-color: #0d6430;
   border: none;
 }
-
+.timer_div {
+  display: flex;
+  grid-gap: 5px;
+  gap: 5px;
+  justify-content: space-between;
+  align-items: center;
+}
+.countdownTime {
+  font-weight: 700;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
+  grid-gap: 0px;
+  grid-gap: 0px;
+  gap: 0px;
+  font-size: 28px;
+}
+.startsIn {
+  margin: 0;
+  font-weight: 800;
+  font-size: 27px;
+  color: #4b4b4b;
+  margin-right: 0.5em;
+}
+.countdownTime_time_indicator {
+  font-size: 20px;
+  color: #5b5b5b;
+}
 .hero_img_area2_img {
   width: 100%;
   z-index: 4;
@@ -1484,7 +1520,7 @@ section.productsDisplaySection {
   }
   .h_update_hero_area1_title {
     font-size: 36px;
-    font-weight: 800;
+    font-weight: 700;
     line-height: 40px;
   }
   .compliment_number_title {
@@ -1960,7 +1996,7 @@ section.productsDisplaySection {
   }
   .h_update_hero_area1_title {
     font-size: 36px;
-    font-weight: 800;
+    font-weight: 700;
     line-height: 40px;
   }
   .compliment_number_title {
@@ -2210,7 +2246,7 @@ section.productsDisplaySection {
   }
   .h_update_hero_area1_title {
     font-size: 30px;
-    font-weight: 800;
+    font-weight: 700;
     line-height: 31px;
   }
   .h_update_hero_area1_para {

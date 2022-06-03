@@ -47,6 +47,9 @@ const Footer = () => {
     if (FooterHide === "/dashboard/wallet/withdrawal") {
       document.getElementById("FooterId").style.display = "none";
     }
+    if (FooterHide === "/swap") {
+      document.getElementById("FooterId").style.display = "none";
+    }
     if ((FooterHide === "/products/details/" + myArr[3], myArr[4])) {
       document.getElementById("FooterId").style.display = "none";
     }
@@ -240,9 +243,9 @@ const Footer = () => {
                 {/* <a href="/egr-token" className="c1link1" target="_blank">
                   EGR
                 </a> */}
-                <a href="/engn-token" className="c1link1" target="_blank">
+                {/* <a href="/engn-token" className="c1link1" target="_blank">
                   eNGN
-                </a>
+                </a> */}
                 <a href="/egc_token" className="c1link1" target="_blank">
                   EGC
                 </a>
@@ -360,9 +363,9 @@ const Footer = () => {
                     {/* <a href="/egr-token" className="c1link1 a" target="_blank">
                       EGR
                     </a> */}
-                    <a href="/engn-token" className="c1link1" target="_blank">
+                    {/* <a href="/engn-token" className="c1link1" target="_blank">
                       eNGN
-                    </a>
+                    </a> */}
                     <a href="/egc_token" className="c1link1" target="_blank">
                       EGC
                     </a>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
@@ -562,8 +562,20 @@ const HomeUpdate = () => {
       "Content-Type": "application/json",
     },
   };
+  const Ref = useRef(null);
   const [aboutVideoModal, setAboutVideoModal] = useState(false);
   const [term, setTerm] = useState([]);
+  const [dumDay, setDumDay] = useState(new Date(2022, 5, 1, 0, 0, 0, 0));
+  const [countDownDeadLine, setCountDownDeadLine] = useState(
+    new Date("Jun 8, 2022 15:37:").getTime()
+  );
+  const [countDownDateTimes, setCountDownDateTimes] = useState({
+    countdownDays: "",
+    countdownHours: "",
+    countdownMinutes: "",
+    countdownSeconds: "",
+  });
+
   const [activeTab, setActiveTab] = useState("computers");
   const toggleAboutVideoModal = () => {
     if (aboutVideoModal === true) {
@@ -629,12 +641,57 @@ const HomeUpdate = () => {
   }, []);
   const text = "No Products Found";
 
-  var txt = "My Name is Samuel";
-  const enCode = () => {
-    var trt = new TextEncoder(txt);
-    console.log(trt);
-    console.log(txt);
+  // Update the count down every 1 second
+  const countDownFunction = () => {
+    const timeInterval = setInterval(() => {
+      // Get today's date and time
+      const now = new Date().getTime();
+
+      // Find the distance between now and the count down date
+      const distance = countDownDeadLine - now;
+
+      // Time calculations for days, hours, minutes and seconds
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Output the result in an element with id="demo"
+
+      setCountDownDateTimes({
+        countdownDays: days,
+        countdownHours: hours,
+        countdownMinutes: minutes,
+        countdownSeconds: seconds,
+      });
+
+      // If the count down is over, write some text
+      if (distance < 0) {
+        clearInterval(timeInterval);
+        setCountDownDeadLine(false);
+      }
+    }, 1000);
   };
+
+  useEffect(() => {
+    countDownFunction();
+  }, []);
+
+  useEffect(() => {
+    let newDate = new Date();
+    let endDate = new Date(2022, 5, 8, 0, 0, 0, 0);
+
+    endDate.setHours(endDate.getHours() + 168);
+    // return deadline;
+    const remainingDays = new Date(endDate - dumDay);
+    console.log(endDate);
+    console.log(dumDay);
+    console.log(remainingDays);
+    // console.log(remainingDays);
+  }, []);
+
   return (
     <div style={{ overflow: "hidden" }}>
       <section className="h_update_hero_section">
@@ -687,7 +744,7 @@ const HomeUpdate = () => {
             <div className="h_update_hero_area">
               <div className="h_update_hero_area1">
                 <div className="h_update_hero_area1_title">
-                  We want your junks whether big or small, work or not.
+                  We want your junks whether big or small, working or not.
                 </div>
                 <div className="h_update_hero_area1_para">
                   Convert your junks to cash. Help the planet.
@@ -837,12 +894,14 @@ const HomeUpdate = () => {
                 alt=""
                 className="thumbnail_img"
               />
-              <img
-                src="/img/play_thumbnail_btn.svg"
-                alt=""
-                className="thumbnail_btn"
-                onClick={toggleAboutVideoModal}
-              />
+              <div class="wrap">
+                <img
+                  src="/img/play_thumbnail_btn.svg"
+                  alt=""
+                  className="thumbnail_btn"
+                  onClick={toggleAboutVideoModal}
+                />
+              </div>
             </div>
           </div>
           {/* <script src="https://player.vimeo.com/api/player.js"></script> */}
@@ -861,6 +920,13 @@ const HomeUpdate = () => {
 
       {/* ================== */}
       {/* ================== */}
+      {/* ================== */}
+      {/* ================== */}
+      {/* ================== */}
+      {/* ================== */}
+      {/* ================== */}
+      {/* ================== */}
+
       {/* ================== */}
       {/* ================== */}
       {/* ================== */}

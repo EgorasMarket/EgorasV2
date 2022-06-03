@@ -1,0 +1,2 @@
+const currentDate=new Date();
+const endDate =new Date() + new Date().getDays;

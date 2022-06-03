@@ -38,6 +38,7 @@
 }
 
 .hero-right {
+  position: absolute;
   right: 0;
   z-index: -2;
   bottom: 50px;
@@ -188,8 +189,8 @@
   position: relative;
   padding-left: 80px;
 }
-
-/* .ldCardTexts1::before {
+/* 
+.ldCardTexts1::before {
   background: url(/img/ld-icon1.svg);
 }
 .ldCardTexts2::before {

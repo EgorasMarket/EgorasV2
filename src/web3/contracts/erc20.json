@@ -6,7 +6,7 @@
     "abi": [
         {
             "constant": false,
-            "inputs": [
+            "inputs": [  
                 {
                     "internalType": "address",
                     "name": "account",

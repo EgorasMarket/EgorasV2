@@ -325,8 +325,10 @@ span.per_day {
   display: flex;
   align-items: center;
   grid-gap: 20px;
-  gap: 35%;
+  /* grid-gap: 35%; */
+  gap: 10px;
   padding: 16px;
+  justify-content: center;
 }
 .buy_now_button:hover {
   background-color: #e4a788;
