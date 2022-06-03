@@ -1,0 +1,181 @@
+@media screen and (max-width: 1245px) {
+  /* hero  Section Start */
+  .heroSection2 {
+    padding: 6em 6em;
+  }
+  .heroTitle2 {
+    font-size: 36px;
+  }
+
+  .hero-right {
+    width: 600px;
+    /* height: 400px; */
+  }
+  .restaurantPic {
+    width: 300px;
+    height: 300px;
+  }
+
+  /* hero  Section end */
+
+  .loanDetailsSection {
+    position: relative;
+    background: #fafafa;
+  }
+  .LTitle {
+    font-size: 32px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  /* hero section start */
+  .heroSection2 {
+    padding: 6em 3em;
+  }
+  .gtheroTitleloan1 {
+    font-weight: 600;
+    font-size: 24px;
+    color: #000;
+    width: 100%;
+  }
+  /* hero section end */
+
+  .loanDetailsDays {
+    margin-right: 50px;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .loanDetailsCards {
+    display: flex;
+    width: 100%;
+    box-shadow: 0px 0px 15px #d9f1dd;
+    border-radius: 10px;
+    padding: 1em 1em;
+    background: #fff;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+@media screen and (max-width: 869px) {
+  /* hero section start */
+  .heroArea2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    font-size: 24px;
+  }
+  .hero-images {
+    margin-left: 0%;
+    position: relative;
+    width: 100%;
+  }
+  .hero-right {
+    right: 0;
+    width: 700px;
+  }
+  .restaurantPic {
+    width: 350px;
+    height: 350px;
+  }
+  /* hero section end */
+
+  .loanDetailsArea {
+    display: grid;
+    justify-content: space-between;
+    align-items: center;
+    grid-row-gap: 150px;
+  }
+  .loanDetailsCards {
+    padding: 1em 4em;
+  }
+}
+
+@media screen and (max-width: 765px) {
+  /* hero section start */
+  .hero-right {
+    right: 0;
+    width: 600px;
+  }
+  .restaurantPic {
+    width: 300px;
+    height: 300px;
+  }
+  .projectsSection2 {
+    padding: 4em;
+  }
+  .heroArea2 {
+    display: flex;
+    flex-direction: column;
+    /* grid-template-columns: auto; */
+    position: relative;
+    /* justify-content: center; */
+    margin-bottom: 100px;
+    grid-row-gap: 50px;
+  }
+
+  /* hero section end */
+}
+@media screen and (max-width: 590px) {
+  .loanDetailsCards {
+    padding: 1em 0.5em;
+  }
+}
+@media screen and (max-width: 565px) {
+  .heroSection2 {
+    padding: 4em 2em;
+  }
+  .heroTitle2 {
+    font-size: 38px;
+  }
+  .hero-right {
+    right: 0;
+    width: 400px;
+  }
+  .restaurantPic {
+    width: 300px;
+    height: 300px;
+  }
+
+  .loanDetailsSection {
+  }
+  .loanDetailsDays {
+    margin-right: 0px;
+  }
+  .projectsSection2 {
+    padding: 2em;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .heroTitle2 {
+    font-size: 24px;
+  }
+  .loanDetailsSection {
+  }
+  .loanDetailsCards {
+    padding: 1em 0.5em;
+  }
+  .ldAmount1 {
+    font-size: 18px;
+  }
+  .ldAmount2 {
+    font-size: 18px;
+  }
+  .ldTitle1 {
+    font-size: 12px;
+  }
+  .gtheroTitleloan1 {
+    font-weight: 600;
+    font-size: 20px;
+    color: #000;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .loanDetailsCards {
+    padding: 1em 1em;
+  }
+}

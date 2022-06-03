@@ -1,0 +1,331 @@
+.about-us-section {
+  padding: 10em 0em;
+  padding-bottom: 3em;
+  position: relative;
+  overflow: hidden;
+}
+.heroArea3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 0em 4em;
+}
+.heroTxts3 {
+  margin-bottom: 100px;
+  margin-top: 60px;
+}
+.hero-images {
+  /* margin-left: 10%; */
+  position: relative;
+  width: 135%;
+}
+
+.blur-white-bg {
+  width: 60%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: -1;
+}
+.blur-white-bga {
+  position: absolute;
+  width: 410px;
+  left: 0;
+  z-index: -1;
+  top: 305px;
+}
+.blur-white-bg2 {
+  width: 60%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  /* z-index: -1; */
+}
+
+.top-align {
+  position: relative;
+  z-index: 5;
+}
+.blur-white-bga2 {
+  position: absolute;
+  width: 410px;
+  left: 0;
+  /* z-index: -1; */
+  bottom: 0;
+}
+.blur-white-bga3 {
+  position: absolute;
+  width: 265px;
+  right: 0;
+  /* z-index: -1; */
+  top: 224px;
+}
+.blur-white-bga4 {
+  position: absolute;
+  width: 265px;
+  left: 0;
+  /* z-index: -1; */
+  bottom: 0;
+}
+.egoras-team-area {
+  position: relative;
+  z-index: 5;
+}
+
+.title-3 {
+  line-height: 57px;
+}
+.caption2 {
+  margin-top: 30px;
+}
+.heroTitle3 {
+  font-weight: 800;
+  font-size: 54px;
+  color: #000;
+  width: 100%;
+}
+
+.hero3para {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.hero-images3 {
+  position: relative;
+}
+.aboutPhone {
+  width: 450px;
+}
+
+.img-divs {
+  align-items: flex-end;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.imgdiv1 {
+  flex: 0 1 50%;
+  margin: 0;
+  padding: 10px;
+  position: relative;
+}
+/* .imgdiv1.margin-img {
+  margin-bottom: 6%;
+} */
+
+.flexauto1 {
+  flex: 0 1 60%;
+  margin: 0;
+  padding: 10px;
+  position: relative;
+}
+.flexauto2 {
+  flex: 0 1 40%;
+  margin: 0;
+  padding: 10px;
+  position: relative;
+}
+.shop_heading_body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.shop_arrow_div {
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 36px;
+        color: #229e54;
+}
+
+
+.shop_heading_para {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 28px;
+    color: #8f8f8f;
+}
+
+.arrow_alt_forward {
+    font-size: 22px !important;
+    font-weight: 900;
+    width: 33px;
+        color: #229e54;
+}
+.imgdiv1 .about-img1 {
+  border-radius: 5px;
+  display: block;
+  height: auto;
+  width: 100%;
+  /* image-rendering: -webkit-optimize-contrast; */
+  box-shadow: 5px 5px 9px 0px #cdcdcd;
+}
+/* ================================= */
+/* ================================= */
+/* ================================= */
+/* ================================= */
+/* ================================= */
+/* ================================= */
+
+.about-us-section-2 {
+  padding: 4em 0em;
+  padding-bottom: 3em;
+  position: relative;
+  overflow: hidden;
+  background: #f1fff6;
+}
+
+.about-us-section-2 .img-divs-second {
+  align-items: flex-end;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 85%;
+}
+
+.top-align {
+  align-items: center;
+}
+
+.imgdiv1-second {
+  border-radius: 5px;
+  flex: 0 1 calc(50% - 10px);
+  height: 230px;
+  margin: 0 0 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.imgdiv1-second-last {
+  flex-basis: calc(100%);
+}
+
+.imgdiv1-second .about-img1-second {
+  display: block;
+  height: 100%;
+  /* -o-object-fit: cover; */
+  object-fit: cover;
+  /* -o-object-position: center; */
+  object-position: top;
+  width: 100%;
+  height: 100%;
+  /* image-rendering: -webkit-optimize-contrast; */
+}
+
+.img-8 {
+  width: 110% !important;
+  height: 150% !important;
+}
+.img-11 {
+  height: 126% !important;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  grid-row-gap: 30px;
+}
+
+.caption2 {
+  margin-top: 0px;
+  font-weight: 500;
+}
+.title-3 {
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.txt-flex {
+  display: flex;
+  align-items: center;
+}
+
+.mission-para {
+  font-size: 16px;
+}
+.bIcon1 {
+  width: 30px;
+  margin-right: 10px;
+}
+.valuetitle {
+  margin: 0;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.missiontxt {
+  display: flex;
+  flex-direction: column;
+  grid-row-gap: 20px;
+}
+
+section.about-egoras-team {
+  padding: 4em 0em;
+  position: relative;
+  overflow: hidden;
+}
+/* ================================= */
+/* ================================= */
+/* ================================= */
+/* ================================= */
+/* ================================= */
+/* ================================= */
+/* ================================= */
+/* ================================= */
+.AboutLine {
+  width: 20%;
+  height: 5px;
+  border-radius: 10px;
+  background: #e4a788;
+}
+
+/* .aboutTxts {
+  margin-top: -100px;
+} */
+
+.ATitle {
+  font-size: 44px;
+  font-weight: 800;
+}
+
+.AboutUsPara {
+  font-size: 16px;
+  margin-top: 30px;
+  font-weight: 500;
+  color: #414141;
+}
+
+.aboutArea {
+  text-align: center;
+}
+.AboutLine {
+  margin: auto;
+  width: 5%;
+}
+
+.partnerlog {
+  filter: grayscale();
+  transition: 0.3s ease-in-out;
+  width: 300px;
+}
+.partnerlog:hover {
+  filter: none;
+  transition: 0.3s ease-in-out;
+}
+
+.partnerCards {
+  margin-top: 30px;
+  position: relative;
+  z-index: 3;
+}
+.footerCard3 {
+  display: none;
+}
+
+.partnerCards .react-multi-carousel-item {
+  align-items: center !important;
+  text-align: center !important;
+}

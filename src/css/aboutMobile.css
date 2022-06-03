@@ -1,0 +1,117 @@
+@media screen and (max-width: 1245px) {
+  /* hero  Section Start */
+  .heroSection3 {
+    padding: 6em 6em;
+  }
+  .heroTitle3 {
+    font-size: 60px;
+  }
+  .hero3para {
+    font-size: 14px;
+  }
+
+  .iFrame2 {
+    width: 500px;
+    height: 400px;
+  }
+
+  .ATitle {
+    font-size: 32px;
+  }
+
+  /* hero  Section end */
+}
+
+@media screen and (max-width: 1024px) {
+  /* hero section start */
+  .aboutPhone {
+    width: 400px;
+  }
+  /* hero section end */
+}
+
+@media screen and (max-width: 869px) {
+  /* hero section start */
+  .aboutPhone {
+    width: 350px;
+  }
+  .heroTitle3 {
+    font-size: 48px;
+  }
+  /* hero section end */
+}
+
+@media screen and (max-width: 794px) {
+  /* hero section start */
+  .aboutPhone {
+    width: 300px;
+  }
+  .heroTitle3 {
+    font-size: 40px;
+  }
+  /* hero section end */
+}
+@media screen and (max-width: 767px) {
+  /* hero section start */
+  .aboutPhone {
+    width: 450px;
+  }
+  .heroTitle3 {
+    font-size: 60px;
+  }
+  /* hero section end */
+  .photo-imgs {
+    width: 100%;
+  }
+  .width {
+    margin: 0;
+  }
+  .top-align {
+    flex-direction: column-reverse;
+  }
+  .missiontxt {
+    text-align: left;
+  }
+
+  .about-us-section-2 .img-divs-second {
+    width: 100%;
+  }
+  .width-img {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 565px) {
+  .partnerlog {
+    width: 150px;
+  }
+  .aboutPhone {
+    width: 400px;
+  }
+  .heroSection3 {
+    padding: 4em 2em;
+  }
+  .heroTitle3 {
+    font-size: 48px;
+    font-weight: 7008;
+  }
+  .iFrame2 {
+    width: 100%;
+    height: 100%;
+  }
+}
+@media screen and (max-width: 485px) {
+  .aboutPhone {
+    width: 350px;
+  }
+}
+@media screen and (max-width: 390px) {
+  .aboutPhone {
+    width: 300px;
+  }
+}
+@media screen and (max-width: 300px) {
+  .aboutPhone {
+    width: 250px;
+  }
+}

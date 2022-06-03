@@ -1,0 +1,74 @@
+.account_nav_page {
+  height: 100%;
+}
+.account_navigation_area {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+}
+.account_navigation_section {
+  height: 100%;
+}
+.account_nav_header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em 0.8em;
+  background: #ffffff;
+}
+.account_nav_area1 {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5em 1em;
+}
+.acct_nav_body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+}
+.accnt_nav_profile_Name {
+  font-size: 24px;
+  font-weight: 700;
+}
+.accnt_nav_profile_email {
+  font-size: 12px;
+  color: #a1a1a1;
+}
+.account_nav_area1 {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5em 1em;
+  border-bottom: solid 1px #e4e4e4;
+}
+.account_nav_other_areas {
+  padding: 0.5em 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #000;
+}
+.other_area_title {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.acct_nav_log_out_btn_div {
+  padding: 0.5em 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.acct_nav_log_out_btn {
+  padding: 0.8em;
+  width: 100%;
+  border-radius: 10px;
+  border: none;
+  background: #41ba71;
+  color: #fff;
+}
+.arrow_nav_link_btn {
+  font-size: 18px !important;
+  cursor: pointer;
+  color: #a3baac !important;
+}

@@ -1,0 +1,44 @@
+.all_user_data_area {
+  padding: 2em;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px #bdd7c7;
+}
+.all_users_search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: grey;
+  font-size: 14px;
+  font-weight: 700;
+}
+.user_search {
+  padding: 0.8em 2em;
+  border-radius: 50px;
+  border: solid 1px #c3dfce;
+  padding-left: 4em;
+  width: 100%;
+  font-size: 14px;
+}
+.all_users_body {
+  height: 75vh;
+  overflow-y: scroll;
+}
+.right_align {
+  text-align: right;
+}
+.s_table {
+  max-width: 1345px;
+}
+.search_container {
+  width: 30%;
+  position: relative;
+}
+.user_search_icon {
+  position: absolute;
+  top: 25%;
+  left: 5%;
+}
+.email_align {
+  text-align: left;
+}

@@ -1,0 +1,258 @@
+import React, { useState, useEffect, useCallback } from "react";
+import axios from "axios";
+import { connect, useDispatch } from "react-redux";
+import DisplayMoney from "../../../DisplayMoney";
+import {
+  PRODUCT_LOADED,
+  API_URL2 as api_url2,
+} from "../../../../actions/types";
+import LoginComp from "../Login/LoginComp";
+import LoginSignup from "../Login/LoginSignup";
+import ItemDetailComponent from "../item_details_page/ItemDetailCompnent";
+import Checkout from "../item_details_page/CheckoutModalComponent";
+
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css";
+
+const ProductDetailPage = ({ auth, match }) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  // //console.log(window.location.pathname.split("/"));
+  // //console.log(match.params.id);
+  const [loginModal, setLoginModal] = useState(false);
+  const [loginSuccess, setLoginSuccess] = useState(false);
+  const [product_id, setProductId] = useState(match.params.id);
+  const [user_id, set_user_id] = useState("");
+  const [payload, setPayload] = useState({});
+  const [modal, setModal] = useState(false);
+  const [detailsModal, setDetailsModal] = useState(false);
+  const [showCheckout, setCheckoutStatus] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
+  const [userPayload, setUserPayload] = useState({});
+  const [card, setSpec] = useState([]);
+  const [deScript, setDeScript] = useState([]);
+
+  // const {contactAddress}=addressName
+
+  useEffect(() => {
+    //console.log(auth);
+
+    if (window.location.pathname.split("/")[1] === "dashboard") {
+      setProductId(match.params.id);
+      setIsAuthenticated(true);
+    } else {
+      setProductId(window.location.pathname.split("/")[3]);
+      setIsAuthenticated(false);
+    }
+  }, [auth]);
+
+  const openDetailsModal = () => {
+    setDetailsModal(true);
+  };
+
+  const closeDetailModal = () => {
+    setDetailsModal(false);
+  };
+  const OpenModal = () => {
+    setModal(true);
+  };
+
+  const CloseModal = () => {
+    setModal(false);
+  };
+
+  const openCheckout = () => {
+    setCheckoutStatus(true);
+  };
+
+  const closeCheckout = () => {
+    setCheckoutStatus(false);
+  };
+
+  const OpenLoginModal = () => {
+    // //console.log(auth.user.user);
+    if (auth.user !== null) {
+      //console.log(auth.user.user);
+      // set_user_id(customer_id);
+      openDetailsModal();
+      // checkout(
+      //   user_id,
+      //   product_id,
+      //   daysAdded,
+      //   startDate,
+      //   endDate
+      //   );
+    } else {
+      setLoginModal(true);
+    }
+  };
+
+  const CloseLoginModal = () => {
+    setLoginModal(false);
+  };
+
+  const callback = useCallback((loginSuccess) => {
+    setLoginSuccess(loginSuccess);
+
+    if (loginSuccess === true) {
+      CloseLoginModal();
+      window.location.reload();
+      // openDetailsModal();
+      // checkout(
+      //   user_id,
+      //   product_id,
+      //   daysAdded,
+      //   startDate,
+      //   endDate
+      // );
+    } else {
+    }
+  }, []);
+
+  useEffect(async () => {
+    console.log(auth, auth.isAuthenticated, auth.user);
+    const body = JSON.stringify({
+      product_id,
+    });
+    if (auth.user !== null) {
+      set_user_id(auth.user.user.id);
+      //console.log(auth.user.user);
+    } else {
+      set_user_id("");
+      //console.log('rrrrr');
+    }
+
+    await axios
+      .post(api_url2 + "/v1/product/retrieve/specific", body, config)
+      .then((data) => {
+        const {
+          amount,
+          roundedAmount,
+          percentage,
+          product_brand,
+          product_category_code,
+          product_category_desc,
+          product_details,
+          product_duration,
+          product_id,
+          product_image,
+          more_image,
+          product_name,
+          product_specifications,
+          product_type,
+          initial_deposit,
+          paymentPerday,
+          payment_type,
+          days_left,
+          no_of_days,
+          no_of_days_paid,
+          startDate,
+          endDate,
+          status,
+        } = data.data.data;
+
+        console.log(data.data.data, "king");
+        setPayload({
+          amount,
+          roundedAmount,
+          percentage,
+          product_brand,
+          product_category_code,
+          product_category_desc,
+          product_details,
+          product_duration,
+          product_id,
+          product_image,
+          more_image,
+          product_name,
+          product_specifications,
+          product_type,
+          initial_deposit,
+          paymentPerday,
+          payment_type,
+          days_left,
+          no_of_days,
+          no_of_days_paid,
+          startDate,
+          endDate,
+          status,
+        });
+        const getSlid = data.data.data.product_specifications;
+        const getSpecs = data.data.data.product_details;
+        // const myArray = getSlid.split(",");
+
+        console.log(getSlid);
+        console.log(getSlid);
+        //console.log(getSpecs);
+
+        setSpec(getSlid);
+        setDeScript(getSpecs);
+
+        // //  const slipVar = getSlid.split(',');
+        // //console.log("====================================");
+        // //console.log(getSlid);
+        // //console.log("====================================");
+
+        // //console.log("====================================");
+      })
+      .catch((err) => {
+        //console.log(err.response); // "oh, no!"
+      });
+  }, [product_id, auth]); // USE EFFECT TO  GET THE SPECIFIC PRODUCTS
+
+  //console.log(product_id);
+  return (
+    <>
+      {loginModal === false ? null : (
+        <div className="checkout_main">
+          <div
+            className="checkout_modal_out_signup"
+            onClick={() => {
+              setLoginModal(false);
+            }}
+          ></div>
+          {/* <div>Login</div> */}
+          {/* <Dashboard_Checkout_Page
+            cAmount={parseInt(productDetails.amount)}
+            click={CloseModal}
+          /> */}
+          <LoginSignup parentCallback={callback} />
+        </div>
+      )}
+      <div>
+        <section className="market_page_section">
+          <div className="custom_container">
+            {detailsModal === true ? (
+              <Checkout
+                payload={payload}
+                closeCheckoutOptions={closeDetailModal}
+              />
+            ) : (
+              <ItemDetailComponent
+                payload={payload}
+                stringUrl="/products/details"
+                specification={deScript}
+                // numberWithCommas={numberWithCommas}
+                card={card}
+                openCheckoutModal={() => {
+                  // openDetailsModal();
+                  OpenLoginModal();
+                  // //console.log('gggg');
+                }}
+              />
+            )}
+          </div>
+        </section>
+      </div>
+    </>
+  );
+};
+const mapStateToProps1 = (state) => ({
+  auth: state.auth,
+  isAuthenticated: state.auth.isAuthenticated,
+  cart: state.shop.cart,
+});
+export default connect(mapStateToProps1)(ProductDetailPage);

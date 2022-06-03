@@ -1,0 +1,36 @@
+.register_form_area {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+}
+.register_form_title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #92ad9c;
+}
+.register_form {
+  background: #fff;
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px #c1d9ca;
+  width: 70%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.register_form_input_div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.register_form_input-div_title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #41ba71;
+}
+.name_input1aa {
+  width: 100% !important;
+  margin-right: 0px !important;
+}
