@@ -189,7 +189,7 @@
   position: relative;
   padding-left: 80px;
 }
-
+/* 
 .ldCardTexts1::before {
   background: url(/img/ld-icon1.svg);
 }
@@ -208,7 +208,7 @@
 }
 .ldCardTexts6::before {
   background: url(/img/ld-icon6.svg);
-}
+} */
 .ldCardTexts1::before,
 .ldCardTexts2::before,
 .ldCardTexts3::before,

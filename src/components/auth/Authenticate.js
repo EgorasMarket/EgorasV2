@@ -67,7 +67,7 @@ export const Authenticate = (props) => {
     setClickedmodal(true);
   };
 
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
 
   const context = useWeb3React();
   const {
@@ -92,8 +92,6 @@ export const Authenticate = (props) => {
   // success
   // handle logic to eagerly connect to the injected ethereum provider, if it exists and has granted access already
   const triedEager = useEagerConnect();
-  // handle logic to connect in reaction to certain events on the injected ethereum provider, if it exists
-  useInactiveListener(!triedEager || !!activatingConnector);
   // handle logic to connect in reaction to certain events on the injected ethereum provider, if it exists
   useInactiveListener(!triedEager || !!activatingConnector);
 
@@ -245,12 +243,6 @@ export const Authenticate = (props) => {
               deactivate();
             }}
             style={{ color: "#000", border: "none", background: "none" }}
-
-            // className={
-            //   props.isHome == "false"
-            //     ? "auto btn btn-success btn-sm login_drop_cont_link"
-            //     : "i custom-btn"
-            // }
           >
             {" "}
             Disconnect <FontAwesomeIcon icon={faSignOutAlt} />{" "}
@@ -260,11 +252,6 @@ export const Authenticate = (props) => {
         <button
           onClick={toggle}
           style={{ color: "#000", border: "none", background: "none" }}
-          // className={
-          //   props.isHome == "false"
-          //     ? "auto btn btn-success btn-sm login_drop_cont_link"
-          //     : " i custom-btn"
-          // }
         >
           {" "}
           Connect Wallet{" "}

@@ -1,23 +1,6 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from "react";
 
 export const CustomAlert = (props) => {
-  // const [timeOut, setTimeOuut] = useState(true);
-  //console.log(props.alertType);
-  // const timer = () => {
-  //   if (timeOut == false) {
-  //     setTimeout(() => {
-  //       setTimeOuut(false);
-  //     }, 1000);
-  //   } else {
-  //     setTimeOuut(true);
-  //   }
-  // };
-
-  // const timer = () =>
-  //   setTimeout(function () {
-  //     props.closeAlert();
-  //     console.log("66");
-  //   }, 10000);
   useEffect(() => {
     setTimeout(function () {
       // closeAlert();
@@ -28,9 +11,7 @@ export const CustomAlert = (props) => {
     <div className="alert_cont">
       <div
         className={
-          props.alertType === 'danger'
-            ? 'setAlertErr'
-            : 'setAlertSuccess'
+          props.alertType === "danger" ? "setAlertErr" : "setAlertSuccess"
         }
       >
         {props.alert}

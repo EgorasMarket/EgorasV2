@@ -92,15 +92,12 @@ const Login = ({ getLogin, isAuthenticated }) => {
     }
     setIsLoading(true);
     setDisable(true);
-    let res3 = await getLogin(email, password);
-    // console.log(res3.data.data.errors[0].msg);
-    //  setToken(res)
 
-    console.log(res3.data);
 
-    // if (res.data.email !== e.target.value)
+    if (navigator.onLine) {
+      let res3 = await getLogin(email, password);
 
-    if (res3.data.success === true) {
+      if (res3.data.success === true) {
       setIsSuccessful(true);
       setIsLoading(false);
       // setDisable(false);
@@ -113,15 +110,19 @@ const Login = ({ getLogin, isAuthenticated }) => {
       setIsLoading(false);
       setDisable(false);
     }
+    
+    } else {
+      // console.log('hevdghjb');
+        console.log('check your internet connection');
+    }   
 
-    // if (email === "") {
-    //   setDisable(true);
-    // } else if (password === "") {
-    //   setDisable(true);
-    // } else {
-    //   setDisable(false);
+
+
     // }
   };
+
+
+
   const setPasswordVisibilty = () => {
     setVisibility(true);
     // setPassImg("hide_pass");

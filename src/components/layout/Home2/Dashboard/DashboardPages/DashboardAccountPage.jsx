@@ -19,9 +19,11 @@ import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import "../DashboardStyles/dashboard_home.css";
 import "../DashboardStyles/dashboard_account.css";
+
 import { connect } from "react-redux";
 import {
   sumitGenderAndDate,
+  submitPhone,
   nextOfKING,
   changePassword,
   addAddress,
@@ -37,6 +39,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function DashboardAccountPage({
   sumitGenderAndDate,
   setAlert,
+  submitPhone,
   nextOfKING,
   auth,
   changePassword,
@@ -114,11 +117,17 @@ function DashboardAccountPage({
     newpassword: "",
   });
 
+  const [changePhone1, setChangePhone1] = useState({
+    primaryPhoneNumber: "",
+    secondaryPhoneNumber: "",
+  });
+
   const [userInfo, setUserInfo] = useState({
     Userfirstname: "",
     Userlastname: "",
     Useremail: "",
     UserphoneNumber: "",
+    UserOldNumber: "",
     UseruserImage: "",
     Userrelationship: "",
     Usergender: "",
@@ -133,6 +142,7 @@ function DashboardAccountPage({
     Usergender,
     Userrelationship,
     UseruserImage,
+    UserOldNumber,
     UserphoneNumber,
     Userbvn,
     UserdateOfBirth,
@@ -148,6 +158,7 @@ function DashboardAccountPage({
     nxtrelationship,
   } = nextOfKinData;
   const { oldpassword, newpassword } = changePassword1;
+  const { primaryPhoneNumber, secondaryPhoneNumber } = changePhone1;
   const [idSet, setIdSet] = useState({ idNum: "" });
   const { idNum } = idSet;
 
@@ -165,6 +176,7 @@ function DashboardAccountPage({
       // //console.log( new Buffer(dataa));
       var todecoded = auth.user;
       var todecodedn = todecoded.user.userImage;
+      var todecodedm = todecoded.user.primaryPhoneNumber;
 
       // console.log('========================');
       // console.log(todecoded.user);
@@ -190,6 +202,7 @@ function DashboardAccountPage({
         Useremail: todecoded.user.email,
         UseruserImage: todecoded.user.userImage,
         UserphoneNumber: todecoded.user.phoneNumber,
+        UserOldNumber: todecoded.user.secondaryPhoneNumber,
         Userrelationship: todecoded.user.relationship,
         Usergender: todecoded.user.gender,
         Userbvn: todecoded.user.BVN,
@@ -293,6 +306,13 @@ function DashboardAccountPage({
     });
   };
 
+  const onChange2 = (e) => {
+    setChangePhone1({
+      ...changePhone1,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   // const updateUser =()=>{
   //   setUserName()
   // }
@@ -302,6 +322,7 @@ function DashboardAccountPage({
   // const [bvnNum, setBvnNum] = useState("23745672845");
   // const [phoneNo, setPhoneNo] = useState("+2348164020234");
   const [phone_no2, setPhone_no2] = useState("");
+  const [phone_no3, setPhone_no3] = useState("");
   //   const [value, setValue] = useState(new Date("2014-02-09"));
   const [age, setAge] = React.useState({ relationship });
   const [activeBg, setActiveBg] = useState("accounts");
@@ -374,6 +395,7 @@ function DashboardAccountPage({
   const handleChange = (event) => {
     setAge(event.target.value);
     setPhone_no2(event.target.value);
+    setPhone_no3(event.target.value);
   };
   const changeBg = (e) => {
     let currentId = e.currentTarget.id;
@@ -550,7 +572,7 @@ function DashboardAccountPage({
 
     if (res.data.success == true) {
       console.log(res.data.success);
-      window.location.reload();
+      // window.location.reload();
       //console.log("okay Good Server");
     } else {
       setAlert(res.data.data.errors[0].msg, "danger");
@@ -565,13 +587,21 @@ function DashboardAccountPage({
       setDisable2(true);
     }
   });
-  // useEffect(() => {
-  //   if (Usergender == "") {
-  //     setDisable(true);
-  //   } else {
-  //     setDisable(false);
-  //   }
-  // });
+
+  const ChanePhoneNumber = async (e) => {
+    let res = await submitPhone(primaryPhoneNumber, secondaryPhoneNumber);
+    console.log(res);
+
+    if (res.data.success == true) {
+      console.log(res.data.success);
+      window.location.reload();
+      //console.log("okay Good Server");
+    } else {
+      setAlert(res.data.data.errors[0].msg, "danger");
+    }
+
+    // setPhone_no3(event.target.value)
+  };
 
   const AddUserPhoto = async (e) => {
     e.preventDefault();
@@ -873,15 +903,14 @@ function DashboardAccountPage({
                           </div>
                         ) : (
                           <div className="text-left">
-                            <span className="input_title">Date Of Birth</span>
                             <TextField
-                              className="name_input1"
+                              style={{ width: "100%" }}
+                              // className="name_input1"
                               id="outlined-basic"
                               label="Date Of Birth"
                               variant="outlined"
                               // name="lastnameQ"
                               value={UserdateOfBirth}
-                              // onChange={onChangeFor}
                             />
                           </div>
                         )}
@@ -1350,13 +1379,18 @@ function DashboardAccountPage({
                         Phone Number
                         <span className="toggle_body_area1_cont1_sub_txts"></span>
                       </div>
-                      <div className="toggle_body_area1_cont1_input">
-                        {UserphoneNumber} {phone_no2}
-                        <AddCircleIcon
-                          className="edit_icon"
-                          onClick={openModal2}
-                        />
-                      </div>
+                      {UserphoneNumber === null ? (
+                        <div className="toggle_body_area1_cont1_input">
+                          <AddCircleIcon
+                            className="edit_icon"
+                            onClick={openModal2}
+                          />
+                        </div>
+                      ) : (
+                        <div className="toggle_body_area1_cont1_input">
+                          {UserphoneNumber} {UserphoneNumber}
+                        </div>
+                      )}
                     </div>
                     {/* ============ */}
                     {/* ============ */}
@@ -1536,18 +1570,38 @@ function DashboardAccountPage({
                   id="outlined-basic"
                   label="Phone No:"
                   variant="outlined"
+                  name="primaryPhoneNumber"
+                  value={primaryPhoneNumber}
+                  onChange={onChange2}
+                />
+                {/* <TextField
+                  className="name_input1ab"
+                  id="outlined-basic"
+                  label="Phone No:"
+                  variant="outlined"
                   name="phone no"
                   value={phone_no2}
                   onChange={handleChange}
                 />
+                 */}
               </div>
+              <TextField
+                className="name_input1ab"
+                id="outlined-basic"
+                label="Change Phone No:"
+                variant="outlined"
+                name="secondaryPhoneNumber"
+                value={secondaryPhoneNumber}
+                onChange={onChange2}
+              />
+
               <div className="profile_modal_area2">
-                <button className="add_photo">
+                <button className="add_photo" onClick={ChanePhoneNumber}>
                   {" "}
                   <LocalPhoneIcon className="cancel_icon" />
                   Add Number
                 </button>
-                <button className="cancel_photo" onClick={closeModal2}>
+                <button className="cancel_photo" onClick={ChanePhoneNumber}>
                   {" "}
                   <DoDisturbIcon className="cancel_icon" />
                   Cancel
@@ -1614,5 +1668,6 @@ export default connect(mapStateToProps, {
   setAlert,
   nextOfKING,
   changePassword,
+  submitPhone,
   addAddress,
 })(DashboardAccountPage);

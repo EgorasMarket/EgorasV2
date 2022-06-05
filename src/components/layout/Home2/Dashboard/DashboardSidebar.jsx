@@ -411,7 +411,14 @@ const DashboardSidebar = ({ auth, cart, retrieveCart }) => {
               ) : null}
               {searchBar == false ? (
                 <div className="welcome_user">
-                  <span className="userName_name">{Userlastname}</span>
+                  <span
+                    className="userName_name"
+                    style={{ textTransform: "capitalize" }}
+                  >
+                    {Userlastname === ""
+                      ? Useremail.split("@")[0]
+                      : Userlastname}
+                  </span>
                   <span
                     style={{
                       fontSize: "16px",

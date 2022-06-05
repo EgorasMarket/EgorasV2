@@ -6,6 +6,7 @@
   "dependencies": {
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
+    "@ethersproject/contracts": "^5.5.0",
     "@ethersproject/properties": "^5.0.2",
     "@fortawesome/fontawesome-free": "^5.14.0",
     "@fortawesome/fontawesome-free-brands": "^5.0.13",
@@ -36,6 +37,9 @@
     "aos": "^2.3.4",
     "axios": "^0.21.4",
     "bootstrap": "^4.5.0",
+    "crypto": "^1.0.1",
+    "crypto-browserify": "^3.12.0",
+    "crypto-js": "^3.1.9-1",
     "d3-array": "^3.1.1",
     "draft-js": "^0.11.6",
     "draftjs-to-html": "^0.9.1",
@@ -74,7 +78,7 @@
     "react-redux": "^7.2.0",
     "react-responsive-carousel": "^3.2.22",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1",
+    "react-scripts": "^4.0.3",
     "react-scroll": "^1.8.4",
     "react-select": "^3.1.0",
     "react-slick": "^0.28.1",
@@ -87,6 +91,7 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
+    "stream": "^0.0.2",
     "styled-components": "^5.3.1",
     "use-axios-client": "^2.0.0",
     "uuid": "^8.1.0",
@@ -118,5 +123,9 @@
   },
   "devDependencies": {
     "http-proxy-middleware": "^2.0.3"
+  },
+  "browser": {
+    "crypto": false,
+    "stream": false
   }
 }

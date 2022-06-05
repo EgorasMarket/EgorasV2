@@ -291,6 +291,11 @@ const Header = ({ isAuthenticated, auth }) => {
         document.getElementById("headerSection").style.position = "relative";
       });
     }
+    if (currentPage === "/dashboard/accounts") {
+      setshowHeader(() => {
+        document.getElementById("Header").style.display = "none";
+      });
+    }
     // if (currentPage === "/market") {
     //   setshowHeader(() => {
     //     document.getElementById("hide_menu").style.display = "none";
@@ -349,8 +354,8 @@ const Header = ({ isAuthenticated, auth }) => {
       setLogoutBtn(true);
     }
 
-    console.log(authToken);
-    console.log(localStorage.getItem("token"));
+    // console.log(authToken);
+    // console.log(localStorage.getItem('token'));
   }, []);
   const triggerLogout = () => {
     localStorage.removeItem("token");
@@ -619,7 +624,8 @@ const Header = ({ isAuthenticated, auth }) => {
                             }}
                           >
                             {" "}
-                            {item.tag.toLowerCase()}
+                            {item.tag.charAt(0).toUpperCase() +
+                              item.tag.slice(1)}
                           </div>
                         </a>
                       ))}

@@ -268,7 +268,7 @@ input:-internal-autofill-selected {
   overflow: hidden;
 }
 .setAlertErr::before {
-  content: url("/img/error_icon.svg");
+  /* content: url("/img/error_icon.svg"); */
 
   position: absolute;
   height: 100%;
@@ -305,7 +305,7 @@ input:-internal-autofill-selected {
   overflow: hidden;
 }
 .setAlertSuccess::before {
-  content: url("/img/success_icon.svg");
+  /* content: url("/img/success_icon.svg"); */
   position: absolute;
   height: 100%;
   width: 65px;

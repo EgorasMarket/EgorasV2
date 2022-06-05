@@ -50,13 +50,16 @@ const AdminUploadProducts = () => {
   const [product_condition, setProduct_condition] = useState("");
   const [customAlert, setCustomAlert] = useState(false);
   const [payment_type, setPayment_type] = useState(1);
+  const [sales_type, setSales_type] = useState(1);
   const [roles1, setRoles1] = useState({
     role15: "",
     role2: "",
     role3: "",
   });
-  const [disable, setDisable] = React.useState(false);
+  const [disable, setDisable] = useState(true);
+  const [disable2, setDisable2] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoading2, setIsLoading2] = useState(false);
   // +++++++************+++++++************+++++++************
   // +++++++************+++++++************+++++++************
   // Strictly for tags
@@ -131,6 +134,8 @@ const AdminUploadProducts = () => {
     amount: null,
     // product_details: "",
     product_duration: null,
+    // sales_type: "",
+    awoof_price: "",
   });
   const { product_details } = formData;
 
@@ -145,6 +150,8 @@ const AdminUploadProducts = () => {
     amount,
     // product_details,
     product_duration,
+    // sales_type,
+    awoof_price,
   } = productUpdateInfo;
 
   const generateString = (length) => {
@@ -201,16 +208,6 @@ const AdminUploadProducts = () => {
       });
   }, []);
 
-  useEffect(() => {
-    // const element2 = document.getElementById("product_image2");
-    // const element3 = document.getElementById("product_image3");
-    if (product_image === "../../img/profile_img.jpeg") {
-      setDisable(true);
-    } else {
-      setDisable(false);
-    }
-  });
-
   const onEditorStateChange = (editorState) => {
     let text = draftToHtml(convertToRaw(editorState.getCurrentContent()));
 
@@ -249,17 +246,28 @@ const AdminUploadProducts = () => {
     console.log("focus out");
 
     const { value } = e.target;
-    // // product_name
-    console.log(value);
+    let tagExist;
+    tags11.forEach((element) => {
+      // ...use `element`...
+      if (element.id != value) {
+        tagExist = false;
+      } else {
+        tagExist = true;
+      }
+    });
 
-    const brandArray = {
-      id: value,
-      text: value,
-    };
+    if (value != "") {
+      if (!tagExist) {
+        const brandArray = {
+          id: value,
+          text: value,
+        };
 
-    setTags([...tags, brandArray]);
-    tags11.push(brandArray);
-    // console.log(tags);
+        setTags([...tags, brandArray]);
+        tags11.push(brandArray);
+        // console.log(tags);
+      }
+    }
   };
 
   const addCategory = async () => {
@@ -332,20 +340,37 @@ const AdminUploadProducts = () => {
         }
       }
     }
+
+    let checkImg1 = document.getElementById("product_image").files.length;
+    let checkImg2 = document.getElementById("product_image2").files.length;
+    let checkImg3 = document.getElementById("product_image3").files.length;
+
+    if (checkImg1 == 1 && checkImg2 == 1 && checkImg3 == 1) {
+      // setIsLoading(false);
+      setDisable(false);
+    } else {
+    }
   };
   const successUploadMsg = "Product image uploaded successfully";
   const AddProductPhoto = async (e) => {
     e.preventDefault();
+
     setIsLoading(true);
     setDisable(true);
-    const formData = new FormData();
 
-    if (product_image === "../../img/profile_img.jpeg") {
-      //console.log("empty passport");
-      setCustomAlert(true);
-      setAlert("Please provide product image");
-      setAlertType("danger");
-    } else {
+    const formData = new FormData();
+    // if (isLoading == true) {
+    //   setDisable(true);
+    // } else if (isLoading == false) {
+    //   setDisable(false);
+    // }
+
+    let checkImg1 = document.getElementById("product_image").files.length;
+    let checkImg2 = document.getElementById("product_image2").files.length;
+    let checkImg3 = document.getElementById("product_image3").files.length;
+
+    if (checkImg1 == 1 && checkImg2 == 1 && checkImg3 == 1) {
+      console.log("okkkk");
       const element = document.getElementById("product_image");
       const element2 = document.getElementById("product_image2");
       const element3 = document.getElementById("product_image3");
@@ -355,16 +380,13 @@ const AdminUploadProducts = () => {
       formData.append("product_image", file);
       formData.append("product_image2", file2);
       formData.append("product_image3", file3);
-
       //console.log(formData, "hhhh");
-
       try {
         const res = await axios.post(
           api_url2 + "/v1/product/add/product/image",
           formData
         );
         console.log(res.data, "undefined");
-
         if (res.data.statusCode === 200) {
           setCustomAlert(true);
           setAlert(successUploadMsg);
@@ -386,6 +408,18 @@ const AdminUploadProducts = () => {
       } catch (err) {
         console.log(err.response);
       }
+    } else {
+      console.log("empty Product image");
+      setCustomAlert(true);
+      setAlert("Please provide product image(s)");
+      setAlertType("danger");
+
+      setIsLoading(false);
+      setDisable(false);
+    }
+
+    if (product_image === "../../img/profile_img.jpeg") {
+    } else {
     }
   };
 
@@ -413,20 +447,23 @@ const AdminUploadProducts = () => {
 
   const handleproductType = (event) => {
     setProduct_type(event.target.value || "");
-    // // //console.log('handleMOI');
   };
 
   const handleCondition = (event) => {
     setProduct_condition(event.target.value || "");
-    // // //console.log('handleMOI');
   };
 
   const handlepaymentType = (event) => {
     setPayment_type(event.target.value || null);
-    // // //console.log('handleMOI');
+  };
+
+  const handleSalesType = (event) => {
+    setSales_type(event.target.value || null);
   };
 
   const UpdateProductInfo = async (e) => {
+    setIsLoading2(true);
+    setDisable2(true);
     if (payment_type === 1) {
       if (
         product_name === "" ||
@@ -440,67 +477,90 @@ const AdminUploadProducts = () => {
         amount === null ||
         product_details === ""
       ) {
-        // //console.log("Please supply all information.");
+        setCustomAlert(true);
         setAlert("Please supply all information");
         setAlertType("danger");
+        setIsLoading2(false);
+        setDisable2(false);
       } else {
         if (!localStorage.productId) {
+          // setAlert("Please provide a product id by adding a new product image");
+          // setAlertType("danger");
+
+          setCustomAlert(true);
           setAlert("Please provide a product id by adding a new product image");
           setAlertType("danger");
+          setIsLoading2(false);
+          setDisable2(false);
         } else {
-          let product_category_code = product_category_code1;
-          const body = JSON.stringify({
-            product_type,
-            payment_type,
-            productId,
-            product_name,
-            product_category_code,
-            unitCount,
-            product_condition,
-            product_duration,
-            product_brand,
-            percentage,
-            product_specifications,
-            amount,
-            product_details,
-            tags11,
-          });
-          //console.log(body, "yyyyyy");
-          try {
-            const res = await axios.put(
-              api_url2 + "/v1/product/add/product",
-              body,
-              config
-            );
-            //console.log(res, "undefined");
+          if (sales_type == 2 && awoof_price === "") {
+            setCustomAlert(true);
+            setAlert("Please supply awoof price for this product");
+            setAlertType("danger");
+            setIsLoading2(false);
+            setDisable2(false);
+          } else {
+            let product_category_code = product_category_code1;
+            const body = JSON.stringify({
+              product_type,
+              payment_type,
+              productId,
+              product_name,
+              product_category_code,
+              unitCount,
+              product_condition,
+              product_duration,
+              product_brand,
+              percentage,
+              product_specifications,
+              amount,
+              product_details,
+              tags11,
+              sales_type,
+              awoof_price,
+            });
+            console.log(body, "yyyyyy");
+            try {
+              const res = await axios.put(
+                api_url2 + "/v1/product/add/product",
+                body,
+                config
+              );
+              //console.log(res, "undefined");
 
-            if (res.data.statusCode === 200) {
-              // setMOIUpload(true)
-              localStorage.removeItem("productId");
-              setLSExist(false);
-              setProduct_category_code1("");
-              // setProduct_duration('')
-              setAlert("Product was uploaded successfully");
-              setAlertType("success");
-              setProductId("");
-              setProduct_type("");
-              setProductUpdateInfo({
-                product_name: "",
-                unitCount: null,
-                percentage: null,
-                product_brand: "",
-                product_specifications: "",
-                amount: null,
-                product_details: "",
-              });
-              return window.location.replace("/super_admin/upload_products");
-            } else {
-              setAlert(res.data.data.errors[0].msg);
-              setAlertType("danger");
+              if (res.data.statusCode === 200) {
+                // setMOIUpload(true)
+                localStorage.removeItem("productId");
+                setLSExist(false);
+                setProduct_category_code1("");
+                // setProduct_duration('')
+                setAlert("Product was uploaded successfully");
+                setAlertType("success");
+                setProductId("");
+                setProduct_type("");
+                setProductUpdateInfo({
+                  product_name: "",
+                  unitCount: null,
+                  percentage: null,
+                  product_brand: "",
+                  product_specifications: "",
+                  amount: null,
+                  product_details: "",
+                });
+                return window.location.replace("/super_admin/upload_products");
+              } else {
+                setCustomAlert(true);
+                setAlert(res.data.data.errors[0].msg);
+                setAlertType("danger");
+                setIsLoading2(false);
+                setDisable2(false);
+              }
+            } catch (err) {
+              console.log(err.response);
+              setIsLoading2(false);
+              setDisable2(false);
+              // setAlert("Check your internet connection", "danger");
             }
-          } catch (err) {
-            //console.log(err.response);
-            // setAlert('Check your internet connection', 'danger');
           }
         }
       }
@@ -518,13 +578,18 @@ const AdminUploadProducts = () => {
         amount === null ||
         product_details === ""
       ) {
-        // //console.log("Please supply all information.");
+        setCustomAlert(true);
         setAlert("Please supply all information");
         setAlertType("danger");
+        setIsLoading2(false);
+        setDisable2(false);
       } else {
         if (!localStorage.productId) {
+          setCustomAlert(true);
           setAlert("Please provide a product id by adding a new product image");
           setAlertType("danger");
+          setIsLoading2(false);
+          setDisable2(false);
         } else {
           let product_category_code = product_category_code1;
           const body = JSON.stringify({
@@ -542,6 +607,8 @@ const AdminUploadProducts = () => {
             amount,
             product_details,
             tags11,
+            sales_type,
+            awoof_price,
           });
           //console.log(body, "yyyyyy");
           try {
@@ -573,12 +640,17 @@ const AdminUploadProducts = () => {
               });
               return window.location.replace("/super_admin/upload_products");
             } else {
+              setCustomAlert(true);
               setAlert(res.data.data.errors[0].msg);
               setAlertType("danger");
+              setIsLoading2(false);
+              setDisable2(false);
             }
           } catch (err) {
-            //console.log(err.response);
-            // setAlert('Check your internet connection', 'danger');
+            console.log(err.response);
+            setIsLoading2(false);
+            setDisable2(false);
+            // setAlert("Check your internet connection", "danger");
           }
         }
       }
@@ -852,49 +924,6 @@ const AdminUploadProducts = () => {
                       tags={tags}
                     />
                   </div>
-                </div>
-
-                <div className="toggle_body_area1_cont1_input products_des_upload">
-                  {" "}
-                  <div className="add_cat_input_title">
-                    <span className="input_brand">Product Count</span>
-
-                    <TextField
-                      className=" width_incr"
-                      id="outlined-basic"
-                      label="Product count"
-                      type="number"
-                      variant="outlined"
-                      name="unitCount"
-                      value={unitCount}
-                      onChange={(e) => onChange1(e)}
-                    />
-                  </div>
-                  {/* <div className="add_cat_input_title">
-                  <span className="input_brand">Product Duration</span>
-       
-                  <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">
-                      Duration
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      name="product_duration"
-                      className="w-100"
-                      value={product_duration}
-                      label="Product category"
-                      onChange={handleDuration}
-                    >
-                      <MenuItem>Select Duration</MenuItem>
-                      <MenuItem value={1}>Outright Sell</MenuItem>
-                      <MenuItem value={2}>2 Months</MenuItem>
-                      <MenuItem value={3}>4 Months</MenuItem>
-                      <MenuItem value={4}>6 Months</MenuItem>
-                      <MenuItem value={5}>12 Months</MenuItem>
-                    </Select>
-                  </FormControl>
-                </div> */}
                   <div className="add_cat_input_title">
                     <span className="input_brand">Payment Type</span>
 
@@ -915,6 +944,66 @@ const AdminUploadProducts = () => {
                         <MenuItem value={2}>INSTALLMENTAL</MenuItem>
                       </Select>
                     </FormControl>
+                  </div>
+                  {payment_type == 1 ? (
+                    <>
+                      <div className="add_cat_input_title">
+                        <span className="input_brand">Sales Type</span>
+
+                        <FormControl fullWidth>
+                          <InputLabel id="demo-simple-select-label">
+                            Select Type
+                          </InputLabel>
+                          <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            name="sales_type"
+                            className="w-100"
+                            value={sales_type}
+                            label="Sales Type"
+                            onChange={handleSalesType}
+                          >
+                            <MenuItem value={1}>Showroom</MenuItem>
+                            <MenuItem value={2}>Awoof</MenuItem>
+                          </Select>
+                        </FormControl>
+                      </div>
+
+                      {sales_type == 2 ? (
+                        <div className="add_cat_input_title">
+                          <span className="input_brand">Price Slash</span>
+
+                          <TextField
+                            className=" width_incr"
+                            id="outlined-basic"
+                            label="Price Slash"
+                            variant="outlined"
+                            name="awoof_price"
+                            value={awoof_price}
+                            type="number"
+                            onChange={(e) => onChange1(e)}
+                          />
+                        </div>
+                      ) : null}
+                    </>
+                  ) : null}
+                </div>
+
+                <div className="toggle_body_area1_cont1_input products_des_upload">
+                  {" "}
+                  <div className="add_cat_input_title">
+                    <span className="input_brand">Product Count</span>
+
+                    <TextField
+                      className=" width_incr"
+                      id="outlined-basic"
+                      label="Product count"
+                      type="number"
+                      variant="outlined"
+                      name="unitCount"
+                      value={unitCount}
+                      onChange={(e) => onChange1(e)}
+                    />
                   </div>
                   {payment_type !== 1 ? (
                     <div className="add_cat_input_title">
@@ -971,7 +1060,7 @@ const AdminUploadProducts = () => {
                     value={product_specifications}
                     id=""
                     cols="30"
-                    rows="10"
+                    rows="7"
                     className="prod_desc_text_area"
                     onChange={(e) => onChange1(e)}
                   ></textarea>
@@ -999,10 +1088,22 @@ const AdminUploadProducts = () => {
                 <div className="add_cat_input_title">
                   <span className="submit_cat_btn_div">
                     <button
-                      className="submit_cat_btn"
+                      className="add_photo"
                       onClick={UpdateProductInfo}
+                      disabled={disable2}
                     >
-                      Submit
+                      {isLoading2 ? (
+                        <span>
+                          Submitting Details
+                          <FontAwesomeIcon
+                            className="ml-2"
+                            icon={faSpinner}
+                            spin
+                          />
+                        </span>
+                      ) : (
+                        <span>Submit Details</span>
+                      )}
                     </button>
                   </span>
                 </div>

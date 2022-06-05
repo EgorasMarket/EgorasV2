@@ -195,6 +195,19 @@ const CheckoutModalComponent = ({
     setProcessingDiv(true);
   };
   const selectOption = async (value) => {
+    console.log(auth.user.user);
+    if (
+      auth.user.user.fullname === null ||
+      auth.user.user.phoneNumber === null
+    ) {
+      // console.log('From me to you');
+      setProcessingDiv(false);
+      setSuccessDiv(false);
+      setErrorMsg('You have not completed your profile.. ');
+      setErrorDiv(true);
+      return;
+    }
+
     switch (value) {
       case 0:
         if (!product_id) {

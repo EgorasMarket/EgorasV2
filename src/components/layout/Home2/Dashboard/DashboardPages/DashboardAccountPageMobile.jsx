@@ -24,6 +24,7 @@ import {
   sumitGenderAndDate,
   nextOfKING,
   changePassword,
+  submitPhone
 } from '../../../../../actions/auth';
 import './accF.css';
 import { setAlert } from '../../../../../actions/alert';
@@ -34,6 +35,7 @@ function DashboardAccountPageMobile({
   sumitGenderAndDate,
   setAlert,
   nextOfKING,
+  submitPhone,
   auth,
   changePassword,
   match,
@@ -102,11 +104,17 @@ function DashboardAccountPageMobile({
     newpassword: '',
   });
 
+  const [changePhone1, setChangePhone1] = useState({
+      primaryPhoneNumber: "",
+      secondaryPhoneNumber: ""
+  })
+
   const [userInfo, setUserInfo] = useState({
     Userfirstname: '',
     Userlastname: '',
     Useremail: '',
     UserphoneNumber: '',
+    UserOldNumber: '',
     UseruserImage: '',
     Userrelationship: '',
     Usergender: '',
@@ -122,6 +130,7 @@ function DashboardAccountPageMobile({
     Userrelationship,
     UseruserImage,
     UserphoneNumber,
+    UserOldNumber,
     Userbvn,
     UserdateOfBirth,
   } = userInfo;
@@ -136,6 +145,7 @@ function DashboardAccountPageMobile({
     nxtrelationship,
   } = nextOfKinData;
   const { oldpassword, newpassword } = changePassword1;
+  const {primaryPhoneNumber, secondaryPhoneNumber} = changePhone1;
   const [idSet, setIdSet] = useState({ idNum: '' });
   const { idNum } = idSet;
 
@@ -170,6 +180,7 @@ function DashboardAccountPageMobile({
         Useremail: todecoded.user.email,
         UseruserImage: todecoded.user.userImage,
         UserphoneNumber: todecoded.user.phoneNumber,
+        UserOldNumber: todecoded.user.secondaryPhoneNumber,
         Userrelationship: todecoded.user.relationship,
         Usergender: todecoded.user.gender,
         Userbvn: todecoded.user.BVN,
@@ -319,6 +330,13 @@ function DashboardAccountPageMobile({
       [e.target.name]: e.target.value,
     });
   };
+
+  const onChange2 = (e) => {
+    setChangePhone1({
+      ...changePhone1,
+      [e.target.name]:e.target.value
+    })
+  }
 
   // const updateUser =()=>{
   //   setUserName()
@@ -585,6 +603,20 @@ function DashboardAccountPageMobile({
       setAlert(res.data.data.errors[0].msg, 'danger');
     }
   };
+
+
+  const ChanePhoneNumber = async (e) => {
+    let res = await submitPhone(primaryPhoneNumber, secondaryPhoneNumber);
+    console.log(res);
+
+   if (res.data.success == true) {
+      console.log(res.data.success);
+
+    } else {
+      setAlert(res.data.data.errors[0].msg, "danger");
+    }
+  
+  }
 
   const AddUserPhoto = async (e) => {
     e.preventDefault();
@@ -1441,7 +1473,7 @@ function DashboardAccountPageMobile({
                         <span className="toggle_body_area1_cont1_sub_txts"></span>
                       </div>
                       <div className="toggle_body_area1_cont1_input">
-                        {UserphoneNumber} {phone_no2}
+                        {UserphoneNumber} {UserOldNumber}
                         <AddCircleIcon
                           className="edit_icon"
                           onClick={openModal2}
@@ -1626,11 +1658,20 @@ function DashboardAccountPageMobile({
                   id="outlined-basic"
                   label="Phone No:"
                   variant="outlined"
-                  name="phone no"
-                  value={phone_no2}
-                  onChange={handleChange}
+                  name="primaryPhoneNumber"
+                  value={primaryPhoneNumber}
+                  onChange={onChange2}
                 />
               </div>
+               <TextField
+                    className="name_input1ab"
+                  id="outlined-basic"
+                  label="Change Phone No:"
+                  variant="outlined"
+                  name="secondaryPhoneNumber"
+                  value={secondaryPhoneNumber}
+                  onChange={onChange2}
+                />
               <div className="profile_modal_area2">
                 <button className="add_photo">
                   {' '}
@@ -1711,6 +1752,7 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   sumitGenderAndDate,
   setAlert,
+  submitPhone,
   nextOfKING,
   changePassword,
 })(DashboardAccountPageMobile);

@@ -96,6 +96,7 @@ const getPriceImpl = async (ticker, signer) => {
       Contract_Address.address
     );
     let result = await instance.price(ticker);
+    console.log(result);
     return {
       message: result,
       status: true,
@@ -559,6 +560,100 @@ const initiateRequest = async (requestID, signer) => {
     };
   }
 };
+
+// EgorasLoanFacet
+
+const addNFTAddressImpl = async (eNFTAddress, signer) => {
+  // console.log(loanID, signer);
+  try {
+    const instance = contractInstance(signer);
+    let result = await instance.addNFTAddress(eNFTAddress);
+
+    return {
+      message: result.hash,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: error.data.message,
+      status: false,
+    };
+  }
+};
+
+const suspendBranchImpl = async (branch, signer) => {
+  // console.log(loanID, signer);
+  try {
+    const instance = contractInstance(signer);
+    let result = await instance.suspendBranch(branch);
+
+    return {
+      message: result.hash,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: error.data.message,
+      status: false,
+    };
+  }
+};
+
+const rewardUsserMetaImpl = async (index, curPeriod, signer) => {
+  // console.log(loanID, signer);
+  try {
+    const instance = contractInstance(signer);
+    let result = await instance.rewardUsserMeta(index, curPeriod);
+
+    return {
+      message: result.hash,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: error.data.message,
+      status: false,
+    };
+  }
+};
+
+const getLoanDataImpl = async (loanID, signer) => {
+  // console.log(loanID, signer);
+  try {
+    const instance = contractInstance(signer);
+    let result = await instance.getLoanData(loanID);
+
+    return {
+      message: result.hash,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: error.data.message,
+      status: false,
+    };
+  }
+};
+
+const updatePeriods = async (signer) => {
+  // console.log(loanID, signer);
+  try {
+    const instance = contractInstance(signer);
+    let result = await instance.updatePeriods();
+
+    return {
+      message: result.hash,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: error.data.message,
+      status: false,
+    };
+  }
+};
+
+// EgorasLoanFacet End
 
 export {
   voteInCompany,

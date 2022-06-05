@@ -1,46 +1,46 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from "react";
 
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import Carousel from 'react-multi-carousel';
-import '../../../../css/itemsDetailsPage.css';
-import axios from 'axios';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import Success_Error_Component from '../../../assets/Success_Error_Component';
-import DoDisturbIcon from '@mui/icons-material/DoDisturb';
-import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import Carousel from "react-multi-carousel";
+import "../../../../css/itemsDetailsPage.css";
+import axios from "axios";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
+import Success_Error_Component from "../../../assets/Success_Error_Component";
+import DoDisturbIcon from "@mui/icons-material/DoDisturb";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 // import Dashboard_Checkout_Page from "../Dashboard/DashboardPages/Dashboard_Checkout_Page";
-import { numberWithCommas } from '../../../../static';
+import { numberWithCommas } from "../../../../static";
 
-import { ProductImageCarousel } from '../../Home2/item_details_page/ProductImageCarousel';
+import { ProductImageCarousel } from "../../Home2/item_details_page/ProductImageCarousel";
 
-import 'react-date-range/dist/styles.css'; // main style file
-import 'react-date-range/dist/theme/default.css'; // theme css file
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
 
 import {
   PRODUCT_LOADED,
   API_URL2 as api_url2,
-} from '../../../../actions/types';
-import { connect, useDispatch } from 'react-redux';
-import { fontSize } from '@mui/system';
+} from "../../../../actions/types";
+import { connect, useDispatch } from "react-redux";
+import { fontSize } from "@mui/system";
 const Accordion = ({ title, children }) => {
   const [isOpen, setOpen] = React.useState(false);
   return (
     <div className="accordion-wrapper">
       <div
-        className={`accordion-title ${isOpen ? 'open' : ''}`}
+        className={`accordion-title ${isOpen ? "open" : ""}`}
         onClick={() => setOpen(!isOpen)}
       >
         {title}
       </div>
-      <div className={`accordion-item ${!isOpen ? 'collapsed' : ''}`}>
+      <div className={`accordion-item ${!isOpen ? "collapsed" : ""}`}>
         <div className="accordion-content">{children}</div>
       </div>
     </div>
@@ -49,7 +49,7 @@ const Accordion = ({ title, children }) => {
 function ItemDetailsPage({ auth, match }) {
   const config = {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   };
 
@@ -72,25 +72,25 @@ function ItemDetailsPage({ auth, match }) {
   const [daysAddedDiv, setDaysAddedDiv] = useState(false);
   const [detailsModal, setDetailsModal] = useState(false);
   const [product_id, setProductId] = useState(match.params.id);
-  const [user_id, set_user_id] = useState('');
+  const [user_id, set_user_id] = useState("");
   const [showApproval, setShowApproval] = useState(true);
-  const [asset, setAsset] = useState('');
-  const [adminRole, setAdminRole] = useState('');
+  const [asset, setAsset] = useState("");
+  const [adminRole, setAdminRole] = useState("");
   const [moreImg, setMoreImg] = useState([]);
-  const [product_route, setProduct_route] = useState('');
+  const [product_route, setProduct_route] = useState("");
   const [productRoute, setProductRoute] = useState({
     // product_route: "",
-    carrier: '',
-    narration: '',
+    carrier: "",
+    narration: "",
   });
 
   const { carrier, narration } = productRoute;
 
-  const [base, setBase] = useState('');
+  const [base, setBase] = useState("");
 
-  const [imeeg, setImeeg] = useState('');
+  const [imeeg, setImeeg] = useState("");
 
-  const [activeBg, setActiveBg] = useState('descript');
+  const [activeBg, setActiveBg] = useState("descript");
 
   const [term, setTerm] = useState([]);
   const [dailyAmount, setDailyAmount] = useState();
@@ -101,26 +101,26 @@ function ItemDetailsPage({ auth, match }) {
   const [more_image, setMore_image] = useState();
 
   const [productDetails, setProductDetails] = useState({
-    product_image: '',
-    product_name: '',
-    product_brand: '',
-    status: '',
-    Product_type: '',
-    unitCount: '',
-    product_condition: '',
-    paymentperweek: '',
-    amount: '',
-    approval: '',
-    roundedAmount: '',
-    product_category_desc: '',
+    product_image: "",
+    product_name: "",
+    product_brand: "",
+    status: "",
+    Product_type: "",
+    unitCount: "",
+    product_condition: "",
+    paymentperweek: "",
+    amount: "",
+    approval: "",
+    roundedAmount: "",
+    product_category_desc: "",
     // more_image: {},
-    product_duration: '',
-    product_category_code: '',
-    product_details: '',
-    productSpecification: '',
-    percentage: '',
-    payment_type: '',
-    productId: '',
+    product_duration: "",
+    product_category_code: "",
+    product_details: "",
+    productSpecification: "",
+    percentage: "",
+    payment_type: "",
+    productId: "",
   });
 
   var addedDays = 0;
@@ -185,7 +185,7 @@ function ItemDetailsPage({ auth, match }) {
       set_user_id(auth.user.user.id);
       const { role } = auth.user.user;
       setAdminRole(role);
-      if (role === 'LOGISTICS') {
+      if (role === "LOGISTICS") {
         setShowApproval(true);
       }
     }
@@ -193,7 +193,7 @@ function ItemDetailsPage({ auth, match }) {
     //console.log(body);
 
     axios
-      .post(api_url2 + '/v1/product/retrieve/specific', body, config)
+      .post(api_url2 + "/v1/product/retrieve/specific", body, config)
       .then((data) => {
         //console.log(data.data.data, "king");
 
@@ -261,12 +261,12 @@ function ItemDetailsPage({ auth, match }) {
     firstItem: {
       // the naming can be any, depends on you.
       id: 1,
-      img: '/img/samsung_tv_555.jpeg',
+      img: "/img/samsung_tv_555.jpeg",
     },
     second: {
       // the naming can be any, depends on you.
       id: 2,
-      img: '/img/BAG.jpeg',
+      img: "/img/BAG.jpeg",
     },
   };
 
@@ -292,11 +292,7 @@ function ItemDetailsPage({ auth, match }) {
 
   const delete2 = (id) => {
     axios
-      .delete(
-        api_url2 + `/v1/product/delete/product/${id}`,
-        null,
-        config
-      )
+      .delete(api_url2 + `/v1/product/delete/product/${id}`, null, config)
       .then((response) => {
         //console.log(response.data);
         // if (data.data.data.success === true) {
@@ -382,7 +378,7 @@ function ItemDetailsPage({ auth, match }) {
     setAsset(assetVal);
     setBase(baseVal);
 
-    let ticker = assetVal + '-' + baseVal;
+    let ticker = assetVal + "-" + baseVal;
     window.scrollTo(0, 0);
     // setImeeg(itemsId.map((log) => log.img));
     setImeeg(itemsId.firstItem.img);
@@ -392,9 +388,9 @@ function ItemDetailsPage({ auth, match }) {
   const submitRoute = async () => {
     const config = {
       headers: {
-        Accept: '*',
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
+        Accept: "*",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
     };
 
@@ -411,7 +407,7 @@ function ItemDetailsPage({ auth, match }) {
 
     try {
       const res = await axios.post(
-        api_url2 + '/v1/product/set/product/route',
+        api_url2 + "/v1/product/set/product/route",
         body,
         config
       );
@@ -446,14 +442,14 @@ function ItemDetailsPage({ auth, match }) {
     });
 
     axios
-      .post(api_url2 + '/v1/product/approve/product', body, config)
+      .post(api_url2 + "/v1/product/approve/product", body, config)
       .then((data) => {
         // document.getElementById(product_id).remove();
 
         //console.log(data.data);
 
         if (data.data.success === true) {
-          return window.location.replace('/super_admin/all_products');
+          return window.location.replace("/super_admin/all_products");
         }
       })
       .catch((err) => {
@@ -469,7 +465,7 @@ function ItemDetailsPage({ auth, match }) {
   const percentMoney = (percentage / 100) * amount;
 
   const CalcAmtperweek = amount / CalcDaysConvert(product_duration);
-  if (ID === '1248f7f7-c2f7-49bd-9e8d-ccdb4db7b82b') {
+  if (ID === "1248f7f7-c2f7-49bd-9e8d-ccdb4db7b82b") {
     //console.log("Hello Mr King");
   }
   const OpenModal = () => {
@@ -482,10 +478,7 @@ function ItemDetailsPage({ auth, match }) {
     <div className="other2">
       {modal == false ? null : (
         <div className="checkout_main">
-          <div
-            className="checkout_modal_out"
-            onClick={CloseModal}
-          ></div>
+          <div className="checkout_modal_out" onClick={CloseModal}></div>
           {/* <Dashboard_Checkout_Page cAmount={parseInt(productDetails.amount)} click={CloseModal} /> */}
         </div>
       )}
@@ -495,12 +488,9 @@ function ItemDetailsPage({ auth, match }) {
           <div className="products_area">
             <div className="product_details_area1">
               <div className="details_area1_cont1">
-                {' '}
+                {" "}
                 {moreImg.length == 0 ? (
-                  <img
-                    src={product_image}
-                    className="image_carooooo"
-                  />
+                  <img src={product_image} className="image_carooooo" />
                 ) : (
                   <ProductImageCarousel
                     img={moreImg[0]}
@@ -515,13 +505,11 @@ function ItemDetailsPage({ auth, match }) {
               {/* ================ */}
 
               <div className="details_area1_cont2">
-                {' '}
-                <div className="product_details_Title">
-                  {product_name}
-                </div>
+                {" "}
+                <div className="product_details_Title">{product_name}</div>
                 <div
                   className="product_details_code"
-                  style={{ color: '#239e54' }}
+                  style={{ color: "#239e54" }}
                 >
                   <span className="product_code_title">Brand: </span>
                   {product_brand}
@@ -532,18 +520,14 @@ function ItemDetailsPage({ auth, match }) {
                   {numberWithCommas(parseInt(amount).toFixed())}
                 </div>
                 {/* put new code here  */}
-                {payment_type === 'INSTALLMENT' ? (
+                {payment_type === "INSTALLMENT" ? (
                   <div className="product_details_code">
-                    <span className="product_code_title">
-                      Percentage:
-                    </span>
+                    <span className="product_code_title">Percentage:</span>
                     {percentage}%
                   </div>
                 ) : null}
                 <div className="product_details_code">
-                  <span className="product_code_title">
-                    Payment Type:
-                  </span>
+                  <span className="product_code_title">Payment Type:</span>
                   {payment_type}
                 </div>
                 <div className="product_details_code">
@@ -553,15 +537,11 @@ function ItemDetailsPage({ auth, match }) {
                   {product_category_code}
                 </div>
                 <div className="product_details_code">
-                  <span className="product_code_title">
-                    Product Status:
-                  </span>
+                  <span className="product_code_title">Product Status:</span>
                   {status}
                 </div>
                 <div className="product_details_code">
-                  <span className="product_code_title">
-                    Admin_Personnel:
-                  </span>
+                  <span className="product_code_title">Admin_Personnel:</span>
                   {admin_personnel}
                 </div>
                 <div className="product_details_code">
@@ -571,44 +551,30 @@ function ItemDetailsPage({ auth, match }) {
                   {product_category_desc}
                 </div>
                 <div className="product_details_code">
-                  <span className="product_code_title">
-                    Product Condition:
-                  </span>
+                  <span className="product_code_title">Product Condition:</span>
                   {product_condition}
                 </div>
-                {payment_type === 'INSTALLMENT' ? (
+                {payment_type === "INSTALLMENT" ? (
                   <div
                     className="product_details_code"
-                    style={{ color: '#239e54' }}
+                    style={{ color: "#239e54" }}
                   >
-                    <span className="product_code_title">
-                      Payment Per Day:
-                    </span>
-                    ₦
-                    {numberWithCommas(
-                      parseInt(paymentperweek).toFixed()
-                    )}
+                    <span className="product_code_title">Payment Per Day:</span>
+                    ₦{numberWithCommas(parseInt(paymentperweek).toFixed())}
                     {/* {paymentperweek} */}
                   </div>
                 ) : null}
-                {payment_type === 'INSTALLMENT' ? (
+                {payment_type === "INSTALLMENT" ? (
                   <div
                     className="product_details_code"
-                    style={{ color: '#239e54' }}
+                    style={{ color: "#239e54" }}
                   >
-                    <span className="product_code_title">
-                      Rounded amount:
-                    </span>
-                    ₦
-                    {numberWithCommas(
-                      parseInt(roundedAmount).toFixed()
-                    )}
+                    <span className="product_code_title">Rounded amount:</span>₦
+                    {numberWithCommas(parseInt(roundedAmount).toFixed())}
                   </div>
                 ) : null}
                 <div className="product_details_code">
-                  <span className="product_code_title">
-                    Product Duration:
-                  </span>
+                  <span className="product_code_title">Product Duration:</span>
                   {product_duration} days
                 </div>
                 <div className="buy_now_btn_div">
@@ -620,22 +586,22 @@ function ItemDetailsPage({ auth, match }) {
                 Proceed to Checkout
               </button> */}
                 </div>
-                {adminRole === 'HOD_MEDIA' && approval === 'NEW' ? (
+                {adminRole === "HOD_MEDIA" && approval === "NEW" ? (
                   <div className="offline_payment_div">
                     <button
-                      style={{ width: '48%' }}
+                      style={{ width: "48%" }}
                       className="buy_now_button"
                       onClick={(e) => submitCallCheck(product_id)}
                     >
                       {product_duration !== 1
-                        ? 'Approved'
-                        : 'Proceed to checkout'}
+                        ? "Approved"
+                        : "Proceed to checkout"}
                     </button>
 
                     <button
                       style={{
-                        width: '48%',
-                        backgroundColor: '#e4a788',
+                        width: "48%",
+                        backgroundColor: "#e4a788",
                       }}
                       className="buy_now_button"
                       // {/* id={productId}  */}
@@ -643,11 +609,11 @@ function ItemDetailsPage({ auth, match }) {
                       onClick={() => delete2(productId)}
                     >
                       {product_duration !== 1
-                        ? 'Delete'
-                        : 'Proceed to checkout'}
+                        ? "Delete"
+                        : "Proceed to checkout"}
                     </button>
                   </div>
-                ) : adminRole === 'LOGISTICS' ? (
+                ) : adminRole === "LOGISTICS" ? (
                   <div className="offline_payment_div">
                     <div className="name_input1a">
                       <FormControl fullWidth>
@@ -668,16 +634,12 @@ function ItemDetailsPage({ auth, match }) {
                             To Rumukwrushi
                           </MenuItem>
                           <MenuItem value="AGIP">To Agip</MenuItem>
-                          <MenuItem value="OYIGBO">
-                            To Oyigbo
-                          </MenuItem>
+                          <MenuItem value="OYIGBO">To Oyigbo</MenuItem>
                         </Select>
                       </FormControl>
                     </div>
                     <div className="add_cat_input_title">
-                      <span className="input_brand">
-                        Product Carrier
-                      </span>
+                      <span className="input_brand">Product Carrier</span>
 
                       <TextField
                         className=" width_incr"
@@ -703,10 +665,7 @@ function ItemDetailsPage({ auth, match }) {
                       />
                     </div>
                     <span className="submit_cat_btn_div">
-                      <button
-                        className="submit_cat_btn"
-                        onClick={submitRoute}
-                      >
+                      <button className="submit_cat_btn" onClick={submitRoute}>
                         Submit
                       </button>
                     </span>
@@ -729,9 +688,9 @@ function ItemDetailsPage({ auth, match }) {
                   id="descript"
                   onClick={changeBg}
                   className={
-                    activeBg == 'descript'
-                      ? 'description_click1 description_click1_active'
-                      : 'description_click1'
+                    activeBg == "descript"
+                      ? "description_click1 description_click1_active"
+                      : "description_click1"
                   }
                 >
                   Description
@@ -779,10 +738,7 @@ function ItemDetailsPage({ auth, match }) {
             {detailsModal == true ? (
               <div className="detailsModal">
                 <div className="detailsModalSection1">
-                  <div
-                    className="bacKbutton"
-                    onClick={closeDetailModal}
-                  >
+                  <div className="bacKbutton" onClick={closeDetailModal}>
                     Previous
                     <ArrowForwardIosIcon className="arrow_back" />
                   </div>
@@ -793,7 +749,7 @@ function ItemDetailsPage({ auth, match }) {
                     <div className="delivery_cards_section">
                       <div className="delivery_card1">
                         <div className="delivery_card_title">
-                          Deliver to me{' '}
+                          Deliver to me{" "}
                           <button className="button_change_delivery_address">
                             Change Address
                           </button>
@@ -803,8 +759,8 @@ function ItemDetailsPage({ auth, match }) {
                             Samuel Ifeanyi
                           </div>
                           <div className="delivery_card_body_cont1">
-                            62 Harold Wilson Drive, Borokiri, RV, Port
-                            Harcourt, Rivers
+                            62 Harold Wilson Drive, Borokiri, RV, Port Harcourt,
+                            Rivers
                           </div>
                           <div className="delivery_card_body_cont1">
                             08164020234
@@ -824,8 +780,8 @@ function ItemDetailsPage({ auth, match }) {
                         </div>
                         <div className="delivery_card_body">
                           <div className="delivery_card_body_cont1">
-                            Select a pickup location in your area from
-                            our 32 locations nationwide.
+                            Select a pickup location in your area from our 32
+                            locations nationwide.
                           </div>
                         </div>
                       </div>
@@ -836,14 +792,12 @@ function ItemDetailsPage({ auth, match }) {
                     <div className="detailsModalSection1-area2_title">
                       Review Order
                     </div>
-                    <div className="review_order_div">
-                      Delivery 1 of 1
-                    </div>
+                    <div className="review_order_div">Delivery 1 of 1</div>
                     <div>
                       <div class="save_prod_deta">
                         <table
                           className="save_item_table"
-                          style={{ display: 'unset' }}
+                          style={{ display: "unset" }}
                         >
                           <thead className="assets-category-titles">
                             <tr className="assets">
@@ -869,7 +823,7 @@ function ItemDetailsPage({ auth, match }) {
                             className="save_items_cat popular-categories"
                             id="popular-categories"
                           >
-                            {' '}
+                            {" "}
                             <tr className="assets-category-row">
                               <td className="save_item_data">
                                 <div className="assets-data height_data">
@@ -896,11 +850,7 @@ function ItemDetailsPage({ auth, match }) {
                                         className="days_left_percentage"
                                         style={{
                                           width:
-                                            100 %
-                                            -(
-                                              (amount * 100) /
-                                              unitCount
-                                            ),
+                                            100 % -((amount * 100) / unitCount),
                                         }}
                                       ></span>
                                     </div>
@@ -937,12 +887,10 @@ function ItemDetailsPage({ auth, match }) {
                 </div>
                 <div className="detailsModalSection2">
                   <div className="details_modal_divv">
-                    <div className="cart_area2_heading">
-                      Payment Options
-                    </div>
+                    <div className="cart_area2_heading">Payment Options</div>
                     <div className="cart_area2_select">
                       <div className="wit_card">
-                        Pay via card{' '}
+                        Pay via card{" "}
                         <input
                           type="checkbox"
                           name=""
@@ -953,7 +901,7 @@ function ItemDetailsPage({ auth, match }) {
                     </div>
                     <div className="cart_area2_select border_down">
                       <div className="wit_card">
-                        Pay via wallet{' '}
+                        Pay via wallet{" "}
                         <input
                           type="checkbox"
                           name=""
@@ -977,7 +925,7 @@ function ItemDetailsPage({ auth, match }) {
                     {/* ========== */}
                     {/* ========== */}
                     <div className="sub_total_div">
-                      Sub Total:{' '}
+                      Sub Total:{" "}
                       <span className="sub_total_div_span">
                         {amount * unitCount}
                       </span>
@@ -987,19 +935,19 @@ function ItemDetailsPage({ auth, match }) {
                     {/* ========== */}
                     {/* ========== */}
                     <div className="sub_total_div">
-                      Delivery Fee:{' '}
+                      Delivery Fee:{" "}
                       <span className="sub_total_div_span">₦0</span>
                     </div>
                     {/* ========== */}
                     {/* ========== */}
                     <div className="secure_transac_text">
-                      {' '}
+                      {" "}
                       Transactions are 100% Safe and Secure
                     </div>
                     {/* ========== */}
                     {/* ========== */}
                     <div className="transac_secure_div">
-                      Total{' '}
+                      Total{" "}
                       <span className="sub_total_div_span">
                         {amount * unitCount}
                       </span>
@@ -1007,11 +955,8 @@ function ItemDetailsPage({ auth, match }) {
                     {/* ========== */}
                     {/* ========== */}
 
-                    <button
-                      className="checkout_btn1a"
-                      onClick={OpenModal}
-                    >
-                      Proceed to Checkout{' '}
+                    <button className="checkout_btn1a" onClick={OpenModal}>
+                      Proceed to Checkout{" "}
                     </button>
                   </div>
                 </div>

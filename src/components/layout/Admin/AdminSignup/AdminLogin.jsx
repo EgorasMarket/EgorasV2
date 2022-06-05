@@ -7,6 +7,8 @@ import { CustomAlert } from "../../../../CustomAlert";
 import { getLogin } from "../../../../actions/adminAuth";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { NoDataFoundComponent } from "../../Home2/Dashboard/NodataFound/NoDataFoundComponent";
+import { render } from "react-dom";
 // import { setAlert } from "../../../../actions/alert";
 
 const AdminLogin = ({ getLogin, isAuthenticated }) => {
@@ -38,6 +40,9 @@ const AdminLogin = ({ getLogin, isAuthenticated }) => {
         break;
     }
   };
+
+  const text = "No item Locked yet";
+  const transText = "No transactions found";
   useEffect(() => {
     if (email === "") {
       setDisable(true);
@@ -60,23 +65,24 @@ const AdminLogin = ({ getLogin, isAuthenticated }) => {
     }
     setIsLoading(true);
     setDisable(true);
-    let res3 = await getLogin(email, password);
 
-    //  setToken(res)
+    if (navigator.onLine) {
+      let res3 = await getLogin(email, password);
 
-    //console.log(res3);
+      console.log(res3);
 
-    // if (res.data.email !== e.target.value)
-
-    if (res3.data.success === true) {
-      setIsSuccessful(true);
-      setIsLoading(false);
-      //console.log("okay Good Server");
+      if (res3.data.success === true) {
+        setIsSuccessful(true);
+        setIsLoading(false);
+        //console.log("okay Good Server");
+      } else {
+        setAlert(res3.data, "danger");
+        setIsLoading(false);
+        setDisable(false);
+        // setAlert(res3.data.errors[0].msg, "danger");
+      }
     } else {
-      setAlert(res3.data, "danger");
-      setIsLoading(false);
-      setDisable(false);
-      // setAlert(res3.data.errors[0].msg, "danger");
+      render(<NoDataFoundComponent />);
     }
   };
   const setPasswordVisibilty = () => {

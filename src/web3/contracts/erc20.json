@@ -1,12 +1,12 @@
 {
-    "egc": "0x8ec285aa8c39f93ab144cea5339f9231205499c7",
+    "egc": "0xd68e5C52F7563486CC1A15D00eFA12C8644a907e",
     "eusd": "0x09FC8C5996B30F6f7de74A300946d2bB312e5796",
-    "egr": "0x4a59bdd537b8b8620797d36b2e117df4ffc6cc2b",
-    "engn": "0xb6eea17f504eb1baa97f266d7642ebedebd6ef38",
+    "egr": "0x8e9a916b6920136110a77E9acAf878862358A467",
+    "engn": "0xe03f527a64128e8Edb64bf67256416302c56c4b7",
     "abi": [
         {
             "constant": false,
-            "inputs": [
+            "inputs": [  
                 {
                     "internalType": "address",
                     "name": "account",
