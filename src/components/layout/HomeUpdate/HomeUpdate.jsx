@@ -566,9 +566,9 @@ const HomeUpdate = () => {
   const [aboutVideoModal, setAboutVideoModal] = useState(false);
   const [term, setTerm] = useState([]);
   const [dumDay, setDumDay] = useState(new Date(2022, 5, 1, 0, 0, 0, 0));
-  const [countDownDeadLine, setCountDownDeadLine] = useState({});
-  const [consola, setConsola] = useState(null);
-  const [shoppingDeadLine, setShoppingDeadLine] = useState({});
+  const [countDownDeadLine, setCountDownDeadLine] = useState(null);
+  // const [consola, setConsola] = useState(null);
+  const [shoppingDeadLine, setShoppingDeadLine] = useState(null);
 
   const [countDownDateTimes, setCountDownDateTimes] = useState({
     countdownDays: "",
@@ -654,85 +654,67 @@ const HomeUpdate = () => {
   //   setCountDownDeadLine(new Date("Jun 3, 2022 15:15:00"));
 
   const countDownFunction = () => {
-    try {
-      if (countDownDeadLine === {}) {
-        setCountDownDeadLine(new Date("Jun 3, 2022 16:20:00"));
-        console.log("am hereoo");
-        const timeInterval = setInterval(() => {
-          const now = new Date();
-          const distance = countDownDeadLine - now;
+    setCountDownDeadLine(new Date("Jun 5, 2022 13:00:00"));
+    const timeInterval = setInterval(() => {
+      const now = new Date();
+      const distance = countDownDeadLine - now;
 
-          // Time calculations for days, hours, minutes and seconds
-          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-          const hours = Math.floor(
-            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-          );
-          const minutes = Math.floor(
-            (distance % (1000 * 60 * 60)) / (1000 * 60)
-          );
-          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-          setCountDownDateTimes({
-            countdownDays: days,
-            countdownHours: hours,
-            countdownMinutes: minutes,
-            countdownSeconds: seconds,
-          });
-          if (distance < 0) {
-            clearInterval(timeInterval);
-            setCountDownDeadLine({});
-            console.log("time to start is up");
-          }
-        }, 1000);
+      // Time calculations for days, hours, minutes and seconds
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      setCountDownDateTimes({
+        countdownDays: days,
+        countdownHours: hours,
+        countdownMinutes: minutes,
+        countdownSeconds: seconds,
+      });
+      if (distance < 0) {
+        clearInterval(timeInterval);
+        setCountDownDeadLine(null);
+        console.log("time to start is up");
       }
-      return;
-    } catch (error) {
-      console.log(error);
-    }
+    }, 1000);
+  };
 
-    try {
-      if (shoppingDeadLine === {}) {
-        setShoppingDeadLine(new Date("Jun 3, 2022 16:50:00"));
-        const timeIntervalForShopping = setInterval(() => {
-          const now = new Date();
+  const shoppingCountDownFunc = () => {
+    setShoppingDeadLine(new Date("Jun 5, 2022 14:55:00"));
 
-          const distance = shoppingDeadLine - now;
+    const timeIntervalForShopping = setInterval(() => {
+      const now = new Date();
 
-          // Time calculations for days, hours, minutes and seconds
-          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-          const hours = Math.floor(
-            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-          );
-          const minutes = Math.floor(
-            (distance % (1000 * 60 * 60)) / (1000 * 60)
-          );
-          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      const distance = shoppingDeadLine - now;
 
-          setShoppingTimes({
-            shoppingDays: days,
-            shoppingHours: hours,
-            shoppingMinutes: minutes,
-            shoppingSeconds: seconds,
-          });
+      // Time calculations for days, hours, minutes and seconds
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-          if (distance < 0) {
-            clearInterval(timeIntervalForShopping);
-            setShoppingDeadLine({});
-            // setCountDownDeadLine(!false);
-            console.log("time for shopping is up");
-          }
-        }, 1000);
+      setShoppingTimes({
+        shoppingDays: days,
+        shoppingHours: hours,
+        shoppingMinutes: minutes,
+        shoppingSeconds: seconds,
+      });
+
+      if (distance < 0) {
+        clearInterval(timeIntervalForShopping);
+        setShoppingDeadLine(null);
+        // setCountDownDeadLine();
+        console.log("time for shopping is up");
       }
-      return;
-    } catch (error) {
-      console.log(error);
-    }
-
-    // setConsola("updated");
-    // console.log(consola);
+    }, 1000);
   };
   useEffect(() => {
     countDownFunction();
-  }, [countDownDeadLine, shoppingDeadLine, countDownDateTimes, shoppingTimes]);
+    shoppingCountDownFunc();
+  }, []);
 
   useEffect(() => {
     let newDay = new Date("Jun 1, 2022 00:00:00");
@@ -999,7 +981,7 @@ const HomeUpdate = () => {
                   <ArrowForwardIcon className="arrow_alt_forward" />
                 </a>
                 <div className="timer">
-                  {countDownDeadLine !== {} ? (
+                  {countDownDeadLine === !null ? (
                     <div className="timer_div">
                       <p className="startsIn">Starts In:</p>
                       <div className="countdownTime">
@@ -1022,7 +1004,7 @@ const HomeUpdate = () => {
                         <span className="countdownTime_time_indicator">S</span>
                       </div>
                     </div>
-                  ) : shoppingDeadLine !== {} ? (
+                  ) : shoppingDeadLine === !null ? (
                     <div className="timer_div">
                       <p className="startsIn">Ends In:</p>
                       <div className="countdownTime">
