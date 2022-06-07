@@ -351,7 +351,7 @@ const ItemDetailComponent = ({
     console.log(totalMiliseconds);
 
     if (getData.countType === "WEEKLY") {
-      setPlaceHolder("Item Opens In");
+      setPlaceHolder("Item Available In");
     } else {
       setPlaceHolder("Item Closes In");
     }
