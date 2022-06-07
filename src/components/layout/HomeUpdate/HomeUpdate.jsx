@@ -25,6 +25,8 @@ import { numberWithCommas } from "../../../static";
 import { NoDataFoundComponent } from "../Home2/Dashboard/NodataFound/NoDataFoundComponent";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import TravelExploreOutlinedIcon from "@mui/icons-material/TravelExploreOutlined";
+import FlipCountdown from "@rumess/react-flip-countdown";
+
 const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
@@ -565,10 +567,14 @@ const HomeUpdate = () => {
   const Ref = useRef(null);
   const [aboutVideoModal, setAboutVideoModal] = useState(false);
   const [term, setTerm] = useState([]);
-  const [dumDay, setDumDay] = useState(new Date(2022, 5, 1, 0, 0, 0, 0));
-  const [countDownDeadLine, setCountDownDeadLine] = useState(null);
-  // const [consola, setConsola] = useState(null);
-  const [shoppingDeadLine, setShoppingDeadLine] = useState(null);
+  const [dumDay, setDumDay] = useState(false);
+  const [dateType, setDateType] = useState("");
+  const [countDownDeadLine, setCountDownDeadLine] = useState(
+    "0000-00-00 00:00:00"
+  );
+  const [shoppingDeadLine, setShoppingDeadLine] = useState(
+    "0000-00-00 00:00:00"
+  );
 
   const [countDownDateTimes, setCountDownDateTimes] = useState({
     countdownDays: "",
@@ -647,87 +653,6 @@ const HomeUpdate = () => {
       });
   }, []);
   const text = "No Products Found";
-
-  // Update the count down every 1 second
-
-  // const udatedMen = () =>
-  //   setCountDownDeadLine(new Date("Jun 3, 2022 15:15:00"));
-
-  const countDownFunction = () => {
-    setCountDownDeadLine(new Date("Jun 5, 2022 13:00:00"));
-    const timeInterval = setInterval(() => {
-      const now = new Date();
-      const distance = countDownDeadLine - now;
-
-      // Time calculations for days, hours, minutes and seconds
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      setCountDownDateTimes({
-        countdownDays: days,
-        countdownHours: hours,
-        countdownMinutes: minutes,
-        countdownSeconds: seconds,
-      });
-      if (distance < 0) {
-        clearInterval(timeInterval);
-        setCountDownDeadLine(null);
-        console.log("time to start is up");
-      }
-    }, 1000);
-  };
-
-  const shoppingCountDownFunc = () => {
-    setShoppingDeadLine(new Date("Jun 5, 2022 14:55:00"));
-
-    const timeIntervalForShopping = setInterval(() => {
-      const now = new Date();
-
-      const distance = shoppingDeadLine - now;
-
-      // Time calculations for days, hours, minutes and seconds
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      setShoppingTimes({
-        shoppingDays: days,
-        shoppingHours: hours,
-        shoppingMinutes: minutes,
-        shoppingSeconds: seconds,
-      });
-
-      if (distance < 0) {
-        clearInterval(timeIntervalForShopping);
-        setShoppingDeadLine(null);
-        // setCountDownDeadLine();
-        console.log("time for shopping is up");
-      }
-    }, 1000);
-  };
-  useEffect(() => {
-    countDownFunction();
-    shoppingCountDownFunc();
-  }, []);
-
-  useEffect(() => {
-    let newDay = new Date("Jun 1, 2022 00:00:00");
-
-    let endDate = new Date("Jun 8, 2022 00:00:00");
-    endDate.setDate(endDate.getDate() + 7);
-    // return deadline;
-    const remainingDays = new Date(endDate - newDay.getDate());
-    console.log(endDate);
-    console.log(newDay);
-    console.log(remainingDays);
-    // console.log(remainingDays);
-  }, []);
 
   return (
     <div style={{ overflow: "hidden" }}>
@@ -980,55 +905,7 @@ const HomeUpdate = () => {
                   Awoof Sales
                   <ArrowForwardIcon className="arrow_alt_forward" />
                 </a>
-                <div className="timer">
-                  {countDownDeadLine === !null ? (
-                    <div className="timer_div">
-                      <p className="startsIn">Starts In:</p>
-                      <div className="countdownTime">
-                        {countDownDateTimes.countdownDays}{" "}
-                        <span className="countdownTime_time_indicator">D</span>
-                      </div>
-                      <span>:</span>
-                      <div className="countdownTime">
-                        {countDownDateTimes.countdownHours}{" "}
-                        <span className="countdownTime_time_indicator">H</span>
-                      </div>
-                      <span>:</span>
-                      <div className="countdownTime">
-                        {countDownDateTimes.countdownMinutes}{" "}
-                        <span className="countdownTime_time_indicator">M</span>
-                      </div>
-                      <span>:</span>
-                      <div className="countdownTime">
-                        {countDownDateTimes.countdownSeconds}{" "}
-                        <span className="countdownTime_time_indicator">S</span>
-                      </div>
-                    </div>
-                  ) : shoppingDeadLine === !null ? (
-                    <div className="timer_div">
-                      <p className="startsIn">Ends In:</p>
-                      <div className="countdownTime">
-                        {shoppingTimes.shoppingDays}{" "}
-                        <span className="countdownTime_time_indicator">D</span>
-                      </div>
-                      <span>:</span>
-                      <div className="countdownTime">
-                        {shoppingTimes.shoppingHours}{" "}
-                        <span className="countdownTime_time_indicator">H</span>
-                      </div>
-                      <span>:</span>
-                      <div className="countdownTime">
-                        {shoppingTimes.shoppingMinutes}{" "}
-                        <span className="countdownTime_time_indicator">M</span>
-                      </div>
-                      <span>:</span>
-                      <div className="countdownTime">
-                        {shoppingTimes.shoppingSeconds}{" "}
-                        <span className="countdownTime_time_indicator">S</span>
-                      </div>
-                    </div>
-                  ) : null}
-                </div>
+                <div className="timer"></div>
                 <span className="shop_heading_para">
                   Opens Every Saturday by 12:00am and closes on Sunday 12:00am .
                 </span>
