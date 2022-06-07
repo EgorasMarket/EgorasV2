@@ -4,6 +4,7 @@ import Carousel from "react-multi-carousel";
 import "../../../../css/itemsDetailsPage.css";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import axios from "axios";
+import { connect } from "react-redux";
 
 import { ProductImageCarousel } from "./ProductImageCarousel";
 import "../Dashboard/DashboardStyles/dashboardCart.css";
@@ -11,6 +12,9 @@ import CreditScoreIcon from "@mui/icons-material/CreditScore";
 import CallIcon from "@mui/icons-material/Call";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import { NoDataFoundComponent } from "../Dashboard/NodataFound/NoDataFoundComponent";
+import Countdown from "react-countdown";
+
+import { countdown } from "../../../../actions/countdown";
 // import { ProductDescription } from "./ProductDescription";
 import Dashboard_Checkout_Page from "../Dashboard/DashboardPages/Dashboard_Checkout_Page";
 import { numberWithCommas } from "../../../../static";
@@ -100,6 +104,7 @@ const ItemDetailComponent = ({
   OpenModal,
   openCheckoutModal,
   stringUrl,
+  countdown,
 }) => {
   const config = {
     headers: {
@@ -113,6 +118,11 @@ const ItemDetailComponent = ({
   const [term, setTerm] = useState([]);
   const [activeBg, setActiveBg] = useState("features");
   const [moreImg, setMoreImg] = useState([]);
+  const [counterReady, setCounterReady] = useState(false);
+  const [placeHolder, setPlaceHolder] = useState("");
+  const [counterArray, setCounterArray] = useState([]);
+
+  const [counterDuration, setCounterDuration] = useState(0);
   const [outrightProducts, setOutrightProducts] = useState([]);
   // const [categoryName, setCategoryName] = useState("");
   const [categ, setcate] = useState([]);
@@ -309,7 +319,126 @@ const ItemDetailComponent = ({
   //   // return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
   // };
   // //console.log(product_id);
+  const callCounter = async () => {
+    let res3 = await countdown();
+    setCounterArray(res3.data.data);
+    let getData = res3.data.data[0];
+    // console.log(res3.data.data);
+    // console.log(getData.countType);
+    let convertToDate = Date(getData.dropDate);
+    // console.log(convertToDate);
 
+    const today = new Date();
+    const endDate = new Date(getData.dropDate);
+    const days = parseInt((endDate - today) / (1000 * 60 * 60 * 24));
+    const hours = parseInt((Math.abs(endDate - today) / (1000 * 60 * 60)) % 24);
+    const minutes = parseInt(
+      (Math.abs(endDate.getTime() - today.getTime()) / (1000 * 60)) % 60
+    );
+    const seconds = parseInt(
+      (Math.abs(endDate.getTime() - today.getTime()) / 1000) % 60
+    );
+    console.log(days, hours, minutes, seconds);
+
+    // 👇️        hour  min  sec  ms
+    let dayscount = days * 24 * 60 * 60 * 1000;
+    let hourscount = hours * 60 * 60 * 1000;
+    let minutescount = minutes * 60 * 1000;
+    let secondscount = seconds * 1000;
+
+    let totalMiliseconds = dayscount + hourscount + minutescount + secondscount;
+
+    console.log(totalMiliseconds);
+
+    if (getData.countType === "WEEKLY") {
+      setPlaceHolder("Item Opens In");
+    } else {
+      setPlaceHolder("Item Closes In");
+    }
+    setCounterDuration(totalMiliseconds);
+    setCounterReady(true);
+  };
+
+  useEffect(() => {
+    callCounter();
+  }, []);
+
+  useEffect(() => {
+    const timeInterval = setInterval(() => {
+      console.log(counterArray, "okkkkk");
+      let getData = counterArray[0];
+      // let convertToDate = Date(getData.dropDate);
+
+      const today = new Date();
+      const endDate = new Date(getData.dropDate);
+      const days = parseInt((endDate - today) / (1000 * 60 * 60 * 24));
+      const hours = parseInt(
+        (Math.abs(endDate - today) / (1000 * 60 * 60)) % 24
+      );
+      const minutes = parseInt(
+        (Math.abs(endDate.getTime() - today.getTime()) / (1000 * 60)) % 60
+      );
+      const seconds = parseInt(
+        (Math.abs(endDate.getTime() - today.getTime()) / 1000) % 60
+      );
+      console.log(days, hours, minutes, seconds);
+
+      // 👇️        hour  min  sec  ms
+      let dayscount = days * 24 * 60 * 60 * 1000;
+      let hourscount = hours * 60 * 60 * 1000;
+      let minutescount = minutes * 60 * 1000;
+      // let newMinutes = 5 * 60 * 1000;
+      let secondscount = seconds * 1000;
+
+      let totalMiliseconds =
+        dayscount + hourscount + minutescount + secondscount;
+
+      var completeCount = Date.now() + totalMiliseconds;
+      var newEndDate = endDate.getTime();
+      console.log(completeCount, newEndDate);
+      // 1654532579461 1654532594462
+      if (completeCount >= newEndDate) {
+        console.log("time up", new Date());
+
+        callCounter();
+
+        // completeCount = Date.now() + newMinutes;
+        // var currentDate = new Date();
+        // newEndDate = currentDate.setMinutes(currentDate.getMinutes() + 3);
+        // console.log(completeCount, newEndDate);
+
+        setCounterReady(false);
+        setCounterReady(true);
+
+        if (counterArray === undefined || counterArray.length == 0) {
+          console.log("empty array");
+        } else {
+          if (getData.countType === "WEEKLY") {
+            console.log("Market Opens In WEEKLY");
+            setPlaceHolder("Item available for checkout in");
+            // setCounterDuration(newMinutes);
+          } else {
+            console.log("Market Opens In DAILY");
+            setPlaceHolder("Item unavailable for checkout in");
+          }
+        }
+      } else {
+        console.log("still counting", Date.now());
+      }
+    }, 5000);
+    return () => {
+      clearInterval(timeInterval);
+    };
+  }, [counterArray]);
+  const CoundownRenderer = ({ days, hours, minutes, seconds }) => (
+    <div>
+      {days}
+      <span className="count_down_tags_detail">D</span>: {hours}
+      <span className="count_down_tags_detail">H</span>: {minutes}
+      <span className="count_down_tags_detail">M</span>: {seconds}
+      <span className="count_down_tags_detail">S</span>
+    </div>
+  );
   return (
     <>
       {modal == false ? null : (
@@ -391,6 +520,20 @@ const ItemDetailComponent = ({
             {/* ======= */}
             {/* ======= */}
             {/* ======= */}
+            {counterReady ? (
+              <div>
+                <span className="shopping_countdown_div_item_detail">
+                  {placeHolder}:{" "}
+                  <div className="count_down_shopping_item_detail">
+                    <Countdown
+                      className="countdownDiv"
+                      date={Date.now() + counterDuration}
+                      renderer={CoundownRenderer}
+                    />
+                  </div>
+                </span>
+              </div>
+            ) : null}
             {/* ======= */}
             {/* <hr className="horizontal_rule" /> */}
             {/* ------- */}
@@ -804,5 +947,4 @@ const mapStateToProps1 = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
   cart: state.shop.cart,
 });
-
-export default ItemDetailComponent;
+export default connect(null, { countdown })(ItemDetailComponent);

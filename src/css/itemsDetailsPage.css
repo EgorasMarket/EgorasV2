@@ -170,7 +170,29 @@ span.per_day {
   color: darkgrey;
   font-weight: 500;
 }
+.shopping_countdown_div_item_detail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: solid 1px #d9d9d9;
+  padding: 0.5em 0.5em;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  gap: 0px;
+  margin-top: 20px;
+}
 
+.count_down_tags_detail {
+  font-size: 18px;
+  color: #444444;
+  font-weight: 700;
+}
+.count_down_shopping_item_detail {
+  font-size: 24px;
+  color: black;
+  font-weight: 800;
+}
 .product_details_price {
   font-size: 26px;
   font-weight: 700;

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
+import { connect } from "react-redux";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
@@ -15,6 +16,9 @@ import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import CloseIcon from "@mui/icons-material/Close";
 import MiscellaneousServicesIcon from "@mui/icons-material/MiscellaneousServices";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import Countdown from "react-countdown";
+import { countdown } from "../../../actions/countdown";
+
 import Carousel from "react-multi-carousel";
 import "../../../css/market_home.css";
 import "../../../css/about.css";
@@ -558,7 +562,13 @@ export const Home_kitchenBody = () => {
     </div>
   );
 };
-const HomeUpdate = () => {
+
+const HomeUpdate = ({ countdown }) => {
+  const [counterReady, setCounterReady] = useState(false);
+  const [placeHolder, setPlaceHolder] = useState("");
+  const [counterArray, setCounterArray] = useState([]);
+
+  const [counterDuration, setCounterDuration] = useState(0);
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -567,8 +577,6 @@ const HomeUpdate = () => {
   const Ref = useRef(null);
   const [aboutVideoModal, setAboutVideoModal] = useState(false);
   const [term, setTerm] = useState([]);
-  const [dumDay, setDumDay] = useState(false);
-  const [dateType, setDateType] = useState("");
 
   const [activeTab, setActiveTab] = useState("computers");
   const toggleAboutVideoModal = () => {
@@ -635,6 +643,131 @@ const HomeUpdate = () => {
   }, []);
   const text = "No Products Found";
 
+  // Update the count down every 1 second
+
+  // const udatedMen = () =>
+  //   setCountDownDeadLine(new Date("Jun 3, 2022 15:15:00"));
+
+  const callCounter = async () => {
+    let res3 = await countdown();
+    setCounterArray(res3.data.data);
+    let getData = res3.data.data[0];
+    // console.log(res3.data.data);
+    // console.log(getData.countType);
+    let convertToDate = Date(getData.dropDate);
+    // console.log(convertToDate);
+
+    const today = new Date();
+    const endDate = new Date(getData.dropDate);
+    const days = parseInt((endDate - today) / (1000 * 60 * 60 * 24));
+    const hours = parseInt((Math.abs(endDate - today) / (1000 * 60 * 60)) % 24);
+    const minutes = parseInt(
+      (Math.abs(endDate.getTime() - today.getTime()) / (1000 * 60)) % 60
+    );
+    const seconds = parseInt(
+      (Math.abs(endDate.getTime() - today.getTime()) / 1000) % 60
+    );
+    console.log(days, hours, minutes, seconds);
+
+    // 👇️        hour  min  sec  ms
+    let dayscount = days * 24 * 60 * 60 * 1000;
+    let hourscount = hours * 60 * 60 * 1000;
+    let minutescount = minutes * 60 * 1000;
+    let secondscount = seconds * 1000;
+
+    let totalMiliseconds = dayscount + hourscount + minutescount + secondscount;
+
+    console.log(totalMiliseconds);
+
+    if (getData.countType === "WEEKLY") {
+      setPlaceHolder("Market Opens In");
+    } else {
+      setPlaceHolder("Market Closes In");
+    }
+    setCounterDuration(totalMiliseconds);
+    setCounterReady(true);
+  };
+
+  useEffect(() => {
+    callCounter();
+  }, []);
+
+  useEffect(() => {
+    const timeInterval = setInterval(() => {
+      console.log(counterArray, "okkkkk");
+      let getData = counterArray[0];
+      // let convertToDate = Date(getData.dropDate);
+
+      const today = new Date();
+      const endDate = new Date(getData.dropDate);
+      const days = parseInt((endDate - today) / (1000 * 60 * 60 * 24));
+      const hours = parseInt(
+        (Math.abs(endDate - today) / (1000 * 60 * 60)) % 24
+      );
+      const minutes = parseInt(
+        (Math.abs(endDate.getTime() - today.getTime()) / (1000 * 60)) % 60
+      );
+      const seconds = parseInt(
+        (Math.abs(endDate.getTime() - today.getTime()) / 1000) % 60
+      );
+      console.log(days, hours, minutes, seconds);
+
+      // 👇️        hour  min  sec  ms
+      let dayscount = days * 24 * 60 * 60 * 1000;
+      let hourscount = hours * 60 * 60 * 1000;
+      let minutescount = minutes * 60 * 1000;
+      // let newMinutes = 5 * 60 * 1000;
+      let secondscount = seconds * 1000;
+
+      let totalMiliseconds =
+        dayscount + hourscount + minutescount + secondscount;
+
+      var completeCount = Date.now() + totalMiliseconds;
+      var newEndDate = endDate.getTime();
+      console.log(completeCount, newEndDate);
+      // 1654532579461 1654532594462
+      if (completeCount >= newEndDate) {
+        console.log("time up", new Date());
+
+        callCounter();
+
+        // completeCount = Date.now() + newMinutes;
+        // var currentDate = new Date();
+        // newEndDate = currentDate.setMinutes(currentDate.getMinutes() + 3);
+        // console.log(completeCount, newEndDate);
+
+        setCounterReady(false);
+        setCounterReady(true);
+
+        if (counterArray === undefined || counterArray.length == 0) {
+          console.log("empty array");
+        } else {
+          if (getData.countType === "WEEKLY") {
+            console.log("Market Opens In WEEKLY");
+            setPlaceHolder("Market Opens In");
+            // setCounterDuration(newMinutes);
+          } else {
+            console.log("Market Opens In DAILY");
+            setPlaceHolder("Market Closes In");
+          }
+        }
+      } else {
+        console.log("still counting", Date.now());
+      }
+    }, 5000);
+    return () => {
+      clearInterval(timeInterval);
+    };
+  }, [counterArray]);
+  const CoundownRenderer = ({ days, hours, minutes, seconds }) => (
+    <div>
+      {days}
+      <span className="count_down_tags">D</span>: {hours}
+      <span className="count_down_tags">H</span>: {minutes}
+      <span className="count_down_tags">M</span>: {seconds}
+      <span className="count_down_tags">S</span>
+    </div>
+  );
   return (
     <div style={{ overflow: "hidden" }}>
       <section className="h_update_hero_section">
@@ -886,7 +1019,22 @@ const HomeUpdate = () => {
                   Awoof Sales
                   <ArrowForwardIcon className="arrow_alt_forward" />
                 </a>
-                <div className="timer"></div>
+                <div className="timer">
+                  {counterReady ? (
+                    <div>
+                      <span className="startsIn">
+                        {placeHolder}:{" "}
+                        <div className="count_down_shopping_">
+                          <Countdown
+                            className="countdownDiv"
+                            date={Date.now() + counterDuration}
+                            renderer={CoundownRenderer}
+                          />
+                        </div>
+                      </span>
+                    </div>
+                  ) : null}
+                </div>
                 <span className="shop_heading_para">
                   Opens Every Saturday by 12:00am and closes on Sunday 12:00am .
                 </span>
@@ -1615,4 +1763,6 @@ const HomeUpdate = () => {
   );
 };
 
-export default HomeUpdate;
+// export default HomeUpdate;
+
+export default connect(null, { countdown })(HomeUpdate);

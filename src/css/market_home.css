@@ -139,21 +139,28 @@
 }
 .startsIn {
   margin: 0;
-  font-weight: 800;
+  font-weight: 700;
   font-size: 27px;
-  color: #4b4b4b;
-  margin-right: 0.5em;
+  color: #6b6b6b;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-.countdownTime_time_indicator {
+.count_down_tags {
   font-size: 20px;
-  color: #5b5b5b;
+  color: #444444;
 }
 .hero_img_area2_img {
   width: 100%;
   z-index: 4;
   position: relative;
 }
-
+.count_down_shopping_ {
+  font-size: 35px;
+  color: black;
+  font-weight: 800;
+}
 .hero_img_drop_bg {
   width: 88%;
   margin: auto;
