@@ -60,6 +60,7 @@
     "react-bootstrap": "^0.32.4",
     "react-card-carousel": "^1.1.3",
     "react-charty": "^0.1.7",
+    "react-countdown": "^2.3.2",
     "react-countdown-now": "^2.1.2",
     "react-date-picker": "^8.4.0",
     "react-date-range": "^1.4.0",
