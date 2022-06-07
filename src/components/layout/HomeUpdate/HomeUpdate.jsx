@@ -569,25 +569,6 @@ const HomeUpdate = () => {
   const [term, setTerm] = useState([]);
   const [dumDay, setDumDay] = useState(false);
   const [dateType, setDateType] = useState("");
-  const [countDownDeadLine, setCountDownDeadLine] = useState(
-    "0000-00-00 00:00:00"
-  );
-  const [shoppingDeadLine, setShoppingDeadLine] = useState(
-    "0000-00-00 00:00:00"
-  );
-
-  const [countDownDateTimes, setCountDownDateTimes] = useState({
-    countdownDays: "",
-    countdownHours: "",
-    countdownMinutes: "",
-    countdownSeconds: "",
-  });
-  const [shoppingTimes, setShoppingTimes] = useState({
-    shoppingDays: "",
-    shoppingHours: "",
-    shoppingMinutes: "",
-    shoppingSeconds: "",
-  });
 
   const [activeTab, setActiveTab] = useState("computers");
   const toggleAboutVideoModal = () => {
