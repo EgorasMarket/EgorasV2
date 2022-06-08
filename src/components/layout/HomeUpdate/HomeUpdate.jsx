@@ -754,7 +754,7 @@ const HomeUpdate = ({ countdown }) => {
       } else {
         console.log("still counting", Date.now());
       }
-    }, 5000);
+    }, 3000);
     return () => {
       clearInterval(timeInterval);
     };
