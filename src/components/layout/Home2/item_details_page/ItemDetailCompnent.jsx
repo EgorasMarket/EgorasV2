@@ -5,7 +5,7 @@ import "../../../../css/itemsDetailsPage.css";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import axios from "axios";
 import { connect } from "react-redux";
-
+import LockClockIcon from "@mui/icons-material/LockClock";
 import { ProductImageCarousel } from "./ProductImageCarousel";
 import "../Dashboard/DashboardStyles/dashboardCart.css";
 import CreditScoreIcon from "@mui/icons-material/CreditScore";
@@ -121,6 +121,9 @@ const ItemDetailComponent = ({
   const [counterReady, setCounterReady] = useState(false);
   const [placeHolder, setPlaceHolder] = useState("");
   const [counterArray, setCounterArray] = useState([]);
+  const [countType, setCountType] = useState("");
+  const [disable, setDisable] = useState(false);
+  const [date, setDate] = useState("");
 
   const [counterDuration, setCounterDuration] = useState(0);
   const [outrightProducts, setOutrightProducts] = useState([]);
@@ -323,10 +326,10 @@ const ItemDetailComponent = ({
     let res3 = await countdown();
     setCounterArray(res3.data.data);
     let getData = res3.data.data[0];
-    // console.log(res3.data.data);
+    console.log(res3.data.data);
     // console.log(getData.countType);
     let convertToDate = Date(getData.dropDate);
-    // console.log(convertToDate);
+    console.log(convertToDate);
 
     const today = new Date();
     const endDate = new Date(getData.dropDate);
@@ -347,13 +350,18 @@ const ItemDetailComponent = ({
     let secondscount = seconds * 1000;
 
     let totalMiliseconds = dayscount + hourscount + minutescount + secondscount;
-
+    setDate(getData.dropDate);
     console.log(totalMiliseconds);
-
     if (getData.countType === "WEEKLY") {
       setPlaceHolder("Item Available In");
+      setCountType("WEEKLY");
+
+      setDisable(true);
     } else {
       setPlaceHolder("Item Closes In");
+      setCountType("DAILY");
+
+      setDisable(false);
     }
     setCounterDuration(totalMiliseconds);
     setCounterReady(true);
@@ -538,9 +546,24 @@ const ItemDetailComponent = ({
             {/* <hr className="horizontal_rule" /> */}
             {/* ------- */}
             <div className="buy_now_btn_div">
-              <button className="buy_now_button" onClick={openCheckoutModal}>
-                <ShoppingCartCheckoutIcon className="payment_btn_icon" />
-                Proceed to Checkout
+              <button
+                className="buy_now_button"
+                disabled={disable}
+                onClick={openCheckoutModal}
+              >
+                {countType === "WEEKLY" ? (
+                  <>
+                    <span className="countType_write_up">
+                      This item is locked
+                      <LockClockIcon className="payment_btn_icon" />
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <ShoppingCartCheckoutIcon className="payment_btn_icon" />
+                    Proceed to Checkout
+                  </>
+                )}
               </button>
             </div>
             <div className="offline_payment_div">
@@ -938,6 +961,48 @@ const ItemDetailComponent = ({
       {/* </div>
       </section> */}
       {/* )})} */}
+      <div className="mobile_view_price_pop_up">
+        <div className="mobile_view_price_pop_up_area">
+          <div className="mobile_view_price_pop_up_price_cont">
+            {" "}
+            {payment_type == "INSTALLMENT" ? (
+              <span className="slashed_detail_price">
+                {" "}
+                <DisplayMoney amount={roundedAmount * 2} />
+              </span>
+            ) : (
+              <span className="slashed_detail_price">
+                {" "}
+                <DisplayMoney amount={amount * 2} />
+              </span>
+            )}
+            {payment_type == "INSTALLMENT" ? (
+              <span className="full_detail_price">
+                {" "}
+                <DisplayMoney amount={roundedAmount} />
+              </span>
+            ) : (
+              <span className="full_detail_price">
+                {" "}
+                <DisplayMoney amount={amount} />
+              </span>
+            )}
+          </div>
+          <div className="mobile_view_price_pop_up_price_btn_cont">
+            <button
+              className="mobile_view_price_pop_up_price_button"
+              disabled={disable}
+              onClick={openCheckoutModal}
+            >
+              {countType === "WEEKLY" ? (
+                <span>Item is locked</span>
+              ) : (
+                <span>Checkout</span>
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
