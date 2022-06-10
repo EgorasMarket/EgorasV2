@@ -322,7 +322,7 @@ const ProductDetailPage = ({ auth, match, countdown }) => {
             cAmount={parseInt(productDetails.amount)}
             click={CloseModal}
           /> */}
-          <LoginSignup parentCallback={callback} />
+          <LoginComp parentCallback={callback} />
         </div>
       )}
       <div>

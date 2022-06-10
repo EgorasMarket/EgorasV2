@@ -1,182 +1,310 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect, Fragment } from "react";
 // import "../../../../css/signup.css";
-import { connect } from 'react-redux';
-import '../../../../css/login.css';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { CustomAlert } from './alert';
-
-import { getLogin } from '../../../../actions/auth';
+import { connect } from "react-redux";
+import "../../../../css/login.css";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import AttachEmailOutlinedIcon from "@mui/icons-material/AttachEmailOutlined";
+import { CustomAlert } from "../../../../CustomAlert";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./Kcl.css";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { getLogin } from "../../../../actions/auth";
 // import { getAuthentication } from "../../../../actions/auth";
-import { setAlert } from '../../../../actions/alert';
-import UserSignUpComp from '../Signup/UserSignUpComp';
+// import { setAlert } from "../../../../actions/alert";
 
-const LoginComp = ({
-  getLogin,
-  setAlert,
-  isAuthenticated,
-  parentCallback,
-}) => {
-  const [toke, setToke] = useState({ email: '', password: '' });
-  const [userName, setUserName] = useState('');
-  const [alert2, setAlert2] = useState('');
-  const [alertType, setAlertType] = useState('');
-  const [authState, setAuthState] = useState('login');
-  // const [autFree,setAutFree]=useState()
+const LoginComp = ({ getLogin, isAuthenticated }) => {
+  // const [token,setToken]=useState();
+  const [disable, setDisable] = React.useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [visibility, setVisibility] = useState(false);
+  const [token, setToken] = useState({ email: "" });
+  const [strongPass, setStrongPass] = useState(false);
+  const [alert, setAlert] = useState("");
+  const [customAlert, setCustomAlert] = useState(false);
+  const [alertType, setAlertType] = useState("");
+  const { email } = token;
+  const [emailLink, setEmailLink] = useState(false);
+  const [isSuccessful, setIsSuccessful] = useState(false);
+  const [authToken, setAuthToken] = useState(localStorage.getItem("token"));
+  useEffect(() => {
+    if (authToken !== null) {
+      //   return (window.location.replace = "/");
+      return (window.location.href = "/");
+    }
+  }, []);
 
-  // const [loginSuccess,setLoginSuccess]= useState('successfully');
-  // const [password,setPassword]= useState();
-
-  const { email, password } = toke;
-
-  const [infoSet, setSet] = useState(
-    localStorage.getItem('6218a7a7c55c3a00ed668b6d.appUserId')
-  );
+  const NetWorkTimeoutMsg = "The connection to the server timed out.";
+  const onlineMsg = "Your internet connection appears to be offline.";
+  // ===============
+  // ===============
+  // ===============
+  // ===============
+  // useEffect(() => {
+  //   setAlert("");
+  //   const closeAlert = () => setAlert("");
+  //   setTimeout(function () {
+  //     closeAlert();
+  //     console.log("66");
+  //   }, 10000);
+  // }, [alert]);
+  // ===============
+  // ===============
+  // ===============
+  // ===============
 
   const onChange2 = (e) => {
-    setToke({ ...toke, [e.target.name]: e.target.value });
+    setToken({ ...token, [e.target.name]: e.target.value });
   };
-
-  const showSignUp = () => {
-    setAuthState('signup');
+  const toggleEmailLink = () => {
+    if (emailLink === false) {
+      setEmailLink(true);
+    } else if (emailLink === true) {
+      setEmailLink(false);
+    }
   };
-
-  // const onChangeMe1 =(e)=>{
-  // setEmail(e.target.value)
-
-  // }
-  // console.log(email," email up to you")
-
-  //  const onChangeMe2 =(e)=>{
-  // setPassword(e.target.value)
-
-  //  }
-
-  const sumit = async (e) => {
-    // loginSuccess('true')
-
-    let res3 = await getLogin(email, password);
-
-    console.log(res3, 'send');
-
-    // const email2 = document.querySelector('#Email');
-    // if (email != email2.target.value){
-    //   console.log(' email does not match')
-    // }
-
-    if (res3.data.success === true) {
-      parentCallback(true);
+  useEffect(() => {
+    if (email === "") {
+      setDisable(true);
+    } else if (isLoading == true) {
+      setDisable(true);
+    } else if (isLoading == false) {
+      setDisable(false);
+    } else if (email != "") {
+      setDisable(false);
     } else {
+      setDisable(false);
+    }
+  });
+  const submitLogin = async (e) => {
+    if (isLoading == true) {
+      setDisable(true);
+    } else if (isLoading == false) {
+      setDisable(false);
+    }
+
+    if (window.navigator.onLine === false) {
+      console.log("i am offline ");
+      setIsLoading(false);
+      setDisable(false);
+      setAlertType("danger");
+      setAlert(onlineMsg);
+      setCustomAlert(true);
+      return;
+    }
+    setIsLoading(true);
+    setDisable(true);
+
+    try {
+      let res3 = await getLogin(email);
+      // console.log(res3.data.data.errors[0].msg);
+      //  setToken(res)
+
       console.log(res3.data);
-      setAlert2(res3.data);
+
+      // if (res.data.email !== e.target.value)
+
+      if (res3.data.success === true) {
+        setIsSuccessful(true);
+        setIsLoading(false);
+        // setDisable(false);
+        console.log("okay Good Server");
+      } else {
+        console.log(res3.data.data.errors[0].msg);
+        setCustomAlert(true);
+        setAlert(res3.data.data.errors[0].msg);
+        setAlertType("danger");
+        setIsLoading(false);
+        setDisable(false);
+        //   if (res3.data.data.request) {
+        //     // The request was made but no response was received
+
+        //   } else {
+        //     // Something happened in setting up the request that triggered an Error
+        //     console.log("Error", res3.data.data.errors[0].msg);
+        //   }
+      }
+    } catch (err) {
+      setIsLoading(false);
+      setDisable(false);
+      setAlertType("danger");
+      setAlert(NetWorkTimeoutMsg);
+      setCustomAlert(true);
     }
   };
   // Redirect if logged in
   if (isAuthenticated) {
     // return <Redirect to="/dashboard" />;
-    // return window.location.replace("/dashboard");
+    return window.location.replace("/dashboard");
   }
 
-  const timer = setTimeout(() => {
-    setAlert2('');
-  }, 5000);
-
-  const closeUserSignUp = () => {
-    // alert('close the component');
-    setAuthState('login');
-  };
-
   return (
-    <div>
-      {authState === 'login' ? (
-        <div>
-          <div style={{ zIndex: '10000' }} className="signup_area">
-            <div
-              style={{
-                width: '100vw',
-                height: '100vh',
-                borderRadius: 'unset',
-              }}
-              className="signup_cont"
-            >
-              <div className="mt-5">
-                <div className="signup_title">
-                  Login to user account
+    <div style={{ width: "100%", maxWidth: "500px" }}>
+      <section className="signup_section" style={{ padding: "0em" }}>
+        <div className="container">
+          {isSuccessful === true ? (
+            <div className="signup_area">
+              <div className="signup_cont">
+                <div
+                  className="back_btn"
+                  onClick={() => {
+                    setIsSuccessful(false);
+                    setToken({ email: "" });
+                  }}
+                >
+                  <ArrowBackIosIcon className="back_register_icon" />
+                  Back
                 </div>
-                <span className="signup_para">
-                  Securely login to your Egoras Savings account.
-                </span>
-                <div className="signup_inputs_cont">
-                  <div className="signup_input_field1_cont">
-                    <span className="input_title">Email address</span>
-                    <input
-                      type="email"
-                      id="Email"
-                      className="signup_input_field"
-                      name="email"
-                      onChange={onChange2}
-                      value={email}
-                      placeHolder="email or password"
-                    />
-                  </div>
-                  {/* <div className="signup_input_field1_cont">
-                        <span className="input_title">Phone Number</span>
-                        <input type="number" className="signup_input_field" />
-                      </div> */}
-                  <div className="signup_input_field1_cont">
-                    <span className="input_title">Password</span>
-                    <input
-                      type="password"
-                      className="signup_input_field"
-                      name="password"
-                      onChange={onChange2}
-                      value={password}
-                      placeHolder="****"
-                    />
-                  </div>
-                  {/* <div className="signup_input_field1_cont">
-                        <span className="input_title">Repeat Password</span>
-                        <input type="password" className="signup_input_field" />
-                      </div> */}
-                  <button
-                    type="submit"
-                    className="sign_up_btn"
-                    onClick={sumit}
-                  >
-                    login
-                  </button>
-                  <span className="login_txt mt-4">
-                    <a
-                      href="#"
-                      onClick={showSignUp}
-                      className="login_link"
-                    >
-                      Don't have an account? Register
-                    </a>
-                  </span>
+                <div className="register_success_msg">
+                  <span className="check_emailTitle">Check your email.</span>
+                  Click on the login button that We have emailed to{" "}
+                  <span className="email_name">{email} </span>to login.
                 </div>
+                <p className="terms_privacy">
+                  You agree to Egoras's{" "}
+                  <a href="/terms-conditions" className="terms_link">
+                    {" "}
+                    Terms of Service
+                  </a>{" "}
+                  and
+                  <a href="/privacy" className="privacy_link">
+                    {" "}
+                    Privacy Policy
+                  </a>
+                  .
+                </p>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className="signup_area">
+              <div className="signup_cont">
+                {emailLink === true ? (
+                  <div className="back_btn" onClick={toggleEmailLink}>
+                    <ArrowBackIosIcon className="back_register_icon" />
+                    Back
+                  </div>
+                ) : null}
 
-          {alert2 == '' ? null : (
-            <CustomAlert
-              alert={alert2}
-              alertType={alertType}
-              onChange={timer}
-            />
+                <div className="signup_title">Login / Register</div>
+                <span className="signup_para">
+                  Securely Signup to get an Egoras account.
+                </span>
+
+                {emailLink === true ? (
+                  <div className="signup_inputs_cont">
+                    <div className="signup_input_field1_cont">
+                      <span className="input_title">
+                        Enter your Email address
+                      </span>
+                      <input
+                        type="email"
+                        className="signup_input_field"
+                        name="email"
+                        onChange={onChange2}
+                        value={email}
+                        placeHolder="Email"
+                        // autocomplete="off"
+
+                        // autocomplete="off"
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="sign_up_btn"
+                      onClick={submitLogin}
+                      disabled={disable}
+                    >
+                      {isLoading ? (
+                        <span>
+                          Sending Link{" "}
+                          <FontAwesomeIcon
+                            className="ml-2"
+                            icon={faSpinner}
+                            spin
+                          />
+                        </span>
+                      ) : (
+                        <span>Send Link</span>
+                      )}
+                    </button>
+                    <p className="terms_privacy">
+                      You agree to Egoras's{" "}
+                      <a href="/terms-conditions" className="terms_link">
+                        {" "}
+                        Terms of Service
+                      </a>{" "}
+                      and
+                      <a href="/privacy" className="privacy_link">
+                        {" "}
+                        Privacy Policy
+                      </a>
+                      .
+                    </p>
+                  </div>
+                ) : emailLink === false ? (
+                  <div className="signup_inputs_cont">
+                    <button
+                      type="submit"
+                      className="sign_up_btn"
+                      onClick={toggleEmailLink}
+                    >
+                      <AttachEmailOutlinedIcon className="back_register_icon" />{" "}
+                      Sign in with Email
+                    </button>
+
+                    <p className="terms_privacy">
+                      You agree to Egoras's{" "}
+                      <a href="/terms-condition" className="terms_link">
+                        {" "}
+                        Terms of Service
+                      </a>{" "}
+                      and
+                      <a href="/privacy" className="privacy_link">
+                        {" "}
+                        Privacy Policy
+                      </a>
+                      .
+                    </p>
+                  </div>
+                ) : null}
+              </div>
+              {/* <span className="login_txt">
+              <a href="/signup" className="login_link">
+                Don't have an account? Register
+              </a>
+            </span> */}
+            </div>
           )}
         </div>
-      ) : (
-        <UserSignUpComp close={closeUserSignUp} />
-      )}
+        {/* <img src="/img/piggy_bg.svg" alt="" className="piggy_bg" /> */}
+      </section>
+
+      {/* {alert === "" ? null : (
+        <CustomAlert
+          closeAlert={() => setCustomAlert(false)}
+          alert={alert}
+          alertType={alertType}
+        />
+      )} */}
+
+      {customAlert === true ? (
+        <CustomAlert
+          alert={alert}
+          alertType={alertType}
+          closeAlert={() => setCustomAlert(false)}
+        />
+      ) : null}
     </div>
+
+    // :null}
   );
 };
 
 LoginComp.propTypes = {
-  // getLoginAuthentication: PropTypes.func.isRequired,
-  // setAlert: PropTypes.func.isRequired,
+  getLogin: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
 };
 
@@ -184,6 +312,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { getLogin, setAlert })(
-  LoginComp
-);
+export default connect(mapStateToProps, { getLogin })(LoginComp);
