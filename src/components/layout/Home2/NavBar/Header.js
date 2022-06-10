@@ -1032,6 +1032,12 @@ const Header = ({ isAuthenticated, auth }) => {
           <div className="container-fluid header">
             <div className="header_categories">
               <a
+                href={`/products/categories/Awoof`}
+                className="header_cat_link"
+              >
+                Awoof Sales
+              </a>
+              <a
                 href={`/products/categories/Computer & Accessories`}
                 className="header_cat_link"
               >
@@ -1072,12 +1078,6 @@ const Header = ({ isAuthenticated, auth }) => {
                 className="header_cat_link"
               >
                 Gaming & console
-              </a>
-              <a
-                href={`/products/categories/Industral Equipments`}
-                className="header_cat_link"
-              >
-                Industral Equipments
               </a>
             </div>
           </div>

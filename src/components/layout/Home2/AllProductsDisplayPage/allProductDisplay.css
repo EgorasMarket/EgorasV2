@@ -3,7 +3,7 @@
   grid-template-columns: auto auto auto auto auto;
   grid-gap: 10px;
   gap: 20px;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 2em;
   padding-bottom: 0;
 }
@@ -233,11 +233,16 @@
     grid-gap: 10px;
     grid-gap: 20px;
     gap: 20px;
-    justify-content: space-around;
+    justify-content: flex-start;
     padding: 1em;
     padding-bottom: 0;
   }
+  /* .inventory_cards {
+    width: 215px !important;
+    height: 230px !important;
+  } */
 }
+
 @media (max-width: 1118px) {
   .product_display_cards_body {
     display: grid;
@@ -246,7 +251,7 @@
     grid-gap: 20px;
     grid-gap: 20px;
     gap: 20px;
-    justify-content: space-around;
+    justify-content: flex-start;
     padding: 1em;
     padding-bottom: 0;
   }
@@ -257,6 +262,30 @@
   }
   .pagination_body {
     width: 100%;
+  }
+  .product_display_cards_body {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 10px;
+    grid-gap: 20px;
+    grid-gap: 20px;
+    gap: 20px;
+    justify-content: flex-start;
+    padding: 1em;
+    padding-bottom: 0;
+  }
+}
+@media (max-width: 887px) {
+  .product_display_cards_body {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 10px;
+    grid-gap: 20px;
+    grid-gap: 20px;
+    gap: 20px;
+    justify-content: flex-start;
+    padding: 1em;
+    padding-bottom: 0;
   }
 }
 @media (max-width: 700px) {
@@ -442,19 +471,29 @@
     transition: 0.3s ease-in-out;
   }
 }
-@media (max-width: 422px) {
+
+@media (max-width: 432px) {
   .product_display_cards_body {
-    grid-template-columns: auto auto auto;
-    gap: 5px;
-  }
-}
-@media (max-width: 422px) {
-  .product_display_cards_body {
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto;
     gap: 5px;
   }
   .product_display_cards_body {
     padding: 0.5em;
     padding-bottom: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .product_display_cards_body {
+    grid-template-columns: auto auto;
+    gap: 15px;
+  }
+}
+@media (max-width: 380px) {
+  .product_display_cards_body {
+    grid-template-columns: auto auto;
+    grid-gap: 5px;
+    gap: 15px;
+    justify-content: center;
   }
 }

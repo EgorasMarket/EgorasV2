@@ -1,34 +1,30 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from "react";
 
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import Carousel from 'react-multi-carousel';
-import '../../../../css/itemsDetailsPage.css';
-import axios from 'axios';
-import '../Dashboard/DashboardStyles/dashboardCart.css';
-import {
-  Calendar,
-  DateRangePicker,
-  DateRange,
-} from 'react-date-range';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { addDays, differenceInCalendarDays } from 'date-fns';
-import Dashboard_Checkout_Page from '../Dashboard/DashboardPages/Dashboard_Checkout_Page';
-import Checkout from './CheckoutModalComponent';
-import 'react-date-range/dist/styles.css'; // main style file
-import 'react-date-range/dist/theme/default.css'; // theme css file
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import Carousel from "react-multi-carousel";
+import "../../../../css/itemsDetailsPage.css";
+import axios from "axios";
+import "../Dashboard/DashboardStyles/dashboardCart.css";
+import { Calendar, DateRangePicker, DateRange } from "react-date-range";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { addDays, differenceInCalendarDays } from "date-fns";
+import Dashboard_Checkout_Page from "../Dashboard/DashboardPages/Dashboard_Checkout_Page";
+import Checkout from "./CheckoutModalComponent";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
 
 import {
   PRODUCT_LOADED,
   API_URL2 as api_url2,
-} from '../../../../actions/types';
-import { connect, useDispatch } from 'react-redux';
-import ItemDetailComponent from './ItemDetailCompnent';
-import LoginComp from '../Login/LoginComp';
+} from "../../../../actions/types";
+import { connect, useDispatch } from "react-redux";
+import ItemDetailComponent from "./ItemDetailCompnent";
+import LoginComp from "../Login/LoginComp";
 
 function ItemDetailsPage({ auth, match }) {
   const config = {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   };
   // //console.log(window.location.pathname.split("/"));
@@ -36,7 +32,7 @@ function ItemDetailsPage({ auth, match }) {
   const [loginModal, setLoginModal] = useState(false);
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [product_id, setProductId] = useState(match.params.id);
-  const [user_id, set_user_id] = useState('');
+  const [user_id, set_user_id] = useState("");
   const [payload, setPayload] = useState({});
   const [modal, setModal] = useState(false);
   const [detailsModal, setDetailsModal] = useState(false);
@@ -51,11 +47,11 @@ function ItemDetailsPage({ auth, match }) {
   useEffect(() => {
     //console.log(auth);
 
-    if (window.location.pathname.split('/')[1] === 'dashboard') {
+    if (window.location.pathname.split("/")[1] === "dashboard") {
       setProductId(match.params.id);
       setIsAuthenticated(true);
     } else {
-      setProductId(window.location.pathname.split('/')[3]);
+      setProductId(window.location.pathname.split("/")[3]);
       setIsAuthenticated(false);
     }
   }, [auth]);
@@ -123,12 +119,12 @@ function ItemDetailsPage({ auth, match }) {
       set_user_id(auth.user.user.id);
       //console.log(auth.user.user);
     } else {
-      set_user_id('');
+      set_user_id("");
       //console.log('rrrrr');
     }
 
     await axios
-      .post(api_url2 + '/v1/product/retrieve/specific', body, config)
+      .post(api_url2 + "/v1/product/retrieve/specific", body, config)
       .then((data) => {
         const {
           amount,
@@ -154,9 +150,10 @@ function ItemDetailsPage({ auth, match }) {
           startDate,
           endDate,
           status,
+          sales_type,
         } = data.data.data;
 
-        console.log(data.data.data, 'king');
+        console.log(data.data.data, "king");
         setPayload({
           amount,
           roundedAmount,
@@ -181,6 +178,7 @@ function ItemDetailsPage({ auth, match }) {
           startDate,
           endDate,
           status,
+          sales_type,
         });
         const getSlid = data.data.data.product_specifications;
         const getSpecs = data.data.data.product_details;
@@ -209,10 +207,7 @@ function ItemDetailsPage({ auth, match }) {
     <>
       {loginModal === false ? null : (
         <div className="checkout_main">
-          <div
-            className="checkout_modal_out"
-            onClick={CloseModal}
-          ></div>
+          <div className="checkout_modal_out" onClick={CloseModal}></div>
           {/* <div>Login</div> */}
           {/* <Dashboard_Checkout_Page
             cAmount={parseInt(productDetails.amount)}
