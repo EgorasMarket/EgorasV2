@@ -384,6 +384,7 @@ const ItemDetailComponent = ({
       setPlaceHolder("Item Available In");
       setCountType("WEEKLY");
       setModal(false);
+      setBookingModal(false);
       setDisable(true);
       // setLoginModal(false);
     } else {
@@ -587,10 +588,11 @@ const ItemDetailComponent = ({
                       className="buy_now_button"
                       // disabled={disable}
                       onClick={toggleBookingModal}
+                      style={{ background: "#939393" }}
                     >
                       <span className="countType_write_up">
-                        This item is locked
                         <LockClockIcon className="payment_btn_icon" />
+                        Item is locked book now
                       </span>
                     </button>
                   </div>
@@ -1340,7 +1342,7 @@ const ItemDetailComponent = ({
         </div>
       </div>
 
-      {bookingModal !== true ? (
+      {bookingModal === true ? (
         <div className="booking_modal">
           <div
             className="close_booking_modal_cont"
@@ -1350,8 +1352,8 @@ const ItemDetailComponent = ({
             <div className="book_modal_heading">
               This item is only available in awoof sales and is locked until
               Saturday 12:00am and closes on Sunday 12:00am. But you have an
-              option to book for this product so we can give you a reminder a
-              day before it becomes available for shopping.
+              option to book this product so we can give you a reminder a day
+              before it becomes available for shopping.
             </div>
             <div className="booking_container">
               <div className="booking_container1">
