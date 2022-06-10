@@ -16,7 +16,155 @@
   max-width: 1400px;
   /* overflow: hidden; */
 }
+.booking_modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #00000080;
+  z-index: 100;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  flex-direction: column;
+  grid-gap: 20px;
+  grid-gap: 25px;
+  grid-gap: 25px;
+  grid-gap: 25px;
+  gap: 25px;
+  padding: 2em 0.5em;
+  /* padding-top: 16em; */
+  overflow: scroll;
+}
+.book_now_container_area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.book_modal_heading {
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+  color: #fff;
+  border: solid 1px #aeaeae;
+  padding: 1em;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 300;
+  background: #ffffff1f;
+  box-shadow: 0px 3px 10px #565656;
+  /* margin-bottom: 20px; */
+}
+.booking_container {
+  background: #fff;
+  padding: 1.5em;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0px 0px 25px #0000008a;
+}
 
+.close_booking_modal_cont {
+  position: absolute;
+  background: none;
+  width: 100vw;
+  top: 0;
+  height: 100vh;
+  left: 0;
+  z-index: -1;
+  cursor: pointer;
+}
+.booking_container1 {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.booking_cont_title {
+  font-size: 12px;
+}
+.booking_cont_input {
+  width: 100%;
+}
+
+.booking_cont_input_area {
+  width: 100%;
+  padding: 0.5em;
+  border-radius: 6px;
+  border: solid 1px #d0d0d0;
+  font-size: 14px;
+  color: #3a3a3a;
+}
+.checkbox_txt {
+  font-size: 13px;
+  color: #000000;
+}
+.booking_cont_input_area::placeholder {
+  color: #a1a1a1;
+}
+.checkbox_book_modal {
+  padding: 10px !important;
+}
+.checkbox_book_modal.css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root:hover {
+  background-color: rgb(86 229 144 / 11%) !important;
+}
+.checkbox_book_modal.css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.Mui-checked {
+  color: #229e54 !important;
+}
+
+.checkbox_book_modal svg {
+  color: #239d52 !important;
+}
+.check_box_div {
+  display: flex;
+  gap: 0px;
+  align-items: center;
+}
+.t_c_book_link {
+  color: #239d52;
+}
+.booking_cont_button_div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.booking_cont_button {
+  background: #229e54;
+  color: #fff;
+  width: 100%;
+  padding: 0.8em;
+  border-radius: 7px;
+  border: none;
+}
+
+.close_div_icon_ {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.close_book_modal_icon {
+  color: #fff;
+  border: solid 1px #fff;
+  border-radius: 50%;
+  padding: 3px;
+  background: #ffffff21;
+  cursor: pointer;
+  font-size: 32px !important;
+}
+
+.close_txt {
+  font-size: 14px;
+  color: #fff;
+  font-weight: 700;
+}
 .product_details_area1 {
   display: flex;
   justify-content: space-between;
@@ -358,6 +506,16 @@ span.per_day {
   transform: translate3d(0, -5px, 0);
   transition: 0.3s ease-in-out;
   box-shadow: 0px 4px 10px #d5d5d5;
+}
+.buy_now_button:disabled {
+  background: #d6d6d6;
+  color: #797979;
+  cursor: not-allowed;
+}
+.countType_write_up {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 .carousel .carousel-status {
   position: absolute;

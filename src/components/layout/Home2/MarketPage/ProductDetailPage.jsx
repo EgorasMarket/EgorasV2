@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { connect, useDispatch } from "react-redux";
 import DisplayMoney from "../../../DisplayMoney";
+import { countdown } from "../../../../actions/countdown";
 import {
   PRODUCT_LOADED,
   API_URL2 as api_url2,
@@ -10,11 +11,11 @@ import LoginComp from "../Login/LoginComp";
 import LoginSignup from "../Login/LoginSignup";
 import ItemDetailComponent from "../item_details_page/ItemDetailCompnent";
 import Checkout from "../item_details_page/CheckoutModalComponent";
-
+import "./market.css";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css";
 
-const ProductDetailPage = ({ auth, match }) => {
+const ProductDetailPage = ({ auth, match, countdown }) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -27,6 +28,7 @@ const ProductDetailPage = ({ auth, match }) => {
   const [product_id, setProductId] = useState(match.params.id);
   const [user_id, set_user_id] = useState("");
   const [payload, setPayload] = useState({});
+  const [sale_type, setSale_type] = useState("");
   const [modal, setModal] = useState(false);
   const [detailsModal, setDetailsModal] = useState(false);
   const [showCheckout, setCheckoutStatus] = useState(false);
@@ -34,7 +36,11 @@ const ProductDetailPage = ({ auth, match }) => {
   const [userPayload, setUserPayload] = useState({});
   const [card, setSpec] = useState([]);
   const [deScript, setDeScript] = useState([]);
-
+  const [counterReady, setCounterReady] = useState(false);
+  const [placeHolder, setPlaceHolder] = useState("");
+  const [counterArray, setCounterArray] = useState([]);
+  const [countType, setCountType] = useState("");
+  const [counterDuration, setCounterDuration] = useState(0);
   // const {contactAddress}=addressName
 
   useEffect(() => {
@@ -55,21 +61,6 @@ const ProductDetailPage = ({ auth, match }) => {
 
   const closeDetailModal = () => {
     setDetailsModal(false);
-  };
-  const OpenModal = () => {
-    setModal(true);
-  };
-
-  const CloseModal = () => {
-    setModal(false);
-  };
-
-  const openCheckout = () => {
-    setCheckoutStatus(true);
-  };
-
-  const closeCheckout = () => {
-    setCheckoutStatus(false);
   };
 
   const OpenLoginModal = () => {
@@ -152,8 +143,9 @@ const ProductDetailPage = ({ auth, match }) => {
           startDate,
           endDate,
           status,
+          sales_type,
         } = data.data.data;
-
+        setSale_type(data.data.data.sales_type);
         console.log(data.data.data, "king");
         setPayload({
           amount,
@@ -179,6 +171,7 @@ const ProductDetailPage = ({ auth, match }) => {
           startDate,
           endDate,
           status,
+          sales_type,
         });
         const getSlid = data.data.data.product_specifications;
         const getSpecs = data.data.data.product_details;
@@ -204,6 +197,116 @@ const ProductDetailPage = ({ auth, match }) => {
   }, [product_id, auth]); // USE EFFECT TO  GET THE SPECIFIC PRODUCTS
 
   //console.log(product_id);
+  const callCounter = async () => {
+    let res3 = await countdown();
+    setCounterArray(res3.data.data);
+    let getData = res3.data.data[0];
+    console.log(res3.data.data);
+    // console.log(getData.countType);
+    let convertToDate = Date(getData.dropDate);
+    console.log(convertToDate);
+
+    const today = new Date();
+    const endDate = new Date(getData.dropDate);
+    const days = parseInt((endDate - today) / (1000 * 60 * 60 * 24));
+    const hours = parseInt((Math.abs(endDate - today) / (1000 * 60 * 60)) % 24);
+    const minutes = parseInt(
+      (Math.abs(endDate.getTime() - today.getTime()) / (1000 * 60)) % 60
+    );
+    const seconds = parseInt(
+      (Math.abs(endDate.getTime() - today.getTime()) / 1000) % 60
+    );
+    console.log(days, hours, minutes, seconds);
+
+    // 👇️        hour  min  sec  ms
+    let dayscount = days * 24 * 60 * 60 * 1000;
+    let hourscount = hours * 60 * 60 * 1000;
+    let minutescount = minutes * 60 * 1000;
+    let secondscount = seconds * 1000;
+
+    let totalMiliseconds = dayscount + hourscount + minutescount + secondscount;
+    // setDate(getData.dropDate);
+    console.log(totalMiliseconds);
+    if (getData.countType === "WEEKLY") {
+      setCountType("WEEKLY");
+      setLoginModal(false);
+      setDetailsModal(false);
+    } else {
+      setCountType("DAILY");
+    }
+    setCounterDuration(totalMiliseconds);
+    setCounterReady(true);
+  };
+  useEffect(() => {
+    console.log(sale_type, "consoling sales_type_prod_detail");
+
+    callCounter();
+  }, []);
+
+  useEffect(() => {
+    const timeInterval = setInterval(() => {
+      console.log(counterArray, "okkkkk");
+      let getData = counterArray[0];
+      // let convertToDate = Date(getData.dropDate);
+      //
+      const today = new Date();
+      const endDate = new Date(getData.dropDate);
+      const days = parseInt((endDate - today) / (1000 * 60 * 60 * 24));
+      const hours = parseInt(
+        (Math.abs(endDate - today) / (1000 * 60 * 60)) % 24
+      );
+      const minutes = parseInt(
+        (Math.abs(endDate.getTime() - today.getTime()) / (1000 * 60)) % 60
+      );
+      const seconds = parseInt(
+        (Math.abs(endDate.getTime() - today.getTime()) / 1000) % 60
+      );
+      console.log(days, hours, minutes, seconds);
+
+      // 👇️        hour  min  sec  ms
+      let dayscount = days * 24 * 60 * 60 * 1000;
+      let hourscount = hours * 60 * 60 * 1000;
+      let minutescount = minutes * 60 * 1000;
+      // let newMinutes = 5 * 60 * 1000;
+      let secondscount = seconds * 1000;
+
+      let totalMiliseconds =
+        dayscount + hourscount + minutescount + secondscount;
+
+      var completeCount = Date.now() + totalMiliseconds;
+      var newEndDate = endDate.getTime();
+      console.log(completeCount, newEndDate);
+      // 1654532579461 1654532594462
+      if (completeCount >= newEndDate) {
+        console.log("time up", new Date());
+        callCounter();
+
+        // completeCount = Date.now() + newMinutes;
+        // var currentDate = new Date();
+        // newEndDate = currentDate.setMinutes(currentDate.getMinutes() + 3);
+        // console.log(completeCount, newEndDate);
+
+        setCounterReady(false);
+        setCounterReady(true);
+
+        if (counterArray === undefined || counterArray.length == 0) {
+          console.log("empty array");
+        } else {
+          if (getData.countType === "WEEKLY") {
+            console.log("Market Opens In WEEKLY");
+            // setCounterDuration(newMinutes);
+          } else {
+            console.log("Market Opens In DAILY");
+          }
+        }
+      } else {
+        console.log("still counting", Date.now());
+      }
+    }, 5000);
+    return () => {
+      clearInterval(timeInterval);
+    };
+  }, [counterArray]);
   return (
     <>
       {loginModal === false ? null : (
@@ -236,6 +339,7 @@ const ProductDetailPage = ({ auth, match }) => {
                 stringUrl="/products/details"
                 specification={deScript}
                 // numberWithCommas={numberWithCommas}
+                loginModal={loginModal}
                 card={card}
                 openCheckoutModal={() => {
                   // openDetailsModal();
@@ -255,4 +359,4 @@ const mapStateToProps1 = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
   cart: state.shop.cart,
 });
-export default connect(mapStateToProps1)(ProductDetailPage);
+export default connect(mapStateToProps1, { countdown })(ProductDetailPage);

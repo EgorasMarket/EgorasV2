@@ -566,6 +566,7 @@ export const Home_kitchenBody = () => {
 const HomeUpdate = ({ countdown }) => {
   const [counterReady, setCounterReady] = useState(false);
   const [placeHolder, setPlaceHolder] = useState("");
+  const [awoofProds, setAwoofProds] = useState([]);
   const [counterArray, setCounterArray] = useState([]);
 
   const [counterDuration, setCounterDuration] = useState(0);
@@ -634,6 +635,25 @@ const HomeUpdate = ({ countdown }) => {
         console.log(data.data, "item detail component ");
 
         setTerm(data.data.data);
+
+        // setTerm(data.data.data)
+      })
+      .catch((err) => {
+        //console.log(err); // "oh, no!"
+      });
+  }, []);
+  useEffect(() => {
+    axios
+      .get(
+        api_url2 + "/v1/product/retrieve/products/byId/" + "Awoof",
+        null,
+        config
+      )
+      .then((data) => {
+        // console.log(data.data, "item detail component ");
+
+        setAwoofProds(data.data.data);
+        console.log(data.data, "awoof log");
 
         // setTerm(data.data.data)
       })
@@ -1015,7 +1035,10 @@ const HomeUpdate = ({ countdown }) => {
           <div className="home_products_display_cont" id="computerAcc">
             <div className="home_products_body_head">
               <div className="shop_heading_body awoof_head_body">
-                <a href="/market" className="shop_arrow_div awoof_head">
+                <a
+                  href={`/products/categories/Awoof`}
+                  className="shop_arrow_div awoof_head"
+                >
                   Awoof Sales
                   <ArrowForwardIcon className="arrow_alt_forward" />
                 </a>
@@ -1041,12 +1064,12 @@ const HomeUpdate = ({ countdown }) => {
               </div>
             </div>
             <div className="products_display_body_conts_pad">
-              {term.length <= 0 ? (
+              {awoofProds.length <= 0 ? (
                 <NoDataFoundComponent text={text} />
               ) : (
                 <>
                   <div className="show_prods_on_mobile">
-                    {term.slice(0, 10).map(
+                    {awoofProds.slice(0, 10).map(
                       (asset) => (
                         // if (product_category_desc === asset.product_category_desc) {
                         // return (
@@ -1152,7 +1175,7 @@ const HomeUpdate = ({ countdown }) => {
                     swipeable={true}
                     style={{ height: "25em" }}
                   >
-                    {term.slice(0, 15).map((asset) => (
+                    {awoofProds.slice(0, 15).map((asset) => (
                       <a
                         href={`/products/details/${
                           asset.id

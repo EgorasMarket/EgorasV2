@@ -13,7 +13,10 @@ import CallIcon from "@mui/icons-material/Call";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import { NoDataFoundComponent } from "../Dashboard/NodataFound/NoDataFoundComponent";
 import Countdown from "react-countdown";
-
+import CloseIcon from "@mui/icons-material/Close";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 import { countdown } from "../../../../actions/countdown";
 // import { ProductDescription } from "./ProductDescription";
 import Dashboard_Checkout_Page from "../Dashboard/DashboardPages/Dashboard_Checkout_Page";
@@ -75,6 +78,8 @@ const OutrightComponent = ({
   initial_deposit,
   amount,
   numberWithCommas,
+  payment_type,
+  sales_type,
   DisplayMoney,
 }) => {
   return (
@@ -84,9 +89,19 @@ const OutrightComponent = ({
         <DisplayMoney amount={amount} />
       </div>
       <div className="max_dura">
-        <div className="days_left_numb">
-          <p className="no_margg">Outright Buy</p>
-        </div>
+        {payment_type == "OUTRIGHT" && sales_type == "SHOWROOM" ? (
+          <div className="days_left_numb" style={{ background: "#3ebc6e" }}>
+            <div className="out_right_install_tag">
+              <p className="no_margg">Outright Buy</p>
+            </div>
+          </div>
+        ) : payment_type == "OUTRIGHT" && sales_type === "AWOOF" ? (
+          <div className="days_left_numb" style={{ background: "#000" }}>
+            <div className="out_right_install_tag">
+              <p className="no_margg">Awoof</p>
+            </div>
+          </div>
+        ) : null}
       </div>
 
       {/* <hr className="horizontal_rule" /> */}
@@ -105,6 +120,7 @@ const ItemDetailComponent = ({
   openCheckoutModal,
   stringUrl,
   countdown,
+  // loginModal,
 }) => {
   const config = {
     headers: {
@@ -113,6 +129,8 @@ const ItemDetailComponent = ({
   };
 
   const [modal, setModal] = useState(false);
+  // const [loginModal, setLoginModal] = useState(false);
+
   const [detailsModal, setDetailsModal] = useState(false);
   const [UID, setUserId] = useState(user_id);
   const [term, setTerm] = useState([]);
@@ -123,6 +141,7 @@ const ItemDetailComponent = ({
   const [counterArray, setCounterArray] = useState([]);
   const [countType, setCountType] = useState("");
   const [disable, setDisable] = useState(false);
+  const [bookingModal, setBookingModal] = useState(false);
   const [date, setDate] = useState("");
 
   const [counterDuration, setCounterDuration] = useState(0);
@@ -144,6 +163,7 @@ const ItemDetailComponent = ({
     more_image,
     roundedAmount,
     product_name,
+    sales_type,
     product_specifications,
     product_type,
     initial_deposit,
@@ -156,6 +176,13 @@ const ItemDetailComponent = ({
     endDate,
   } = payload;
 
+  const toggleBookingModal = () => {
+    if (bookingModal === true) {
+      setBookingModal(false);
+    } else if (bookingModal === false) {
+      setBookingModal(true);
+    }
+  };
   console.log("====================================");
   console.log(payload.product_category_desc);
   console.log("====================================");
@@ -273,7 +300,7 @@ const ItemDetailComponent = ({
     axios
       .get(api_url2 + "/v1/product/retrieve/category", null, config)
       .then((data) => {
-        //console.log(data.data.data, "Anthonia");
+        console.log(data.data.data, "Anthonia");
 
         // const pad = data.data.data[0].product_category_code;
 
@@ -304,7 +331,6 @@ const ItemDetailComponent = ({
       )
       .then((data) => {
         console.log(data.data, "item detail component ");
-
         setTerm(data.data.data);
 
         // setTerm(data.data.data)
@@ -323,6 +349,7 @@ const ItemDetailComponent = ({
   // };
   // //console.log(product_id);
   const callCounter = async () => {
+    // if (sales_type === "AWOOF") {
     let res3 = await countdown();
     setCounterArray(res3.data.data);
     let getData = res3.data.data[0];
@@ -342,7 +369,6 @@ const ItemDetailComponent = ({
       (Math.abs(endDate.getTime() - today.getTime()) / 1000) % 60
     );
     console.log(days, hours, minutes, seconds);
-
     // 👇️        hour  min  sec  ms
     let dayscount = days * 24 * 60 * 60 * 1000;
     let hourscount = hours * 60 * 60 * 1000;
@@ -352,19 +378,25 @@ const ItemDetailComponent = ({
     let totalMiliseconds = dayscount + hourscount + minutescount + secondscount;
     setDate(getData.dropDate);
     console.log(totalMiliseconds);
+    // if (sales_type === "AWOOF") {
+
     if (getData.countType === "WEEKLY") {
       setPlaceHolder("Item Available In");
       setCountType("WEEKLY");
-
+      setModal(false);
       setDisable(true);
+      // setLoginModal(false);
     } else {
       setPlaceHolder("Item Closes In");
       setCountType("DAILY");
-
       setDisable(false);
     }
+    // }
+
     setCounterDuration(totalMiliseconds);
     setCounterReady(true);
+    //   return;
+    // }
   };
 
   useEffect(() => {
@@ -522,50 +554,66 @@ const ItemDetailComponent = ({
                   amount={amount}
                   numberWithCommas={numberWithCommas}
                   DisplayMoney={DisplayMoney}
+                  payment_type={payment_type}
+                  sales_type={sales_type}
                 />
               </>
             )}
             {/* ======= */}
             {/* ======= */}
             {/* ======= */}
-            {counterReady ? (
-              <div>
-                <span className="shopping_countdown_div_item_detail">
-                  {placeHolder}:{" "}
-                  <div className="count_down_shopping_item_detail">
-                    <Countdown
-                      className="countdownDiv"
-                      date={Date.now() + counterDuration}
-                      renderer={CoundownRenderer}
-                    />
-                  </div>
-                </span>
-              </div>
-            ) : null}
-            {/* ======= */}
-            {/* <hr className="horizontal_rule" /> */}
-            {/* ------- */}
-            <div className="buy_now_btn_div">
-              <button
-                className="buy_now_button"
-                disabled={disable}
-                onClick={openCheckoutModal}
-              >
-                {countType === "WEEKLY" ? (
-                  <>
-                    <span className="countType_write_up">
-                      This item is locked
-                      <LockClockIcon className="payment_btn_icon" />
+            {sales_type === "AWOOF" ? (
+              <>
+                {counterReady ? (
+                  <div>
+                    <span className="shopping_countdown_div_item_detail">
+                      {placeHolder}:{" "}
+                      <div className="count_down_shopping_item_detail">
+                        <Countdown
+                          className="countdownDiv"
+                          date={Date.now() + counterDuration}
+                          renderer={CoundownRenderer}
+                        />
+                      </div>
                     </span>
-                  </>
+                  </div>
+                ) : null}
+                {/* ======= */}
+                {/* <hr className="horizontal_rule" /> */}
+                {/* ------- */}
+                {countType === "WEEKLY" ? (
+                  <div className="buy_now_btn_div">
+                    <button
+                      className="buy_now_button"
+                      // disabled={disable}
+                      onClick={toggleBookingModal}
+                    >
+                      <span className="countType_write_up">
+                        This item is locked
+                        <LockClockIcon className="payment_btn_icon" />
+                      </span>
+                    </button>
+                  </div>
                 ) : (
-                  <>
-                    <ShoppingCartCheckoutIcon className="payment_btn_icon" />
-                    Proceed to Checkout
-                  </>
+                  <div className="buy_now_btn_div">
+                    <button
+                      className="buy_now_button"
+                      onClick={openCheckoutModal}
+                    >
+                      <ShoppingCartCheckoutIcon className="payment_btn_icon" />
+                      Proceed to Checkout
+                    </button>
+                  </div>
                 )}
-              </button>
-            </div>
+              </>
+            ) : (
+              <div className="buy_now_btn_div">
+                <button className="buy_now_button" onClick={openCheckoutModal}>
+                  <ShoppingCartCheckoutIcon className="payment_btn_icon" />
+                  Proceed to Checkout
+                </button>
+              </div>
+            )}
             <div className="offline_payment_div">
               <div className="offline_payment_tittle">
                 For offline bookings contact:
@@ -680,213 +728,501 @@ const ItemDetailComponent = ({
               <NoDataFoundComponent text={text} />
             ) : (
               <>
-                <div className="show_prods_on_mobile">
-                  {term.map(
-                    (asset) => (
-                      // if (product_category_desc === asset.product_category_desc) {
-                      // return (
-                      <a
-                        href={`${stringUrl}/${
-                          asset.id
-                        }/${asset.product_name.replace(/\s+/g, "-")}`}
-                      >
-                        <li className="carous_list no_marg inventory_cards">
-                          <div
-                            className="storeTiles_storeTileContainer__HoGEa"
-                            style={{
-                              backgroundImage: `url(${asset.product_image})`,
-                              //           height: "200px",
-                              //           width: "100%",
-                              //           backgroundRepeat: "no-repeat",
-                              //           backgroundSize: "cover",
-                              //           borderRadius: "8px",
-                              //           borderBottomLeftRadius: "0px",
-                              //           borderBottomRightRadius: "0px",
-                              //   backgroundPositionY: "center",
-                            }}
+                {product_category_desc == "Awoof" ? (
+                  <div className="show_prods_on_mobile">
+                    {term
+                      .filter((person) => person.sales_type == "AWOOF")
+                      .map(
+                        (asset) => (
+                          // if (product_category_desc === asset.product_category_desc) {
+                          // return (
+                          <a
+                            href={`${stringUrl}/${
+                              asset.id
+                            }/${asset.product_name.replace(/\s+/g, "-")}`}
                           >
-                            {asset.payment_type == "OUTRIGHT" ? (
-                              <div className="out_right_install_tag">
-                                <button
-                                  className="out_right_install_tag_btn"
-                                  style={{
-                                    background: "#3ebc6e",
-                                    borderColor: "#3ebc6e",
-                                  }}
-                                >
-                                  Outright
-                                </button>
-                              </div>
-                            ) : (
-                              <div className="out_right_install_tag">
-                                <button className="out_right_install_tag_btn">
-                                  Savings
-                                </button>
-                              </div>
-                            )}
-                            <div className="storeTiles_storeTileBottomContainer__2sWHh">
-                              <div className="asset_name">
-                                {asset.product_name}
-                              </div>
-                              <div class="asset_prices_div">
-                                <div className="asset_title">
-                                  {asset.payment_type == "OUTRIGHT" ? (
-                                    <span className="init_amount">
-                                      {/* ₦{numberWithCommas(asset.amount)}{" "} */}
-                                      <DisplayMoney amount={asset.amount} />
-                                    </span>
-                                  ) : (
-                                    <span className="init_amount">
-                                      {/* ₦{numberWithCommas(asset.roundedAmount)}{" "} */}
-                                      <DisplayMoney
-                                        amount={asset.roundedAmount}
-                                      />
-                                    </span>
-                                  )}
-                                  {asset.payment_type == "OUTRIGHT" ? (
-                                    <span className="slashed_price">
-                                      <DisplayMoney amount={asset.amount * 2} />
-                                    </span>
-                                  ) : (
-                                    <span className="slashed_price">
-                                      <DisplayMoney
-                                        amount={asset.roundedAmount * 2}
-                                      />
-                                    </span>
-                                  )}
-                                </div>
-                                {asset.payment_type == "OUTRIGHT" ? null : (
-                                  <div className="amount_per_day_div">
-                                    <DisplayMoney
-                                      amount={
-                                        asset.amount / asset.product_duration
-                                      }
-                                    />
-                                    <span className="per_day_symbol">
-                                      {" "}
-                                      / perweek
-                                    </span>
+                            <li className="carous_list no_marg inventory_cards">
+                              <div
+                                className="storeTiles_storeTileContainer__HoGEa"
+                                style={{
+                                  backgroundImage: `url(${asset.product_image})`,
+                                  //           height: "200px",
+                                  //           width: "100%",
+                                  //           backgroundRepeat: "no-repeat",
+                                  //           backgroundSize: "cover",
+                                  //           borderRadius: "8px",
+                                  //           borderBottomLeftRadius: "0px",
+                                  //           borderBottomRightRadius: "0px",
+                                  //   backgroundPositionY: "center",
+                                }}
+                              >
+                                {asset.payment_type == "OUTRIGHT" &&
+                                asset.sales_type == "SHOWROOM" ? (
+                                  <div className="out_right_install_tag">
+                                    <button
+                                      className="out_right_install_tag_btn"
+                                      style={{
+                                        background: "#3ebc6e",
+                                        borderColor: "#3ebc6e",
+                                      }}
+                                    >
+                                      Outright
+                                    </button>
+                                  </div>
+                                ) : asset.payment_type == "OUTRIGHT" &&
+                                  asset.sales_type == "AWOOF" ? (
+                                  <div className="out_right_install_tag">
+                                    <button
+                                      className="out_right_install_tag_btn"
+                                      style={{
+                                        background: "#000",
+                                        borderColor: "#000",
+                                      }}
+                                    >
+                                      Awoof
+                                    </button>
+                                  </div>
+                                ) : (
+                                  <div className="out_right_install_tag">
+                                    <button className="out_right_install_tag_btn">
+                                      Savings
+                                    </button>
                                   </div>
                                 )}
+                                <div className="storeTiles_storeTileBottomContainer__2sWHh">
+                                  <div className="asset_name">
+                                    {asset.product_name}
+                                  </div>
+                                  <div class="asset_prices_div">
+                                    <div className="asset_title">
+                                      {asset.payment_type == "OUTRIGHT" ? (
+                                        <span className="init_amount">
+                                          {/* ₦{numberWithCommas(asset.amount)}{" "} */}
+                                          <DisplayMoney amount={asset.amount} />
+                                        </span>
+                                      ) : (
+                                        <span className="init_amount">
+                                          {/* ₦{numberWithCommas(asset.roundedAmount)}{" "} */}
+                                          <DisplayMoney
+                                            amount={asset.roundedAmount}
+                                          />
+                                        </span>
+                                      )}
+                                      {asset.payment_type == "OUTRIGHT" ? (
+                                        <span className="slashed_price">
+                                          <DisplayMoney
+                                            amount={asset.amount * 2}
+                                          />
+                                        </span>
+                                      ) : (
+                                        <span className="slashed_price">
+                                          <DisplayMoney
+                                            amount={asset.roundedAmount * 2}
+                                          />
+                                        </span>
+                                      )}
+                                    </div>
+                                    {asset.payment_type == "OUTRIGHT" ? null : (
+                                      <div className="amount_per_day_div">
+                                        <DisplayMoney
+                                          amount={
+                                            asset.amount /
+                                            asset.product_duration
+                                          }
+                                        />
+                                        <span className="per_day_symbol">
+                                          {" "}
+                                          / perweek
+                                        </span>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                                {/* </a> */}
                               </div>
-                            </div>
-                            {/* </a> */}
-                          </div>
-                        </li>
-                      </a>
-                    )
-                    // );
-                  )}
-                </div>
-                <Carousel
-                  responsive={responsive8}
-                  className="partnerCards LEFTARROW market_carous"
-                  showDots={false}
-                  //   infinite={false}
-                  autoPlay={false}
-                  autoPlaySpeed={6000}
-                  transitionDelay={"2s"}
-                  infinite={false}
-                  draggable={true}
-                  // transitionDuration={500}
-                  swipeable={true}
-                  style={{ height: "25em" }}
-                >
-                  {term.map((asset) => (
-                    <a
-                      href={`${stringUrl}/${
-                        asset.id
-                      }/${asset.product_name.replace(/\s+/g, "-")}`}
-                    >
-                      {/* <a
+                            </li>
+                          </a>
+                        )
+                        // );
+                      )}
+                  </div>
+                ) : (
+                  <div className="show_prods_on_mobile">
+                    {term
+                      .filter((person) => person.sales_type == "SHOWROOM")
+                      .map(
+                        (asset) => (
+                          // if (product_category_desc === asset.product_category_desc) {
+                          // return (
+                          <a
+                            href={`${stringUrl}/${
+                              asset.id
+                            }/${asset.product_name.replace(/\s+/g, "-")}`}
+                          >
+                            <li className="carous_list no_marg inventory_cards">
+                              <div
+                                className="storeTiles_storeTileContainer__HoGEa"
+                                style={{
+                                  backgroundImage: `url(${asset.product_image})`,
+                                  //           height: "200px",
+                                  //           width: "100%",
+                                  //           backgroundRepeat: "no-repeat",
+                                  //           backgroundSize: "cover",
+                                  //           borderRadius: "8px",
+                                  //           borderBottomLeftRadius: "0px",
+                                  //           borderBottomRightRadius: "0px",
+                                  //   backgroundPositionY: "center",
+                                }}
+                              >
+                                {asset.payment_type == "OUTRIGHT" &&
+                                asset.sales_type == "SHOWROOM" ? (
+                                  <div className="out_right_install_tag">
+                                    <button
+                                      className="out_right_install_tag_btn"
+                                      style={{
+                                        background: "#3ebc6e",
+                                        borderColor: "#3ebc6e",
+                                      }}
+                                    >
+                                      Outright
+                                    </button>
+                                  </div>
+                                ) : asset.payment_type == "OUTRIGHT" &&
+                                  asset.sales_type == "AWOOF" ? (
+                                  <div className="out_right_install_tag">
+                                    <button
+                                      className="out_right_install_tag_btn"
+                                      style={{
+                                        background: "#000",
+                                        borderColor: "#000",
+                                      }}
+                                    >
+                                      Awoof
+                                    </button>
+                                  </div>
+                                ) : (
+                                  <div className="out_right_install_tag">
+                                    <button className="out_right_install_tag_btn">
+                                      Savings
+                                    </button>
+                                  </div>
+                                )}
+                                <div className="storeTiles_storeTileBottomContainer__2sWHh">
+                                  <div className="asset_name">
+                                    {asset.product_name}
+                                  </div>
+                                  <div class="asset_prices_div">
+                                    <div className="asset_title">
+                                      {asset.payment_type == "OUTRIGHT" ? (
+                                        <span className="init_amount">
+                                          {/* ₦{numberWithCommas(asset.amount)}{" "} */}
+                                          <DisplayMoney amount={asset.amount} />
+                                        </span>
+                                      ) : (
+                                        <span className="init_amount">
+                                          {/* ₦{numberWithCommas(asset.roundedAmount)}{" "} */}
+                                          <DisplayMoney
+                                            amount={asset.roundedAmount}
+                                          />
+                                        </span>
+                                      )}
+                                      {asset.payment_type == "OUTRIGHT" ? (
+                                        <span className="slashed_price">
+                                          <DisplayMoney
+                                            amount={asset.amount * 2}
+                                          />
+                                        </span>
+                                      ) : (
+                                        <span className="slashed_price">
+                                          <DisplayMoney
+                                            amount={asset.roundedAmount * 2}
+                                          />
+                                        </span>
+                                      )}
+                                    </div>
+                                    {asset.payment_type == "OUTRIGHT" ? null : (
+                                      <div className="amount_per_day_div">
+                                        <DisplayMoney
+                                          amount={
+                                            asset.amount /
+                                            asset.product_duration
+                                          }
+                                        />
+                                        <span className="per_day_symbol">
+                                          {" "}
+                                          / perweek
+                                        </span>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                                {/* </a> */}
+                              </div>
+                            </li>
+                          </a>
+                        )
+                        // );
+                      )}
+                  </div>
+                )}
+
+                {product_category_desc == "Awoof" ? (
+                  <Carousel
+                    responsive={responsive8}
+                    className="partnerCards LEFTARROW market_carous"
+                    showDots={false}
+                    //   infinite={false}
+                    autoPlay={false}
+                    autoPlaySpeed={6000}
+                    transitionDelay={"2s"}
+                    infinite={false}
+                    draggable={true}
+                    // transitionDuration={500}
+                    swipeable={true}
+                    style={{ height: "25em" }}
+                  >
+                    {term
+                      .filter((person) => person.sales_type == "AWOOF")
+                      .map((asset) => (
+                        <a
+                          href={`${stringUrl}/${
+                            asset.id
+                          }/${asset.product_name.replace(/\s+/g, "-")}`}
+                        >
+                          {/* <a
                       href={`/dashboard/products/details/${
                         asset.id
                       }/${asset.product_name.replace(/\s+/g, "-")}`}
                     > */}
-                      <li className="carous_list">
-                        <div
-                          className="storeTiles_storeTileContainer__HoGEa"
-                          style={{
-                            backgroundImage: `url(${asset.product_image})`,
-                            //           height: "200px",
-                            //           width: "100%",
-                            //           backgroundRepeat: "no-repeat",
-                            //           backgroundSize: "cover",
-                            //           borderRadius: "8px",
-                            //           borderBottomLeftRadius: "0px",
-                            //           borderBottomRightRadius: "0px",
-                            //   backgroundPositionY: "center",
-                          }}
-                        >
-                          {asset.payment_type == "OUTRIGHT" ? (
-                            <div className="out_right_install_tag">
-                              <button
-                                className="out_right_install_tag_btn"
-                                style={{
-                                  background: "#3ebc6e",
-                                  borderColor: "#3ebc6e",
-                                }}
-                              >
-                                Outright
-                              </button>
-                            </div>
-                          ) : (
-                            <div className="out_right_install_tag">
-                              <button className="out_right_install_tag_btn">
-                                Savings
-                              </button>
-                            </div>
-                          )}
-                          <div className="storeTiles_storeTileBottomContainer__2sWHh">
-                            <div className="asset_name">
-                              {asset.product_name}
-                            </div>
-                            <div class="asset_prices_div">
-                              <div className="asset_title">
-                                {asset.payment_type == "OUTRIGHT" ? (
-                                  <span className="init_amount">
-                                    <DisplayMoney amount={asset.amount} />
-                                  </span>
-                                ) : (
-                                  <span className="init_amount">
-                                    <DisplayMoney
-                                      amount={asset.roundedAmount}
-                                    />
-                                  </span>
-                                )}
-                                {asset.payment_type == "OUTRIGHT" ? (
-                                  <span className="slashed_price">
-                                    <DisplayMoney amount={asset.amount * 2} />
-                                  </span>
-                                ) : (
-                                  <span className="slashed_price">
-                                    <DisplayMoney
-                                      amount={asset.roundedAmount * 2}
-                                    />
-                                  </span>
-                                )}
-                              </div>
-                              {asset.payment_type == "OUTRIGHT" ? null : (
-                                <div className="amount_per_day_div">
-                                  <DisplayMoney
-                                    amount={
-                                      asset.amount / asset.product_duration
-                                    }
-                                  />
-                                  <span className="per_day_symbol">
-                                    {" "}
-                                    / perweek
-                                  </span>
+                          <li className="carous_list">
+                            <div
+                              className="storeTiles_storeTileContainer__HoGEa"
+                              style={{
+                                backgroundImage: `url(${asset.product_image})`,
+                                //           height: "200px",
+                                //           width: "100%",
+                                //           backgroundRepeat: "no-repeat",
+                                //           backgroundSize: "cover",
+                                //           borderRadius: "8px",
+                                //           borderBottomLeftRadius: "0px",
+                                //           borderBottomRightRadius: "0px",
+                                //   backgroundPositionY: "center",
+                              }}
+                            >
+                              {asset.payment_type == "OUTRIGHT" &&
+                              asset.sales_type == "SHOWROOM" ? (
+                                <div className="out_right_install_tag">
+                                  <button
+                                    className="out_right_install_tag_btn"
+                                    style={{
+                                      background: "#3ebc6e",
+                                      borderColor: "#3ebc6e",
+                                    }}
+                                  >
+                                    Outright
+                                  </button>
+                                </div>
+                              ) : asset.payment_type == "OUTRIGHT" &&
+                                asset.sales_type == "AWOOF" ? (
+                                <div className="out_right_install_tag">
+                                  <button
+                                    className="out_right_install_tag_btn"
+                                    style={{
+                                      background: "#000",
+                                      borderColor: "#000",
+                                    }}
+                                  >
+                                    Awoof
+                                  </button>
+                                </div>
+                              ) : (
+                                <div className="out_right_install_tag">
+                                  <button className="out_right_install_tag_btn">
+                                    Savings
+                                  </button>
                                 </div>
                               )}
+                              <div className="storeTiles_storeTileBottomContainer__2sWHh">
+                                <div className="asset_name">
+                                  {asset.product_name}
+                                </div>
+                                <div class="asset_prices_div">
+                                  <div className="asset_title">
+                                    {asset.payment_type == "OUTRIGHT" ? (
+                                      <span className="init_amount">
+                                        <DisplayMoney amount={asset.amount} />
+                                      </span>
+                                    ) : (
+                                      <span className="init_amount">
+                                        <DisplayMoney
+                                          amount={asset.roundedAmount}
+                                        />
+                                      </span>
+                                    )}
+                                    {asset.payment_type == "OUTRIGHT" ? (
+                                      <span className="slashed_price">
+                                        <DisplayMoney
+                                          amount={asset.amount * 2}
+                                        />
+                                      </span>
+                                    ) : (
+                                      <span className="slashed_price">
+                                        <DisplayMoney
+                                          amount={asset.roundedAmount * 2}
+                                        />
+                                      </span>
+                                    )}
+                                  </div>
+                                  {asset.payment_type == "OUTRIGHT" ? null : (
+                                    <div className="amount_per_day_div">
+                                      <DisplayMoney
+                                        amount={
+                                          asset.amount / asset.product_duration
+                                        }
+                                      />
+                                      <span className="per_day_symbol">
+                                        {" "}
+                                        / perweek
+                                      </span>
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                              {/* </a> */}
                             </div>
-                          </div>
-                          {/* </a> */}
-                        </div>
-                      </li>
-                    </a>
-                  ))}
-                </Carousel>
+                          </li>
+                        </a>
+                      ))}
+                  </Carousel>
+                ) : (
+                  <Carousel
+                    responsive={responsive8}
+                    className="partnerCards LEFTARROW market_carous"
+                    showDots={false}
+                    //   infinite={false}
+                    autoPlay={false}
+                    autoPlaySpeed={6000}
+                    transitionDelay={"2s"}
+                    infinite={false}
+                    draggable={true}
+                    // transitionDuration={500}
+                    swipeable={true}
+                    style={{ height: "25em" }}
+                  >
+                    {term
+                      .filter((person) => person.sales_type == "SHOWROOM")
+                      .map((asset) => (
+                        <a
+                          href={`${stringUrl}/${
+                            asset.id
+                          }/${asset.product_name.replace(/\s+/g, "-")}`}
+                        >
+                          {/* <a
+                      href={`/dashboard/products/details/${
+                        asset.id
+                      }/${asset.product_name.replace(/\s+/g, "-")}`}
+                    > */}
+                          <li className="carous_list">
+                            <div
+                              className="storeTiles_storeTileContainer__HoGEa"
+                              style={{
+                                backgroundImage: `url(${asset.product_image})`,
+                                //           height: "200px",
+                                //           width: "100%",
+                                //           backgroundRepeat: "no-repeat",
+                                //           backgroundSize: "cover",
+                                //           borderRadius: "8px",
+                                //           borderBottomLeftRadius: "0px",
+                                //           borderBottomRightRadius: "0px",
+                                //   backgroundPositionY: "center",
+                              }}
+                            >
+                              {asset.payment_type == "OUTRIGHT" &&
+                              asset.sales_type == "SHOWROOM" ? (
+                                <div className="out_right_install_tag">
+                                  <button
+                                    className="out_right_install_tag_btn"
+                                    style={{
+                                      background: "#3ebc6e",
+                                      borderColor: "#3ebc6e",
+                                    }}
+                                  >
+                                    Outright
+                                  </button>
+                                </div>
+                              ) : asset.payment_type == "OUTRIGHT" &&
+                                asset.sales_type == "AWOOF" ? (
+                                <div className="out_right_install_tag">
+                                  <button
+                                    className="out_right_install_tag_btn"
+                                    style={{
+                                      background: "#000",
+                                      borderColor: "#000",
+                                    }}
+                                  >
+                                    Awoof
+                                  </button>
+                                </div>
+                              ) : (
+                                <div className="out_right_install_tag">
+                                  <button className="out_right_install_tag_btn">
+                                    Savings
+                                  </button>
+                                </div>
+                              )}
+                              <div className="storeTiles_storeTileBottomContainer__2sWHh">
+                                <div className="asset_name">
+                                  {asset.product_name}
+                                </div>
+                                <div class="asset_prices_div">
+                                  <div className="asset_title">
+                                    {asset.payment_type == "OUTRIGHT" ? (
+                                      <span className="init_amount">
+                                        <DisplayMoney amount={asset.amount} />
+                                      </span>
+                                    ) : (
+                                      <span className="init_amount">
+                                        <DisplayMoney
+                                          amount={asset.roundedAmount}
+                                        />
+                                      </span>
+                                    )}
+                                    {asset.payment_type == "OUTRIGHT" ? (
+                                      <span className="slashed_price">
+                                        <DisplayMoney
+                                          amount={asset.amount * 2}
+                                        />
+                                      </span>
+                                    ) : (
+                                      <span className="slashed_price">
+                                        <DisplayMoney
+                                          amount={asset.roundedAmount * 2}
+                                        />
+                                      </span>
+                                    )}
+                                  </div>
+                                  {asset.payment_type == "OUTRIGHT" ? null : (
+                                    <div className="amount_per_day_div">
+                                      <DisplayMoney
+                                        amount={
+                                          asset.amount / asset.product_duration
+                                        }
+                                      />
+                                      <span className="per_day_symbol">
+                                        {" "}
+                                        / perweek
+                                      </span>
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                              {/* </a> */}
+                            </div>
+                          </li>
+                        </a>
+                      ))}
+                  </Carousel>
+                )}
               </>
             )}
           </div>
@@ -1003,6 +1339,91 @@ const ItemDetailComponent = ({
           </div>
         </div>
       </div>
+
+      {bookingModal !== true ? (
+        <div className="booking_modal">
+          <div
+            className="close_booking_modal_cont"
+            onClick={toggleBookingModal}
+          ></div>
+          <div className="book_now_container_area">
+            <div className="book_modal_heading">
+              This item is only available in awoof sales and is locked until
+              Saturday 12:00am and closes on Sunday 12:00am. But you have an
+              option to book for this product so we can give you a reminder a
+              day before it becomes available for shopping.
+            </div>
+            <div className="booking_container">
+              <div className="booking_container1">
+                <div className="booking_cont_title">First Name</div>
+                <div className="booking_cont_input">
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="First name"
+                    className="booking_cont_input_area"
+                  />
+                </div>
+              </div>
+              <div className="booking_container1">
+                <div className="booking_cont_title">Last Name</div>
+                <div className="booking_cont_input">
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Last name"
+                    className="booking_cont_input_area"
+                  />
+                </div>
+              </div>
+              <div className="booking_container1">
+                <div className="booking_cont_title">Email Address</div>
+                <div className="booking_cont_input">
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email address"
+                    className="booking_cont_input_area"
+                  />
+                </div>
+              </div>
+              <div className="booking_container1">
+                <div className="booking_cont_title">Phone Number</div>
+                <div className="booking_cont_input">
+                  <input
+                    type="number"
+                    name="phone number"
+                    placeholder="Phone number"
+                    className="booking_cont_input_area"
+                  />
+                </div>
+              </div>
+              <div className="check_box_div">
+                <Checkbox className="checkbox_book_modal" />
+                <span className="checkbox_txt">
+                  I agree to the{" "}
+                  <a href="/terms-conditions" className="t_c_book_link">
+                    Terms & Conditions.
+                  </a>
+                </span>
+              </div>
+              <div className="booking_cont_button_div">
+                <button type="submit" className="booking_cont_button">
+                  Book this product
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="close_div_icon_">
+            <CloseIcon
+              className="close_book_modal_icon"
+              onClick={toggleBookingModal}
+            />
+            <span className="close_txt">Close</span>
+          </div>
+        </div>
+      ) : null}
     </>
   );
 };
