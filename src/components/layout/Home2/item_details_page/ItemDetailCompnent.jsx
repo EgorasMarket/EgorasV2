@@ -323,10 +323,8 @@ const ItemDetailComponent = ({
     let res3 = await countdown();
     setCounterArray(res3.data.data);
     let getData = res3.data.data[0];
-    // console.log(res3.data.data);
-    // console.log(getData.countType);
-    let convertToDate = Date(getData.dropDate);
-    // console.log(convertToDate);
+
+    // let convertToDate = Date(getData.dropDate);
 
     const today = new Date();
     const endDate = new Date(getData.dropDate);
@@ -340,7 +338,7 @@ const ItemDetailComponent = ({
     );
     console.log(days, hours, minutes, seconds);
 
-    // 👇️        hour  min  sec  ms
+    // 👇️                  hour  min  sec  ms
     let dayscount = days * 24 * 60 * 60 * 1000;
     let hourscount = hours * 60 * 60 * 1000;
     let minutescount = minutes * 60 * 1000;
