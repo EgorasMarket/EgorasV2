@@ -34,6 +34,7 @@ const NewOne = () => {
         console.log(err);
       });
   }, []);
+
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
     //console.log(event.target.value);
