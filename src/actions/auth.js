@@ -47,8 +47,7 @@ export const loadUser = () => async (dispatch) => {
   }
 };
 
-
- export const submitPhone = 
+export const submitPhone =
   (primaryPhoneNumber, secondaryPhoneNumber) => async (dispatch) => {
     const config = {
       headers: {
@@ -59,13 +58,12 @@ export const loadUser = () => async (dispatch) => {
     };
     const body = JSON.stringify({
       primaryPhoneNumber,
-      secondaryPhoneNumber
+      secondaryPhoneNumber,
     });
 
     console.log(body);
 
-
-    try{
+    try {
       const res = await axios.put(
         api_url2 + "/v1/user/update/secondary/contact",
         body,
@@ -82,11 +80,8 @@ export const loadUser = () => async (dispatch) => {
         success: false,
         data: err.response,
       };
-    
-  }
-
-  }
-
+    }
+  };
 
 // // Load User
 
@@ -467,7 +462,7 @@ export const sumitGenderAndDate =
     }
   };
 
- export const changePassword =
+export const changePassword =
   (oldpassword, newpassword) => async (dispatch) => {
     const config = {
       headers: {
