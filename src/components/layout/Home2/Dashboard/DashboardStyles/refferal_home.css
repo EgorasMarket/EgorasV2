@@ -141,3 +141,7 @@
 .refer_banner {
   width: 100%;
 }
+.circle_active {
+  font-size: 7px !important;
+  color: #ff8000;
+}

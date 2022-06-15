@@ -306,7 +306,7 @@ const Admin = ({ isAuthenticated, loading }) => {
                   <Route
                     exact
                     path="/super_admin/fund/accountant"
-                    component={Wallet}
+                    component={Wallet4}
                   />
                   <Route
                     exact

@@ -352,6 +352,7 @@ const AdminUploadProducts = () => {
     }
   };
   const successUploadMsg = "Product image uploaded successfully";
+  const errorUploadMsg = "Something went wrong, try again.";
   const AddProductPhoto = async (e) => {
     e.preventDefault();
 
@@ -407,6 +408,11 @@ const AdminUploadProducts = () => {
         }
       } catch (err) {
         console.log(err.response);
+        setCustomAlert(true);
+        setAlert(errorUploadMsg);
+        setAlertType("danger");
+        setIsLoading(false);
+        setDisable(false);
       }
     } else {
       console.log("empty Product image");

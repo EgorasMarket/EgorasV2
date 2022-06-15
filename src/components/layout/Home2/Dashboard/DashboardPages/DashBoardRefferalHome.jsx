@@ -1,21 +1,26 @@
 import React, { useState, useEffect } from "react";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import DisplayMoney from "../../../../DisplayMoney";
+import CircleIcon from "@mui/icons-material/Circle";
 import GroupIcon from "@mui/icons-material/Group";
 import LoadingIcons from "react-loading-icons";
 import "../DashboardStyles/refferal_home.css";
 import "../DashboardStyles/dashboard_home.css";
-
-const DashBoardRefferalHome = () => {
-  const [myReferral, setMyReferral] = useState([]);
-  const [topReferral, setTopReferral] = useState([]);
-  const [referralCount, setReferralCount] = useState("");
+import { API_URL2 as api_url2 } from "../../../../../actions/types";
+import { connect } from "react-redux";
+import axios from "axios";
+const DashBoardRefferalHome = ({ auth }) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const [referrals, setReferrals] = useState([]);
   const [noData, setNoData] = useState("no_data");
   const [noData2, setNoData2] = useState("no_data");
+  const [refCount, setRefCount] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const [copyValue, setCopyValue] = useState(
-    "https://egoras.com/referral/cb318e16-266b-402b-b92e-bcefe64be94b"
-  );
+  const [copyValue, setCopyValue] = useState("");
 
   const copyText = () => {
     var copyText = document.getElementById("myInput");
@@ -75,6 +80,39 @@ const DashBoardRefferalHome = () => {
       email: "samuelify225@gmail.com",
     },
   ];
+
+  useEffect(() => {
+    // setCartNum(cart.length)
+    // fetchDepositLinks();
+    //console.log(auth);
+
+    //   console.log(auth)
+
+    if (auth.user !== null) {
+      console.log(auth.user.user);
+      setCopyValue(auth.user.user.ref_auth);
+      return;
+    }
+  }, [auth]);
+
+  useEffect(() => {
+    axios
+      .get(api_url2 + "/v1/user/referal/count", null, config)
+      .then((data) => {
+        console.log(data.data.data.length);
+        setRefCount(data.data.data.length);
+      })
+      .catch((error) => {});
+  }, []);
+  useEffect(() => {
+    axios
+      .get(api_url2 + "/v1/user/get/my/referals", null, config)
+      .then((data) => {
+        console.log(data.data.data);
+        setReferrals(data.data.data);
+      })
+      .catch((error) => {});
+  }, []);
   return (
     <div className="other2">
       {/* get started section start */}
@@ -105,13 +143,17 @@ const DashBoardRefferalHome = () => {
                 </div>
                 <div className="user_refferals_table_body">
                   <div className="user_refferals_table_body_titles">
-                    <span>UserName</span>
                     <span>EmailAddress</span>
+                    <span>Activity</span>
                   </div>
-                  {assets.slice(0, 5).map((data) => (
+                  {referrals.slice(0, 5).map((data) => (
                     <div className="user_refferals_table_body_cont1">
-                      <span>{data.userName}</span>
                       <span>{data.email}</span>
+                      <span
+                        style={{ display: "flex", alignItems: "flex-start" }}
+                      >
+                        Not active <CircleIcon className="circle_active" />
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -121,7 +163,7 @@ const DashBoardRefferalHome = () => {
               <div className="dashboard_user_refferals_count_mini_cont1">
                 <div className="total_refferals_tittle">My Total Refferals</div>
 
-                <div className="total_ref_figure_cont">5</div>
+                <div className="total_ref_figure_cont">{refCount}</div>
               </div>
               <div className="dashboard_user_refferals_count_mini_cont1">
                 <h6 className="referral_txt">
@@ -139,7 +181,7 @@ const DashBoardRefferalHome = () => {
                   onClick={copyText}
                   onMouseOut={outFunc}
                 >
-                  Copy referral link
+                  Copy referral code
                   <span className="tooltiptext" id="myTooltip"></span>
                 </button>
               </div>
@@ -150,5 +192,11 @@ const DashBoardRefferalHome = () => {
     </div>
   );
 };
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  isAuthenticated: state.auth.isAuthenticated,
+  //   cart: state.shop.cart,
+});
+export default connect(mapStateToProps)(DashBoardRefferalHome);
 
-export default DashBoardRefferalHome;
+// export default DashBoardRefferalHome;

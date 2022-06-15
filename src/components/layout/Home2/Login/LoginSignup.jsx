@@ -17,23 +17,35 @@ import { getLogin } from "../../../../actions/auth";
 const LoginSignup = ({ getLogin, isAuthenticated }) => {
   // const [token,setToken]=useState();
   const [disable, setDisable] = React.useState(false);
+  // const [ref_auth, setRef_auth] = React.useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [visibility, setVisibility] = useState(false);
-  const [token, setToken] = useState({ email: "" });
+  const [token, setToken] = useState({ email: "", ref_auth: "" });
   const [strongPass, setStrongPass] = useState(false);
   const [alert, setAlert] = useState("");
   const [customAlert, setCustomAlert] = useState(false);
   const [alertType, setAlertType] = useState("");
-  const { email } = token;
+  const { email, ref_auth } = token;
   const [emailLink, setEmailLink] = useState(false);
   const [isSuccessful, setIsSuccessful] = useState(false);
   const [authToken, setAuthToken] = useState(localStorage.getItem("token"));
   useEffect(() => {
     if (authToken !== null) {
-      //   return (window.location.replace = "/");
       return (window.location.href = "/");
     }
   }, []);
+
+  useEffect(() => {
+    if (typeof localStorage.referer !== undefined) {
+      // localStorage.getItem("referer");
+      // setRef_auth(localStorage.getItem("referer"));
+      setToken({
+        email: "",
+        ref_auth: localStorage.getItem("referer"),
+      });
+    }
+  }, []);
+  // console.log(ref_auth);
 
   const NetWorkTimeoutMsg = "The connection to the server timed out.";
   const onlineMsg = "Your internet connection appears to be offline.";
@@ -97,7 +109,7 @@ const LoginSignup = ({ getLogin, isAuthenticated }) => {
     setDisable(true);
 
     try {
-      let res3 = await getLogin(email);
+      let res3 = await getLogin(email, ref_auth);
       // console.log(res3.data.data.errors[0].msg);
       //  setToken(res)
 
@@ -108,6 +120,7 @@ const LoginSignup = ({ getLogin, isAuthenticated }) => {
       if (res3.data.success === true) {
         setIsSuccessful(true);
         setIsLoading(false);
+        localStorage.removeItem("referer");
         // setDisable(false);
         console.log("okay Good Server");
       } else {
@@ -204,9 +217,17 @@ const LoginSignup = ({ getLogin, isAuthenticated }) => {
                         onChange={onChange2}
                         value={email}
                         placeHolder="Email"
-                        // autocomplete="off"
-
-                        // autocomplete="off"
+                      />
+                    </div>
+                    <div className="signup_input_field1_cont">
+                      <span className="input_title">Referal Code</span>
+                      <input
+                        type="text"
+                        className="signup_input_field"
+                        name="ref_auth"
+                        onChange={onChange2}
+                        value={ref_auth}
+                        placeHolder="Referal Code"
                       />
                     </div>
 

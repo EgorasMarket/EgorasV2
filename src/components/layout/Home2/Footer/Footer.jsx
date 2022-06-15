@@ -125,11 +125,15 @@ const Footer = () => {
     if (FooterHide === "/whitepaper") {
       document.getElementById("FooterId").style.display = "none";
     }
+    if (FooterHide === "/referal/" + myArr[2]) {
+      document.getElementById("FooterId").style.display = "none";
+    }
     // ////console.log(myArr[1]);
     if (myArr[1] === "super_admin") {
       document.getElementById("FooterId").style.display = "none";
     }
   });
+  console.log(myArr[2]);
 
   const classes = useStyles();
 
