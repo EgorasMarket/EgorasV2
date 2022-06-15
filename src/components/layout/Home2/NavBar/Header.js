@@ -196,6 +196,11 @@ const Header = ({ isAuthenticated, auth }) => {
         document.getElementById("Header").style.display = "none";
       });
     }
+    if (currentPage === "/dashboard/referral/home") {
+      setshowHeader(() => {
+        document.getElementById("Header").style.display = "none";
+      });
+    }
     if (currentPage === "/dashboard") {
       setshowHeader(() => {
         document.getElementById("Header").style.display = "none";

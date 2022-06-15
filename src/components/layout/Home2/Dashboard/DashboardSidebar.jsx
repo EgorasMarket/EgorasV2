@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import HomeIcon from "@mui/icons-material/Home";
 import { API_URL2 as api_url2 } from "../../../../actions/types";
+// import GroupIcon from "@mui/icons-material/Group";
+
 // import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 // import SecurityIcon from "@mui/icons-material/Security";
 import { AccountNavigation } from "./DashboardPages/AccountNavigation";
@@ -199,6 +201,10 @@ const DashboardSidebar = ({ auth, cart, retrieveCart }) => {
     }
     if (linksActive === "/dashboard/cart") {
       setActiveBg("cart");
+      setCatDiv("not_home");
+    }
+    if (linksActive === "/dashboard/referral/home") {
+      setActiveBg("referral");
       setCatDiv("not_home");
     }
     if (linksActive === "/dashboard/orders") {
@@ -599,6 +605,28 @@ const DashboardSidebar = ({ auth, cart, retrieveCart }) => {
                 {/* ===================== */}
 
                 <a
+                  href="/dashboard/referral/home"
+                  className="link"
+                  id="referral"
+                  onClick={changeBg}
+                >
+                  <li
+                    className={
+                      activeBg == "referral"
+                        ? "sidebarListItem list-item-active"
+                        : "sidebarListItem"
+                    }
+                  >
+                    <GroupIcon className="sidebarIcon" />
+                    Referrals
+                  </li>
+                </a>
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+
+                <a
                   href="/dashboard/orders"
                   className="link"
                   id="order"
@@ -760,6 +788,29 @@ const DashboardSidebar = ({ auth, cart, retrieveCart }) => {
                     Wallet
                   </li>
                   <span className="hover_link_txt">Wallet</span>
+                </a>
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+
+                <a
+                  href="/dashboard/referral/home"
+                  className="link hover_link"
+                  id="referral"
+                  onClick={changeBg}
+                >
+                  <li
+                    className={
+                      activeBg == "referral"
+                        ? "sidebarListItem small_list-item-active"
+                        : "sidebarListItem"
+                    }
+                  >
+                    <GroupIcon className="sidebarIcon" />
+                    Referrals
+                  </li>
+                  <span className="hover_link_txt"> Referrals</span>
                 </a>
                 {/* ===================== */}
                 {/* ===================== */}

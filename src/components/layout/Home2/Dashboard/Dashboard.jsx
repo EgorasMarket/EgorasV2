@@ -12,6 +12,7 @@ import Wallet from "../../Wallet/Wallet";
 import DashboardSidebar from "./DashboardSidebar";
 import DashboardAccountPageMobile from "./DashboardPages/DashboardAccountPageMobile";
 import ItemDetailsPage from "../item_details_page/ItemDetailsPage";
+import DashBoardRefferalHome from "./DashboardPages/DashBoardRefferalHome";
 // import ItemDetailsPage1 from "../item_details_page/detail";
 import DashboardOrderPage from "./DashboardPages/DashboardOrderPage";
 import DashboardSavingsPage from "./DashboardPages/DashboardSavingsPage";
@@ -106,6 +107,11 @@ const Dashboard = ({ isAuthenticated, loading }) => {
                 exact
                 path="/dashboard/accounts"
                 component={DashboardAccountPage}
+              />
+              <Route
+                exact
+                path="/dashboard/referral/home"
+                component={DashBoardRefferalHome}
               />
               {/* <Route
                 exact
