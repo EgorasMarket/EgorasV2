@@ -39,12 +39,11 @@
   padding: 1em;
   background: #f6f6f6;
   border-radius: 6px;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
 }
 .dashboard_user_refferals_count_mini_conts {
   display: flex;
-  /* align-items: center; */
   justify-content: space-between;
   gap: 10px;
 }
@@ -59,11 +58,9 @@
   gap: 20px;
   align-items: center;
   background: #fff;
-
-  /* justify-content: space-between; */
 }
 .total_ref_figure_cont {
-  border: solid 7px #d6d6d6;
+  border: solid 15px #e3e3e3;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -84,7 +81,7 @@
   width: 100%;
 }
 .referral_txt {
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
 }
 .ref_btn .tooltiptext {
@@ -143,5 +140,86 @@
 }
 .circle_active {
   font-size: 7px !important;
-  color: #ff8000;
+}
+.ref_loading_icon {
+  padding: 2em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.loading_txt {
+  margin: 0;
+  font-size: 14px;
+}
+
+.reffer_activity {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+.reffer_email {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+}
+@media screen and (max-width: 767px) {
+  .dashboard_user_refferals_count_mini_conts {
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-between;
+    grid-gap: 10px;
+    gap: 10px;
+    flex-direction: column;
+  }
+  .dashboard_refferal_area {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 25px;
+    gap: 10px;
+  }
+  .dashboard_user_refferals_count_mini_cont1 {
+    padding: 1em;
+    gap: 15px;
+    /* justify-content: space-between; */
+  }
+  .user_refferals_table_body_titles {
+    display: none;
+  }
+  .user_refferals_table_body_cont1 {
+    font-size: 12px;
+    flex-direction: column;
+    align-items: end;
+    gap: 20px;
+    overflow: hidden;
+  }
+  .referral_txt {
+    font-size: 14px;
+    text-align: center;
+  }
+  .reffer_activity {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .reffer_email {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .reffer_activity::before {
+    content: "Activity";
+    color: #828282;
+    display: flex;
+  }
+  .reffer_email::before {
+    content: "Email";
+    color: #828282;
+    display: flex;
+  }
 }

@@ -1060,12 +1060,7 @@ const Header = ({ isAuthenticated, auth }) => {
               >
                 Electronics
               </a>
-              <a
-                href={`/products/categories/Fashion`}
-                className="header_cat_link"
-              >
-                Fashion
-              </a>
+
               <a
                 href={`/products/categories/Home Appliances`}
                 className="header_cat_link"
