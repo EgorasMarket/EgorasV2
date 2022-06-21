@@ -54,6 +54,8 @@ const CheckoutModalComponent = ({
     status,
   } = payload;
 
+  console.log(payload, "this is the complete payload");
+
   const [user_id, setUserId] = useState("");
   const [isloading, setIsLoading] = useState(true);
   const [email, setEmail] = useState("");
