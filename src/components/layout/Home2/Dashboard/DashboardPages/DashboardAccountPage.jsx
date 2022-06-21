@@ -611,8 +611,9 @@ function DashboardAccountPage({
       console.log(res.data.success);
       window.location.reload();
       //console.log("okay Good Server");
-    } else {
-      setAlert(res.data.data.errors[0].msg, 'danger');
+    } else if (res.data.success === false) {
+      alert(res.data.data.message);
+      setAlert(res.data.data.message, 'danger');
     }
 
     // setPhone_no3(event.target.value)
