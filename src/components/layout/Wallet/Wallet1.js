@@ -15,7 +15,7 @@ import { NoDataFoundComponent } from "../Home2/Dashboard/NodataFound/NoDataFound
 import { Link } from "react-router-dom";
 import data from "../MockData";
 import { API_URL2 as api_url2 } from "../../../actions/types";
-import Success_Error_Component from '../../assets/Success_Error_Component'
+import Success_Error_Component from "../../assets/Success_Error_Component";
 
 import axios from "axios";
 
@@ -63,6 +63,8 @@ const Wallet1 = ({ auth, createWallet, depositToken }) => {
   // const [txId2, setTxId2] = useState(
   //   "0x360ba97e2a8f0deb200e34846092a3b8110283b1"
   // );
+
+  const currentPage = window.location.pathname;
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -216,10 +218,9 @@ const Wallet1 = ({ auth, createWallet, depositToken }) => {
   }, 5000);
   // const hide_error = setTimeout(setAlert(""), 5000);
   const openDepositDiv = async (tokenName, tokenSymbol) => {
-
-    let transType = 1
+    let transType = 1;
     setActiveBg("deposit_btn");
-console.log(accountExists);
+    console.log(accountExists);
     if (accountExists) {
       // console.log("accountExists");
       setShowDeposit(true);
@@ -241,11 +242,11 @@ console.log(accountExists);
 
   const fundCustomer = async () => {
     console.log(fAmount);
-    setIsLoading3(true)
-    
+    setIsLoading3(true);
+
     if (fAmount === null) {
-      setAlert('Please enter amount.');
-      setIsLoading3(false)
+      setAlert("Please enter amount.");
+      setIsLoading3(false);
     } else {
       console.log(parseInt(fAmount.replace(/,/g, "")));
       const amount = parseInt(fAmount.replace(/,/g, ""));
@@ -253,9 +254,9 @@ console.log(accountExists);
       const body = JSON.stringify({
         amount,
       });
-  
+
       // setAssetVal(assetVal + amount)
-  
+
       try {
         const res = await axios.post(
           api_url2 + "/v1/wallet/fund/customer/" + userId,
@@ -265,18 +266,22 @@ console.log(accountExists);
         console.log(res.data.message);
 
         if (res.data.success === true) {
-          return window.location.replace("/super_admin/overview");
+          if (currentPage == "/super_admin/fund/accountant") {
+            return window.location.replace("/super_admin/fund/accountant");
+          } else {
+            return window.location.replace("/super_admin/overview");
+          }
           // setIsLoading3(false)
         } else {
-          setAlert(res.data.message)
-          setIsLoading3(false)
+          setAlert(res.data.message);
+          setIsLoading3(false);
         }
         setAlert(res.data.message);
       } catch (err) {
         console.log(err.response.data.message);
         setAlert(err.response.data.message);
         setAlertType("danger");
-        setIsLoading3(false)
+        setIsLoading3(false);
       }
     }
   };
@@ -562,11 +567,7 @@ console.log(accountExists);
         </div>
       ) : null} */}
       {alert == "" ? null : (
-        <CustomAlert
-          alert={alert}
-          alertType={alertType}
-          onChange={timer}
-        />
+        <CustomAlert alert={alert} alertType={alertType} onChange={timer} />
       )}
     </div>
   );

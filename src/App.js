@@ -160,6 +160,7 @@ import PrivateRoute2 from "./components/routing/PrivateRoute2";
 import PrivateRoute3 from "./components/routing/PrivateRoute3";
 import ResetPassword from "./components/layout/Home2/PasswordReset/ResetPassword";
 import ValidateLogin from "./components/layout/Home2/Login/ValidateLogin";
+import Referal from "./components/layout/Home2/Login/Referal";
 
 // import ItemDetailsPage from "./components/layout/Home2/item_details_page/ItemDetailsPage.jsx";
 if (localStorage.token) {
@@ -360,6 +361,7 @@ const App = () => {
 
                   <Route exact path="/companies" component={Companies} />
                   <Route exact path="/register" component={LoginSignup} />
+                  <Route exact path="/referal/:ref" component={Referal} />
                   <Route
                     exact
                     path="/authenticate/:id"
@@ -525,6 +527,7 @@ const App = () => {
                   <Route exact path="/whitepaper" component={Whitepaper} />
 
                   <Route exact path="/login" component={Login} />
+
                   {/* <Route exact path="/super_admin" component={Admin} /> */}
                   {/* <Route exact path="/dashboard" component={Dashboard} /> */}
                   {/* <Route exact path='/token-metrics' component={TokenMetrics} /> */}

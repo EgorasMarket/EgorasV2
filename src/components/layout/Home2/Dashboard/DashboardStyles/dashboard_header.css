@@ -14,7 +14,9 @@
   align-items: center;
   justify-content: space-between;
 }
-
+.dashboard_widgets {
+  display: none !important;
+}
 .together {
   display: flex;
   align-items: center;
@@ -179,6 +181,15 @@ button.logout-btn {
   } */
   .scr {
     top: 30px !important;
+  }
+
+  .dashboard_widgets {
+    color: #000;
+    border-left: 1px solid grey;
+    font-size: 24px;
+    padding-left: 0px;
+    width: 15%;
+    display: block !important;
   }
   .search_input_cont {
     position: relative;

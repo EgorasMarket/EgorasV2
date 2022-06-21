@@ -68,20 +68,6 @@ const HeaderMenu = ({ onClick }) => {
               </span>
             </a>
             <a
-              href={`/products/categories/Fashion`}
-              className="header_area_menu_link"
-            >
-              <div className="header_area_link_button">
-                <span className="header_area_menu_icon">
-                  {/* <ApartmentIcon className="header_area_menu_icon_svg" /> */}
-                </span>
-                Fashion
-              </div>
-              <span className="header_area_menu_icon">
-                <ArrowForwardIosIcon className="header_area_menu_icon_arrow" />
-              </span>
-            </a>
-            <a
               href={`/products/categories/Home Appliances`}
               className="header_area_menu_link"
             >

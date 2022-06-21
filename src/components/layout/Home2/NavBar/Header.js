@@ -191,7 +191,17 @@ const Header = ({ isAuthenticated, auth }) => {
         document.getElementById("Header").style.display = "none";
       });
     }
+    if (currentPage === "/dashboard/membership_subscription") {
+      setshowHeader(() => {
+        document.getElementById("Header").style.display = "none";
+      });
+    }
     if (currentPage === "/dashboard") {
+      setshowHeader(() => {
+        document.getElementById("Header").style.display = "none";
+      });
+    }
+    if (currentPage === "/dashboard/referral/home") {
       setshowHeader(() => {
         document.getElementById("Header").style.display = "none";
       });
@@ -1055,12 +1065,7 @@ const Header = ({ isAuthenticated, auth }) => {
               >
                 Electronics
               </a>
-              <a
-                href={`/products/categories/Fashion`}
-                className="header_cat_link"
-              >
-                Fashion
-              </a>
+
               <a
                 href={`/products/categories/Home Appliances`}
                 className="header_cat_link"

@@ -780,8 +780,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-<<<<<<< HEAD
 export default connect(mapStateToProps, {})(Header2);
-=======
-export default connect(mapStateToProps, {})(Header2);
->>>>>>> 0509764233febfeb0ec1a7952c350a9a02bf7e74

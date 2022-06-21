@@ -181,7 +181,7 @@ export const activate = (email_auth) => async (dispatch) => {
   }
 };
 
-export const getLogin = (email) => async (dispatch) => {
+export const getLogin = (email, ref_auth) => async (dispatch) => {
   const config = {
     headers: {
       Accept: '*',
@@ -193,6 +193,7 @@ export const getLogin = (email) => async (dispatch) => {
 
   const body = JSON.stringify({
     email,
+    ref_auth,
   });
 
   console.log(body);
