@@ -191,6 +191,11 @@ const Header = ({ isAuthenticated, auth }) => {
         document.getElementById("Header").style.display = "none";
       });
     }
+    if (currentPage === "/dashboard/membership_subscription") {
+      setshowHeader(() => {
+        document.getElementById("Header").style.display = "none";
+      });
+    }
     if (currentPage === "/dashboard") {
       setshowHeader(() => {
         document.getElementById("Header").style.display = "none";

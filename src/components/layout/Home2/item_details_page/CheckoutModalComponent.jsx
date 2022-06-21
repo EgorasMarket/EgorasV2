@@ -64,16 +64,22 @@ const CheckoutModalComponent = ({
   const [fullname, setName] = useState("");
   const [option, setOption] = useState(-1);
   const [customer_data, setCustomerData] = useState({});
-  const [tokenBal, setTokenBal] = useState("");
-  const [assetVal, setAssetVal] = useState("");
+  const [tokenBal, setTokenBal] = useState(0);
+  const [assetVal, setAssetVal] = useState(0);
   const [error_msg, setErrorMsg] = useState("");
+  const [error_msg3, setErrorMsg3] = useState("");
+  const [error_msg4, setErrorMsg4] = useState("");
   const [success_msg, setSuccessMsg] = useState("");
   const [order_id, setOrder_id] = useState("");
+  const [membershipStatus, setMembershipStatus] = useState(false);
+  const [subscriptionStatus, setSubscriptionStatus] = useState(false);
 
   const [tokenSign, setTokenSign] = useState();
   const [hardNumb, setHardNum] = useState(300);
   const [errorDiv, setErrorDiv] = useState(false);
   const [errorDiv2, setErrorDiv2] = useState(false);
+  const [errorDiv3, setErrorDiv3] = useState(false);
+  const [errorDiv4, setErrorDiv4] = useState(false);
   const [successDiv, setSuccessDiv] = useState(false);
   const [total, setTotal] = useState("");
   // //console.log(phone_no, name, option);
@@ -104,6 +110,34 @@ const CheckoutModalComponent = ({
 
         setAddressName(response.data.cusAddress.address);
         //  //console.log(addressName,"Bk is good for development")
+      });
+  }, []);
+  useEffect(async () => {
+    await axios
+      .get(api_url2 + "/v1/user/subscription/check/active", null, config)
+      .then((data) => {
+        console.log(data.data, "membership ooo success");
+        setSubscriptionStatus(data.data.success);
+        // setAddressName(response.data.cusAddress.address);
+        // //  //console.log(addressName,"Bk is good for development")
+      })
+      .catch((error) => {
+        console.log(error, "membership ooo error");
+        setErrorDiv3(true);
+      });
+  }, []);
+  useEffect(async () => {
+    await axios
+      .get(api_url2 + "/v1/user/membership/check", null, config)
+      .then((data) => {
+        console.log(data.data, "membership ooo success");
+        setMembershipStatus(data.data.success);
+        // setAddressName(response.data.cusAddress.address);
+        // //  //console.log(addressName,"Bk is good for development")
+      })
+      .catch((error) => {
+        console.log(error, "membership ooo error");
+        setErrorDiv4(true);
       });
   }, []);
 
@@ -184,6 +218,8 @@ const CheckoutModalComponent = ({
   const closeErrorDiv = () => {
     setErrorDiv(false);
     setErrorDiv2(false);
+    setErrorDiv3(false);
+    setErrorDiv4(false);
   };
   const handleFlutterPayment = useFlutterwave(flutterConfig);
   const openProcessingDiv = () => {
@@ -591,13 +627,18 @@ const CheckoutModalComponent = ({
             {/* ========== */}
             {/* ========== */}
             {/* ========== */}
-            <div className="sub_total_div">
+            {/* <div className="sub_total_div">
               VAT: <span className="sub_total_div_span">₦{vat}</span>
-            </div>
+            </div> */}
             {/* ========== */}
             {/* ========== */}
             {/* ========== */}
             {/* ========== */}
+            {/* ========== */}
+            {/* ========== */}
+            {/* ========== */}
+            {/* ========== */}
+
             <div className="sub_total_div">
               Delivery Fee: <span className="sub_total_div_span">₦0</span>
             </div>
@@ -624,23 +665,66 @@ const CheckoutModalComponent = ({
             </div>
             {/* ========== */}
             {/* ========== */}
-            <button
-              className="checkout_btn1a"
-              // onClick={() => {
 
-              //   <Loader/>
+            {membershipStatus == false ? (
+              <button
+                className="checkout_btn1a"
+                // onClick={() => {
 
-              //   // openPayment();
-              //   selectOption(option);
+                //   <Loader/>
 
-              // }}
-              onClick={() => {
-                // return( <Loader/>)
-                selectOption(option);
-              }}
-            >
-              Proceed to Checkout
-            </button>
+                //   // openPayment();
+                //   selectOption(option);
+
+                // }}
+                onClick={() => {
+                  setErrorDiv4(true);
+                  setProcessingDiv(false);
+                  setSuccessDiv(false);
+                  setErrorMsg4("You don't have an active membership");
+                }}
+              >
+                Proceed to Checkout Member
+              </button>
+            ) : subscriptionStatus == false ? (
+              <button
+                className="checkout_btn1a"
+                // onClick={() => {
+
+                //   <Loader/>
+
+                //   // openPayment();
+                //   selectOption(option);
+
+                // }}
+                onClick={() => {
+                  setErrorDiv3(true);
+                  setProcessingDiv(false);
+                  setSuccessDiv(false);
+                  setErrorMsg3("You don't have an active subscription");
+                }}
+              >
+                Proceed to Checkout Subscribe
+              </button>
+            ) : (
+              <button
+                className="checkout_btn1a"
+                // onClick={() => {
+
+                //   <Loader/>
+
+                //   // openPayment();
+                //   selectOption(option);
+
+                // }}
+                onClick={() => {
+                  // return( <Loader/>)
+                  selectOption(option);
+                }}
+              >
+                Proceed to Checkout
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -700,6 +784,42 @@ const CheckoutModalComponent = ({
           }}
           link_btn={true}
           src="/dashboard/accounts"
+          onclick={closeErrorDiv}
+        />
+        // </div>
+      )}
+      {errorDiv3 == false ? null : (
+        // <div className="processing_transac_div insufficient">
+        <Success_Error_Component
+          // remove_success_div={() => setErrorDiv(true)}
+          btn_txt="Subscribe"
+          // msg={<div>Stupid boy</div>}
+          msg={error_msg3}
+          errorMsgDiv={errorDiv3}
+          removeTransDiv={() => {
+            redirect("/dashboard/products");
+            closeErrorDiv();
+          }}
+          link_btn={true}
+          src="/dashboard/membership_subscription"
+          onclick={closeErrorDiv}
+        />
+        // </div>
+      )}
+      {errorDiv4 == false ? null : (
+        // <div className="processing_transac_div insufficient">
+        <Success_Error_Component
+          // remove_success_div={() => setErrorDiv(true)}
+          btn_txt="Activate"
+          // msg={<div>Stupid boy</div>}
+          msg={error_msg4}
+          errorMsgDiv={errorDiv4}
+          removeTransDiv={() => {
+            redirect("/dashboard/products");
+            closeErrorDiv();
+          }}
+          link_btn={true}
+          src="/dashboard/membership_subscription"
           onclick={closeErrorDiv}
         />
         // </div>

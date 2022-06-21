@@ -44,6 +44,9 @@ const Footer = () => {
     if (FooterHide === "/dashboard/wallet") {
       document.getElementById("FooterId").style.display = "none";
     }
+    if (FooterHide === "/dashboard/membership_subscription") {
+      document.getElementById("FooterId").style.display = "none";
+    }
     if (FooterHide === "/dashboard/referral/home") {
       document.getElementById("FooterId").style.display = "none";
     }
