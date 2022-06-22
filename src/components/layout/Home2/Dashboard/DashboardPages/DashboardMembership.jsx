@@ -108,7 +108,6 @@ const DashboardMembership = ({ auth }) => {
                   'an uncaught error just occured. contact support '
                 );
               }
-              console.log('callback is called');
               //
               await axios
                 .post(
