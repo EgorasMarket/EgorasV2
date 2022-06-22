@@ -19,6 +19,7 @@ const DashBoardRefferalHome = ({ auth }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoading2, setIsLoading2] = useState(false);
   const [copyValue, setCopyValue] = useState("");
+  const [copyrefferalLink, setCopyRefferalLink] = useState("");
 
   const copyText = () => {
     var copyText = document.getElementById("myInput");
@@ -30,59 +31,34 @@ const DashBoardRefferalHome = ({ auth }) => {
     tooltip.innerHTML = "Copied Code ";
     tooltip.style.display = "block";
   };
+  const copyText2 = () => {
+    var copyText = document.getElementById("myInput2");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(copyText.value);
+
+    var tooltip = document.getElementById("myTooltip2");
+    tooltip.innerHTML = "Copied Link ";
+    tooltip.style.display = "block";
+  };
   function outFunc() {
     var tooltip = document.getElementById("myTooltip");
     tooltip.innerHTML = "Copy to clipboard";
     tooltip.style.display = "none";
   }
-
-  const assets = [
-    {
-      userName: "Sammy224",
-      email: "samuelify225@gmail.com",
-    },
-    {
-      userName: "Cyntax4444",
-      email: "jamuelhhh225@gmail.com",
-    },
-    {
-      userName: "Sammy224",
-      email: "samuelify225@gmail.com",
-    },
-    {
-      userName: "Sammy224",
-      email: "samuelify225@gmail.com",
-    },
-    {
-      userName: "Cyntax4444",
-      email: "jamuelhhh225@gmail.com",
-    },
-    {
-      userName: "Sammy224",
-      email: "samuelify225@gmail.com",
-    },
-    {
-      userName: "Cyntax4444",
-      email: "jamuelhhh225@gmail.com",
-    },
-    {
-      userName: "Sammy224",
-      email: "samuelify225@gmail.com",
-    },
-    {
-      userName: "Sammy224",
-      email: "samuelify225@gmail.com",
-    },
-    {
-      userName: "Sammy224",
-      email: "samuelify225@gmail.com",
-    },
-  ];
+  function outFunc2() {
+    var tooltip = document.getElementById("myTooltip2");
+    tooltip.innerHTML = "Copy to clipboard";
+    tooltip.style.display = "none";
+  }
 
   useEffect(() => {
     if (auth.user !== null) {
       console.log(auth.user.user);
       setCopyValue(auth.user.user.ref_auth);
+      setCopyRefferalLink(
+        "http://localhost:3000/referal/" + auth.user.user.ref_auth
+      );
       return;
     }
   }, [auth]);
@@ -144,8 +120,43 @@ const DashBoardRefferalHome = ({ auth }) => {
                 </div>
                 <div className="user_refferals_table_body">
                   <div className="user_refferals_table_body_titles">
-                    <span>EmailAddress</span>
-                    <span>Activity</span>
+                    <span
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "flex-start",
+                      }}
+                    >
+                      User
+                    </span>
+
+                    <span
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "flex-end",
+                      }}
+                    >
+                      Profit
+                    </span>
+                    <span
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "flex-end",
+                      }}
+                    >
+                      Transactions
+                    </span>
+                    <span
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "flex-end",
+                      }}
+                    >
+                      Status
+                    </span>
                   </div>
 
                   {isLoading === true ? (
@@ -168,31 +179,50 @@ const DashBoardRefferalHome = ({ auth }) => {
                                 data.subscription_status === "INACTIVE"
                                   ? {
                                       border: "solid 1px #ffd5aa",
-                                      background: "#fffcf8",
+                                      background: "#fff",
                                     }
                                   : {
                                       border: "solid 1px #95dab0",
-                                      background: "#f4fff8",
+                                      background: "#fff",
                                     }
                               }
                             >
                               <span className="reffer_email">{data.email}</span>
+                              <span className="reffer_profit">+₦0.00</span>
+                              <span className="reffer_transact">0</span>
                               <span className="reffer_activity">
                                 <span
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "flex-start",
-                                  }}
+                                  style={
+                                    data.subscription_status === "INACTIVE"
+                                      ? {
+                                          display: "flex",
+                                          alignItems: "flex-start",
+                                          background: "#fab02d3d",
+                                          padding: " 0.5em 1em",
+                                          borderRadius: "8px",
+                                          fontSize: "11px",
+                                          color: "#db872f",
+                                        }
+                                      : {
+                                          display: "flex",
+                                          alignItems: "flex-start",
+                                          background: "#41ba7130",
+                                          padding: " 0.5em 1em",
+                                          borderRadius: "8px",
+                                          fontSize: "11px",
+                                          color: "#32a861",
+                                        }
+                                  }
                                 >
                                   {data.subscription_status}{" "}
-                                  <CircleIcon
+                                  {/* <CircleIcon
                                     className="circle_active"
                                     style={
                                       data.subscription_status === "INACTIVE"
                                         ? { color: " #ff8000" }
                                         : { color: " #41ba71" }
                                     }
-                                  />
+                                  /> */}
                                 </span>
                               </span>
                             </div>
@@ -231,14 +261,30 @@ const DashBoardRefferalHome = ({ auth }) => {
                   className="referral_default_value"
                   id="myInput"
                 />
-                <button
-                  className="ref_btn"
-                  onClick={copyText}
-                  onMouseOut={outFunc}
-                >
-                  Copy referral code
-                  <span className="tooltiptext" id="myTooltip"></span>
-                </button>
+                <input
+                  type="text"
+                  value={copyrefferalLink}
+                  className="referral_default_value"
+                  id="myInput2"
+                />
+                <div className="refferal_copy_btns">
+                  <button
+                    className="ref_btn"
+                    onClick={copyText}
+                    onMouseOut={outFunc}
+                  >
+                    Copy referral code
+                    <span className="tooltiptext" id="myTooltip"></span>
+                  </button>
+                  <button
+                    className="ref_btn"
+                    onClick={copyText2}
+                    onMouseOut={outFunc2}
+                  >
+                    Copy referral link
+                    <span className="tooltiptext2" id="myTooltip2"></span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>

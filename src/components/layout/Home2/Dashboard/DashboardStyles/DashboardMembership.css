@@ -231,3 +231,20 @@
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
 }
+
+@media screen and (max-width: 991px) {
+  .membership_subscription_plans_payment_div_cont1 {
+    align-items: center;
+    flex-direction: column;
+
+    margin: auto;
+  }
+}
+@media screen and (max-width: 599px) {
+  .membership_subscription_plans_payment_div_cont1_div1 {
+    padding: 2em;
+  }
+  .membership_subscription_plans_payment_div_cont1_div1b {
+    padding: 2em;
+  }
+}
