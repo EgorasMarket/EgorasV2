@@ -9,7 +9,14 @@ import {
 import axios from 'axios';
 import { connect } from 'react-redux';
 import LoadingIcons from 'react-loading-icons';
-import { API_URL2 as api_url2 } from '../../../../../actions/types';
+import {
+  API_URL2,
+  API_URL2 as api_url2,
+  CRYPTO,
+  FIAT,
+} from '../../../../../actions/types';
+
+import SubscribeMembership from '../../../../../flutterwave/API/SubscribeMembership';
 const DashboardMembership = ({ auth }) => {
   const config = {
     headers: {
@@ -38,6 +45,7 @@ const DashboardMembership = ({ auth }) => {
       phoneNumber,
       email,
     });
+
     await axios
       .get(
         api_url2 + '/v1/wallet/get/wallet/info/' + userId,
@@ -77,6 +85,30 @@ const DashboardMembership = ({ auth }) => {
     },
   };
 
+  const flutterConfig2 = {
+    public_key: process.env.REACT_APP_PUBLIC_KEY,
+    tx_ref: 'EGC-' + Date.now(),
+    amount: 1, // this amount is for testing
+    currency: 'NGN',
+    // redirect_url: 'https://saul.egoras.com/v1/webhooks/all',
+
+    payment_options: 'card',
+    // payment_plan:63558,
+    customer: {
+      phone_number: phoneNumber,
+      email: email,
+      name: fullname,
+    },
+    meta: {
+      eventType: '1',
+    },
+    customizations: {
+      title: 'Payment for Egoras Subscription',
+      description: `This is a one time payment, you'll be notified via email as soon`,
+      logo: 'https://egoras.com/img/egoras-logo.svg',
+    },
+  };
+
   const handleFlutterPayment = useFlutterwave(flutterConfig);
   const togglePaymentModal = () => {
     if (paymentModal === true) {
@@ -93,12 +125,10 @@ const DashboardMembership = ({ auth }) => {
     }
   };
   const selectOption = async (value) => {
-    console.log(auth.user.user);
+    // console.log(auth.user.user);
 
     switch (value) {
       case 0:
-        // setProcessingDiv(true);
-
         handleFlutterPayment({
           callback: async (response) => {
             //console.log(response);
@@ -108,17 +138,23 @@ const DashboardMembership = ({ auth }) => {
                   'an uncaught error just occured. contact support '
                 );
               }
-              //
-              await axios
-                .post(
-                  `${api_url2}/v1/user/membership/subscribe`,
-                  null,
-                  config
-                )
-                .then((response) => {});
+
+              const transaction_id = response.transaction_id;
+              setProcessingDiv(true);
+
+              const membership = await SubscribeMembership(
+                FIAT,
+                transaction_id
+              ).then((response) => {
+                if (response === 'success') {
+                  console.log('this is successful');
+                }
+              });
+
               closePaymentModal();
             } catch (error) {
               console.log(error.response);
+              setProcessingDiv(false);
             }
           },
           onClose: (response) => {
@@ -130,6 +166,33 @@ const DashboardMembership = ({ auth }) => {
 
       case 1:
         setProcessingDiv(true);
+        const body = JSON.stringify({
+          channel: CRYPTO,
+        });
+        console.log(body);
+        const res = await axios
+          .post(
+            API_URL2 + '/v1/user/membership/subscribe',
+            body,
+            config
+          )
+          .then((response) => {
+            console.log(
+              response,
+              ' You have successfully registered as a member of the Co-operative'
+            );
+
+            alert(
+              ' You have successfully registered as a member of the Co-operative'
+            );
+            setProcessingDiv(false);
+          })
+
+          .catch((err) => {
+            setProcessingDiv(false);
+            alert('THe transaction failed ');
+            console.log(err.response, 'unsuccessful');
+          });
 
         break;
     }
@@ -145,6 +208,33 @@ const DashboardMembership = ({ auth }) => {
 
       case 1:
         setProcessingDiv(true);
+        const body = JSON.stringify({
+          channel: CRYPTO,
+        });
+        console.log(body);
+        const res = await axios
+          .post(
+            API_URL2 + '/v1/user/subscription/subscribe',
+            body,
+            config
+          )
+          .then((response) => {
+            console.log(
+              response,
+              ' You have successfully registered as a member of the Co-operative'
+            );
+
+            alert(
+              ' You have successfully registered as a member of the Co-operative'
+            );
+            setProcessingDiv(false);
+          })
+
+          .catch((err) => {
+            setProcessingDiv(false);
+            alert('THe transaction failed ');
+            console.log(err.response, 'unsuccessful');
+          });
 
         break;
     }
@@ -291,7 +381,7 @@ const DashboardMembership = ({ auth }) => {
               </div>
               {walletBalance === true ? (
                 <div className="wallet_bal_pay_member">
-                  Wallet Balance: {tokenBal.toFixed(2)}
+                  Wallet Balance: {Number(tokenBal)}
                 </div>
               ) : null}
 
@@ -394,7 +484,7 @@ const DashboardMembership = ({ auth }) => {
               </div>
               {walletBalance === true ? (
                 <div className="wallet_bal_pay_member">
-                  Wallet Balance: {tokenBal.toFixed(2)}
+                  Wallet Balance: {Number(tokenBal)}
                 </div>
               ) : null}
 
