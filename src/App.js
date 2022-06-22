@@ -161,6 +161,7 @@ import PrivateRoute3 from "./components/routing/PrivateRoute3";
 import ResetPassword from "./components/layout/Home2/PasswordReset/ResetPassword";
 import ValidateLogin from "./components/layout/Home2/Login/ValidateLogin";
 import Referal from "./components/layout/Home2/Login/Referal";
+import NotFoundPage from "./components/layout/Home2/PageNotFound/NotFoundPage";
 
 // import ItemDetailsPage from "./components/layout/Home2/item_details_page/ItemDetailsPage.jsx";
 if (localStorage.token) {
@@ -276,6 +277,7 @@ const App = () => {
               <section>
                 <Switch>
                   <Route exact path="/" component={HomeUpdate} />
+
                   <Route exact path="/activation/:id" component={Activation} />
                   <Route
                     exact
@@ -320,7 +322,6 @@ const App = () => {
                   />
                   <Route
                     exact
-                    // path ={`/dashboard/products/details/:id/:${"name".replace( '','-')}`}
                     path={`/products/details/:id/:${"name".replace(
                       /\s+/g,
                       ""
@@ -395,11 +396,7 @@ const App = () => {
                     path="/products/details/:id/:name"
                     component={Item_details_main}
                   />
-                  {/* <Route
-                    exact
-                    path="/products/categories/:category"
-                    component={See_ALL_Category}
-                  /> */}
+
                   <Route
                     exact
                     path="/egoras-decentralized-autonomous-organization"
@@ -561,6 +558,7 @@ const App = () => {
                     
                     return null;
                   })()} */}
+                  <Route component={NotFoundPage} />
                 </Switch>
               </section>
               {/* <Footer /> */}

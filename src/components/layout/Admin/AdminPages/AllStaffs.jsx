@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import SearchIcon from '@mui/icons-material/Search';
-import '../AdminStyles/allCustomer.css';
-import axios from 'axios';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import SearchIcon from "@mui/icons-material/Search";
+import "../AdminStyles/allCustomer.css";
+import axios from "axios";
+import { connect } from "react-redux";
 
 import {
   PRODUCT_LOADED,
   API_URL2 as api_url2,
-} from '../../../../actions/types';
+} from "../../../../actions/types";
 
 const AllStaffs = ({ auth }) => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [user_id, set_user_id] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [user_id, set_user_id] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [allCustomers, setAllCustomers] = useState([]);
   const config = {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   };
 
@@ -35,7 +35,7 @@ const AllStaffs = ({ auth }) => {
     //console.log(event.target.value);
   };
   useEffect(() => {
-    if (searchTerm === '') {
+    if (searchTerm === "") {
       setSearchResults(allCustomers);
       //console.log("tttt");
     } else {
@@ -53,7 +53,7 @@ const AllStaffs = ({ auth }) => {
 
   useEffect(() => {
     axios
-      .get(api_url2 + '/v1/admin/retrieve/staff/all', config, null)
+      .get(api_url2 + "/v1/admin/retrieve/staff/all", config, null)
       .then((data) => {
         setAllCustomers(data.data.data);
         // setSearchResults(data.data.payload);
@@ -66,9 +66,9 @@ const AllStaffs = ({ auth }) => {
 
   const saveCustomerId = (id, fullname) => {
     console.log(id);
-    localStorage.setItem('adminStaffId', id);
-    localStorage.setItem('adminStaffName', fullname);
-    return window.location.replace('/super_admin/fund/accountant');
+    localStorage.setItem("adminStaffId", id);
+    localStorage.setItem("adminStaffName", fullname);
+    return window.location.replace("/super_admin/fund/accountant");
   };
 
   return (
@@ -111,7 +111,7 @@ const AllStaffs = ({ auth }) => {
                       </th>
 
                       <th className="assets-category-titles-heading1 right_align">
-                        Id
+                        Wallet Balance
                       </th>
 
                       <th className="assets-category-titles-heading1 right_align">
@@ -124,7 +124,7 @@ const AllStaffs = ({ auth }) => {
                       className="assets-table-body popular-categories"
                       id="popular-categories"
                     >
-                      {' '}
+                      {" "}
                       <tr className="assets-category-row">
                         <td className="assets-category-data">
                           <div className="assets-data">
@@ -142,9 +142,7 @@ const AllStaffs = ({ auth }) => {
                         </td>
 
                         <td className="assets-category-data1">
-                          <div className="assets-data-name">
-                            {user.mobile}
-                          </div>
+                          <div className="assets-data-name">{user.mobile}</div>
                         </td>
 
                         {/* <td className="assets-category-data1">
@@ -153,50 +151,47 @@ const AllStaffs = ({ auth }) => {
 
                         <td className="assets-category-data1">
                           <div className="assets-data-name">
-                            {user.role === 'CASHIER' ||
-                            user.role === 'CUSTOMER_SERVICE'
-                              ? 'SALES REP'
+                            {user.role === "CASHIER" ||
+                            user.role === "CUSTOMER_SERVICE"
+                              ? "SALES REP"
                               : user.role}
                           </div>
                         </td>
 
                         <td className="assets-category-data1">
                           <div className="assets-data-name">
-                            {user.id}
+                            {user.balance == null
+                              ? "0.0"
+                              : parseFloat(user.balance)}
                           </div>
                         </td>
 
                         <td className="assets-category-data1">
-                          <div className="assets-data-name">
-                            {user.staffId}
-                          </div>
+                          <div className="assets-data-name">{user.staffId}</div>
                         </td>
 
                         <td
                           className="save_item_data1b"
-                          style={{ width: 'unset' }}
+                          style={{ width: "unset" }}
                         >
                           {user_id === user.id ? (
                             <button
-                              style={{ background: '#87ddab' }}
+                              style={{ background: "#87ddab" }}
                               disabled={true}
                               className="checkout_btn1 py-1 px-2 m-0"
                             >
-                              Current User{' '}
+                              Current User{" "}
                             </button>
                           ) : (
                             <a>
                               <button
                                 id={user.id}
                                 onClick={(e) =>
-                                  saveCustomerId(
-                                    user.id,
-                                    user.fullname
-                                  )
+                                  saveCustomerId(user.id, user.fullname)
                                 }
                                 className="checkout_btn1 py-1 px-2 m-0"
                               >
-                                See Wallet{' '}
+                                See Wallet{" "}
                               </button>
                             </a>
                           )}
