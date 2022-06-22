@@ -1,9 +1,9 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState } from 'react';
 
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 
 // import { setAlert } from '../../../actions/alert';
 // import { customerLoanApplication } from '../../../actions/loans';
@@ -12,8 +12,8 @@ export const Logout = ({}) => {
   const triggerLogout = (event) => {
     // setBusinessDuration(event.target.value);
     // //console.log('okkkk');
-    localStorage.removeItem("token");
-    window.location.href = "/login";
+    localStorage.removeItem('token');
+    window.location.href = '/login';
   };
 
   return (
@@ -30,9 +30,9 @@ export const Logout = ({}) => {
 };
 
 // export default Logout;
-Logout.propTypes = {
-  setAlert: PropTypes.func.isRequired,
-};
+// Logout.propTypes = {
+//   setAlert: PropTypes.func.isRequired,
+// };
 
 const mapStateToProps = (state) => ({});
 

@@ -38,5 +38,3 @@ export const API_URL2 = "http://localhost:4000";
 // export const API_URL2 = "http://192.168.100.200:4015";
 // export const API_URL3 = "https://api.coingecko.com/api/v3";
 // export const API_URL2 = 'https://saul.egoras.com';
-
-// export const API_URL2 = "https://saul.egoras.com";

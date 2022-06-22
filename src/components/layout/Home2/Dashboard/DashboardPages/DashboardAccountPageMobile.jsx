@@ -1,34 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { API_URL2 as api_url2 } from '../../../../../actions/types';
-import Stack from '@mui/material/Stack';
-import EditIcon from '@mui/icons-material/Edit';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import LockIcon from '@mui/icons-material/Lock';
-import { useLocalStorage } from '../../Activation/useLocalStorage';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { API_URL2 as api_url2 } from "../../../../../actions/types";
+import Stack from "@mui/material/Stack";
+import EditIcon from "@mui/icons-material/Edit";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
+import LockIcon from "@mui/icons-material/Lock";
+import { useLocalStorage } from "../../Activation/useLocalStorage";
 // import jwt from "jsonwebtoken";
-import DoDisturbIcon from '@mui/icons-material/DoDisturb';
-import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import TextField from '@mui/material/TextField';
-import '../DashboardStyles/dashboard_home.css';
-import Success_Error_Component from '../../../../assets/Success_Error_Component';
-import '../DashboardStyles/dashboard_account.css';
-import { connect } from 'react-redux';
+import DoDisturbIcon from "@mui/icons-material/DoDisturb";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
+import "../DashboardStyles/dashboard_home.css";
+import Success_Error_Component from "../../../../assets/Success_Error_Component";
+import "../DashboardStyles/dashboard_account.css";
+import { connect } from "react-redux";
 import {
   sumitGenderAndDate,
   nextOfKING,
   changePassword,
-  submitPhone
-} from '../../../../../actions/auth';
-import './accF.css';
-import { setAlert } from '../../../../../actions/alert';
-import validator from 'validator';
+  submitPhone,
+} from "../../../../../actions/auth";
+import "./accF.css";
+import { setAlert } from "../../../../../actions/alert";
+import validator from "validator";
 // import {getNaame} from "../../../Signup/signup"
 
 function DashboardAccountPageMobile({
@@ -42,84 +42,84 @@ function DashboardAccountPageMobile({
 }) {
   const config = {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   };
   if (match == null) {
-    console.log('param is not here');
+    console.log("param is not here");
   } else {
-    console.log('param is here', match.params.state);
+    console.log("param is here", match.params.state);
   }
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState("");
   const [nxtOfKinA, setNxtOfKinA] = useState(false);
   // const [getNxtOfKin, setGetNxtOfKin] = useState([]);
   const [nextOfKinData, setNextOfKinData] = useState({
-    nxtcustomer_id: '',
-    nxtemail: '',
-    nxtfirstname: '',
-    nxtgender: '',
-    nxtlastname: '',
-    nxtphoneNumber: '',
-    nxtrelationship: '',
+    nxtcustomer_id: "",
+    nxtemail: "",
+    nxtfirstname: "",
+    nxtgender: "",
+    nxtlastname: "",
+    nxtphoneNumber: "",
+    nxtrelationship: "",
   });
   const [tokens, setTokens] = useState({
-    gender: '',
-    dateOfBirth: '',
+    gender: "",
+    dateOfBirth: "",
   });
-  const [customerAddress, setAddress] = useState('');
-  const [customer_image, setcustomer_image] = useState('');
-  const [customerBvn1, setCustomerBvn1] = useState('');
+  const [customerAddress, setAddress] = useState("");
+  const [customer_image, setcustomer_image] = useState("");
+  const [customerBvn1, setCustomerBvn1] = useState("");
   const [bvnId, setBvnId] = useState({});
 
   const [disabled1, setDisabled1] = useState(false);
   const [disabled2, setDisabled2] = useState(false);
   const [disabled3, setDisabled3] = useState(false);
 
-  const [fold, setFold] = useState('save_changes_btn');
-  const [fold1, setFold1] = useState('save_changes_btn');
-  const [fold2, setFold2] = useState('add_photo');
-  const [emailError, setEmailError] = useState('Email Address');
+  const [fold, setFold] = useState("save_changes_btn");
+  const [fold1, setFold1] = useState("save_changes_btn");
+  const [fold2, setFold2] = useState("add_photo");
+  const [emailError, setEmailError] = useState("Email Address");
 
   const validateEmail = (e) => {
     var email = e.target.value;
 
     if (validator.isEmail(email)) {
-      setEmailError('Valid Email :');
+      setEmailError("Valid Email :");
     } else {
       setEmailError(label4);
     }
   };
 
   const [nextKin, setNextKin] = useState({
-    firstname: '',
-    lastname: '',
-    email: '',
-    phoneNumber: '',
-    relationship: '',
-    gender: '',
+    firstname: "",
+    lastname: "",
+    email: "",
+    phoneNumber: "",
+    relationship: "",
+    gender: "",
   });
 
   const [changePassword1, setChangePassword] = useState({
-    oldpassword: '',
-    newpassword: '',
+    oldpassword: "",
+    newpassword: "",
   });
 
   const [changePhone1, setChangePhone1] = useState({
-      primaryPhoneNumber: "",
-      secondaryPhoneNumber: ""
-  })
+    primaryPhoneNumber: "",
+    secondaryPhoneNumber: "",
+  });
 
   const [userInfo, setUserInfo] = useState({
-    Userfirstname: '',
-    Userlastname: '',
-    Useremail: '',
-    UserphoneNumber: '',
-    UserOldNumber: '',
-    UseruserImage: '',
-    Userrelationship: '',
-    Usergender: '',
-    Userbvn: '',
-    UserdateOfBirth: '',
+    Userfirstname: "",
+    Userlastname: "",
+    Useremail: "",
+    UserphoneNumber: "",
+    UserOldNumber: "",
+    UseruserImage: "",
+    Userrelationship: "",
+    Usergender: "",
+    Userbvn: "",
+    UserdateOfBirth: "",
   });
 
   const {
@@ -145,8 +145,8 @@ function DashboardAccountPageMobile({
     nxtrelationship,
   } = nextOfKinData;
   const { oldpassword, newpassword } = changePassword1;
-  const {primaryPhoneNumber, secondaryPhoneNumber} = changePhone1;
-  const [idSet, setIdSet] = useState({ idNum: '' });
+  const { primaryPhoneNumber, secondaryPhoneNumber } = changePhone1;
+  const [idSet, setIdSet] = useState({ idNum: "" });
   const { idNum } = idSet;
 
   useEffect(() => {
@@ -172,7 +172,7 @@ function DashboardAccountPageMobile({
       // console.log('====================================');
 
       const getName = todecoded.user.fullname;
-      const splitName = getName.split(' ');
+      const splitName = getName.split(" ");
 
       setUserInfo({
         Userfirstname: splitName[0],
@@ -189,16 +189,16 @@ function DashboardAccountPageMobile({
       // setBvnId({Userbvn})
 
       if (todecoded.user.userImage !== null) {
-        setImage(api_url2 + '/' + todecoded.user.userImage);
+        setImage(api_url2 + "/" + todecoded.user.userImage);
       } else {
-        setImage('../../img/profile_img.jpeg');
+        setImage("../../img/profile_img.jpeg");
       }
     }
   }, [auth]);
 
   useEffect(() => {
     axios
-      .get(api_url2 + '/v1/user/nextOfKin/info', null, config)
+      .get(api_url2 + "/v1/user/nextOfKin/info", null, config)
       .then((data) => {
         //console.log('eeeeee');
         //console.log(data.data.nxtOfKin, "king");
@@ -223,7 +223,7 @@ function DashboardAccountPageMobile({
       });
 
     axios
-      .get(api_url2 + '/v1/user/address/info', null, config)
+      .get(api_url2 + "/v1/user/address/info", null, config)
       .then((data) => {
         console.log(data.data);
         //console.log(data.data.cusAddress, "king");
@@ -233,8 +233,8 @@ function DashboardAccountPageMobile({
       });
   }, []);
 
-  const [userName, setUserName] = useState({ user: '' });
-  const [nameUpdate, setNameUpdate] = useState('');
+  const [userName, setUserName] = useState({ user: "" });
+  const [nameUpdate, setNameUpdate] = useState("");
 
   const { user } = userName;
 
@@ -246,14 +246,8 @@ function DashboardAccountPageMobile({
   //   },
   // };
 
-  const {
-    firstname,
-    lastname,
-    email,
-    gender1,
-    relationship,
-    phoneNumber,
-  } = nextKin;
+  const { firstname, lastname, email, gender1, relationship, phoneNumber } =
+    nextKin;
 
   const { gender, dateOfBirth } = tokens;
 
@@ -267,7 +261,7 @@ function DashboardAccountPageMobile({
     var email = e.target.value;
 
     if (validator.isEmail(email)) {
-      setEmailError('Valid Email :');
+      setEmailError("Valid Email :");
     } else {
       setEmailError(label4);
     }
@@ -292,7 +286,7 @@ function DashboardAccountPageMobile({
     if (firstname.length === null) {
       setError4(label3);
     } else {
-      setError4('First Name');
+      setError4("First Name");
     }
   };
 
@@ -302,7 +296,7 @@ function DashboardAccountPageMobile({
     if (lastname.length === null) {
       setError5(label3);
     } else {
-      setError5('Last Name');
+      setError5("Last Name");
     }
   };
 
@@ -334,9 +328,9 @@ function DashboardAccountPageMobile({
   const onChange2 = (e) => {
     setChangePhone1({
       ...changePhone1,
-      [e.target.name]:e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   // const updateUser =()=>{
   //   setUserName()
@@ -344,13 +338,13 @@ function DashboardAccountPageMobile({
 
   // const [value, setValue] = useState("1997-02-09");
   // const [email, setEmail] = useState("samuelify225@gmail.com");
-  const [bvnNum, setBvnNum] = useState('23745672845');
-  const [phoneNo, setPhoneNo] = useState('+2348164020234');
-  const [phone_no2, setPhone_no2] = useState('');
+  const [bvnNum, setBvnNum] = useState("23745672845");
+  const [phoneNo, setPhoneNo] = useState("+2348164020234");
+  const [phone_no2, setPhone_no2] = useState("");
   //   const [value, setValue] = useState(new Date("2014-02-09"));
   const [age, setAge] = React.useState({ relationship });
-  const [activeBg, setActiveBg] = useState('accounts');
-  const [activeBody, setActiveBody] = useState('');
+  const [activeBg, setActiveBg] = useState("accounts");
+  const [activeBody, setActiveBody] = useState("");
   // const immmg = localStorage.getItem("imageDef");
   const [modal, setModal] = useState(false);
   const [modal2, setModal2] = useState(false);
@@ -359,60 +353,45 @@ function DashboardAccountPageMobile({
 
   // const [bvnId,setBvnId]= useState("")
   // const [image2, setImage2] = useState("../../img/profile_img.jpeg");
-  const [error4, setError4] = useState('First Name');
-  const [error5, setError5] = useState('Last Name');
-  const [error6, setError6] = useState('Phone Number');
-  const [error7, setError7] = useState('Address');
-  const [error8, setError8] = useState('BVN');
-  const [error9, setError9] = useState('Select Relationship');
-  const $disableMe = document.getElementById('fadat');
+  const [error4, setError4] = useState("First Name");
+  const [error5, setError5] = useState("Last Name");
+  const [error6, setError6] = useState("Phone Number");
+  const [error7, setError7] = useState("Address");
+  const [error8, setError8] = useState("BVN");
+  const [error9, setError9] = useState("Select Relationship");
+  const $disableMe = document.getElementById("fadat");
   const [empty, setEmpty] = useState(true);
 
-  const label3 = (
-    <span style={{ color: 'red' }}>First Name Required</span>
-  );
-  const label4 = (
-    <span style={{ color: 'red' }}>Enter Valid Email</span>
-  );
-  const label14 = (
-    <span style={{ color: 'red' }}>last Name Required</span>
-  );
-  const label5 = (
-    <span style={{ color: 'red' }}>Enter Phone Number</span>
-  );
-  const label6 = <span style={{ color: 'red' }}>Enter Address</span>;
-  const label7 = <span style={{ color: 'red' }}>Enter BVN</span>;
-  const label8 = (
-    <span style={{ color: 'red' }}>Relationship Required</span>
-  );
+  const label3 = <span style={{ color: "red" }}>First Name Required</span>;
+  const label4 = <span style={{ color: "red" }}>Enter Valid Email</span>;
+  const label14 = <span style={{ color: "red" }}>last Name Required</span>;
+  const label5 = <span style={{ color: "red" }}>Enter Phone Number</span>;
+  const label6 = <span style={{ color: "red" }}>Enter Address</span>;
+  const label7 = <span style={{ color: "red" }}>Enter BVN</span>;
+  const label8 = <span style={{ color: "red" }}>Relationship Required</span>;
   useEffect(() => {
-    if (window.location.pathname == '/dashboard/accounts/accounts') {
-      setActiveBg('accounts');
-    } else if (
-      window.location.pathname == '/dashboard/accounts/kin'
-    ) {
-      setActiveBg('kin');
-    } else if (
-      window.location.pathname == '/dashboard/accounts/security'
-    ) {
-      setActiveBg('security');
+    if (window.location.pathname == "/dashboard/accounts/accounts") {
+      setActiveBg("accounts");
+    } else if (window.location.pathname == "/dashboard/accounts/kin") {
+      setActiveBg("kin");
+    } else if (window.location.pathname == "/dashboard/accounts/security") {
+      setActiveBg("security");
     }
   });
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       setImage(URL.createObjectURL(event.target.files[0]));
 
-      const types = ['jpg', 'png', 'jpeg'];
+      const types = ["jpg", "png", "jpeg"];
 
-      if (event.currentTarget.id === 'customer_image') {
+      if (event.currentTarget.id === "customer_image") {
         if (event.currentTarget.files.length === 0) {
           // setUserInfo({ ...userInfo, applicantImg: "" });
           // document.getElementById("output1").src = "";
         } else {
-          let passportFile =
-            document.getElementById('customer_image').files[0];
+          let passportFile = document.getElementById("customer_image").files[0];
 
-          let fileExtension = passportFile.name.split('.').pop();
+          let fileExtension = passportFile.name.split(".").pop();
           //console.log(passportFile);
 
           if (!types.includes(fileExtension)) {
@@ -474,14 +453,14 @@ function DashboardAccountPageMobile({
     let res = await sumitGenderAndDate(gender, dateOfBirth);
 
     setDisabled2(true);
-    setFold1('disBtn');
+    setFold1("disBtn");
 
     // $disableMe.setAttribute('disabled','disabled')
     //console.log(res);
 
     setTimeout(() => {
       setDisabled2(false);
-      setFold1('save_changes_btn');
+      setFold1("save_changes_btn");
     }, 5000);
 
     if (res.success === true) {
@@ -506,7 +485,7 @@ function DashboardAccountPageMobile({
 
   useEffect(() => {
     if (relationship.length > 1) {
-      setError9('Select Relationship');
+      setError9("Select Relationship");
     }
   }, [relationship]);
 
@@ -514,23 +493,23 @@ function DashboardAccountPageMobile({
     // $disableMe.setAttribute('diasbled','diasbled')
 
     if (
-      firstname === '' ||
-      lastname === '' ||
-      email === '' ||
-      phoneNumber === '' ||
-      relationship === ''
+      firstname === "" ||
+      lastname === "" ||
+      email === "" ||
+      phoneNumber === "" ||
+      relationship === ""
     ) {
       //  console.log('fil in')
-      if (firstname === '') {
+      if (firstname === "") {
         setError4(label3);
       }
-      if (lastname === '') {
+      if (lastname === "") {
         setError5(label14);
       }
-      if (phoneNumber === '') {
+      if (phoneNumber === "") {
         setError6(label5);
       }
-      if (relationship === '') {
+      if (relationship === "") {
         setError9(label8);
       }
       if (email === null) {
@@ -539,7 +518,7 @@ function DashboardAccountPageMobile({
       if (phoneNumber.length < 11 || phoneNumber.length > 11) {
         setError6(label5);
       } else {
-        setError6('Phone Number');
+        setError6("Phone Number");
       }
     } else {
       let res = await nextOfKING(
@@ -552,11 +531,11 @@ function DashboardAccountPageMobile({
       );
 
       setDisabled1(true);
-      setFold('disBtn');
+      setFold("disBtn");
 
       setTimeout(() => {
         setDisabled1(false);
-        setFold('save_changes_btn');
+        setFold("save_changes_btn");
       }, 5000);
 
       // if(firstname === "" || firstname.length === 0 ){
@@ -569,7 +548,7 @@ function DashboardAccountPageMobile({
       if (res.data.data.success === true) {
         //console.log("okay Good Server");
       } else {
-        setAlert(res.data.data.errors[0].msg, 'danger');
+        setAlert(res.data.data.errors[0].msg, "danger");
       }
     }
   };
@@ -600,42 +579,39 @@ function DashboardAccountPageMobile({
     if (res.data.data.success === true) {
       //console.log("okay Good Server");
     } else {
-      setAlert(res.data.data.errors[0].msg, 'danger');
+      setAlert(res.data.data.errors[0].msg, "danger");
     }
   };
-
 
   const ChanePhoneNumber = async (e) => {
     let res = await submitPhone(primaryPhoneNumber, secondaryPhoneNumber);
     console.log(res);
 
-   if (res.data.success == true) {
+    if (res.data.success == true) {
       console.log(res.data.success);
-
     } else {
       setAlert(res.data.data.errors[0].msg, "danger");
     }
-  
-  }
+  };
 
   const AddUserPhoto = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
 
-    if (customer_image === '') {
+    if (customer_image === "") {
       //console.log("empty passport");
       // setAlert('Please provide a passport photo', 'danger');
     } else {
-      const element = document.getElementById('customer_image');
+      const element = document.getElementById("customer_image");
       const file = element.files[0];
-      formData.append('customer_image', file, file.name);
+      formData.append("customer_image", file, file.name);
 
       //console.log(formData, "hhhh");
 
       try {
         const res = await axios.put(
-          api_url2 + '/v1/user/add/customer/image',
+          api_url2 + "/v1/user/add/customer/image",
           formData
         );
         //console.log(res.data, "undefined");
@@ -661,15 +637,15 @@ function DashboardAccountPageMobile({
     //   setError7(label6)
     // }
     if (
-      customerAddress === '' ||
-      customerBvn1 === '' ||
+      customerAddress === "" ||
+      customerBvn1 === "" ||
       customerBvn1.length > 11 ||
       customerBvn1.length < 11
     ) {
-      if (customerAddress === '') {
+      if (customerAddress === "") {
         setError7(label6);
       }
-      if (customerBvn1 === '') {
+      if (customerBvn1 === "") {
         setError8(label7);
       }
 
@@ -683,13 +659,13 @@ function DashboardAccountPageMobile({
 
       // }else{
 
-      setFold2('disBtn');
+      setFold2("disBtn");
       // setDisabled3(true)
       // setFold2('disBtn')
       // setError7('Address')
       // setError8('BVN')
 
-      if (customerAddress === '') {
+      if (customerAddress === "") {
         //console.log("empty address");
 
         setDisabled3(false);
@@ -698,14 +674,14 @@ function DashboardAccountPageMobile({
         // setAlert('Please provide a passport photo', 'danger');
       } else {
         const body = JSON.stringify({ customerAddress });
-        setError7('Address');
+        setError7("Address");
         setDisabled3(true);
 
         //console.log(body);
 
         try {
           const res = await axios.post(
-            api_url2 + '/v1/user/add/address',
+            api_url2 + "/v1/user/add/address",
             body,
             config
           );
@@ -723,7 +699,7 @@ function DashboardAccountPageMobile({
       }
 
       // comments for bvn
-      if (customerBvn1 === '') {
+      if (customerBvn1 === "") {
         //console.log("empty address");
 
         setDisabled3(false);
@@ -735,13 +711,13 @@ function DashboardAccountPageMobile({
         let customer_id = idNum;
         const body = JSON.stringify({ BVN, customer_id });
         setDisabled3(true);
-        setError8('BVN');
+        setError8("BVN");
         // setFold2('disBtn')
         // console.log(body);
 
         try {
           const res = await axios.post(
-            api_url2 + '/v1/user/add/BVN',
+            api_url2 + "/v1/user/add/BVN",
             body,
             config
           );
@@ -760,7 +736,7 @@ function DashboardAccountPageMobile({
 
       setTimeout(() => {
         setDisabled3(false);
-        setFold2('add_photo');
+        setFold2("add_photo");
       }, 5000);
     }
 
@@ -772,11 +748,11 @@ function DashboardAccountPageMobile({
   return (
     <div
       className="other2 account_body account_mobile"
-      style={{ paddingBottom: '0em' }}
+      style={{ paddingBottom: "0em" }}
     >
       <section
         className="no-bg account_mobi_section"
-        style={{ paddingBottom: '0em' }}
+        style={{ paddingBottom: "0em" }}
       >
         <div className="container">
           <div className="dashboard_account_page_area dashboard_account_page_area_mobi">
@@ -785,11 +761,11 @@ function DashboardAccountPageMobile({
                 id="accounts"
                 onClick={changeBg}
                 className={
-                  activeBg == 'accounts'
-                    ? 'account_toggle account_toggle_active'
-                    : activeBg !== 'accounts'
-                    ? 'not_account_toggle'
-                    : 'account_toggle_active account_toggle'
+                  activeBg == "accounts"
+                    ? "account_toggle account_toggle_active"
+                    : activeBg !== "accounts"
+                    ? "not_account_toggle"
+                    : "account_toggle_active account_toggle"
                 }
               >
                 Accounts
@@ -798,11 +774,11 @@ function DashboardAccountPageMobile({
                 id="kin"
                 onClick={changeBg}
                 className={
-                  activeBg == 'kin'
-                    ? 'account_toggle account_toggle_active'
-                    : activeBg !== 'kin'
-                    ? 'not_account_toggle'
-                    : 'account_toggle_active account_toggle'
+                  activeBg == "kin"
+                    ? "account_toggle account_toggle_active"
+                    : activeBg !== "kin"
+                    ? "not_account_toggle"
+                    : "account_toggle_active account_toggle"
                 }
               >
                 Next of Kin
@@ -811,11 +787,11 @@ function DashboardAccountPageMobile({
                 id="security"
                 onClick={changeBg}
                 className={
-                  activeBg == 'security'
-                    ? 'account_toggle account_toggle_active'
-                    : activeBg !== 'security'
-                    ? 'not_account_toggle'
-                    : 'account_toggle_active account_toggle'
+                  activeBg == "security"
+                    ? "account_toggle account_toggle_active"
+                    : activeBg !== "security"
+                    ? "not_account_toggle"
+                    : "account_toggle_active account_toggle"
                 }
               >
                 Security
@@ -823,12 +799,12 @@ function DashboardAccountPageMobile({
             </div>
             {/* [[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]] */}
             <div className="account_toggle_body_area">
-              {activeBg == 'accounts' ? (
+              {activeBg == "accounts" ? (
                 <div
                   className={
-                    activeBg == 'kin' || activeBg == 'security'
-                      ? 'not_account_toggle_body_area1 '
-                      : 'account_toggle_body_area1'
+                    activeBg == "kin" || activeBg == "security"
+                      ? "not_account_toggle_body_area1 "
+                      : "account_toggle_body_area1"
                   }
                 >
                   <div className="account_toggle_body_area1_title">
@@ -842,29 +818,24 @@ function DashboardAccountPageMobile({
                     <div className="toggle_body_area1_cont1">
                       {UseruserImage === null ? (
                         <div className="toggle_body_area1_cont1_txts">
-                          Change Profile Picture{' '}
+                          Change Profile Picture{" "}
                           <span className="toggle_body_area1_cont1_sub_txts">
-                            {' '}
-                            Choose a new avatar to be used across
-                            Egoras
+                            {" "}
+                            Choose a new avatar to be used across Egoras
                           </span>
                         </div>
                       ) : (
                         <div className="toggle_body_area1_cont1_txts">
-                          My Profile Picture{' '}
+                          My Profile Picture{" "}
                           <span className="toggle_body_area1_cont1_sub_txts">
-                            {' '}
+                            {" "}
                             {/* Choose a new avatar to be used across Egoras */}
                           </span>
                         </div>
                       )}
                       <div className="toggle_body_area1_cont1_input">
-                        {' '}
-                        <img
-                          src={image}
-                          alt=""
-                          className="user_upload_img"
-                        />
+                        {" "}
+                        <img src={image} alt="" className="user_upload_img" />
                         {UseruserImage === null ? (
                           <AddCircleIcon
                             className="add_icon"
@@ -881,7 +852,7 @@ function DashboardAccountPageMobile({
                       <div className="toggle_body_area1_cont1_txts">
                         Full Name
                         <span className="toggle_body_area1_cont1_sub_txts">
-                          {' '}
+                          {" "}
                           Customize your account name
                         </span>
                       </div>
@@ -915,7 +886,7 @@ function DashboardAccountPageMobile({
                       <div className="toggle_body_area1_cont1_txts">
                         Gender
                         <span className="toggle_body_area1_cont1_sub_txts">
-                          {' '}
+                          {" "}
                           How you would like to be identified
                         </span>
                       </div>
@@ -960,7 +931,7 @@ function DashboardAccountPageMobile({
                       <div className="toggle_body_area1_cont1_txts">
                         Date of birth
                         <span className="toggle_body_area1_cont1_sub_txts">
-                          {' '}
+                          {" "}
                           For your birthday :
                         </span>
                       </div>
@@ -1013,12 +984,12 @@ function DashboardAccountPageMobile({
               {/* ================= */}
               {/* ================= */}
               {/* ================= */}
-              {activeBg == 'kin' ? (
+              {activeBg == "kin" ? (
                 <div
                   className={
-                    activeBg == 'security' || activeBg == 'accounts'
-                      ? 'not_account_toggle_body_area1 '
-                      : 'account_toggle_body_area1'
+                    activeBg == "security" || activeBg == "accounts"
+                      ? "not_account_toggle_body_area1 "
+                      : "account_toggle_body_area1"
                   }
                 >
                   <div className="account_toggle_body_area1_title">
@@ -1123,7 +1094,7 @@ function DashboardAccountPageMobile({
                       {/* ================= */}
                       <div className="toggle_body_area1_cont1">
                         <div className="toggle_body_area1_cont1_txts">
-                          Relationship{' '}
+                          Relationship{" "}
                           <span className="toggle_body_area1_cont1_sub_txts">
                             Father, Mother, Sister ...
                           </span>
@@ -1149,7 +1120,7 @@ function DashboardAccountPageMobile({
                         <div className="toggle_body_area1_cont1_txts">
                           Gender
                           <span className="toggle_body_area1_cont1_sub_txts">
-                            {' '}
+                            {" "}
                             How you would like to be identified
                           </span>
                         </div>
@@ -1301,7 +1272,7 @@ function DashboardAccountPageMobile({
                       {/* ================= */}
                       <div className="toggle_body_area1_cont1">
                         <div className="toggle_body_area1_cont1_txts">
-                          Relationship{' '}
+                          Relationship{" "}
                           <span className="toggle_body_area1_cont1_sub_txts">
                             Father, Mother, Sister ...
                           </span>
@@ -1322,28 +1293,15 @@ function DashboardAccountPageMobile({
                                 onChange={onChangeFor22}
                                 // onSelect={onChangeFor2}
                               >
-                                <MenuItem
-                                  name="relationship"
-                                  value="Mother"
-                                >
+                                <MenuItem name="relationship" value="Mother">
                                   Mother
                                 </MenuItem>
-                                <MenuItem value="Father">
-                                  Father
-                                </MenuItem>
-                                <MenuItem value="Sister">
-                                  Sister
-                                </MenuItem>
-                                <MenuItem value="Uncle">
-                                  Uncle
-                                </MenuItem>
+                                <MenuItem value="Father">Father</MenuItem>
+                                <MenuItem value="Sister">Sister</MenuItem>
+                                <MenuItem value="Uncle">Uncle</MenuItem>
                                 <MenuItem value="Aunt">Aunt</MenuItem>
-                                <MenuItem value="Brother">
-                                  Brother
-                                </MenuItem>
-                                <MenuItem value="Inlaw">
-                                  Inlaw
-                                </MenuItem>
+                                <MenuItem value="Brother">Brother</MenuItem>
+                                <MenuItem value="Inlaw">Inlaw</MenuItem>
                               </Select>
                             </FormControl>
                           </div>
@@ -1358,7 +1316,7 @@ function DashboardAccountPageMobile({
                         <div className="toggle_body_area1_cont1_txts">
                           Gender
                           <span className="toggle_body_area1_cont1_sub_txts">
-                            {' '}
+                            {" "}
                             How you would like to be identified
                           </span>
                         </div>
@@ -1372,11 +1330,7 @@ function DashboardAccountPageMobile({
                               value="Male"
                               onChange={onChangeFor2}
                             />
-                            <label
-                              for="male"
-                              class="radio"
-                              value={gender}
-                            >
+                            <label for="male" class="radio" value={gender}>
                               Male
                             </label>
                           </div>
@@ -1389,11 +1343,7 @@ function DashboardAccountPageMobile({
                               value="Female"
                               onChange={onChangeFor2}
                             />
-                            <label
-                              for="female"
-                              class="radio"
-                              value={gender}
-                            >
+                            <label for="female" class="radio" value={gender}>
                               Female
                             </label>
                           </div>
@@ -1438,12 +1388,12 @@ function DashboardAccountPageMobile({
                             </button> */}
               {/* ================= */}
               {/* ================= */}
-              {activeBg == 'security' ? (
+              {activeBg == "security" ? (
                 <div
                   className={
-                    activeBg == 'kin' || activeBg == 'accounts'
-                      ? 'not_account_toggle_body_area1 '
-                      : 'account_toggle_body_area1'
+                    activeBg == "kin" || activeBg == "accounts"
+                      ? "not_account_toggle_body_area1 "
+                      : "account_toggle_body_area1"
                   }
                 >
                   <div className="account_toggle_body_area1_title">
@@ -1488,7 +1438,7 @@ function DashboardAccountPageMobile({
                       <div className="toggle_body_area1_cont1_txts">
                         Bank Verification Number (BVN)
                         <span className="toggle_body_area1_cont1_sub_txts">
-                          {' '}
+                          {" "}
                         </span>
                       </div>
                       <div className="toggle_body_area1_cont1_input">
@@ -1566,7 +1516,7 @@ function DashboardAccountPageMobile({
                           />
                           <button
                             className={fold2}
-                            style={{ width: '25%' }}
+                            style={{ width: "25%" }}
                             onClick={submitAddress}
                             disabled={disabled3}
                           >
@@ -1615,7 +1565,7 @@ function DashboardAccountPageMobile({
                     // src="/img/profile_img.jpeg"
                     alt=""
                     className="user_upload_img"
-                    style={{ width: '250px', height: '250px' }}
+                    style={{ width: "250px", height: "250px" }}
                   />
                   <label
                     for="customer_image"
@@ -1625,7 +1575,7 @@ function DashboardAccountPageMobile({
                     <AddCircleIcon
                       className="add_icon33"
                       onChange={onImageChange}
-                    />{' '}
+                    />{" "}
                   </label>
                   <input
                     type="file"
@@ -1634,7 +1584,7 @@ function DashboardAccountPageMobile({
                     onChange={onImageChange}
                     className="filetype"
                   />
-                </div>{' '}
+                </div>{" "}
               </div>
               <div className="profile_modal_area2">
                 <button className="add_photo" onClick={AddUserPhoto}>
@@ -1663,26 +1613,23 @@ function DashboardAccountPageMobile({
                   onChange={onChange2}
                 />
               </div>
-               <TextField
-                    className="name_input1ab"
-                  id="outlined-basic"
-                  label="Change Phone No:"
-                  variant="outlined"
-                  name="secondaryPhoneNumber"
-                  value={secondaryPhoneNumber}
-                  onChange={onChange2}
-                />
+              <TextField
+                className="name_input1ab"
+                id="outlined-basic"
+                label="Change Phone No:"
+                variant="outlined"
+                name="secondaryPhoneNumber"
+                value={secondaryPhoneNumber}
+                onChange={onChange2}
+              />
               <div className="profile_modal_area2">
                 <button className="add_photo">
-                  {' '}
+                  {" "}
                   <LocalPhoneIcon className="cancel_icon" />
                   Add Number
                 </button>
-                <button
-                  className="cancel_photo"
-                  onClick={closeModal2}
-                >
-                  {' '}
+                <button className="cancel_photo" onClick={closeModal2}>
+                  {" "}
                   <DoDisturbIcon className="cancel_icon" />
                   Cancel
                 </button>
@@ -1720,17 +1667,11 @@ function DashboardAccountPageMobile({
                 </div>
               </div>
               <div className="profile_modal_area2">
-                <button
-                  className="add_photo"
-                  onClick={sumitChangePassword}
-                >
+                <button className="add_photo" onClick={sumitChangePassword}>
                   <LockIcon className="cancel_icon" />
                   Change Password
                 </button>
-                <button
-                  className="cancel_photo"
-                  onClick={closeModal3}
-                >
+                <button className="cancel_photo" onClick={closeModal3}>
                   <DoDisturbIcon className="cancel_icon" />
                   Cancel
                 </button>

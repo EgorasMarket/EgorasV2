@@ -21,7 +21,18 @@
   flex-direction: column;
   gap: 10px;
 }
-
+.reffer_profit {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.reffer_transact {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
 .user_refferals_table_body_titles {
   display: flex;
   width: 100%;
@@ -39,12 +50,11 @@
   padding: 1em;
   background: #f6f6f6;
   border-radius: 6px;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
 }
 .dashboard_user_refferals_count_mini_conts {
   display: flex;
-  /* align-items: center; */
   justify-content: space-between;
   gap: 10px;
 }
@@ -59,11 +69,9 @@
   gap: 20px;
   align-items: center;
   background: #fff;
-
-  /* justify-content: space-between; */
 }
 .total_ref_figure_cont {
-  border: solid 7px #d6d6d6;
+  border: solid 15px #e3e3e3;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -83,8 +91,15 @@
 .ref_btn {
   width: 100%;
 }
+
+.refferal_copy_btns {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 20px;
+}
 .referral_txt {
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
 }
 .ref_btn .tooltiptext {
@@ -97,14 +112,40 @@
   padding: 5px;
   position: absolute;
   z-index: 1;
-  bottom: 205%;
-  left: 50%;
+  bottom: 325%;
+  left: 26%;
+  margin-left: -75px;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+.ref_btn .tooltiptext2 {
+  display: none;
+  width: 140px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 215%;
+  left: 0%;
   margin-left: -75px;
   opacity: 1;
   transition: opacity 0.3s;
 }
 
 .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+.tooltiptext2::after {
   content: "";
   position: absolute;
   top: 100%;
@@ -143,5 +184,130 @@
 }
 .circle_active {
   font-size: 7px !important;
-  color: #ff8000;
+}
+.ref_loading_icon {
+  padding: 2em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.loading_txt {
+  margin: 0;
+  font-size: 14px;
+}
+
+.reffer_activity {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+.reffer_email {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  overflow: hidden;
+}
+@media screen and (max-width: 991px) {
+  .dashboard_user_refferals_count_mini_conts {
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-between;
+    grid-gap: 10px;
+    gap: 10px;
+    flex-direction: column;
+  }
+  .dashboard_refferal_area {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 25px;
+    gap: 10px;
+  }
+  .dashboard_user_refferals_count_mini_cont1 {
+    padding: 1em;
+    gap: 15px;
+    /* justify-content: space-between; */
+  }
+  .user_refferals_table_body_titles {
+    display: none;
+  }
+  .user_refferals_table_body_cont1 {
+    font-size: 12px;
+    flex-direction: column;
+    align-items: end;
+    gap: 20px;
+    overflow: hidden;
+  }
+  .referral_txt {
+    font-size: 14px;
+    text-align: center;
+  }
+  .reffer_activity {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .reffer_profit {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .reffer_transact {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .reffer_email {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    overflow: hidden;
+  }
+  .reffer_activity::before {
+    content: "Status";
+    color: #828282;
+    display: flex;
+  }
+  .reffer_transact::before {
+    content: "Transactions";
+    color: #828282;
+    display: flex;
+  }
+  .reffer_email::before {
+    content: "User";
+    color: #828282;
+    display: flex;
+  }
+  .reffer_profit::before {
+    content: "Profit";
+    color: #828282;
+    display: flex;
+  }
+  .refferal_copy_btns {
+    flex-direction: column;
+  }
+
+  .ref_btn .tooltiptext2 {
+    display: none;
+    width: 140px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 347%;
+    left: 51%;
+    margin-left: -75px;
+    opacity: 1;
+    transition: opacity 0.3s;
+  }
 }
