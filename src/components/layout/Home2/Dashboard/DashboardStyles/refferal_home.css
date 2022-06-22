@@ -21,7 +21,18 @@
   flex-direction: column;
   gap: 10px;
 }
-
+.reffer_profit {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.reffer_transact {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
 .user_refferals_table_body_titles {
   display: flex;
   width: 100%;
@@ -80,6 +91,13 @@
 .ref_btn {
   width: 100%;
 }
+
+.refferal_copy_btns {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 20px;
+}
 .referral_txt {
   font-size: 16px;
   text-align: center;
@@ -94,14 +112,40 @@
   padding: 5px;
   position: absolute;
   z-index: 1;
-  bottom: 205%;
-  left: 50%;
+  bottom: 325%;
+  left: 26%;
+  margin-left: -75px;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+.ref_btn .tooltiptext2 {
+  display: none;
+  width: 140px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 215%;
+  left: 0%;
   margin-left: -75px;
   opacity: 1;
   transition: opacity 0.3s;
 }
 
 .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+.tooltiptext2::after {
   content: "";
   position: absolute;
   top: 100%;
@@ -167,7 +211,7 @@
   gap: 20px;
   overflow: hidden;
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 991px) {
   .dashboard_user_refferals_count_mini_conts {
     display: flex;
     /* align-items: center; */
@@ -207,6 +251,18 @@
     justify-content: space-between;
     gap: 20px;
   }
+  .reffer_profit {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .reffer_transact {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
   .reffer_email {
     width: 100%;
     display: flex;
@@ -215,13 +271,43 @@
     overflow: hidden;
   }
   .reffer_activity::before {
-    content: "Activity";
+    content: "Status";
+    color: #828282;
+    display: flex;
+  }
+  .reffer_transact::before {
+    content: "Transactions";
     color: #828282;
     display: flex;
   }
   .reffer_email::before {
-    content: "Email";
+    content: "User";
     color: #828282;
     display: flex;
+  }
+  .reffer_profit::before {
+    content: "Profit";
+    color: #828282;
+    display: flex;
+  }
+  .refferal_copy_btns {
+    flex-direction: column;
+  }
+
+  .ref_btn .tooltiptext2 {
+    display: none;
+    width: 140px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 347%;
+    left: 51%;
+    margin-left: -75px;
+    opacity: 1;
+    transition: opacity 0.3s;
   }
 }
