@@ -1421,8 +1421,11 @@ function DashboardAccountPage({
                           />
                         </div>
                       ) : (
-                        <div className="toggle_body_area1_cont1_input">
-                          {UserphoneNumber} {UserphoneNumber}
+                        <div
+                          className="toggle_body_area1_cont1_input"
+                          onClick={openModal2}
+                        >
+                          {UserphoneNumber} {UserOldNumber}
                         </div>
                       )}
                     </div>
@@ -1604,7 +1607,7 @@ function DashboardAccountPage({
           </div>
         </div>
       ) : null}
-      {modal2 == true ? (
+      {modal2 == true && (
         <div className="profile_modal_div">
           <div className="container">
             <div className="profile_modal_area_phone_no">
@@ -1650,7 +1653,9 @@ function DashboardAccountPage({
                 </button>
                 <button
                   className="cancel_photo"
-                  onClick={ChanePhoneNumber}
+                  onClick={() => {
+                    setModal2(!modal2);
+                  }}
                 >
                   {' '}
                   <DoDisturbIcon className="cancel_icon" />
@@ -1660,7 +1665,7 @@ function DashboardAccountPage({
             </div>
           </div>
         </div>
-      ) : null}
+      )}
       {modal3 == true ? (
         <div className="profile_modal_div">
           <div className="container">
