@@ -61,6 +61,9 @@ const DashboardMembership = ({ auth }) => {
       });
   }, [auth]);
 
+  useEffect(async () => {
+    //fetch the membership and subscription record
+  }, []);
   const flutterConfig = {
     public_key: process.env.REACT_APP_PUBLIC_KEY,
     tx_ref: 'EGC-' + Date.now(),

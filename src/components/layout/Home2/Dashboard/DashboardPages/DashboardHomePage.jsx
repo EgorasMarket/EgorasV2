@@ -1,27 +1,29 @@
-import React, { useState, useEffect } from "react";
-import Carousel from "react-multi-carousel";
-import LogoutIcon from "@mui/icons-material/Logout";
-import "../DashboardStyles/dashboard_home.css";
-import { API_URL2 as api } from "../../../../../actions/types";
-import { connect, useDispatch } from "react-redux";
-import axios from "axios";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import CloseIcon from "@mui/icons-material/Close";
-import CircleIcon from "@mui/icons-material/Circle";
-import LoadingIcons from "react-loading-icons";
+import React, { useState, useEffect } from 'react';
+import Carousel from 'react-multi-carousel';
+import LogoutIcon from '@mui/icons-material/Logout';
+import '../DashboardStyles/dashboard_home.css';
+import { API_URL2 as api } from '../../../../../actions/types';
+import { connect, useDispatch } from 'react-redux';
+import axios from 'axios';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import CloseIcon from '@mui/icons-material/Close';
+import CircleIcon from '@mui/icons-material/Circle';
+import LoadingIcons from 'react-loading-icons';
+import TawkTo from 'tawkto-react';
+
 // import { numberWithCommas } from "../../../../../static";
 // import { allCart } from "../../../../../actions/shop";
-import DashBoardCard from "../DashBoardCard";
-import data from "../../../MockData";
-import { retrieveCart } from "../../../../../actions/shop";
+import DashBoardCard from '../DashBoardCard';
+import data from '../../../MockData';
+import { retrieveCart } from '../../../../../actions/shop';
 import {
   PRODUCT_LOADED,
   API_URL2 as api_url2,
-} from "../../../../../actions/types";
+} from '../../../../../actions/types';
 // import Nodata from "../NodataFound/NoDataFoundComponent"
-import { NoDataFoundComponent } from "../NodataFound/NoDataFoundComponent";
+import { NoDataFoundComponent } from '../NodataFound/NoDataFoundComponent';
 
-import { numberWithCommas } from "../../../../../static";
+import { numberWithCommas } from '../../../../../static';
 // const transaction = [
 //   {
 //     id: 1,
@@ -116,12 +118,12 @@ const responsive7 = {
 };
 
 const DashboardHomePage = ({ auth, match }) => {
-  const [cus_id, setCusId] = useState("");
+  const [cus_id, setCusId] = useState('');
   const dispatch = useDispatch();
   const [userLockId, setUserLockId] = useState([]);
   const [Loading, setLoading] = useState(false);
   const [tranPopUp, setTranPopUp] = useState(0);
-  const [paymentType, setPaymentType] = useState("");
+  const [paymentType, setPaymentType] = useState('');
 
   // const fetchFromCart = async (customer_id) => {
   //   //console.log('fetchfromCart', customer_id);
@@ -143,18 +145,20 @@ const DashboardHomePage = ({ auth, match }) => {
   // },[])
   const [allDatas, setAllDatas] = useState([]);
   const [savedNum, setSavedNum] = useState(5);
-  const [productPage_id, setProductPageId] = useState(match.params.id);
+  const [productPage_id, setProductPageId] = useState(
+    match.params.id
+  );
   const [lock, setlock] = useState({
-    productImage: "",
-    productName: "",
-    productAmount: "",
+    productImage: '',
+    productName: '',
+    productAmount: '',
   });
 
   const { productImage, productName, productAmount } = lock;
 
   const config = {
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   };
 
@@ -166,7 +170,7 @@ const DashboardHomePage = ({ auth, match }) => {
   const closeTranPop = () => {
     // let currentTarget = e.currentTarget.id;
     setTranPopUp(0);
-    console.log("i am not here");
+    console.log('i am not here');
   };
   const [itemGalleryShow, setItemGalleryShow] = useState([]);
   const [accountInfo, setAccountInfo] = useState({
@@ -179,9 +183,9 @@ const DashboardHomePage = ({ auth, match }) => {
 
   useEffect(async () => {
     await axios
-      .get(api_url2 + "/v1/product/retrieve/products", null, config)
+      .get(api_url2 + '/v1/product/retrieve/products', null, config)
       .then((data) => {
-        console.log(data.data.data, "phlip");
+        console.log(data.data.data, 'phlip');
 
         setItemGalleryShow(data.data.data);
       })
@@ -215,7 +219,11 @@ const DashboardHomePage = ({ auth, match }) => {
       customer_id,
     });
     await axios
-      .post(api_url2 + "/v1/user/accounts/fetch/dashboard", body, config)
+      .post(
+        api_url2 + '/v1/user/accounts/fetch/dashboard',
+        body,
+        config
+      )
       .then((data) => {
         setLoading(false);
         // console.log(data.data.data, "bbbbbbb");
@@ -236,8 +244,8 @@ const DashboardHomePage = ({ auth, match }) => {
       });
   }, [auth]);
 
-  const text = "No item Locked yet";
-  const transText = "No transactions found";
+  const text = 'No item Locked yet';
+  const transText = 'No transactions found';
 
   // useEffect(() => {
 
@@ -269,7 +277,11 @@ const DashboardHomePage = ({ auth, match }) => {
 
   useEffect(() => {
     axios
-      .get(api_url2 + "/v1/user/transactions/customer/recent", null, config)
+      .get(
+        api_url2 + '/v1/user/transactions/customer/recent',
+        null,
+        config
+      )
       .then((data) => {
         // let a = data.data.payload;
         setPaymentType(data.data.payload.payment_type);
@@ -301,36 +313,44 @@ const DashboardHomePage = ({ auth, match }) => {
                 draggable={true}
                 swipeable={true}
                 // transitionDuration={1000}
-                style={{ height: "25em" }}
+                style={{ height: '25em' }}
               >
                 {/* {data.dashBoardHomeCard.map((asset, index) => ( */}
                 <DashBoardCard
-                  background={"/img/save_card1.svg"}
-                  title={"Total Savings"}
+                  background={'/img/save_card1.svg'}
+                  title={'Total Savings'}
                   Loading={Loading}
                   LoadingIcon={<LoadingIcons.Oval fill="#fff" />}
-                  balance={numberWithCommas(parseInt(total_sum).toFixed(2))}
+                  balance={numberWithCommas(
+                    parseInt(total_sum).toFixed(2)
+                  )}
                 />
                 <DashBoardCard
-                  background={"/img/save_card2.svg"}
-                  title={"Pending Payment"}
+                  background={'/img/save_card2.svg'}
+                  title={'Pending Payment'}
                   Loading={Loading}
                   LoadingIcon={<LoadingIcons.Oval fill="#fff" />}
-                  balance={numberWithCommas(parseInt(pending_sum).toFixed(2))}
+                  balance={numberWithCommas(
+                    parseInt(pending_sum).toFixed(2)
+                  )}
                 />
                 <DashBoardCard
-                  background={"/img/save_card3.svg"}
-                  title={"Wallet Balance"}
+                  background={'/img/save_card3.svg'}
+                  title={'Wallet Balance'}
                   Loading={Loading}
                   LoadingIcon={<LoadingIcons.Oval fill="#fff" />}
-                  balance={numberWithCommas(parseInt(balance).toFixed(2))}
+                  balance={numberWithCommas(
+                    parseInt(balance).toFixed(2)
+                  )}
                 />
                 <DashBoardCard
-                  background={"/img/save_card3.svg"}
-                  title={"Ledger Balance"}
+                  background={'/img/save_card3.svg'}
+                  title={'Ledger Balance'}
                   Loading={Loading}
                   LoadingIcon={<LoadingIcons.Oval fill="#fff" />}
-                  balance={numberWithCommas(parseInt(ledger).toFixed(2))}
+                  balance={numberWithCommas(
+                    parseInt(ledger).toFixed(2)
+                  )}
                 />
 
                 {/* ))} */}
@@ -347,12 +367,16 @@ const DashboardHomePage = ({ auth, match }) => {
               <NoDataFoundComponent text={text} />
             ) : (
               <div className="savings_overview">
-                <div className="savings_overview_title">Savings Overview</div>
+                <div className="savings_overview_title">
+                  Savings Overview
+                </div>
                 <div className="savings_overview_body">
                   <div className="savings_overview_body_cont1">
-                    Total Number of Locked{" "}
-                    {userLockId.length > 1 ? "items" : "item"}{" "}
-                    <span className="saved_figure">{userLockId.length}</span>
+                    Total Number of Locked{' '}
+                    {userLockId.length > 1 ? 'items' : 'item'}{' '}
+                    <span className="saved_figure">
+                      {userLockId.length}
+                    </span>
                   </div>
                   <div className="savings_overview_body_cont2">
                     {userLockId.slice(0, 3).map((item) => (
@@ -374,7 +398,9 @@ const DashboardHomePage = ({ auth, match }) => {
                             </div>
                             <div className="save_overview_cont_amount">
                               Total Amount ₦
-                              {numberWithCommas(parseInt(item.sum).toFixed(2))}
+                              {numberWithCommas(
+                                parseInt(item.sum).toFixed(2)
+                              )}
                             </div>
                           </div>
                           <div className="save_item_details_btn">
@@ -412,17 +438,26 @@ const DashboardHomePage = ({ auth, match }) => {
 
           <div className="dashboard_transactions">
             <div className="dashboard_transactions_header">
-              Recent Transactions{" "}
-              <a href="/dashboard/wallet" className="see_all_transac_link">
+              Recent Transactions{' '}
+              <a
+                href="/dashboard/wallet"
+                className="see_all_transac_link"
+              >
                 See all
               </a>
             </div>
             <div className="transaction_headings">
               <div className="transaction_heading1">Type</div>
               <div className="transaction_heading1">Date</div>
-              <div className="transaction_heading1 amnt_small">Amount</div>
-              <div className="transaction_heading1 center_this">Channel</div>
-              <div className="transaction_heading1 reduce_width">Status</div>
+              <div className="transaction_heading1 amnt_small">
+                Amount
+              </div>
+              <div className="transaction_heading1 center_this">
+                Channel
+              </div>
+              <div className="transaction_heading1 reduce_width">
+                Status
+              </div>
             </div>
             {allDatas.length <= 0 ? (
               <NoDataFoundComponent text={transText} />
@@ -440,12 +475,12 @@ const DashboardHomePage = ({ auth, match }) => {
                         <div className="deposited_icon">
                           <ArrowDownwardIcon
                             style={
-                              data.transaction_type == "DEBIT"
+                              data.transaction_type == 'DEBIT'
                                 ? {
-                                    backgroundColor: " #e4a788",
-                                    transform: "rotate(180deg)",
+                                    backgroundColor: ' #e4a788',
+                                    transform: 'rotate(180deg)',
                                   }
-                                : { backgroundColor: "#0ecb81" }
+                                : { backgroundColor: '#0ecb81' }
                             }
                             className="arrow_down_deposit_icon"
                           />
@@ -460,15 +495,19 @@ const DashboardHomePage = ({ auth, match }) => {
                         </div>
                       </div>
                       <div className="dashboard_transac_body_cont1_layer1_amount_cont">
-                        {data.transaction_type == "DEBIT" ? (
+                        {data.transaction_type == 'DEBIT' ? (
                           <span>
                             -₦
-                            {numberWithCommas(parseInt(data.amount).toFixed(2))}
+                            {numberWithCommas(
+                              parseInt(data.amount).toFixed(2)
+                            )}
                           </span>
                         ) : (
                           <span>
                             +₦
-                            {numberWithCommas(parseInt(data.amount).toFixed(2))}
+                            {numberWithCommas(
+                              parseInt(data.amount).toFixed(2)
+                            )}
                           </span>
                         )}
                       </div>
@@ -500,7 +539,7 @@ const DashboardHomePage = ({ auth, match }) => {
             <div className="trans_div">
               <div className="tranPop_div">
                 <div className="tranPopHeading">
-                  Deposit Details{" "}
+                  Deposit Details{' '}
                   <span className="tranPopOutButton">
                     <CloseIcon
                       className="closeTranPopDiv"
@@ -509,50 +548,58 @@ const DashboardHomePage = ({ auth, match }) => {
                   </span>
                 </div>
                 <div className="tranPop_div_cont1">
-                  {" "}
+                  {' '}
                   <div className="deposited_icon">
                     <ArrowDownwardIcon
                       style={
-                        data.transaction_type == "DEBIT"
+                        data.transaction_type == 'DEBIT'
                           ? {
-                              backgroundColor: " #e4a788",
-                              transform: "rotate(180deg)",
+                              backgroundColor: ' #e4a788',
+                              transform: 'rotate(180deg)',
                             }
-                          : { backgroundColor: "#0ecb81" }
+                          : { backgroundColor: '#0ecb81' }
                       }
                       className="arrow_down_deposit_icon"
                     />
                   </div>
-                  <span className="transPopData"> {data.transaction_type}</span>
+                  <span className="transPopData">
+                    {' '}
+                    {data.transaction_type}
+                  </span>
                 </div>
                 <div className="tranPop_div_cont1">
-                  Date{" "}
+                  Date{' '}
                   <span className="transPopData">
-                    {" "}
+                    {' '}
                     {data.timestamp.slice(0, 10)}
-                  </span>{" "}
+                  </span>{' '}
                 </div>
                 <div className="tranPop_div_cont1">
-                  Amount{" "}
+                  Amount{' '}
                   <span className="transPopData">
-                    {data.transaction_type == "DEBIT" ? (
+                    {data.transaction_type == 'DEBIT' ? (
                       <span>
                         -₦
-                        {numberWithCommas(parseInt(data.amount).toFixed(2))}
+                        {numberWithCommas(
+                          parseInt(data.amount).toFixed(2)
+                        )}
                       </span>
                     ) : (
                       <span>
                         +₦
-                        {numberWithCommas(parseInt(data.amount).toFixed(2))}
+                        {numberWithCommas(
+                          parseInt(data.amount).toFixed(2)
+                        )}
                       </span>
                     )}
-                  </span>{" "}
+                  </span>{' '}
                 </div>
                 <div className="tranPop_div_cont1">
-                  Channel <span className="transPopData">{data.channel}</span>
+                  Channel{' '}
+                  <span className="transPopData">{data.channel}</span>
                 </div>
                 <div className="tranPop_div_cont1">
-                  Status{" "}
+                  Status{' '}
                   <span className="transPopData">
                     <CircleIcon className="complete_circle" />
                     Completed
