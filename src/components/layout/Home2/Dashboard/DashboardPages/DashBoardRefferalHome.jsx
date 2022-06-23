@@ -173,7 +173,7 @@ const DashBoardRefferalHome = ({ auth }) => {
                         <NoDataFoundComponent />
                       ) : (
                         <>
-                          {referrals.slice(0, 20).map((data) => (
+                          {referrals.slice(0, 5).map((data) => (
                             <div
                               className="user_refferals_table_body_cont1"
                               style={

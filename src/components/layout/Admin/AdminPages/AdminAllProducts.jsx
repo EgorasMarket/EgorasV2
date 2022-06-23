@@ -22,19 +22,6 @@ const AdminAllProducts = () => {
 
   useEffect(() => {
     axios
-      .get(api_url2 + "/v1/product/retrieve/new/products", null, config)
-      .then((data) => {
-        //console.log(data.data.data, "chukwubuike");
-
-        setItemDisplay(data.data.data);
-      })
-      .catch((err) => {
-        //console.log(err); // "oh, no!"
-      });
-  }, []);
-
-  useEffect(() => {
-    axios
       .get(api_url2 + "/v1/admin/info", null, config)
       .then((data) => {
         //console.log(data.data.user, "line_ful");
@@ -46,6 +33,34 @@ const AdminAllProducts = () => {
         //console.log(err); // "oh, no!"
       });
   }, []);
+
+  useEffect(() => {
+    console.log(role20);
+
+    if (role20 == "MEDIA") {
+      axios
+        .get(api_url2 + "/v1/product/retrieve/my/new/products", null, config)
+        .then((data) => {
+          //console.log(data.data.data, "chukwubuike");
+
+          setItemDisplay(data.data.data);
+        })
+        .catch((err) => {
+          //console.log(err); // "oh, no!"
+        });
+    } else {
+      axios
+        .get(api_url2 + "/v1/product/retrieve/new/products", null, config)
+        .then((data) => {
+          //console.log(data.data.data, "chukwubuike");
+
+          setItemDisplay(data.data.data);
+        })
+        .catch((err) => {
+          //console.log(err); // "oh, no!"
+        });
+    }
+  }, [role20]);
 
   return (
     <>
