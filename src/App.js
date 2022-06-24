@@ -166,6 +166,7 @@ import ResetPassword from './components/layout/Home2/PasswordReset/ResetPassword
 import ValidateLogin from './components/layout/Home2/Login/ValidateLogin';
 import Referal from './components/layout/Home2/Login/Referal';
 import TawkTo from 'tawkto-react';
+import { API_URL2 } from './actions/types';
 
 // import ItemDetailsPage from "./components/layout/Home2/item_details_page/ItemDetailsPage.jsx";
 if (localStorage.token) {
@@ -177,7 +178,7 @@ const App = () => {
   // const currentPage = window.location.pathname;
   const [adminLocate, setAdminLocate] = useState('');
 
-  useEffect(() => {
+  useEffect(async () => {
     localStorage.setItem('xrate', 414);
     Aos.init({});
     const config = {
@@ -186,11 +187,16 @@ const App = () => {
       },
     };
     try {
-      axios
-        .get('https://geolocation-db.com/json/', null, config)
+      await axios
+        // .get('https://geolocation-db.com/json/', null, config)
+        .get(API_URL2 + '/geo-location', null, config)
         .then((data) => {
-          //console.log(data, "The Country");
-          localStorage.setItem('origin', data.data.country_name);
+          console.log(data.data.payload.city, 'The Country');
+
+          localStorage.setItem(
+            'origin',
+            data.data.payload.country_name
+          );
         });
 
       var tawkto = new TawkTo(
@@ -198,9 +204,9 @@ const App = () => {
         process.env.REACT_TAWK_TAWK_ID
       );
       tawkto.showWidget();
-      tawkto.onStatusChange((status) => {
-        console.log(status);
-      });
+      // tawkto.onStatusChange((status) => {
+      //   console.log(status);
+      // });
     } catch (err) {
       //console.log(err, "Call from exchange rate");
     }
