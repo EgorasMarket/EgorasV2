@@ -56,6 +56,7 @@
     "node-zendesk": "^2.1.0",
     "react": "^17.0.2",
     "react-alice-carousel": "^2.4.0",
+    "react-animated-progress-bar": "^1.1.1",
     "react-avatar": "^3.9.2",
     "react-bootstrap": "^0.32.4",
     "react-card-carousel": "^1.1.3",

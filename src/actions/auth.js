@@ -1,5 +1,5 @@
-import axios from "axios";
-import { setAlert } from "./alert";
+import axios from 'axios';
+import { setAlert } from './alert';
 // import { LOGIN_FAIL, LOGIN_SUCCESS } from "./types";
 
 import {
@@ -11,9 +11,9 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   API_URL2 as api_url2,
-} from "./types";
+} from './types';
 // import setAuthToken from "../utils/setAuthToken";
-import setAuthToken from "../utils/setAuthToken";
+import setAuthToken from '../utils/setAuthToken';
 
 // Load User
 export const loadUser = () => async (dispatch) => {
@@ -32,7 +32,7 @@ export const loadUser = () => async (dispatch) => {
   // });
 
   try {
-    const res = await axios.get(api_url2 + "/v1/user/info");
+    const res = await axios.get(api_url2 + '/v1/user/info');
     //console.log(res);
     // //console.log("Yes I call You because i can", res.data);
     dispatch({
@@ -51,9 +51,9 @@ export const submitPhone =
   (primaryPhoneNumber, secondaryPhoneNumber) => async (dispatch) => {
     const config = {
       headers: {
-        Accept: "*",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+        Accept: '*',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
       },
     };
     const body = JSON.stringify({
@@ -65,7 +65,7 @@ export const submitPhone =
 
     try {
       const res = await axios.put(
-        api_url2 + "/v1/user/update/secondary/contact",
+        api_url2 + '/v1/user/update/secondary/contact',
         body,
         config
       );
@@ -100,9 +100,9 @@ export const getAuthentication =
   async (dispatch) => {
     const config = {
       headers: {
-        Accept: "*",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+        Accept: '*',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
       },
     };
 
@@ -117,7 +117,7 @@ export const getAuthentication =
       InfoReason,
     });
 
-    console.log(body, "----kkkk");
+    console.log(body, '----kkkk');
 
     // try {
     //   const res = await axios.post(
@@ -144,9 +144,9 @@ export const getAuthentication =
 export const activate = (email_auth) => async (dispatch) => {
   const config = {
     headers: {
-      Accept: "*",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
+      Accept: '*',
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
     },
   };
 
@@ -157,7 +157,11 @@ export const activate = (email_auth) => async (dispatch) => {
   //console.log(body);
 
   try {
-    const res = await axios.post(api_url2 + "/v1/user/activate", body, config);
+    const res = await axios.post(
+      api_url2 + '/v1/user/activate',
+      body,
+      config
+    );
     console.log(res);
     // console.log('yyyyy');
 
@@ -180,9 +184,9 @@ export const activate = (email_auth) => async (dispatch) => {
 export const getLogin = (email, ref_auth) => async (dispatch) => {
   const config = {
     headers: {
-      Accept: "*",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
+      Accept: '*',
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
       timeout: 1000,
     },
   };
@@ -196,7 +200,7 @@ export const getLogin = (email, ref_auth) => async (dispatch) => {
 
   try {
     const res = await axios.post(
-      api_url2 + "/v1/user/register/alternative",
+      api_url2 + '/v1/user/register/alternative',
       body,
       config
     );
@@ -230,9 +234,9 @@ export const getLogin = (email, ref_auth) => async (dispatch) => {
 export const loginValidate = (email_auth) => async (dispatch) => {
   const config = {
     headers: {
-      Accept: "*",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
+      Accept: '*',
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
       timeout: 1000,
     },
   };
@@ -245,7 +249,7 @@ export const loginValidate = (email_auth) => async (dispatch) => {
 
   try {
     const res = await axios.post(
-      api_url2 + "/v1/user/validate/login",
+      api_url2 + '/v1/user/validate/login',
       body,
       config
     );
@@ -300,9 +304,9 @@ export const reset =
   async (dispatch) => {
     const config = {
       headers: {
-        Accept: "*",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+        Accept: '*',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
       },
     };
 
@@ -314,7 +318,11 @@ export const reset =
     //console.log(body);
 
     try {
-      const res = await axios.put(api_url2 + "/v1/user/reset", body, config);
+      const res = await axios.put(
+        api_url2 + '/v1/user/reset',
+        body,
+        config
+      );
       ////console.log(res);
 
       return {
@@ -344,9 +352,9 @@ export const nextOfKING =
   async (dispatch) => {
     const config = {
       headers: {
-        Accept: "*",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+        Accept: '*',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
       },
     };
 
@@ -365,7 +373,7 @@ export const nextOfKING =
 
     try {
       const res = await axios.post(
-        api_url2 + "/v1/user/add/customer/next-of-kin",
+        api_url2 + '/v1/user/add/customer/next-of-kin',
         body,
         config
       );
@@ -386,9 +394,9 @@ export const nextOfKING =
 export const addAddress = (customerAddress) => async (dispatch) => {
   const config = {
     headers: {
-      Accept: "*",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
+      Accept: '*',
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
     },
   };
 
@@ -402,7 +410,7 @@ export const addAddress = (customerAddress) => async (dispatch) => {
 
   try {
     const res = await axios.post(
-      api_url2 + "/v1/user/add/address",
+      api_url2 + '/v1/user/add/address',
       body,
       config
     );
@@ -425,9 +433,9 @@ export const sumitGenderAndDate =
   (firstname, lastname, gender, dateOfBirth) => async (dispatch) => {
     const config = {
       headers: {
-        Accept: "*",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+        Accept: '*',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
       },
     };
 
@@ -443,7 +451,7 @@ export const sumitGenderAndDate =
 
     try {
       const res = await axios.put(
-        api_url2 + "/v1/user/update/customer/info/alternative",
+        api_url2 + '/v1/user/update/customer/info/alternative',
         body,
         config
       );
@@ -467,9 +475,9 @@ export const changePassword =
   (oldpassword, newpassword) => async (dispatch) => {
     const config = {
       headers: {
-        Accept: "*",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+        Accept: '*',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
       },
     };
 
@@ -482,7 +490,7 @@ export const changePassword =
 
     try {
       const res = await axios.put(
-        api_url2 + "/v1/user/change/password",
+        api_url2 + '/v1/user/change/password',
         body,
         config
       );

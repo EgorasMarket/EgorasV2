@@ -17,6 +17,10 @@ export const FETCH_STATISTICS_FAILED = "FETCH_STATISTICS_FAILED";
 export const USER_LOADED = "USER_LOADED";
 export const PRODUCT_LOADED = "PRODUCT_LOADED";
 
+// transaction channels
+export const FIAT = "FIAT";
+export const CRYPTO = "CRYPTO";
+
 //store  types
 export const FETCH_CART = "FETCH_CART";
 export const FETCH_LOCKED = "FETCH_LOCKED";
