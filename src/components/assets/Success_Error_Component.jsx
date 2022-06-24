@@ -83,9 +83,11 @@ const Success_Error_Component = ({
             </button>
           )}
           {errorMsgDiv == true ? (
-            <button className="cancel_success_btn" onClick={onclick}>
-              Cancel
-            </button>
+            <a href="overview">
+              <button className="cancel_success_btn" onClick={onclick}>
+                Cancel
+              </button>
+            </a>
           ) : errorMsgDiv == false ? null : null}
         </div>
       </div>

@@ -27,7 +27,9 @@ import {
   API_URL2 as api_url2,
 } from "../../../../actions/types";
 import data from "../../MockData";
-// import { nextOfKING } from "../../../../actions/adminAuth.js";
+import {
+  nextOfKING,
+} from "../../../../actions/adminAuth.js";
 
 // import
 
@@ -163,7 +165,6 @@ const AdminSavingsOverview = ({ user, match }) => {
         //console.log(err); // "oh, no!"
       });
   }, []);
-  
 
   const onChangeaddress = (event) => {
     setAddress(event.target.value);
@@ -197,7 +198,7 @@ const AdminSavingsOverview = ({ user, match }) => {
       }
     }
   };
-  
+
   const [accountInfo, setAccountInfo] = useState({
     ledger: 0,
     balance: 0,
@@ -213,7 +214,6 @@ const AdminSavingsOverview = ({ user, match }) => {
 
     if (customer_image === "") {
       //console.log("empty passport");
-
       // setAlert('Please provide a passport photo', 'danger');
     } else {
       const element = document.getElementById("customer_image");
@@ -270,6 +270,7 @@ const AdminSavingsOverview = ({ user, match }) => {
   };
   const submitPhoneNumber2 = async (e) => {
     e.preventDefault();
+    let res = await nextOfKING(secondaryPhoneNumber);
 
     if (secondaryPhoneNumber === "") {
       //console.log("empty address");
@@ -357,9 +358,6 @@ const AdminSavingsOverview = ({ user, match }) => {
       });
   }, []);
 
-
-
-
   const submitGender = async (e) => {
     e.preventDefault();
     const { gender1, dateOfBirth } = genderDate;
@@ -423,8 +421,6 @@ const AdminSavingsOverview = ({ user, match }) => {
     setModal3(false);
   };
 
-
-
   return (
     <div className="other2">
       <section className="no-bg">
@@ -435,7 +431,7 @@ const AdminSavingsOverview = ({ user, match }) => {
                 {/* Carousel start==============================
                  ==============================================
                  ============================= */}
-{/* 
+                {/* 
                 <Carousel
                   responsive={responsive6}
                   className="partnerCards LEFTARROW gtr"
@@ -449,21 +445,21 @@ const AdminSavingsOverview = ({ user, match }) => {
                   // transitionDuration={1000}
                   style={{ height: "25em" }}
                 > */}
-                  {/* {cards.map((asset) => (
+                {/* {cards.map((asset) => (
                     <div className="card_cont1">
                       <div className="card_cont_txtxs"> */}
-                        {/* <div className="save_card_cont_txt1">
+                {/* <div className="save_card_cont_txt1">
                         <span className="savings_caption">Title</span>
                         <div className="card_cont_txt_tittle">
                           Total Savings
                         </div>
                       </div> */}
-                        {/* <div className="save_card_cont_txt1">
+                {/* <div className="save_card_cont_txt1">
                           <span className="savings_caption">{asset.title}</span>
                           <div className="card_cont_txt_tittle">
                             ₦{asset.Balance}
                           </div> */}
-                        {/* </div>
+                {/* </div>
                         <div className="to_save_btn">
                           <LogoutIcon className="to_save_area_icon" /> Start
                           saving
@@ -476,55 +472,52 @@ const AdminSavingsOverview = ({ user, match }) => {
                 {/* Carousel end==============================
 ==============================================
 ============================= */}
-                
 
-              <Carousel
-                responsive={responsive6}
-                className="partnerCards LEFTARROW gtr"
-                showDots={true}
-                //   infinite={false}
-                autoPlay={false}
-                autoPlaySpeed={9000}
-                infinite={false}
-                draggable={true}
-                swipeable={true}
-                // transitionDuration={1000}
-                style={{ height: "25em" }}
-              >
-                {/* {data.dashBoardHomeCard.map((asset, index) => ( */}
-                <DashBoardCard
-                  background={"/img/save_card1.svg"}
-                  title={"Total Savings"}
-                  Loading={Loading}
-                  LoadingIcon={<LoadingIcons.Oval fill="#fff" />}
-                  balance={numberWithCommas(parseInt(total_sum).toFixed(2))}
-                />
-                <DashBoardCard
-                  background={"/img/save_card2.svg"}
-                  title={"Item savings"}
-                  Loading={Loading}
-                  LoadingIcon={<LoadingIcons.Oval fill="#fff" />}
-                  balance={numberWithCommas(parseInt(pending_sum).toFixed(2))}
-                />
-                <DashBoardCard
-                  background={"/img/save_card3.svg"}
-                  title={"Flex Savings"}
-                  Loading={Loading}
-                  LoadingIcon={<LoadingIcons.Oval fill="#fff" />}
-                  balance={numberWithCommas(parseInt(balance).toFixed(2))}
-                />
-                <DashBoardCard
-                  background={"/img/save_card4.svg"}
-                  title={"Ledger Balance"}
-                  Loading={Loading}
-                  LoadingIcon={<LoadingIcons.Oval fill="#fff" />}
-                  balance={numberWithCommas(parseInt(ledger).toFixed(2))}
-                />
+                <Carousel
+                  responsive={responsive6}
+                  className="partnerCards LEFTARROW gtr"
+                  showDots={true}
+                  //   infinite={false}
+                  autoPlay={false}
+                  autoPlaySpeed={9000}
+                  infinite={false}
+                  draggable={true}
+                  swipeable={true}
+                  // transitionDuration={1000}
+                  style={{ height: "25em" }}
+                >
+                  {/* {data.dashBoardHomeCard.map((asset, index) => ( */}
+                  <DashBoardCard
+                    background={"/img/save_card1.svg"}
+                    title={"Total Savings"}
+                    Loading={Loading}
+                    LoadingIcon={<LoadingIcons.Oval fill="#fff" />}
+                    balance={numberWithCommas(parseInt(total_sum).toFixed(2))}
+                  />
+                  <DashBoardCard
+                    background={"/img/save_card2.svg"}
+                    title={"Item savings"}
+                    Loading={Loading}
+                    LoadingIcon={<LoadingIcons.Oval fill="#fff" />}
+                    balance={numberWithCommas(parseInt(pending_sum).toFixed(2))}
+                  />
+                  <DashBoardCard
+                    background={"/img/save_card3.svg"}
+                    title={"Flex Savings"}
+                    Loading={Loading}
+                    LoadingIcon={<LoadingIcons.Oval fill="#fff" />}
+                    balance={numberWithCommas(parseInt(balance).toFixed(2))}
+                  />
+                  <DashBoardCard
+                    background={"/img/save_card4.svg"}
+                    title={"Ledger Balance"}
+                    Loading={Loading}
+                    LoadingIcon={<LoadingIcons.Oval fill="#fff" />}
+                    balance={numberWithCommas(parseInt(ledger).toFixed(2))}
+                  />
 
-                {/* ))} */}
-              </Carousel>
-
-
+                  {/* ))} */}
+                </Carousel>
               </div>
               {/* [===================] */}
               {/* [===================] */}
@@ -820,9 +813,18 @@ const AdminSavingsOverview = ({ user, match }) => {
                               variant="outlined"
                               name="phoneNumber"
                               value={phoneNumber}
-                              onChange={onChangeFor2}
+                              onChange={handleChange}
                             />
                           </div>
+                          <TextField
+                            className="name_input1ab"
+                            id="outlined-basic"
+                            label="Change Phone No:"
+                            variant="outlined"
+                            name="secondaryPhoneNumber"
+                            value={secondaryPhoneNumber}
+                            onChange={handleChange}
+                          />
                         </div>
                         {/* '''''''''''''''''''''∂∂ */}
                         {/* '''''''''''''''''''''∂∂ */}
@@ -979,6 +981,18 @@ const AdminSavingsOverview = ({ user, match }) => {
                             Phone Number
                             <span className="toggle_body_area1_cont1_sub_txts"></span>
                           </div>
+                          {/* {CustphoneNumber === null ? (
+                            <div className="toggle_body_area1_cont1_input">
+                              <AddCircleIcon
+                                className="edit_icon"
+                                onClick={openModal2}
+                              />
+                            </div>
+                          ) : (
+                            <div className="toggle_body_area1_cont1_input">
+                              {CustphoneNumber}
+                            </div>
+                          )} */}
                           <div className="toggle_body_area1_cont1_input">
                             {CustphoneNumber} {phone_no2}
                             <AddCircleIcon
@@ -987,6 +1001,7 @@ const AdminSavingsOverview = ({ user, match }) => {
                             />
                           </div>
                         </div>
+
                         {/* ================= */}
                         {/* ================= */}
                         {/* ================= */}
@@ -1223,8 +1238,10 @@ const AdminSavingsOverview = ({ user, match }) => {
     </div>
   );
 };
-// const mapStateToProps = (state) => ({
-//   id: state.customerId,
-// });
-export default AdminSavingsOverview;
-// export default connect(mapStateToProps, { nextOfKING })(AdminSavingsOverview);
+const mapStateToProps = (state) => ({
+  id: state.customerId,
+});
+// export default AdminSavingsOverview;
+export default connect(mapStateToProps,{
+  nextOfKING
+ }) (AdminSavingsOverview);

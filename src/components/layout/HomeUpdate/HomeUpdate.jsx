@@ -16,7 +16,7 @@ import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import CloseIcon from "@mui/icons-material/Close";
 import MiscellaneousServicesIcon from "@mui/icons-material/MiscellaneousServices";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
-import Countdown from "react-countdown";
+// import Countdown from "react-countdown";
 import { countdown } from "../../../actions/countdown";
 
 import Carousel from "react-multi-carousel";
@@ -1047,13 +1047,13 @@ const HomeUpdate = ({ countdown }) => {
                     <div>
                       <span className="startsIn">
                         {placeHolder}:{" "}
-                        <div className="count_down_shopping_">
+                        {/* <div className="count_down_shopping_">
                           <Countdown
                             className="countdownDiv"
                             date={Date.now() + counterDuration}
                             renderer={CoundownRenderer}
                           />
-                        </div>
+                        </div> */}
                       </span>
                     </div>
                   ) : null}

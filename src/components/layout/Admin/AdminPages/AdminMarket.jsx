@@ -313,7 +313,7 @@ function AdminMarket({ auth }) {
     },
   };
   return (
-    <div className="other2">
+    <div className="other2 ">
       {/* <div className="cat_div" id="cat_div">
         <div className="cat_body_toggle">
           <a

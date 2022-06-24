@@ -198,24 +198,24 @@ const Admin = ({ isAuthenticated, loading }) => {
                     path="/super_admin/products/for-sell"
                     component={SellProductList}
                   />
-
+                  {/* 
                   <Route
                     exact
                     path="/super_admin/overview"
                     // path="/dashboard/products/details/:id/:name"
                     // / dashboard/products/details/:id/:name
                     component={AdminMarket}
-                  />
+                  /> */}
 
                   {/* < HEAD /> */}
 
-                  <Route
+                  {/* <Route
                     exact
                     path="/super_admin/user_overview/:id"
                     // path="/dashboard/products/details/:id/:name"
                     // / dashboard/products/details/:id/:name
                     component={AdminSavingsOverview}
-                  />
+                  /> */}
 
                   <Route
                     exact

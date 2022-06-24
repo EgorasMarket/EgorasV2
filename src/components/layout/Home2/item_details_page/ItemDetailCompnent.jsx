@@ -12,7 +12,7 @@ import CreditScoreIcon from "@mui/icons-material/CreditScore";
 import CallIcon from "@mui/icons-material/Call";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import { NoDataFoundComponent } from "../Dashboard/NodataFound/NoDataFoundComponent";
-import Countdown from "react-countdown";
+// import Countdown from "react-countdown";
 import CloseIcon from "@mui/icons-material/Close";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -569,13 +569,13 @@ const ItemDetailComponent = ({
                   <div>
                     <span className="shopping_countdown_div_item_detail">
                       {placeHolder}:{" "}
-                      <div className="count_down_shopping_item_detail">
+                      {/* <div className="count_down_shopping_item_detail">
                         <Countdown
                           className="countdownDiv"
                           date={Date.now() + counterDuration}
                           renderer={CoundownRenderer}
                         />
-                      </div>
+                      </div> */}
                     </span>
                   </div>
                 ) : null}
