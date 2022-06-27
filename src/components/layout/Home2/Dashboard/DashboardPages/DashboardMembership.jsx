@@ -256,6 +256,7 @@ const DashboardMembership = ({ auth }) => {
               console.log(response.data.message);
 
               alert(response.data.message);
+              window.location.reload();
 
               setProcessingDiv(false);
             }
