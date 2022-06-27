@@ -165,7 +165,6 @@ import PrivateRoute3 from './components/routing/PrivateRoute3';
 import ResetPassword from './components/layout/Home2/PasswordReset/ResetPassword';
 import ValidateLogin from './components/layout/Home2/Login/ValidateLogin';
 import Referal from './components/layout/Home2/Login/Referal';
-import TawkTo from 'tawkto-react';
 import { API_URL2 } from './actions/types';
 
 // import ItemDetailsPage from "./components/layout/Home2/item_details_page/ItemDetailsPage.jsx";
@@ -198,15 +197,6 @@ const App = () => {
             data.data.payload.country_name
           );
         });
-
-      var tawkto = new TawkTo(
-        process.env.REACT_TAWK_TO_PROPERTYID,
-        process.env.REACT_TAWK_TAWK_ID
-      );
-      tawkto.showWidget();
-      // tawkto.onStatusChange((status) => {
-      //   console.log(status);
-      // });
     } catch (err) {
       //console.log(err, "Call from exchange rate");
     }

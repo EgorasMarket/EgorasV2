@@ -194,20 +194,24 @@ const DashboardHomePage = ({ auth, match }) => {
       });
   }, []);
 
-  useEffect(() => {
-    axios
+  useEffect(async () => {
+    console.log(auth);
+
+    if (!auth) {
+      return;
+    }
+
+    await axios
       .get(
         api_url2 + `/v1/product/retrieve/locked/${auth.user.user.id}`,
         null,
         config
       )
       .then((data) => {
-        //console.log(data.data,"Ewwooo oh")
-
         setUserLockId(data.data.data);
       })
       .catch((err) => {
-        //console.log(err); // "oh, no!"
+        console.log(err.response); // "oh, no!"
       });
   }, []);
 
@@ -466,6 +470,7 @@ const DashboardHomePage = ({ auth, match }) => {
                 {allDatas.slice(0, 5).map((data) => (
                   <>
                     <div
+                      key={data.id}
                       className="dashboard_transaction_body_cont1"
                       id={data.id}
                       // key={data.id}
@@ -536,7 +541,7 @@ const DashboardHomePage = ({ auth, match }) => {
       {allDatas.map((data) => (
         <>
           {tranPopUp == data.id ? (
-            <div className="trans_div">
+            <div key={data.id} className="trans_div">
               <div className="tranPop_div">
                 <div className="tranPopHeading">
                   Deposit Details{' '}

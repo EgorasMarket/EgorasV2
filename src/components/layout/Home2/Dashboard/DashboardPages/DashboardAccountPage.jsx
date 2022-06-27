@@ -872,7 +872,7 @@ function DashboardAccountPage({
                                 value="Male"
                                 onChange={onChangeFor}
                               />
-                              <label for="male" class="radio">
+                              <label htmlFor="male" class="radio">
                                 Male
                               </label>
                             </div>
@@ -884,7 +884,7 @@ function DashboardAccountPage({
                                 value="Female"
                                 onChange={onChangeFor}
                               />
-                              <label for="female" class="radio">
+                              <label htmlFor="female" class="radio">
                                 Female
                               </label>
                             </div>
@@ -1325,7 +1325,7 @@ function DashboardAccountPage({
                               // value="Male"
                               onChange={onChangeKin}
                             />
-                            <label for="male" class="radio">
+                            <label htmlFor="male" class="radio">
                               Male
                             </label>
                           </div>
@@ -1338,7 +1338,7 @@ function DashboardAccountPage({
                               // value="female"
                               onChange={onChangeKin}
                             />
-                            <label for="female" class="radio">
+                            <label htmlFor="female" class="radio">
                               Female
                             </label>
                           </div>
@@ -1561,7 +1561,7 @@ function DashboardAccountPage({
                     style={{ width: '250px', height: '250px' }}
                   />
                   <label
-                    for="customer_image"
+                    htmlFor="customer_image"
                     className="custom-file-upload33"
                     onChange={onImageChange}
                   >

@@ -741,8 +741,7 @@ const Header = ({ isAuthenticated, auth }) => {
               ===========================
               ========================================== */}
 
-              <vl></vl>
-              <div div className="company">
+              <div className="company">
                 <div
                   style={{
                     cursor: 'pointer',

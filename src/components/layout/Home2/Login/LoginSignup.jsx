@@ -1,16 +1,16 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, Fragment } from 'react';
 // import "../../../../css/signup.css";
-import { connect } from "react-redux";
-import "../../../../css/login.css";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import AttachEmailOutlinedIcon from "@mui/icons-material/AttachEmailOutlined";
-import { CustomAlert } from "../../../../CustomAlert";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./Kcl.css";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import { getLogin } from "../../../../actions/auth";
+import { connect } from 'react-redux';
+import '../../../../css/login.css';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import AttachEmailOutlinedIcon from '@mui/icons-material/AttachEmailOutlined';
+import { CustomAlert } from '../../../../CustomAlert';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import './Kcl.css';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { getLogin } from '../../../../actions/auth';
 // import { getAuthentication } from "../../../../actions/auth";
 // import { setAlert } from "../../../../actions/alert";
 
@@ -20,35 +20,37 @@ const LoginSignup = ({ getLogin, isAuthenticated }) => {
   // const [ref_auth, setRef_auth] = React.useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [visibility, setVisibility] = useState(false);
-  const [token, setToken] = useState({ email: "", ref_auth: "" });
+  const [token, setToken] = useState({ email: '', ref_auth: '' });
   const [strongPass, setStrongPass] = useState(false);
-  const [alert, setAlert] = useState("");
+  const [alert, setAlert] = useState('');
   const [customAlert, setCustomAlert] = useState(false);
-  const [alertType, setAlertType] = useState("");
+  const [alertType, setAlertType] = useState('');
   const { email, ref_auth } = token;
   const [emailLink, setEmailLink] = useState(false);
   const [isSuccessful, setIsSuccessful] = useState(false);
-  const [authToken, setAuthToken] = useState(localStorage.getItem("token"));
+  const [authToken, setAuthToken] = useState(
+    localStorage.getItem('token')
+  );
   useEffect(() => {
     if (authToken !== null) {
-      return (window.location.href = "/");
+      return (window.location.href = '/');
     }
-  }, []);
+  });
 
   useEffect(() => {
     if (typeof localStorage.referer !== undefined) {
       // localStorage.getItem("referer");
       // setRef_auth(localStorage.getItem("referer"));
       setToken({
-        email: "",
-        ref_auth: localStorage.getItem("referer"),
+        email: '',
+        ref_auth: localStorage.getItem('referer'),
       });
     }
   }, []);
   // console.log(ref_auth);
 
-  const NetWorkTimeoutMsg = "The connection to the server timed out.";
-  const onlineMsg = "Your internet connection appears to be offline.";
+  const NetWorkTimeoutMsg = 'The connection to the server timed out.';
+  const onlineMsg = 'Your internet connection appears to be offline.';
   // ===============
   // ===============
   // ===============
@@ -77,13 +79,13 @@ const LoginSignup = ({ getLogin, isAuthenticated }) => {
     }
   };
   useEffect(() => {
-    if (email === "") {
+    if (email === '') {
       setDisable(true);
     } else if (isLoading == true) {
       setDisable(true);
     } else if (isLoading == false) {
       setDisable(false);
-    } else if (email != "") {
+    } else if (email != '') {
       setDisable(false);
     } else {
       setDisable(false);
@@ -97,10 +99,10 @@ const LoginSignup = ({ getLogin, isAuthenticated }) => {
     }
 
     if (window.navigator.onLine === false) {
-      console.log("i am offline ");
+      console.log('i am offline ');
       setIsLoading(false);
       setDisable(false);
-      setAlertType("danger");
+      setAlertType('danger');
       setAlert(onlineMsg);
       setCustomAlert(true);
       return;
@@ -120,14 +122,14 @@ const LoginSignup = ({ getLogin, isAuthenticated }) => {
       if (res3.data.success === true) {
         setIsSuccessful(true);
         setIsLoading(false);
-        localStorage.removeItem("referer");
+        localStorage.removeItem('referer');
         // setDisable(false);
-        console.log("okay Good Server");
+        console.log('okay Good Server');
       } else {
         console.log(res3.data.data.errors[0].msg);
         setCustomAlert(true);
         setAlert(res3.data.data.errors[0].msg);
-        setAlertType("danger");
+        setAlertType('danger');
         setIsLoading(false);
         setDisable(false);
         //   if (res3.data.data.request) {
@@ -141,7 +143,7 @@ const LoginSignup = ({ getLogin, isAuthenticated }) => {
     } catch (err) {
       setIsLoading(false);
       setDisable(false);
-      setAlertType("danger");
+      setAlertType('danger');
       setAlert(NetWorkTimeoutMsg);
       setCustomAlert(true);
     }
@@ -149,7 +151,7 @@ const LoginSignup = ({ getLogin, isAuthenticated }) => {
   // Redirect if logged in
   if (isAuthenticated) {
     // return <Redirect to="/dashboard" />;
-    return window.location.replace("/dashboard");
+    return window.location.replace('/dashboard');
   }
 
   return (
@@ -163,26 +165,29 @@ const LoginSignup = ({ getLogin, isAuthenticated }) => {
                   className="back_btn"
                   onClick={() => {
                     setIsSuccessful(false);
-                    setToken({ email: "" });
+                    setToken({ email: '' });
                   }}
                 >
                   <ArrowBackIosIcon className="back_register_icon" />
                   Back
                 </div>
                 <div className="register_success_msg">
-                  <span className="check_emailTitle">Check your email.</span>
-                  Click on the login button that We have emailed to{" "}
-                  <span className="email_name">{email} </span>to login.
+                  <span className="check_emailTitle">
+                    Check your email.
+                  </span>
+                  Click on the login button that We have emailed to{' '}
+                  <span className="email_name">{email} </span>to
+                  login.
                 </div>
                 <p className="terms_privacy">
-                  You agree to Egoras's{" "}
+                  You agree to Egoras's{' '}
                   <a href="/terms-conditions" className="terms_link">
-                    {" "}
+                    {' '}
                     Terms of Service
-                  </a>{" "}
+                  </a>{' '}
                   and
                   <a href="/privacy" className="privacy_link">
-                    {" "}
+                    {' '}
                     Privacy Policy
                   </a>
                   .
@@ -215,19 +220,21 @@ const LoginSignup = ({ getLogin, isAuthenticated }) => {
                         className="signup_input_field"
                         name="email"
                         onChange={onChange2}
-                        value={email}
-                        placeHolder="Email"
+                        value={email || ''}
+                        placeholder="Email"
                       />
                     </div>
                     <div className="signup_input_field1_cont">
-                      <span className="input_title">Referal Code</span>
+                      <span className="input_title">
+                        Referal Code
+                      </span>
                       <input
                         type="text"
                         className="signup_input_field"
                         name="ref_auth"
                         onChange={onChange2}
-                        value={ref_auth}
-                        placeHolder="Referal Code"
+                        value={ref_auth || ''}
+                        placeholder="Referal Code"
                       />
                     </div>
 
@@ -239,7 +246,7 @@ const LoginSignup = ({ getLogin, isAuthenticated }) => {
                     >
                       {isLoading ? (
                         <span>
-                          Sending Link{" "}
+                          Sending Link{' '}
                           <FontAwesomeIcon
                             className="ml-2"
                             icon={faSpinner}
@@ -251,14 +258,17 @@ const LoginSignup = ({ getLogin, isAuthenticated }) => {
                       )}
                     </button>
                     <p className="terms_privacy">
-                      You agree to Egoras's{" "}
-                      <a href="/terms-conditions" className="terms_link">
-                        {" "}
+                      You agree to Egoras's{' '}
+                      <a
+                        href="/terms-conditions"
+                        className="terms_link"
+                      >
+                        {' '}
                         Terms of Service
-                      </a>{" "}
+                      </a>{' '}
                       and
                       <a href="/privacy" className="privacy_link">
-                        {" "}
+                        {' '}
                         Privacy Policy
                       </a>
                       .
@@ -271,19 +281,22 @@ const LoginSignup = ({ getLogin, isAuthenticated }) => {
                       className="sign_up_btn"
                       onClick={toggleEmailLink}
                     >
-                      <AttachEmailOutlinedIcon className="back_register_icon" />{" "}
+                      <AttachEmailOutlinedIcon className="back_register_icon" />{' '}
                       Sign in with Email
                     </button>
 
                     <p className="terms_privacy">
-                      You agree to Egoras's{" "}
-                      <a href="/terms-condition" className="terms_link">
-                        {" "}
+                      You agree to Egoras's{' '}
+                      <a
+                        href="/terms-condition"
+                        className="terms_link"
+                      >
+                        {' '}
                         Terms of Service
-                      </a>{" "}
+                      </a>{' '}
                       and
                       <a href="/privacy" className="privacy_link">
-                        {" "}
+                        {' '}
                         Privacy Policy
                       </a>
                       .
@@ -325,7 +338,7 @@ const LoginSignup = ({ getLogin, isAuthenticated }) => {
 
 LoginSignup.propTypes = {
   getLogin: PropTypes.func.isRequired,
-  setAlert: PropTypes.func.isRequired,
+  // setAlert: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
 };
 
