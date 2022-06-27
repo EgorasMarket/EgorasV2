@@ -1,73 +1,73 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 // import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-import CloseIcon from "@material-ui/icons/Close";
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import CloseIcon from '@material-ui/icons/Close';
 // import MenuIcon from "@mui/icons-material/Menu";
-import clsx from "clsx";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
-import SearchIcon from "@mui/icons-material/Search";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import Drawer from "@material-ui/core/Drawer";
-import SellIcon from "@mui/icons-material/Sell";
-import PaidIcon from "@mui/icons-material/Paid";
-import HeaderMenu from "./HeaderMenu/HeaderMenu";
-import HeaderApps from "./HeaderMenu/HeaderApps";
-import AppsIcon from "@mui/icons-material/Apps";
-import SwapHorizontalCircleIcon from "@mui/icons-material/SwapHorizontalCircle";
-import HowToRegIcon from "@mui/icons-material/HowToReg";
-import Toolbar from "@material-ui/core/Toolbar";
-import ArticleIcon from "@mui/icons-material/Article";
-import SavingsIcon from "@mui/icons-material/Savings";
-import PersonIcon from "@mui/icons-material/Person";
-import RssFeedIcon from "@mui/icons-material/RssFeed";
-import Accordion from "@material-ui/core/Accordion";
-import GroupsIcon from "@mui/icons-material/Groups";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import Typography from "@material-ui/core/Typography";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { API_URL2 as api_url2 } from "../../../../actions/types";
+import clsx from 'clsx';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
+import SearchIcon from '@mui/icons-material/Search';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import Drawer from '@material-ui/core/Drawer';
+import SellIcon from '@mui/icons-material/Sell';
+import PaidIcon from '@mui/icons-material/Paid';
+import HeaderMenu from './HeaderMenu/HeaderMenu';
+import HeaderApps from './HeaderMenu/HeaderApps';
+import AppsIcon from '@mui/icons-material/Apps';
+import SwapHorizontalCircleIcon from '@mui/icons-material/SwapHorizontalCircle';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
+import Toolbar from '@material-ui/core/Toolbar';
+import ArticleIcon from '@mui/icons-material/Article';
+import SavingsIcon from '@mui/icons-material/Savings';
+import PersonIcon from '@mui/icons-material/Person';
+import RssFeedIcon from '@mui/icons-material/RssFeed';
+import Accordion from '@material-ui/core/Accordion';
+import GroupsIcon from '@mui/icons-material/Groups';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { API_URL2 as api_url2 } from '../../../../actions/types';
 
 // =======================
-import List from "@material-ui/core/List";
+import List from '@material-ui/core/List';
 
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import ListItem from "@material-ui/core/ListItem";
-import Login from "../Login/Login";
-import axios from "axios";
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import ListItem from '@material-ui/core/ListItem';
+import Login from '../Login/Login';
+import axios from 'axios';
 
 // styles
-import "../../../../css/header.css";
-import "../../../../css/headerMobile.css";
-import { Authenticate } from "../../../auth/Authenticate";
-import zIndex from "@material-ui/core/styles/zIndex";
+import '../../../../css/header.css';
+import '../../../../css/headerMobile.css';
+import { Authenticate } from '../../../auth/Authenticate';
+import zIndex from '@material-ui/core/styles/zIndex';
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
+    display: 'flex',
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
   },
   appBar: {
-    transition: theme.transitions.create(["margin", "width"], {
+    transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["margin", "width"], {
+    transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   hide: {
-    display: "none",
+    display: 'none',
   },
   drawer: {
     width: drawerWidth,
@@ -87,24 +87,24 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
   },
   drawerHeader: {
-    display: "flex",
-    alignItems: "center",
+    display: 'flex',
+    alignItems: 'center',
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-    justifyContent: "flex-start",
+    justifyContent: 'flex-start',
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    transition: theme.transitions.create("margin", {
+    transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
     marginRight: -drawerWidth,
   },
   contentShift: {
-    transition: theme.transitions.create("margin", {
+    transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
@@ -124,7 +124,7 @@ const useStyles = makeStyles((theme) => ({
 
 const useStyles2 = makeStyles((theme) => ({
   root: {
-    display: "flex",
+    display: 'flex',
   },
   paper: {
     marginRight: theme.spacing(2),
@@ -134,176 +134,179 @@ const useStyles2 = makeStyles((theme) => ({
 const Header = ({ isAuthenticated, auth }) => {
   const config = {
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   };
 
-  const [showHeader, setshowHeader] = useState("/");
+  const [showHeader, setshowHeader] = useState('/');
   const [isAuth, setIsAuth] = useState(false);
   // const [showHeader, setshowHeader] = useState("/");
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [searchDiv, setSearchDiv] = useState(false);
   const [productNames, setProductNames] = useState([]);
   const [hederMenu, setHeaderMenu] = useState(false);
   const [hederApps, setHeaderApps] = useState(false);
   const [loginDrop, setLoginDrop] = useState(false);
   const [logoutBtn, setLogoutBtn] = useState(false);
-  const [authToken, setAuthToken] = useState(localStorage.getItem("token"));
+  const [authToken, setAuthToken] = useState(
+    localStorage.getItem('token')
+  );
 
   const currentPage = window.location.pathname;
-  const myArr = currentPage.split("/");
+  const myArr = currentPage.split('/');
   useEffect(() => {
     //   if(Hides === '/login'){
     //       document.getElementById('racing').style.display = 'none'
     //     }
-    if (currentPage === "/dashboard/") {
+    if (currentPage === '/dashboard/') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/dashboard/accounts/accounts") {
+    if (currentPage === '/dashboard/accounts/accounts') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/dashboard/accounts/kin") {
+    if (currentPage === '/dashboard/accounts/kin') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/authenticate/" + myArr[2]) {
+    if (currentPage === '/authenticate/' + myArr[2]) {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/dashboard/accounts/security") {
+    if (currentPage === '/dashboard/accounts/security') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/dashboard/accounts/kin") {
+    if (currentPage === '/dashboard/accounts/kin') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/dashboard/accounts/security") {
+    if (currentPage === '/dashboard/accounts/security') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/dashboard/membership_subscription") {
+    if (currentPage === '/dashboard/membership_subscription') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/dashboard") {
+    if (currentPage === '/dashboard') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/dashboard/referral/home") {
+    if (currentPage === '/dashboard/referral/home') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/dashboard") {
+    if (currentPage === '/dashboard') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/dashboard/wallet") {
+    if (currentPage === '/dashboard/wallet') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/dashboard/wallet/withdrawal") {
+    if (currentPage === '/dashboard/wallet/withdrawal') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/super_admin/signup") {
+    if (currentPage === '/super_admin/signup') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/super_admin/user_overview") {
+    if (currentPage === '/super_admin/user_overview') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/signup/super_admin") {
+    if (currentPage === '/signup/super_admin') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/login/super_admin") {
+    if (currentPage === '/login/super_admin') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/super_admin/all_user") {
+    if (currentPage === '/super_admin/all_user') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/super_admin/login") {
+    if (currentPage === '/super_admin/login') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/login") {
+    if (currentPage === '/login') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/signup") {
+    if (currentPage === '/signup') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/dashboard/savings") {
+    if (currentPage === '/dashboard/savings') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/dashboard/products/categories/id-phone") {
+    if (currentPage === '/dashboard/products/categories/id-phone') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/dashboard/products") {
+    if (currentPage === '/dashboard/products') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/dashboard/orders") {
+    if (currentPage === '/dashboard/orders') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/dashboard/egr-") {
+    if (currentPage === '/dashboard/egr-') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/dashboard/orders") {
+    if (currentPage === '/dashboard/orders') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/dashboard/egr-") {
+    if (currentPage === '/dashboard/egr-') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
-    if (currentPage === "/whitepaper") {
+    if (currentPage === '/whitepaper') {
       setshowHeader(() => {
-        document.getElementById("headerSection").style.position = "relative";
+        document.getElementById('headerSection').style.position =
+          'relative';
       });
     }
-    if (currentPage === "/dashboard/accounts") {
+    if (currentPage === '/dashboard/accounts') {
       setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
+        document.getElementById('Header').style.display = 'none';
       });
     }
     // if (currentPage === "/market") {
@@ -344,17 +347,17 @@ const Header = ({ isAuthenticated, auth }) => {
   // page hide element
 
   // class change on click functions
-  const [page1, setPage1] = useState("/");
+  const [page1, setPage1] = useState('/');
 
   useEffect(() => {
-    if (currentPage === "/loan") {
-      setPage1("/loan");
-    } else if (currentPage === "/validator") {
-      setPage1("/validator");
-    } else if (currentPage === "/savings") {
-      setPage1("/savings");
-    } else if (currentPage === "/market") {
-      setPage1("/market");
+    if (currentPage === '/loan') {
+      setPage1('/loan');
+    } else if (currentPage === '/validator') {
+      setPage1('/validator');
+    } else if (currentPage === '/savings') {
+      setPage1('/savings');
+    } else if (currentPage === '/market') {
+      setPage1('/market');
     }
   });
   useEffect(() => {
@@ -368,8 +371,8 @@ const Header = ({ isAuthenticated, auth }) => {
     // console.log(localStorage.getItem('token'));
   }, []);
   const triggerLogout = () => {
-    localStorage.removeItem("token");
-    return (window.location.href = "/register");
+    localStorage.removeItem('token');
+    return (window.location.href = '/register');
   };
 
   useEffect(() => {
@@ -450,39 +453,43 @@ const Header = ({ isAuthenticated, auth }) => {
     setDropDown1(false);
   };
 
-  useEffect(() => {
-    axios
-      .get(
-        api_url2 + "/v1/product/retrieve/products/tag/search/" + searchTerm,
-        null,
-        config
-      )
-      .then((data) => {
-        console.log(data.data.data);
-        setProductNames(data.data.data);
-      })
-      .catch((error) => {
-        console.log("Error:", error);
-      });
-  }, [searchTerm]);
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       api_url2 +
+  //         '/v1/product/retrieve/products/tag/search/' +
+  //         searchTerm,
+  //       null,
+  //       config
+  //     )
+  //     .then((data) => {
+  //       console.log(data.data.data);
+  //       setProductNames(data.data.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log('Error:', error);
+  //     });
+  // }, [searchTerm]);
   const handler = (event) => {
     setSearchTerm(event.target.value);
   };
-  useEffect(() => {
-    axios
-      .get(
-        api_url2 + "/v1/product/retrieve/products/tag/search/" + searchTerm,
-        null,
-        config
-      )
-      .then((data) => {
-        console.log(data.data.data);
-        setProductNames(data.data.data);
-      })
-      .catch((error) => {
-        console.log("Error:", error);
-      });
-  }, [searchTerm]);
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       api_url2 +
+  //         '/v1/product/retrieve/products/tag/search/' +
+  //         searchTerm,
+  //       null,
+  //       config
+  //     )
+  //     .then((data) => {
+  //       console.log(data.data.data);
+  //       setProductNames(data.data.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log('Error:', error);
+  //     });
+  // }, [searchTerm]);
   const results = productNames.filter((car) =>
     car.tag.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -510,50 +517,54 @@ const Header = ({ isAuthenticated, auth }) => {
 
   const links = [
     {
-      id: "market",
-      href: "/market",
-      name: "Shop Now",
+      id: 'market',
+      href: '/market',
+      name: 'Shop Now',
       paragraph:
-        "Shop your favorite products on the egoras market at affordable prices.",
+        'Shop your favorite products on the egoras market at affordable prices.',
       icon: <ShoppingCartIcon className="header_drop_icons" />,
     },
     {
-      id: "sell",
-      href: "https://sell.egoras.com/",
-      name: "Sell Now",
-      paragraph: "Sell your used items in minutes.",
+      id: 'sell',
+      href: 'https://sell.egoras.com/',
+      name: 'Sell Now',
+      paragraph: 'Sell your used items in minutes.',
       icon: <SellIcon className="header_drop_icons" />,
     },
     {
-      id: "borrow",
-      href: "/loan",
-      name: "loan",
+      id: 'borrow',
+      href: '/loan',
+      name: 'loan',
       paragraph:
-        "Pledge your personal properties up as collateral and get an interest free loan.",
+        'Pledge your personal properties up as collateral and get an interest free loan.',
       icon: <PaidIcon className="header_drop_icons" />,
     },
     {
-      id: "savings",
-      href: "/savings",
-      name: "Savings",
+      id: 'savings',
+      href: '/savings',
+      name: 'Savings',
       paragraph:
-        "Get to acquire your desired items with ease through our smart savings plan.",
+        'Get to acquire your desired items with ease through our smart savings plan.',
 
       icon: <SavingsIcon className="header_drop_icons" />,
     },
     {
-      id: "valid",
-      href: "/validator",
-      name: "Validator",
-      paragraph: "Earn over 20% APR for approving/declining collaterals.",
+      id: 'valid',
+      href: '/validator',
+      name: 'Validator',
+      paragraph:
+        'Earn over 20% APR for approving/declining collaterals.',
       icon: <HowToRegIcon className="header_drop_icons" />,
     },
     {
-      id: "swap",
-      href: "/swap",
-      name: "Swap to Engn",
-      paragraph: "Easily swap your EGC to ENGN to access our services.",
-      icon: <SwapHorizontalCircleIcon className="header_drop_icons" />,
+      id: 'swap',
+      href: '/swap',
+      name: 'Swap to Engn',
+      paragraph:
+        'Easily swap your EGC to ENGN to access our services.',
+      icon: (
+        <SwapHorizontalCircleIcon className="header_drop_icons" />
+      ),
     },
   ];
   return (
@@ -562,11 +573,19 @@ const Header = ({ isAuthenticated, auth }) => {
         <div className="container-fluid header">
           <div className="header-area">
             <a href="/">
-              {" "}
-              <img src="/img/egoras-logo.svg" alt="..." className="egr-logo" />
+              {' '}
+              <img
+                src="/img/egoras-logo.svg"
+                alt="..."
+                className="egr-logo"
+              />
             </a>
             <a href="#" className="egrLogo2Cont">
-              <img src="/img/egoras-logo.svg" alt="..." className="egr-logo2" />
+              <img
+                src="/img/egoras-logo.svg"
+                alt="..."
+                className="egr-logo2"
+              />
             </a>
             <div className="header_search">
               <input
@@ -577,7 +596,7 @@ const Header = ({ isAuthenticated, auth }) => {
                 className="header_search_bar"
                 placeholder="Search products, brands and categories"
                 onChange={handler}
-                autocomplete="off"
+                autoComplete="off"
 
                 // onMouseOut={() => {
                 //   setSearchDiv(false);
@@ -588,25 +607,25 @@ const Header = ({ isAuthenticated, auth }) => {
                 <div
                   id="fodo"
                   style={{
-                    position: "absolute",
-                    zIndex: "500",
-                    width: "100%",
-                    top: "46px",
-                    maxHeight: "500px",
-                    height: "auto",
-                    backgroundColor: "#fff",
-                    overflowY: "scroll",
-                    borderRadius: "10px",
-                    borderTopLeftRadius: "0px",
-                    borderTopRightRadius: "0px",
-                    cursor: "pointer",
-                    boxShadow: "#0000000f 0px 20px 20px 0px",
+                    position: 'absolute',
+                    zIndex: '500',
+                    width: '100%',
+                    top: '46px',
+                    maxHeight: '500px',
+                    height: 'auto',
+                    backgroundColor: '#fff',
+                    overflowY: 'scroll',
+                    borderRadius: '10px',
+                    borderTopLeftRadius: '0px',
+                    borderTopRightRadius: '0px',
+                    cursor: 'pointer',
+                    boxShadow: '#0000000f 0px 20px 20px 0px',
                   }}
                   className="scr"
                 >
                   {productNames.length === 0 ? (
                     <span className="search_result_not_found">
-                      {" "}
+                      {' '}
                       Search result not found.
                     </span>
                   ) : (
@@ -618,22 +637,22 @@ const Header = ({ isAuthenticated, auth }) => {
                         <a
                           href={`/products/tag/${item.tag.replace(
                             /\s+/g,
-                            " "
+                            ' '
                           )}`}
                           className="header_search_display_div"
                           style={{
-                            padding: "1em 2em",
+                            padding: '1em 2em',
                           }}
                         >
                           <div
                             key={index.toString()}
                             style={{
-                              color: "#000",
-                              fontSize: "12px",
-                              fontWeight: "400",
+                              color: '#000',
+                              fontSize: '12px',
+                              fontWeight: '400',
                             }}
                           >
-                            {" "}
+                            {' '}
                             {item.tag.charAt(0).toUpperCase() +
                               item.tag.slice(1)}
                           </div>
@@ -651,10 +670,10 @@ const Header = ({ isAuthenticated, auth }) => {
               <div div className="company">
                 <div
                   style={{
-                    cursor: "pointer",
-                    position: "relative",
-                    zIndex: "2",
-                    margin: "0px",
+                    cursor: 'pointer',
+                    position: 'relative',
+                    zIndex: '2',
+                    margin: '0px',
                   }}
                   className="company"
                   id="company1"
@@ -685,7 +704,9 @@ const Header = ({ isAuthenticated, auth }) => {
                           href={data.href}
                           id={data.id}
                           className={
-                            page1 === data.href ? "docs activeLink" : "about"
+                            page1 === data.href
+                              ? 'docs activeLink'
+                              : 'about'
                           }
                           // onClick={clickMe1}
                         >
@@ -720,14 +741,13 @@ const Header = ({ isAuthenticated, auth }) => {
               ===========================
               ========================================== */}
 
-              <vl></vl>
-              <div div className="company">
+              <div className="company">
                 <div
                   style={{
-                    cursor: "pointer",
-                    position: "relative",
-                    zIndex: "2",
-                    margin: "0px",
+                    cursor: 'pointer',
+                    position: 'relative',
+                    zIndex: '2',
+                    margin: '0px',
                   }}
                   className="company"
                   id="company1"
@@ -756,7 +776,9 @@ const Header = ({ isAuthenticated, auth }) => {
                       <a
                         href="/about"
                         className={
-                          page1 === "/about" ? "docs activeLink" : "about"
+                          page1 === '/about'
+                            ? 'docs activeLink'
+                            : 'about'
                         }
                         // onClick={clickMe2}
                         id="aboutUs"
@@ -767,12 +789,15 @@ const Header = ({ isAuthenticated, auth }) => {
                         </div>
                         <ArrowForwardIosIcon className="header_drop_arrow_icon" />
 
-                        {page1 === "/about" ? (
+                        {page1 === '/about' ? (
                           <span className="Line"></span>
                         ) : null}
                       </a>
                       {/* <hr /> */}
-                      <a href="https://egoras.medium.com/" className="about">
+                      <a
+                        href="https://egoras.medium.com/"
+                        className="about"
+                      >
                         <div className="header_drop_txt_div">
                           <RssFeedIcon className="header_drop_icons" />
                           Blog
@@ -784,7 +809,9 @@ const Header = ({ isAuthenticated, auth }) => {
                         href="/whitepaper"
                         id="whitepaper"
                         className={
-                          page1 === "/whitepaper" ? "docs activeLink" : "about"
+                          page1 === '/whitepaper'
+                            ? 'docs activeLink'
+                            : 'about'
                         }
                         // onClick={clickMe1}
                       >
@@ -794,7 +821,7 @@ const Header = ({ isAuthenticated, auth }) => {
                         </div>
                         <ArrowForwardIosIcon className="header_drop_arrow_icon" />
 
-                        {page1 === "/whitepaper" ? (
+                        {page1 === '/whitepaper' ? (
                           <span className="Line"></span>
                         ) : null}
                       </a>
@@ -808,7 +835,7 @@ const Header = ({ isAuthenticated, auth }) => {
                 Apply for loan
               </a> */}
 
-              <div style={{ display: "flex", position: "relative" }}>
+              <div style={{ display: 'flex', position: 'relative' }}>
                 <PersonRoundedIcon
                   className="login_icon"
                   onClick={ToggleLoginDrop}
@@ -824,7 +851,10 @@ const Header = ({ isAuthenticated, auth }) => {
                     <div className="login_drop_cont">
                       <div className="login_drop_cont_body">
                         {logoutBtn === false ? (
-                          <a href="/register" className="login_drop_cont_link">
+                          <a
+                            href="/register"
+                            className="login_drop_cont_link"
+                          >
                             Login / Signup
                           </a>
                         ) : (
@@ -838,7 +868,7 @@ const Header = ({ isAuthenticated, auth }) => {
                             <div
                               onClick={triggerLogout}
                               className="login_drop_cont_link"
-                              style={{ cursor: "pointer" }}
+                              style={{ cursor: 'pointer' }}
                             >
                               Logout
                             </div>
@@ -895,9 +925,9 @@ const Header = ({ isAuthenticated, auth }) => {
               <MenuIcon
                 className="header_mobile_view_area1_menu_icon"
                 onClick={ToggleHeaderMenu}
-              />{" "}
+              />{' '}
               <a href="/">
-                {" "}
+                {' '}
                 <img
                   src="/img/egoras-logo.svg"
                   alt="..."
@@ -905,7 +935,9 @@ const Header = ({ isAuthenticated, auth }) => {
                 />
               </a>
               <div className="header_mobile_icons_cont">
-                <div style={{ display: "flex", position: "relative" }}>
+                <div
+                  style={{ display: 'flex', position: 'relative' }}
+                >
                   <PersonRoundedIcon
                     className="login_icon"
                     onClick={ToggleLoginDrop}
@@ -938,13 +970,16 @@ const Header = ({ isAuthenticated, auth }) => {
                               <div
                                 onClick={triggerLogout}
                                 className="login_drop_cont_link"
-                                style={{ cursor: "pointer" }}
+                                style={{ cursor: 'pointer' }}
                               >
                                 Logout
                               </div>
                             </>
                           )}
-                          <a href="#" className="login_drop_cont_link">
+                          <a
+                            href="#"
+                            className="login_drop_cont_link"
+                          >
                             <Authenticate />
                           </a>
                         </div>
@@ -968,7 +1003,7 @@ const Header = ({ isAuthenticated, auth }) => {
                   className="header_search_bar"
                   placeholder="Search products, brands and categories"
                   onChange={handler}
-                  autocomplete="off"
+                  autoComplete="off"
 
                   // onMouseOut={() => {
                   //   setSearchDiv(false);
@@ -979,25 +1014,25 @@ const Header = ({ isAuthenticated, auth }) => {
                   <div
                     id="fodo"
                     style={{
-                      position: "absolute",
-                      zIndex: "500",
-                      width: "100%",
-                      top: "46px",
-                      maxHeight: "500px",
-                      height: "auto",
-                      backgroundColor: "#fff",
-                      overflowY: "scroll",
-                      borderRadius: "10px",
-                      borderTopLeftRadius: "0px",
-                      borderTopRightRadius: "0px",
-                      cursor: "pointer",
-                      boxShadow: "#0000000f 0px 20px 20px 0px",
+                      position: 'absolute',
+                      zIndex: '500',
+                      width: '100%',
+                      top: '46px',
+                      maxHeight: '500px',
+                      height: 'auto',
+                      backgroundColor: '#fff',
+                      overflowY: 'scroll',
+                      borderRadius: '10px',
+                      borderTopLeftRadius: '0px',
+                      borderTopRightRadius: '0px',
+                      cursor: 'pointer',
+                      boxShadow: '#0000000f 0px 20px 20px 0px',
                     }}
                     className="scr"
                   >
                     {productNames.length === 0 ? (
                       <span className="search_result_not_found">
-                        {" "}
+                        {' '}
                         Search result not found.
                       </span>
                     ) : (
@@ -1009,22 +1044,22 @@ const Header = ({ isAuthenticated, auth }) => {
                           <a
                             href={`/products/tag/${item.tag.replace(
                               /\s+/g,
-                              " "
+                              ' '
                             )}`}
                             className="header_search_display_div"
                             style={{
-                              padding: "1em 2em",
+                              padding: '1em 2em',
                             }}
                           >
                             <div
                               key={index.toString()}
                               style={{
-                                color: "#000",
-                                fontSize: "12px",
-                                fontWeight: "400",
+                                color: '#000',
+                                fontSize: '12px',
+                                fontWeight: '400',
                               }}
                             >
-                              {" "}
+                              {' '}
                               {item.tag.toLowerCase()}
                             </div>
                           </a>
@@ -1087,8 +1122,12 @@ const Header = ({ isAuthenticated, auth }) => {
             </div>
           </div>
         </div>
-        {hederMenu === true ? <HeaderMenu onClick={ToggleHeaderMenu} /> : null}
-        {hederApps === true ? <HeaderApps onClick={ToggleHeaderApps} /> : null}
+        {hederMenu === true ? (
+          <HeaderMenu onClick={ToggleHeaderMenu} />
+        ) : null}
+        {hederApps === true ? (
+          <HeaderApps onClick={ToggleHeaderApps} />
+        ) : null}
       </section>
     </div>
   );
