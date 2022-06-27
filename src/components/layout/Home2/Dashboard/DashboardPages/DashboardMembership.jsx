@@ -358,8 +358,7 @@ const DashboardMembership = ({ auth }) => {
             </div>
             <div className="note_div">
               <span className="note_heading">Note:</span> Membership and
-              subscription fee are to be paid with Engn from your egoras wallet
-              .
+              subscription fee are to be paid with Engn from your egoras wallet.
             </div>
           </div>
           <div className="membership_subscription_plans_transcation"></div>
