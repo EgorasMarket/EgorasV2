@@ -657,14 +657,14 @@ const CheckoutModalComponent = ({
           remove_success_div={closeCheckoutOptions}
           btn_txt="Continue"
           // msg={success_msg}
-          // msg={`${success_msg}, Order-Id: ${order_id}`}
-          // errorMsgDiv={errorDiv}
-          // link_btn={true}
-          // src={
-          //   payment_type === "OUTRIGHT"
-          //     ? "/dashboard/savings"
-          //     : "/dashboard/products"
-          // }
+          msg={`${success_msg}, Order-Id: ${order_id}`}
+          errorMsgDiv={errorDiv}
+          link_btn={true}
+          src={
+            payment_type === "OUTRIGHT"
+              ? "/dashboard/savings"
+              : "/dashboard/products"
+          }
         />
       ) : // </div>
       null}

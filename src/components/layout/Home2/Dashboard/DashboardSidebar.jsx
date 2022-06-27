@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import HomeIcon from "@mui/icons-material/Home";
 import { API_URL2 as api_url2 } from "../../../../actions/types";
+// import GroupIcon from "@mui/icons-material/Group";
+import AppsIcon from "@mui/icons-material/Apps";
+import WidgetsIcon from "@mui/icons-material/Widgets";
 // import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 // import SecurityIcon from "@mui/icons-material/Security";
 import { AccountNavigation } from "./DashboardPages/AccountNavigation";
@@ -10,6 +13,7 @@ import Inventory2Icon from "@mui/icons-material/Inventory2";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MenuIcon from "@mui/icons-material/Menu";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
+import CardMembershipIcon from "@mui/icons-material/CardMembership";
 // import ListIcon from "@mui/icons-material/List";
 import ListIcon from "@mui/icons-material/List";
 import { connect } from "react-redux";
@@ -193,12 +197,20 @@ const DashboardSidebar = ({ auth, cart, retrieveCart }) => {
       setActiveBg("Home");
       setCatDiv("not_home");
     }
+    if (linksActive === "/dashboard/membership_subscription") {
+      setActiveBg("member");
+      setCatDiv("not_home");
+    }
     if (linksActive === "/dashboard/savings") {
       setActiveBg("savings");
       setCatDiv("not_home");
     }
     if (linksActive === "/dashboard/cart") {
       setActiveBg("cart");
+      setCatDiv("not_home");
+    }
+    if (linksActive === "/dashboard/referral/home") {
+      setActiveBg("referral");
       setCatDiv("not_home");
     }
     if (linksActive === "/dashboard/orders") {
@@ -429,6 +441,7 @@ const DashboardSidebar = ({ auth, cart, retrieveCart }) => {
                     {" "}
                     Welcome
                   </span>
+                  <AppsIcon className="dashboard_widgets" />
                 </div>
               ) : null}
             </div>
@@ -599,6 +612,54 @@ const DashboardSidebar = ({ auth, cart, retrieveCart }) => {
                 {/* ===================== */}
 
                 <a
+                  href="/dashboard/referral/home"
+                  className="link"
+                  id="referral"
+                  onClick={changeBg}
+                >
+                  <li
+                    className={
+                      activeBg == "referral"
+                        ? "sidebarListItem list-item-active"
+                        : "sidebarListItem"
+                    }
+                  >
+                    <GroupIcon className="sidebarIcon" />
+                    Referrals
+                  </li>
+                </a>
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+
+                <a
+                  href="/dashboard/membership_subscription"
+                  className="link"
+                  id="member"
+                  onClick={changeBg}
+                >
+                  <li
+                    className={
+                      activeBg == "member"
+                        ? "sidebarListItem list-item-active"
+                        : "sidebarListItem"
+                    }
+                  >
+                    <CardMembershipIcon className="sidebarIcon" />
+                    Billing
+                  </li>
+                </a>
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+
+                <a
                   href="/dashboard/orders"
                   className="link"
                   id="order"
@@ -760,6 +821,56 @@ const DashboardSidebar = ({ auth, cart, retrieveCart }) => {
                     Wallet
                   </li>
                   <span className="hover_link_txt">Wallet</span>
+                </a>
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+
+                <a
+                  href="/dashboard/referral/home"
+                  className="link hover_link"
+                  id="referral"
+                  onClick={changeBg}
+                >
+                  <li
+                    className={
+                      activeBg == "referral"
+                        ? "sidebarListItem small_list-item-active"
+                        : "sidebarListItem"
+                    }
+                  >
+                    <GroupIcon className="sidebarIcon" />
+                    Referrals
+                  </li>
+                  <span className="hover_link_txt"> Referrals</span>
+                </a>
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+
+                <a
+                  href="/dashboard/membership_subscription"
+                  className="link hover_link"
+                  id="member"
+                  onClick={changeBg}
+                >
+                  <li
+                    className={
+                      activeBg == "member"
+                        ? "sidebarListItem small_list-item-active"
+                        : "sidebarListItem"
+                    }
+                  >
+                    <CardMembershipIcon className="sidebarIcon" />
+                    Billing
+                  </li>
+                  <span className="hover_link_txt"> Billing</span>
                 </a>
                 {/* ===================== */}
                 {/* ===================== */}

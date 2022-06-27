@@ -22,6 +22,7 @@
 .market_carous {
   padding: 0.5em 0em !important;
 }
+
 .market_carous .react-multi-carousel-track {
   gap: 0px;
 }
@@ -101,7 +102,29 @@
   border-radius: 4px;
   margin-left: 0px;
 }
-
+.awoof_sale_icon_market_cont {
+  display: flex;
+  align-items: center;
+}
+.awoof_sale_icon {
+  transform: rotate(70deg);
+  font-size: 31px !important;
+}
+.startsIn_market {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.count_down_tags_market {
+  font-size: 16px;
+}
+.count_down_shopping_market {
+  font-size: 24px;
+}
+.heading_color_2a {
+  background: #41ba79 !important;
+  color: #ffffff !important;
+}
 .products_hero_area {
   margin-top: 4em;
   display: flex;
