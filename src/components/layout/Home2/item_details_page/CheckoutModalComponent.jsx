@@ -54,8 +54,6 @@ const CheckoutModalComponent = ({
     status,
   } = payload;
 
-  console.log(payload, "this is the complete payload");
-
   const [user_id, setUserId] = useState("");
   const [isloading, setIsLoading] = useState(true);
   const [email, setEmail] = useState("");
@@ -237,6 +235,7 @@ const CheckoutModalComponent = ({
       setProcessingDiv(false);
       setSuccessDiv(false);
       setErrorMsg("You have not completed your profile.. ");
+      setErrorDiv(true);
       setErrorDiv2(true);
       return;
     }

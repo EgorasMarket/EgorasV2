@@ -30,6 +30,7 @@ import { SplashScreen } from "../../SplashScreen/SplashScreen.js";
 
 import "./DashboardStyles/dashboard.css";
 import PrivateRoute2 from "../../../routing/PrivateRoute2";
+import NotFoundPage from "../PageNotFound/NotFoundPage";
 const Dashboard = ({ isAuthenticated, loading }) => {
   const [splashScreen, setSplashScreen] = useState(true);
   //console.log(isAuthenticated, loading);
@@ -52,7 +53,6 @@ const Dashboard = ({ isAuthenticated, loading }) => {
     // setSplashScreen(true);
   }, [isAuthenticated]);
 
-  // let spaceRemove = "/dashboard/products/details/:id/:name";
   //  let dapp =spaceRemove.replace(/%20/g, "-")
 
   return (
@@ -140,7 +140,6 @@ const Dashboard = ({ isAuthenticated, loading }) => {
               />
               <Route
                 exact
-                // path ={`/dashboard/products/details/:id/:${"name".replace( '','-')}`}
                 path={`/dashboard/products/details/:id/:${"name".replace(
                   /\s+/g,
                   ""
@@ -148,16 +147,13 @@ const Dashboard = ({ isAuthenticated, loading }) => {
                 // path={dapp }
                 component={ItemDetailsPage}
               />
-              {/* <Route
-                exact
-                path="/products/details/:id/:name"
-                component={ItemDetailsPage1}
-              /> */}
+
               <Route
                 exact
                 path="/dashboard/products/checkout"
                 component={CheckoutModalComponent}
               />
+              <Route component={NotFoundPage} />
             </Switch>
           </div>
         )}

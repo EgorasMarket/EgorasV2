@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import '../DashboardStyles/DashboardMembership.css';
+import ProgressBar from 'react-animated-progress-bar';
 import {
   useFlutterwave,
   closePaymentModal,
@@ -32,7 +33,15 @@ const DashboardMembership = ({ auth }) => {
   const [option2, setOption2] = useState(null);
   const [ProcessingDiv, setProcessingDiv] = useState(false);
   const [userInfo, setUserInfo] = useState({});
+  const [paymentStatus, setPaymentStatus] = useState({
+    membership_status: '',
+    subscription_status: '',
+    // success: true
+  });
+  const [usedDays, setUsedDays] = useState('');
+  const [daysLeft, setDaysLeft] = useState(0);
 
+  const { membership_status, subscription_status } = paymentStatus;
   const { fullname, phoneNumber, email } = userInfo;
 
   useEffect(async () => {
@@ -62,8 +71,28 @@ const DashboardMembership = ({ auth }) => {
   }, [auth]);
 
   useEffect(async () => {
-    //fetch the membership and subscription record
-  }, []);
+    await axios
+      .get(api_url2 + '/v1/user/status', null, config)
+      .then((data) => {
+        console.log(data.data);
+        setPaymentStatus({
+          membership_status: data.data.membership_status,
+          subscription_status: data.data.subscription_status,
+        });
+        if (data.data.subscription_status == 'ACTIVE') {
+          // 5 * 100 / 30
+          let finalRes2 = 30 - data.data.differnce;
+          let finalRes = (data.data.differnce * 100) / 30;
+          // [daysLeft, setDaysLeft] = useState(0);
+          setUsedDays(finalRes.toString());
+          setDaysLeft(finalRes2);
+        }
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  }, [auth]);
+
   const flutterConfig = {
     public_key: process.env.REACT_APP_PUBLIC_KEY,
     tx_ref: 'EGC-' + Date.now(),
@@ -222,21 +251,21 @@ const DashboardMembership = ({ auth }) => {
             config
           )
           .then((response) => {
-            console.log(
-              response,
-              ' You have successfully registered as a member of the Co-operative'
-            );
+            console.log(response.data.message);
+            if (response.data.success) {
+              console.log(response.data.message);
 
-            alert(
-              ' You have successfully registered as a member of the Co-operative'
-            );
-            setProcessingDiv(false);
+              alert(response.data.message);
+
+              setProcessingDiv(false);
+            }
           })
 
           .catch((err) => {
             setProcessingDiv(false);
-            alert('THe transaction failed ');
+            alert(err.response.data.message);
             console.log(err.response, 'unsuccessful');
+            return;
           });
 
         break;
@@ -250,34 +279,36 @@ const DashboardMembership = ({ auth }) => {
           <div className="membership_slide"></div>
           <div className="membership_subscription_plans_payment_div">
             <div className="membership_subscription_plans_payment_div_cont1">
-              <div className="membership_subscription_plans_payment_div_cont1_div1">
-                <div className="payment_plans_heading_area">
-                  <img src="/img/icon_for_sub.svg" alt="" />
-                  <p className="payment_plans_header_txt">
-                    Become A Member
-                  </p>
+              {membership_status == 'INACTIVE' ? (
+                <div className="membership_subscription_plans_payment_div_cont1_div1">
+                  <div className="payment_plans_heading_area">
+                    <img src="/img/icon_for_sub.svg" alt="" />
+                    <p className="payment_plans_header_txt">
+                      Become A Member
+                    </p>
+                  </div>
+                  <div className="payment_plans_paragraph_area">
+                    <p className="payment_plans_paragraph_txt">
+                      Activate your membership to become a part of the
+                      Egoras cooperative with a one time payment of
+                      ₦2,500 only.
+                    </p>
+                  </div>
+                  <div className="payment_plans_price_area">
+                    <p className="payment_plans_paragraph_txt_price">
+                      ₦2,500
+                    </p>
+                  </div>
+                  <div className="payment_plans_btn_area">
+                    <button
+                      className="membership_btn"
+                      onClick={togglePaymentModal}
+                    >
+                      Activate
+                    </button>
+                  </div>
                 </div>
-                <div className="payment_plans_paragraph_area">
-                  <p className="payment_plans_paragraph_txt">
-                    Activate your membership to become a part of the
-                    Egoras cooperative with a one time payment of
-                    ₦2,500 only.
-                  </p>
-                </div>
-                <div className="payment_plans_price_area">
-                  <p className="payment_plans_paragraph_txt_price">
-                    ₦2,500
-                  </p>
-                </div>
-                <div className="payment_plans_btn_area">
-                  <button
-                    className="membership_btn"
-                    onClick={togglePaymentModal}
-                  >
-                    Activate
-                  </button>
-                </div>
-              </div>
+              ) : null}
               {/* ================================================================== */}
               {/* ================================================================== */}
               {/* ================================================================== */}
@@ -285,38 +316,77 @@ const DashboardMembership = ({ auth }) => {
               {/* ================================================================== */}
               {/* ================================================================== */}
               {/* ================================================================== */}
-              <div className="membership_subscription_plans_payment_div_cont1_div1b">
-                <div className="payment_plans_heading_area">
-                  <img src="/img/icon_for_sub2.svg" alt="" />
-                  <p className="payment_plans_header_txt">
-                    Subscription
-                  </p>
+              {subscription_status == 'INACTIVE' ? (
+                <div className="membership_subscription_plans_payment_div_cont1_div1b">
+                  <div className="payment_plans_heading_area">
+                    <img src="/img/icon_for_sub2.svg" alt="" />
+                    <p className="payment_plans_header_txt">
+                      Subscription
+                    </p>
+                  </div>
+                  <div className="payment_plans_paragraph_area">
+                    <p className="payment_plans_paragraph_txt">
+                      Subscribe to enjoy and access all features and
+                      bonuses on Egoras.
+                    </p>
+                  </div>
+                  <div className="payment_plans_price_area">
+                    <p className="payment_plans_paragraph_txt_price">
+                      ₦1,000 <span className="only"> /monthly</span>
+                    </p>
+                  </div>
+                  <div className="payment_plans_btn_area">
+                    <button
+                      className="membership_btn"
+                      onClick={toggleSubscribePaymentModal}
+                    >
+                      Subscribe
+                    </button>
+                  </div>
                 </div>
-                <div className="payment_plans_paragraph_area">
-                  <p className="payment_plans_paragraph_txt">
-                    Subscribe to enjoy and access all features and
-                    bonuses on Egoras.
-                  </p>
+              ) : (
+                <div className="membership_subscription_plans_payment_div_cont1_div1b">
+                  <div className="payment_plans_heading_area">
+                    <img src="/img/icon_for_sub2.svg" alt="" />
+                    <p className="payment_plans_header_txt">
+                      Subscription
+                    </p>
+                  </div>
+                  <div className="payment_plans_paragraph_area">
+                    <p className="payment_plans_paragraph_txt">
+                      You are currently on an active subscription.
+                    </p>
+                  </div>
+                  <div className="payment_plans_price_area">
+                    <p className="payment_plans_paragraph_txt_price">
+                      <span className="only">
+                        Your subscription expires in{' '}
+                      </span>{' '}
+                      {daysLeft}
+                      <span className="only">days.</span>
+                    </p>
+                  </div>
+                  <div className="payment_plans_btn_area">
+                    <ProgressBar
+                      width="100%"
+                      height="20px"
+                      rect
+                      fontColor="gray"
+                      percentage={usedDays}
+                      rectPadding="1px"
+                      rectBorderRadius="20px"
+                      trackPathColor="transparent"
+                      // bgColor="#333333"
+                      trackBorderColor="grey"
+                    />
+                  </div>
                 </div>
-                <div className="payment_plans_price_area">
-                  <p className="payment_plans_paragraph_txt_price">
-                    ₦1,000 <span className="only"> /monthly</span>
-                  </p>
-                </div>
-                <div className="payment_plans_btn_area">
-                  <button
-                    className="membership_btn"
-                    onClick={toggleSubscribePaymentModal}
-                  >
-                    Subscribe
-                  </button>
-                </div>
-              </div>
+              )}
             </div>
             <div className="note_div">
               <span className="note_heading">Note:</span> Membership
               and subscription fee are to be paid with Engn from your
-              egoras wallet .
+              egoras wallet.
             </div>
           </div>
           <div className="membership_subscription_plans_transcation"></div>

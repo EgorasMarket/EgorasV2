@@ -22,6 +22,18 @@
   max-width: 1124px;
   margin: auto;
 }
+
+.progress-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  background: none !important;
+  transition: width 0.6s ease;
+}
 .membership_subscription_plans_payment_div_cont1_title {
   font-size: 35px;
   font-weight: 700;

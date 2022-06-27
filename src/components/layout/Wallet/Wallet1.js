@@ -32,6 +32,7 @@ const Wallet1 = ({ auth, createWallet, depositToken }) => {
   const [age, setAge] = React.useState("");
   const [assetVal, setAssetVal] = useState("0.000");
   const [userId, setUserId] = useState(localStorage.getItem("adminCusId"));
+  const [staffId, setStaffId] = useState(localStorage.getItem("adminStaffId"));
   const [visible, settVisible] = useState(false);
   const [secureNumb, setSecureNumb] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -112,16 +113,30 @@ const Wallet1 = ({ auth, createWallet, depositToken }) => {
   //     });
   // }, []);
   useEffect(() => {
-    axios
-      .get(api_url2 + "/v1/wallet/get/wallet/info/" + userId, null, config)
-      .then((data) => {
-        // console.log(data.data.data.balance);
-        setTokenBal(data.data.data.balance);
-        setAssetVal(data.data.data.balance * 1);
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
+    // console.log(userId, "kkkkk");
+    if (currentPage === "/super_admin/fund/accountant") {
+      axios
+        .get(api_url2 + "/v1/wallet/get/wallet/info/" + staffId, null, config)
+        .then((data) => {
+          // console.log(data.data.data.balance);
+          setTokenBal(data.data.data.balance);
+          setAssetVal(data.data.data.balance * 1);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    } else {
+      axios
+        .get(api_url2 + "/v1/wallet/get/wallet/info/" + userId, null, config)
+        .then((data) => {
+          // console.log(data.data.data.balance);
+          setTokenBal(data.data.data.balance);
+          setAssetVal(data.data.data.balance * 1);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    }
   }, [auth]);
   useEffect(() => {
     axios
@@ -254,8 +269,6 @@ const Wallet1 = ({ auth, createWallet, depositToken }) => {
       const body = JSON.stringify({
         amount,
       });
-
-      // setAssetVal(assetVal + amount)
 
       try {
         const res = await axios.post(
@@ -475,7 +488,7 @@ const Wallet1 = ({ auth, createWallet, depositToken }) => {
                               Withdraw
                             </button> */}
 
-                            <button className="buttonMenu_drop">
+                            <button className="buttonMenu_drop ml-1">
                               <MoreVertIcon
                                 className="divVan"
                                 // onClick={works2}
@@ -507,6 +520,21 @@ const Wallet1 = ({ auth, createWallet, depositToken }) => {
                                 </div>
                               </div>
                             </button>
+                            {currentPage === "/super_admin/cus_user_wallet" ? (
+                              <a className="ml-4" href="/super_admin/overview">
+                                <button
+                                  className="buttonMenu_drop px-3 py-2"
+                                  style={{
+                                    width: "auto",
+                                    background: "#3ac572",
+                                    color: "#fff",
+                                    fontWeight: "700",
+                                  }}
+                                >
+                                  Shop For Customer
+                                </button>
+                              </a>
+                            ) : null}
                           </div>
                         </div>
                       </div>

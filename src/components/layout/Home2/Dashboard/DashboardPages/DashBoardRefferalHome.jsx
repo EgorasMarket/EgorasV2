@@ -78,6 +78,7 @@ const DashBoardRefferalHome = ({ auth }) => {
       });
   }, []);
   useEffect(() => {
+    console.log("ok");
     setIsLoading(true);
     axios
       .get(api_url2 + "/v1/user/get/my/referals", null, config)
@@ -188,8 +189,32 @@ const DashBoardRefferalHome = ({ auth }) => {
                               }
                             >
                               <span className="reffer_email">{data.email}</span>
-                              <span className="reffer_profit">+₦0.00</span>
-                              <span className="reffer_transact">0</span>
+                              <span className="reffer_profit">
+                                ₦{parseInt(data.percentageCut)}
+                              </span>
+                              <span className="reffer_transact">
+                                <button
+                                  className="btn"
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "flex-start",
+                                    background: "#41ba7173",
+                                    padding: " 0.5em 1em",
+                                    borderRadius: "8px",
+                                    fontSize: "11px",
+                                    color: "#000",
+                                    flexDirection: "column",
+                                    boxShadow: "-1px 1px 20px 3px #75cd9899",
+                                  }}
+                                >
+                                  <span className="d-block">
+                                    {data.transCount + " transactions"}
+                                  </span>
+                                  <div className="d-block font-weight-bold">
+                                    View Details
+                                  </div>
+                                </button>
+                              </span>
                               <span className="reffer_activity">
                                 <span
                                   style={

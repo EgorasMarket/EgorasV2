@@ -30,6 +30,12 @@ export const ADD_TO_CART = 'ADD_TO_CART';
 
 export const API_URL = 'https://tea.egoras.com';
 
+// export const API_URL2 = 'http://192.168.89.63:4000';
+// export const API_URL2 = "http://192.168.43.241:4015";
+// export const API_URL2 = "http://192.168.43.241:4015";
+// export const API_URL2 = "http://192.168.43.241:4015";
+// export const API_URL2 = "http://192.168.58.63:4000";
+// export const API_URL2 = "http://192.168.43.179:4000";
+// export const API_URL2 = "http://192.168.100.157:4000";
+// export const API_URL2 = "http://192.168.8.100:4000";
 export const API_URL2 = 'http://localhost:4015';
-// export const API_URL3 = "https://api.coingecko.com/api/v3";
-// export const API_URL2 = 'https://saul.egoras.com';
