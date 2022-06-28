@@ -372,29 +372,29 @@ function DashboardAccountPage({
 
       const types = ['jpg', 'png', 'jpeg'];
 
-      // if (event.currentTarget.id == 'customer_image') {
-      //   if (event.currentTarget.files.length == 0) {
-      //     // setUserInfo({ ...userInfo, applicantImg: "" });
-      //     // document.getElementById("output1").src = "";
-      //   } else {
-      //     let passportFile =
-      //       document.getElementById(   'customer_image').files[0];
+      if (event.currentTarget.id == 'customer_image') {
+        if (event.currentTarget.files.length == 0) {
+          // setUserInfo({ ...userInfo, applicantImg: "" });
+          // document.getElementById("output1").src = "";
+        } else {
+          let passportFile =
+            document.getElementById('customer_image').files[0];
 
-      //     let fileExtension = passportFile.name.split('.').pop();
-      //     //console.log(passportFile);
+          let fileExtension = passportFile.name.split('.').pop();
+          //console.log(passportFile);
 
-      //     if (!types.includes(fileExtension)) {
-      //     } else {
-      //       if (passportFile.size > 1000000) {
-      //         //console.log("file too large.");
-      //       }
-      //       // else {
-      //       setcustomer_image(passportFile);
-      //       setDisable(!disable);
-      //       // }
-      //     }
-      //   }
-      // }
+          if (!types.includes(fileExtension)) {
+          } else {
+            if (passportFile.size > 1000000) {
+              //console.log("file too large.");
+            }
+            // else {
+            setcustomer_image(passportFile);
+            setDisable(!disable);
+            // }
+          }
+        }
+      }
     }
   };
 
@@ -636,39 +636,40 @@ function DashboardAccountPage({
     setDisable(true);
     const formData = new FormData();
 
-    if (gender == '') {
-      setDisable(true);
-      //console.log("empty passport");
-      // setAlert('Please provide a passport photo', 'danger');
-    } else {
-      const element = document.getElementById('customer_image');
-      const file = element.files[0];
-      formData.append('customer_image', file, file.name);
-      setDisable(false);
-      //console.log(formData, "hhhh");
+    // if (gender == '') {
+    //   setDisable(true);
+    //   //console.log("empty passport");
+    //   // setAlert('Please provide a passport photo', 'danger');
+    // } else {
 
-      try {
-        const res = await axios.put(
-          api_url2 + '/v1/user/add/customer/image',
-          formData
-        );
-        //console.log(res.data, "undefined");
+    const element = document.getElementById('customer_image');
+    const file = element.files[0];
+    formData.append('customer_image', file, file.name);
+    setDisable(false);
+    //console.log(formData, "hhhh");
 
-        if (res.data.statusCode == 200) {
-          // setIsSuccessful(true);/
-          setIsLoading(false);
-          window.location.reload();
-          // setPassportUpload(true)
-        } else {
-          // setAlert('Something went wrong, please try again later', 'danger');
-        }
-      } catch (err) {
+    try {
+      const res = await axios.put(
+        api_url2 + '/v1/user/add/customer/image',
+        formData
+      );
+      //console.log(res.data, "undefined");
+
+      if (res.data.statusCode == 200) {
+        // setIsSuccessful(true);/
         setIsLoading(false);
-        setDisable(false);
-        //console.log(err.response);
-        // setAlert('Check your internet connection', 'danger');
+        window.location.reload();
+        // setPassportUpload(true)
+      } else {
+        // setAlert('Something went wrong, please try again later', 'danger');
       }
+    } catch (err) {
+      setIsLoading(false);
+      setDisable(false);
+      //console.log(err.response);
+      // setAlert('Check your internet connection', 'danger');
     }
+    // }
   };
 
   const AddUserPhoto2 = async (e) => {
@@ -1599,41 +1600,22 @@ function DashboardAccountPage({
       </section>
 
       {/* IMAGE UPLOAD DIALOG */}
-      {modal == true ? (
+      {modal == true && (
         <div className="profile_modal_div">
           <div className="container">
             <div className="profile_modal_area">
               <div className="profile_modal_area1">
                 <div className="profile_modal_area1_img">
-                  <ReactImageUploading
-                    maxNumber={1}
-                    onChange={onChange2}
-                    value={image}
-                    dataURLKey="data_url"
-                  >
-                    {({
-                      imageList,
-                      onImageUpload,
-                      onImageRemove,
-                      isDragging,
-                      dragProps,
-                    }) => (
-                      <>
-                        <img
-                          // src={value}
-                          src={image}
-                          // src="/img/profile_img.jpeg"
-                          alt=""
-                          onClick={onImageUpload}
-                          className="user_upload_img"
-                          style={{ width: '250px', height: '250px' }}
-                        />
-                      </>
-                    )}
-                  </ReactImageUploading>
-
+                  <img
+                    // src={value}
+                    src={image}
+                    // src="/img/profile_img.jpeg"
+                    alt=""
+                    className="user_upload_img"
+                    style={{ width: '250px', height: '250px' }}
+                  />
                   <label
-                    htmlFor="customer_image"
+                    for="customer_image"
                     className="custom-file-upload33"
                     onChange={onImageChange}
                   >
@@ -1654,7 +1636,7 @@ function DashboardAccountPage({
               <div className="profile_modal_area2">
                 <button
                   className="add_photo"
-                  onClick={AddUserPhoto2}
+                  onClick={AddUserPhoto}
                   disabled={disable}
                 >
                   <AddAPhotoIcon className="photo_icon" />{' '}
@@ -1678,7 +1660,7 @@ function DashboardAccountPage({
             </div>
           </div>
         </div>
-      ) : null}
+      )}
       {/* IMAGE UPLOAD DIALOG */}
 
       {modal2 == true && (
@@ -1695,16 +1677,6 @@ function DashboardAccountPage({
                   value={primaryPhoneNumber}
                   onChange={onChange2}
                 />
-                {/* <TextField
-                  className="name_input1ab"
-                  id="outlined-basic"
-                  label="Phone No:"
-                  variant="outlined"
-                  name="phone no"
-                  value={phone_no2}
-                  onChange={handleChange}
-                />
-                 */}
               </div>
               <TextField
                 className="name_input1ab"
