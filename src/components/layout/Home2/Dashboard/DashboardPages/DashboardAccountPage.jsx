@@ -453,10 +453,8 @@ function DashboardAccountPage({
     let res = await sumitGenderAndDate(
       firstnameQ,
       lastnameQ,
-      // phoneNumberQ,
       gender,
       birthDate
-      // dateOfBirth
     );
 
     if (isLoading2 == true) {
@@ -882,8 +880,10 @@ function DashboardAccountPage({
                           label="First Name"
                           variant="outlined"
                           // name="firstnameQ"
-                          value={Userfirstname}
-                          onChange={(e) => setUser}
+                          // value={Userfirstname}
+                          // onChange={(e) =>
+                          //   setUserInfo.Userfirstname('sam')
+                          // }
                         />
                         <TextField
                           className="name_input1"
