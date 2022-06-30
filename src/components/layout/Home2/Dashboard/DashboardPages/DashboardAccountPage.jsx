@@ -1486,7 +1486,7 @@ function DashboardAccountPage({
                     {/* ============ */}
                     {/* ============ */}
                     {/* ============ */}
-                    <div className="toggle_body_area1_cont1">
+                    {/* <div className="toggle_body_area1_cont1">
                       <div className="toggle_body_area1_cont1_txts">
                         Bank Verification Number (BVN)
                         <span className="toggle_body_area1_cont1_sub_txts">
@@ -1496,31 +1496,8 @@ function DashboardAccountPage({
                       <div className="toggle_body_area1_cont1_input">
                         <div className="bvn_btn">{Userbvn}</div>
                       </div>
-                    </div>
-                    {/* ============ */}
-                    {/* ============ */}
-                    {/* ============ */}
-                    {/* ============ */}
-                    <div className="account_toggle_body_area1_title">
-                      Password
-                    </div>
-                    {/* ============ */}
-                    {/* ============ */}
-                    {/* ============ */}
-                    {/* ============ */}
-                    <div className="toggle_body_area1_cont1">
-                      <div className="toggle_body_area1_cont1_txts">
-                        Update Password
-                        <span className="toggle_body_area1_cont1_sub_txts">
-                          Change your old password to a new one
-                        </span>
-                      </div>
-                      <div className="toggle_body_area1_cont1_input">
-                        <div className="bvn_btn" onClick={openModal3}>
-                          Change Password
-                        </div>
-                      </div>
-                    </div>
+                    </div> */}
+
                     {/* ============ */}
                     {/* ============ */}
                     {/* ============ */}

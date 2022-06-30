@@ -1441,9 +1441,8 @@ function DashboardAccountPageMobile({
                           {" "}
                         </span>
                       </div>
-                      <div className="toggle_body_area1_cont1_input">
-                        {/* {Userbvn ==""? <input type="number" placeholder="enter ur bvn" onChange={onChangeBvn}    value={customerBvn1}/>:className="bvn_btn"
-                        <div className="bvn_btn">{Userbvn}</div>} */}
+                      {/* <div className="toggle_body_area1_cont1_input">
+                       
                         {Userbvn == null ? (
                           <div className="input_btn_grouped_div">
                             <TextField
@@ -1459,32 +1458,9 @@ function DashboardAccountPageMobile({
                         ) : (
                           <div className="bvn_btn">{Userbvn}</div>
                         )}
-                      </div>
+                      </div> */}
                     </div>
-                    {/* ================= */}
-                    {/* ================= */}
-                    {/* ================= */}
-                    {/* ================= */}
-                    <div className="account_toggle_body_area1_title">
-                      Password
-                    </div>
-                    {/* ================= */}
-                    {/* ================= */}
-                    {/* ================= */}
-                    {/* ================= */}
-                    <div className="toggle_body_area1_cont1">
-                      <div className="toggle_body_area1_cont1_txts">
-                        Update Password
-                        <span className="toggle_body_area1_cont1_sub_txts">
-                          Change your old password to a new one
-                        </span>
-                      </div>
-                      <div className="toggle_body_area1_cont1_input">
-                        <div className="bvn_btn" onClick={openModal3}>
-                          Change Password
-                        </div>
-                      </div>
-                    </div>
+
                     {/* ================= */}
                     {/* ================= */}
                     {/* ================= */}
