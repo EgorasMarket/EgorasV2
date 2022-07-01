@@ -41,6 +41,7 @@ const AddLiquidity = ({ match, closeModal, which }) => {
   const [base, setBase] = useState("");
   const [stage, setStage] = useState("swap");
   const [tokenName2, setTokenName2] = useState(0);
+  const [egcToEngn, setEgcToEngn] = useState(0);
   const [text, setText] = useState("");
   const [hash, setHash] = useState("");
   const [inputToggle, setInputToggle] = useState(false);
@@ -96,15 +97,27 @@ const AddLiquidity = ({ match, closeModal, which }) => {
     }
   }, [account]);
 
-  // useEffect(() => {
-  //   console.log(defaultPrice);
+  const getHistoricalPrice = async (event) => {
+    // setEgcToEngn
+    let string =
+      "https://api.coingecko.com/api/v3/simple/price?ids=egoras-credit&vs_currencies=ngn&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true";
+    await fetch(string)
+      .then((resp) => resp.json())
+      .then((data) => {
+        setEgcToEngn(data["egoras-credit"].ngn);
+        // console.log(data["egoras-credit"].ngn);
+        // const {egorascredit} = data;
+      });
+    let string2 =
+      "https://api.coingecko.com/api/v3/simple/price?ids=egoras-credit&vs_currencies=bnb&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true";
+    await fetch(string2)
+      .then((resp) => resp.json())
+      .then((data) => console.log(data));
+  };
 
-  //   if (defaultPrice == 0) {
-  //     setStage("loading");
-  //   } else {
-  //     setStage("swap");
-  //   }
-  // }, [defaultPrice]);
+  useEffect(() => {
+    getHistoricalPrice();
+  }, []);
 
   const Continue = async (e) => {
     setStage("swap");
@@ -169,11 +182,12 @@ const AddLiquidity = ({ match, closeModal, which }) => {
     console.log(baseVal, inputVal);
   };
   const onChange = (e) => {
+    // console.log(egcToEngn);
     if (baseVal.symbol == "EGC") {
       // console.log(formatEther)
-      setInputVal2(parseFloat(defaultPrice) * parseFloat(e.target.value));
+      setInputVal2(parseFloat(egcToEngn) * parseFloat(e.target.value));
     } else {
-      setInputVal2(parseFloat(e.target.value) / parseFloat(defaultPrice));
+      setInputVal2(parseFloat(e.target.value) / parseFloat(egcToEngn));
     }
     console.log(baseVal, "inputVal");
     setInputVal(e.target.value);
