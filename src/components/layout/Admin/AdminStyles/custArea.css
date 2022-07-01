@@ -1,0 +1,8 @@
+.cust_area {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.cust_area2 {
+  background: #fff;
+}

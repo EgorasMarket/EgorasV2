@@ -1,0 +1,17 @@
+.paginate_body {
+  background: #fff;
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px #c0ddcb;
+}
+.center_name_elipsis {
+  text-align: center;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: flex-start !important;
+  white-space: nowrap !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}

@@ -1,0 +1,119 @@
+.cat_input {
+  width: 100%;
+}
+.upload_products_details_area1 {
+  display: flex;
+  width: 100%;
+  gap: 50px;
+  justify-content: space-between;
+}
+.upload_products_details_area2 {
+  /* display: flex; */
+  width: 100%;
+  padding: 2em;
+  background: #fff;
+  box-shadow: 0px 0px 10px #c9e1d2;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  /* gap: 50px; */
+}
+.products_cat_upload {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 2em;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0px 0px 15px #c0e1cd;
+}
+.upload_products_details_area {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex-direction: column;
+}
+.upload_products_details_area2 {
+  width: 100%;
+}
+.products_cat_upload {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.products_desc_upload {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.width_incr {
+  width: 100% !important;
+}
+.add_cat_input_title {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 5px;
+  gap: 5px;
+  width: 100%;
+}
+.input_brand {
+  font-size: 12px;
+  font-weight: 700;
+  color: #41ba71;
+}
+
+.submit_cat_btn {
+  padding: 0.5em 2em;
+  background: #41ba71;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 9px;
+  border: none;
+  box-shadow: 0px 4px 10px #84dda7;
+}
+.width_incra {
+  width: 100% !important;
+  background: #fff;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px #cae5d4;
+  align-items: center;
+  gap: 50px;
+}
+.user_upload_img_box {
+  background: #42a66c;
+  padding: 0.2em;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.custom-file-upload33b {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  width: 100%;
+  position: absolute;
+  position: absolute;
+  bottom: 0;
+  right: -88%;
+}
+.prod_desc_text_area {
+  padding: 2em;
+  font-size: 14px;
+  color: #6e997f;
+  border: solid 1px #c8e7d4;
+  border-radius: 10px;
+}
+.prod_desc_text_area:focus-visible {
+  outline: none;
+  border: solid;
+  border-color: #4fcb81;
+  border-width: 1px;
+  box-shadow: 0px 0px 1px 4px #54bc7e2e;
+  transition: 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}

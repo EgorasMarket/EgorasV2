@@ -1,0 +1,392 @@
+.parentDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #fbfbfc;
+  color: black;
+  padding: 2em;
+  border: solid 1px #d7efe0;
+  border-radius: 15px;
+  width:60%;
+}
+.back {
+  padding-bottom: 45px;
+  padding-left: 12px;
+}
+.withdrawalEGORAS {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 15px;
+  font-size: 22px;
+  font-weight: 800;
+  color: rgb(71, 69, 69);
+  background-color: #fff;
+  margin-bottom: 20px;
+  box-shadow: 0px 2px 10px #ded8d8a6;
+}
+.borderColorIcon {
+  padding: 4px;
+  background-color: gray;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+}
+.addressFormat {
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.TRCN {
+  padding: 8px 10px;
+  border-radius: 5px;
+  border: 1px solid #e7e7e8;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.TRCN:hover {
+  background-color: #229e54;
+  color: white;
+}
+.TRCN.add {
+  margin-right: 10px;
+}
+.ESUD_Address {
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.inputText {
+  border: none;
+  outline: 0;
+  width: 92%;
+}
+.inputText2 {
+  border: none;
+  outline: 0;
+  width: 66%;
+  font-size: 14px;
+}
+.inputHolderText {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e7e7e8;
+  padding: 2px 4px;
+  border-radius: 5px;
+  height: 40px;
+  margin-bottom: 10px;
+}
+.Code21 {
+  width: 8%;
+  background-color: gray;
+  padding: 4px 4px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.withdrawalPage {
+  font-size: 14px;
+  font-weight: 300;
+}
+/* .span12{
+    color:#229e54;
+    font-weight: bold;
+} */
+.EgorasAmount12 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.maxButton {
+  border: 0px;
+  background-color: gray;
+  padding: 3px 6px;
+  border-radius: 4px;
+  color: #fff;
+}
+.Uping {
+  margin-right: 2px;
+  font-weight: 700;
+}
+.maximumEUSDA {
+  font-size: 14px;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+.theAbove {
+  display: flex;
+  font-size: 14px;
+  font-weight: 300;
+  margin-bottom: 18px;
+}
+.submitAbove {
+  /* display:flex;
+    justify-content: center; */
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #229e54;
+  color: #fff;
+  cursor: pointer;
+}
+
+.secondTab {
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.seconD_TagInput {
+  border: none;
+  outline: 0;
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #e7e7e8;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.secondTabng1 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  margin-top: 6px;
+}
+.num_Num {
+  border: none;
+  outline: 0;
+  padding-left: 10px;
+  font-size: 14px;
+  width: 86%;
+  background-color: #fbfbfc;
+}
+.guide_M {
+  border: 1px solid #e7e7e8;
+  padding: 8px 0px;
+  border-radius: 5px;
+  background-color: #fbfbfc;
+  margin-bottom: 8px;
+}
+.num_Num1 {
+  font-weight: 700;
+}
+.Yon_can {
+  font-size: 14px;
+  font-weight: 300;
+}
+.Message {
+  margin-top: 8px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.textArea {
+  border: none;
+  width: 100%;
+  height: 100px;
+  border-radius: 4px;
+  border: 1px solid #e7e7e8;
+  font-size: 14px;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.donateCoin {
+  padding: 10px 10px;
+  border-left: 2px solid #229e54;
+  background-color: #a1ecbf5c;
+  margin-bottom: 15px;
+}
+.phoneNumber {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.twoP {
+  display: flex;
+}
+.nameClass {
+  width: 100%;
+  border: none;
+  outline: 0;
+  border: 1px solid #e7e7e8;
+  padding: 10px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+.Part2 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.maximumEUSDA1 {
+  font-size: 14px;
+  font-weight: 400;
+}
+.sage {
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.welcomeTo {
+  width: 100%;
+  font-size: 14px;
+  height: auto;
+  padding: 10px 10px 20px 10px;
+  border: none;
+  outline: 0;
+  border: 1px solid #e7e7e8;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.Aba {
+  color: #229e54;
+  font-weight: 600;
+}
+.Aba1 {
+  color: #e4a788;
+  font-weight: 600;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+.fullwithDiv {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  z-index: 1000;
+  padding-top: 12rem;
+  overflow-y: scroll;
+  padding-bottom: 2em;
+}
+.fullwithDivChild {
+  height: auto;
+  margin: auto !important;
+  border-radius: 5px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  padding: 50px 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.topboy {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+.fullwithDiv {
+  display: none;
+}
+
+.para_Change {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  letter-spacing: 0.02857em;
+  font-weight: 400;
+}
+.chooseCurrency {
+  margin-bottom: 15px;
+  letter-spacing: 0.02857em;
+  font-weight: bold;
+  font-size: 20px;
+}
+.formKing1,
+.formKing2 {
+  display: none;
+}
+.formKing {
+  box-shadow: 0px 2px 10px #ded8d8a6;
+}
+@media (min-width: 375px) {
+  .inputText2 {
+    width: 72%;
+  }
+}
+@media (min-width: 425px) {
+  .inputText2 {
+    width: 75%;
+  }
+}
+
+@media (max-width: 600px) {
+  .fullwithDivChild {
+    width: 85%;
+  }
+  .gas {
+    min-width: 253px !important;
+  }
+}
+@media (min-width: 600px) {
+  .fullwithDivChild {
+    width: 60%;
+  }
+  .gas {
+    min-width: 353px !important;
+  }
+}
+@media (min-width: 992px) {
+  .fullwithDivChild {
+    width: 43% !important;
+  }
+  .gas {
+    min-width: 420px !important;
+  }
+}
+
+@media (min-width: 600px) {
+  .fullwithDivChild {
+    width: 60%;
+  }
+  .gas {
+    min-width: 353px !important;
+  }
+}
+
+@media (min-width: 768px) {
+  /* .parentDiv{
+    padding:0px 55px; 
+
+  }  */
+  .inputText {
+    width: 95%;
+    padding-left: 13px;
+  }
+  .inputText2 {
+    width: 84%;
+    padding-left: 13px;
+  }
+}
+
+@media (min-width: 992px) {
+  /* .parentDiv{
+    padding:0px 165px;  
+  }  */
+}
+
+@media (min-width: 1200px) {
+  /* .parentDiv{
+    padding:0px 390px;  
+  }  */
+  .inputText2 {
+    width: 80%;
+    padding-left: 13px;
+  }
+}
+@media (min-width: 2200px) {
+  /* .parentDiv{
+    padding:0px 800px;  
+  }  */
+}

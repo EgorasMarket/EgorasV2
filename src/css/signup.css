@@ -1,0 +1,352 @@
+.signup_section {
+  padding: 8em 0em;
+  padding-bottom: 0;
+  position: relative;
+  z-index: 5;
+}
+.signup_area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  position: relative;
+  z-index: 2;
+}
+.back_btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  cursor: pointer;
+}
+.signup_cont {
+  width: 100%;
+  background: #fff;
+  /* box-shadow: 0px 0px 20px #b6d5c3; */
+  padding: 2em 2em;
+  margin: auto;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  grid-gap: 5px;
+  gap: 5px;
+  text-align: center;
+  border: solid 1px #e5e5e5;
+  max-width: 500px;
+}
+.signup_title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #239e54;
+}
+.back_register_icon {
+  font-size: 18px !important;
+}
+span.signup_para {
+  color: grey;
+  font-size: 14px;
+}
+
+.signup_inputs_cont {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  margin-top: 30px;
+}
+.signup_input_field1_cont {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-start;
+}
+.signup_input_field {
+  width: 100%;
+  padding: 0.5em;
+  border-radius: 6px;
+  border: solid;
+  border-width: 1px;
+  background: #f0fff6;
+  border-color: #ace3c2;
+  padding-right: 10%;
+}
+.input_title {
+  font-size: 12px;
+  font-weight: 700;
+}
+.check_emailTitle {
+  font-size: 24px;
+  font-weight: 700;
+}
+.terms_privacy {
+  margin: 0;
+  font-size: 12px;
+  color: #8c8c8c;
+}
+.register_success_msg {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.terms_link {
+  color: #000;
+  font-weight: 700;
+}
+.privacy_link {
+  color: #239e54;
+  font-weight: 700;
+}
+.sign_up_btn {
+  padding: 0.8em;
+  border-radius: 5px;
+  border: none;
+  background: #239e54;
+  color: #ffff;
+  font-weight: 700;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.piggy_bg {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.login_link {
+  color: #000;
+}
+.login_link:hover {
+  color: #239e54;
+}
+/* ============= */
+/* ============= */
+/* ============= */
+/* ============= */
+/* ============= */
+.cust_select {
+  word-wrap: normal;
+  background: #f0fff6;
+  width: 100%;
+  padding: 0.5em;
+  border-radius: 6px;
+  border: solid;
+  border-width: 1px;
+  border-color: #ace2c2;
+}
+
+option {
+  color: red;
+}
+[selected] {
+  font-weight: 900;
+  color: Green;
+  background-color: pink;
+}
+[anything] {
+  color: blue;
+  background-color: yellow;
+}
+/* ===09999999 */
+/* The container must be positioned relative: */
+.custom-select {
+  position: relative;
+  font-family: Arial;
+}
+
+.custom-select select {
+  display: none; /*hide original SELECT element: */
+}
+
+.select-selected {
+  background-color: DodgerBlue;
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,
+.select-selected {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
+  position: absolute;
+  background-color: DodgerBlue;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover,
+.same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.sign_up_area2 {
+  width: 100%;
+  /* height: 100%; */
+  padding-top: 3em;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  grid-gap: 20px;
+  gap: 20px;
+  background: #fff;
+  padding: 4em 2em;
+  box-shadow: 0px 0px 25px #c8ddd0;
+  border-radius: 10px;
+  padding-bottom: 3em;
+}
+.success_div {
+  width: 60%;
+  margin: auto;
+  height: 600px;
+}
+
+.email_name {
+  font-weight: 700;
+  color: #239e54;
+}
+.note {
+  font-weight: 100;
+  color: grey;
+}
+
+.check_mail {
+  font-weight: 800;
+  font-size: 32px;
+}
+
+.center_me {
+  text-align: center;
+  display: grid;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+}
+.success_img {
+  place-self: center;
+}
+
+.sm_width {
+  background-color: #ffff;
+  box-shadow: 0px 5px 10px #86bf9d;
+  color: #54bc7e;
+  width: 65%;
+}
+.passwrd_input_div {
+  width: 100%;
+  position: relative;
+}
+.close_pass_img {
+  position: absolute;
+  width: 20px;
+  right: 2%;
+  top: 35%;
+  bottom: 35%;
+  cursor: pointer;
+}
+.open_pass_img {
+  position: absolute;
+  width: 20px;
+  right: 2%;
+  top: 35%;
+  bottom: 35%;
+  cursor: pointer;
+}
+.weak_pass_div {
+  color: rgb(221, 51, 51);
+  font-size: 12px;
+}
+.sign_up_btn:disabled {
+  background: #d6d6d6;
+  color: #797979;
+  cursor: not-allowed;
+}
+.react-date-picker__wrapper {
+  padding: 6px !important;
+  border-radius: 5px !important;
+  background: #f0fff6 !important;
+  border-color: #ace3c2 !important;
+}
+
+@media screen and (max-width: 991px) {
+  .signup_cont {
+    padding: 2em 2em;
+  }
+}
+@media screen and (max-width: 737px) {
+  .sign_up_area2 {
+    width: 100%;
+    /* height: 100%; */
+    padding-top: 3em;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    grid-gap: 20px;
+    grid-gap: 20px;
+    gap: 10px;
+    background: #fff;
+    padding: 2em 1em;
+    box-shadow: 0px 0px 25px #c8ddd0;
+    border-radius: 10px;
+    padding-bottom: 2em;
+  }
+  .success_div {
+    width: 100%;
+    margin: auto;
+    height: 600px;
+  }
+}
+@media screen and (max-width: 550px) {
+}
+@media screen and (max-width: 400px) {
+  .signup_cont {
+    padding: 1em 1em;
+  }
+  .signup_area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-gap: 40px;
+    gap: 15px;
+    position: relative;
+    z-index: 2;
+  }
+  .signup_title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #239e54;
+  }
+}

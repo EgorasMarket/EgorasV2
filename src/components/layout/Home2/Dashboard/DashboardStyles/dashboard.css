@@ -1,0 +1,17 @@
+.dashboard {
+  display: flex;
+}
+.loadMe {
+  background: rgb(0, 0, 0);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+}
+@media screen and (max-width: 991px) {
+  .dashboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
