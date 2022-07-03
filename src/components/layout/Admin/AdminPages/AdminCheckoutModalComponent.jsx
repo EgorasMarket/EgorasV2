@@ -1,37 +1,31 @@
-import React, { useEffect, useCallback, useState } from 'react';
-import axios from 'axios';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import verify from '../../../../flutterwave/API/Verify';
-import adminVerify from '../../../../flutterwave/API/AdminVerify';
-import LoadingIcons from 'react-loading-icons';
-import Success_Error_Component from '../../../assets/Success_Error_Component';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import React, { useEffect, useCallback, useState } from "react";
+import axios from "axios";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import verify from "../../../../flutterwave/API/Verify";
+import adminVerify from "../../../../flutterwave/API/AdminVerify";
+import LoadingIcons from "react-loading-icons";
+import Success_Error_Component from "../../../assets/Success_Error_Component";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import { numberWithCommas } from "../../../../static";
 import {
   PRODUCT_LOADED,
   API_URL2 as api_url2,
-} from '../../../../actions/types';
-import {
-  useFlutterwave,
-  closePaymentModal,
-} from 'flutterwave-react-v3';
-import FlutterButton from '../../../../flutterwave/FlutterButton';
+} from "../../../../actions/types";
+import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
+import FlutterButton from "../../../../flutterwave/FlutterButton";
 // import Dashboard_Checkout_Page from "../Dashboard/DashboardPages/Dashboard_Checkout_Page";
-import PaymentPlan from '../../../../flutterwave/API/PaymentPlan';
+import PaymentPlan from "../../../../flutterwave/API/PaymentPlan";
 // import verifyTransaction from '../../../../flutterwave/API/Verify'
-import { createOrder } from '../../../../actions/shop';
-import { connect } from 'react-redux';
-import initPayment from '../../../../flutterwave/initPayment';
-import initializePayment from '../../../../flutterwave/API/initializePayment';
-import { Redirect } from 'react-router-dom';
+import { createOrder } from "../../../../actions/shop";
+import { connect } from "react-redux";
+import initPayment from "../../../../flutterwave/initPayment";
+import initializePayment from "../../../../flutterwave/API/initializePayment";
+import { Redirect } from "react-router-dom";
 
-const CheckoutModalComponent = ({
-  payload,
-  closeCheckoutOptions,
-  auth,
-}) => {
+const CheckoutModalComponent = ({ payload, closeCheckoutOptions, auth }) => {
   //destructure the payload and return values
   const {
     amount,
@@ -41,6 +35,7 @@ const CheckoutModalComponent = ({
     product_details,
     product_duration,
     product_id,
+    paymentPerday,
     product_image,
     product_name,
     product_specifications,
@@ -55,36 +50,34 @@ const CheckoutModalComponent = ({
     endDate,
   } = payload;
 
-  const [user_id, setUserId] = useState(
-    localStorage.getItem('adminCusId')
-  );
+  const [user_id, setUserId] = useState(localStorage.getItem("adminCusId"));
   const [isloading, setIsLoading] = useState(true);
-  const [email, setEmail] = useState('');
-  const [phone_no, setPhoneNo] = useState('');
+  const [email, setEmail] = useState("");
+  const [phone_no, setPhoneNo] = useState("");
   const [walletBalance, setWalletBalance] = useState(false);
   const [ProcessingDiv, setProcessingDiv] = useState(false);
-  const [branch, setBranch] = useState('');
+  const [branch, setBranch] = useState("");
 
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const [option, setOption] = useState(-1);
   const [customer_data, setCustomerData] = useState({});
-  const [tokenBal, setTokenBal] = useState('0.000');
-  const [assetVal, setAssetVal] = useState('0.000');
+  const [tokenBal, setTokenBal] = useState("0.000");
+  const [assetVal, setAssetVal] = useState("0.000");
   const [tokenSign, setTokenSign] = useState();
   const [errorDiv, setErrorDiv] = useState(false);
   const [successDiv, setSuccessDiv] = useState(false);
-  const [order_id, setOrder_id] = useState('');
-  const [success_msg, setSuccessMsg] = useState('');
-  const [error_msg, setErrorMsg] = useState('');
-  const [adminFullname, setAdminFullname] = useState('');
+  const [order_id, setOrder_id] = useState("");
+  const [success_msg, setSuccessMsg] = useState("");
+  const [error_msg, setErrorMsg] = useState("");
+  const [adminFullname, setAdminFullname] = useState("");
 
-  const [total, setTotal] = useState('');
+  const [total, setTotal] = useState("");
 
   // console.log(phone_no, name, option)
 
   const config = {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   };
 
@@ -96,11 +89,7 @@ const CheckoutModalComponent = ({
 
   useEffect(() => {
     axios
-      .get(
-        api_url2 + '/v1/wallet/get/wallet/info/' + user_id,
-        null,
-        config
-      )
+      .get(api_url2 + "/v1/wallet/get/wallet/info/" + user_id, null, config)
       .then((data) => {
         console.log(data.data.data.balance);
         setTokenBal(data.data.data.balance);
@@ -111,17 +100,17 @@ const CheckoutModalComponent = ({
       });
   }, []);
   useEffect(() => {
-    if (payment_type === 'OUTRIGHT') {
+    if (payment_type === "OUTRIGHT") {
       // alert(initial_deposit);
       setTotal(amount);
-    } else if (payment_type === 'INSTALLMENT') {
+    } else if (payment_type === "INSTALLMENT") {
       setTotal(initial_deposit);
     }
     // setIsLoading2(true);
     axios
-      .get(api_url2 + '/v1/wallet/get/all/tokens', null, config)
+      .get(api_url2 + "/v1/wallet/get/all/tokens", null, config)
       .then((data) => {
-        console.log(data.data.data, 'powerful');
+        console.log(data.data.data, "powerful");
         setTokenSign(data.data.data[0].tokenSymbol);
       })
       .catch((err) => {
@@ -131,9 +120,9 @@ const CheckoutModalComponent = ({
 
   useEffect(() => {
     axios
-      .get(api_url2 + '/v1/user/info/byId/' + user_id, null, config)
+      .get(api_url2 + "/v1/user/info/byId/" + user_id, null, config)
       .then((data) => {
-        console.log(data.data, 'Admin cus info');
+        console.log(data.data, "Admin cus info");
         setEmail(data.data.user.email);
         setPhoneNo(data.data.user.phoneNumber);
         setName(data.data.user.fullname);
@@ -151,13 +140,13 @@ const CheckoutModalComponent = ({
   }, []);
 
   const flutterConfig = {
-    public_key: 'FLWPUBK-bb7997b5dc41c89e90ee4807684bd05d-X',
-    tx_ref: 'EGC-' + Date.now(),
+    public_key: "FLWPUBK-bb7997b5dc41c89e90ee4807684bd05d-X",
+    tx_ref: "EGC-" + Date.now(),
     amount: 1,
 
-    currency: 'NGN',
+    currency: "NGN",
     // redirect_url: "https://a3dc-197-210-85-62.ngrok.io/v1/webhooks/all",
-    payment_options: 'card',
+    payment_options: "card",
     // payment_plan:63558,
     customer: {
       phonenumber: phone_no,
@@ -166,12 +155,12 @@ const CheckoutModalComponent = ({
     },
     meta: {
       customer_id: user_id,
-      info: 'this is an addtional information',
+      info: "this is an addtional information",
     },
     customizations: {
-      title: 'Payment from Egoras savings',
-      description: 'Payment for items in cart',
-      logo: 'https://egoras.com/img/egoras-logo.svg',
+      title: "Payment from Egoras savings",
+      description: "Payment for items in cart",
+      logo: "https://egoras.com/img/egoras-logo.svg",
     },
   };
   const handleFlutterPayment = useFlutterwave(flutterConfig);
@@ -209,10 +198,7 @@ const CheckoutModalComponent = ({
                 endDate
               );
 
-              console.log(
-                verification.data.data.data.amount,
-                'from me  '
-              );
+              console.log(verification.data.data.data.amount, "from me  ");
               closePaymentModal();
             } catch (error) {
               console.log(error.response);
@@ -244,15 +230,12 @@ const CheckoutModalComponent = ({
           console.log(orderBody);
           const res = await axios
             .post(
-              api_url2 + '/v1/order/add/order/crypto/admin',
+              api_url2 + "/v1/order/add/order/crypto/admin",
               orderBody,
               config
             )
             .then((response) => {
-              console.log(
-                response,
-                ' response after order endpoint is called'
-              );
+              console.log(response, " response after order endpoint is called");
 
               setProcessingDiv(false);
               setSuccessMsg(response.data.message);
@@ -274,11 +257,11 @@ const CheckoutModalComponent = ({
           //
         } else {
           console.log(
-            'This user dont have enough balance to carry this transaction '
+            "This user dont have enough balance to carry this transaction "
           );
           setProcessingDiv(false);
           setSuccessDiv(false);
-          setErrorMsg('Insufficient funds');
+          setErrorMsg("Insufficient funds");
 
           // setErrorMsg("An error")
           setErrorDiv(true);
@@ -291,11 +274,11 @@ const CheckoutModalComponent = ({
   };
 
   var today = new Date();
-  var dd = String(today.getDate()).padStart(2, '0');
-  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var dd = String(today.getDate()).padStart(2, "0");
+  var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
   var yyyy = today.getFullYear();
 
-  today = mm + '/' + dd + '/' + yyyy;
+  today = mm + "/" + dd + "/" + yyyy;
 
   var vat = amount * 0.075;
   var totals = parseInt(vat) + parseInt(amount);
@@ -319,9 +302,9 @@ const CheckoutModalComponent = ({
     // tag.replaceAll(' ', '')
     // var divContents = document.getElementById("mainContent").innerHTML;
 
-    var printWindow = window.open('', '', 'height=1200,width=1200');
+    var printWindow = window.open("", "", "height=1200,width=1200");
     printWindow.document.write(
-      '<html><head><style>.small-text{font-size: 12px;}table.GeneratedTable {width: 100%;background-color: #ffffff; border-collapse: collapse; border-width: 1px; border-color: #000000; border-style: solid; color: #000000;}table.GeneratedTable td, table.GeneratedTable th { border-width: 1px; border-color: #000000; border-style: solid;}.center-text{text-align: center;} .center-text h4{margin: 4px;}.set-flex {display: flex; justify-content: space-between;}.w-50{width: 45%;margin:5px;}.bbt{border-bottom: 1px solid black;}</style><title>Item Receipt</title></head>'
+      "<html><head><style>.small-text{font-size: 12px;}table.GeneratedTable {width: 100%;background-color: #ffffff; border-collapse: collapse; border-width: 1px; border-color: #000000; border-style: solid; color: #000000;}table.GeneratedTable td, table.GeneratedTable th { border-width: 1px; border-color: #000000; border-style: solid;}.center-text{text-align: center;} .center-text h4{margin: 4px;}.set-flex {display: flex; justify-content: space-between;}.w-50{width: 45%;margin:5px;}.bbt{border-bottom: 1px solid black;}</style><title>Item Receipt</title></head>"
     );
     printWindow.document.write(
       '<body style="margin-top: 15px;margin-bottom: 45px;height: min-content;font-family: roboto;margin-right: 25px;  border-bottom: 1px solid black;font-weight:400;">'
@@ -339,7 +322,7 @@ const CheckoutModalComponent = ({
     printWindow.document.write(
       '<div class="small-text"><span>ADDRESS: </span><span>' +
         branch +
-        '</span></div>'
+        "</span></div>"
     );
     printWindow.document.write(
       '<div class="small-text"><span>PHONE NUMBER: </span><span>09123183924</span></div>'
@@ -350,7 +333,7 @@ const CheckoutModalComponent = ({
     printWindow.document.write(
       '<div class="small-text"><span>COMPANY WEBSITE: </span><span>https://www.egoras.com</span></div>                   '
     );
-    printWindow.document.write('</div>');
+    printWindow.document.write("</div>");
     printWindow.document.write('<div class="w-50">');
     printWindow.document.write(
       '<div class="small-text"><h2>INVOICE/SALES RECEIPT</h2></div>'
@@ -358,26 +341,26 @@ const CheckoutModalComponent = ({
     printWindow.document.write(
       '<div class="small-text"><span>INVOICE NO: </span><span>' +
         invoiceNo +
-        '</span></div>'
+        "</span></div>"
     );
     printWindow.document.write(
       '<div class="small-text"><span>DATE: </span><span>' +
         today +
-        '</span></div>'
+        "</span></div>"
     );
     printWindow.document.write(
       '<div class="small-text"><span>SALES REP: </span><span>' +
         adminFullname +
-        '</span></div>'
+        "</span></div>"
     );
-    printWindow.document.write('<br>');
+    printWindow.document.write("<br>");
     printWindow.document.write(
       '<div class="small-text"><span>SOLD TO:</span></div>'
     );
     printWindow.document.write(
       '<div class="small-text"><span>NAME: </span><span>' +
         name +
-        '</span></div>'
+        "</span></div>"
     );
     // printWindow.document.write(
     //   '<div class="small-text"><span>ADDRESS: </span><span>No 23B Adamawu Lane Off Aba Road PH</span></div>'
@@ -385,19 +368,19 @@ const CheckoutModalComponent = ({
     printWindow.document.write(
       '<div class="small-text"><span>PHONE NUMBER: </span><span>' +
         phone_no +
-        '</span></div>'
+        "</span></div>"
     );
     // printWindow.document.write(
     //   '<div class="small-text"><span>PRODUCT ID: </span><span>EG/AGP/SR/00001</span></div>'
     // );
-    printWindow.document.write('</div>');
-    printWindow.document.write('</div>');
-    printWindow.document.write('</div>');
+    printWindow.document.write("</div>");
+    printWindow.document.write("</div>");
+    printWindow.document.write("</div>");
     printWindow.document.write('<div class="small-text">');
     printWindow.document.write(
       '<table style="width: 100%;" class="GeneratedTable">'
     );
-    printWindow.document.write('<tbody>');
+    printWindow.document.write("<tbody>");
     printWindow.document.write('<tr style="height: 23px;">');
     printWindow.document.write(
       '<td style="width: 52.5547px;height: 23px;">QTY</td>'
@@ -414,28 +397,24 @@ const CheckoutModalComponent = ({
     printWindow.document.write(
       '<td style="width: 71px; height: 23px;">AMOUNT</td>'
     );
-    printWindow.document.write('</tr>');
+    printWindow.document.write("</tr>");
     printWindow.document.write('<tr style="height: 80px;">');
     printWindow.document.write(
       '<td style="width: 52.5547px; height: 80px;">1</td>'
     );
     printWindow.document.write(
-      '<td style="width: 100.445px; height: 80px;">' +
-        product_name +
-        '</td>'
+      '<td style="width: 100.445px; height: 80px;">' + product_name + "</td>"
     );
     printWindow.document.write(
-      '<td style="width: 465px; height: 80px;">' +
-        product_name +
-        '</td>'
+      '<td style="width: 465px; height: 80px;">' + product_name + "</td>"
     );
     printWindow.document.write(
-      '<td style="width: 73px; height: 80px;">₦' + amount + '</td>'
+      '<td style="width: 73px; height: 80px;">₦' + amount + "</td>"
     );
     printWindow.document.write(
-      '<td style="width: 71px; height: 80px;">₦' + amount + '</td>'
+      '<td style="width: 71px; height: 80px;">₦' + amount + "</td>"
     );
-    printWindow.document.write('</tr>');
+    printWindow.document.write("</tr>");
     printWindow.document.write('<tr style="height: 22px;">');
     printWindow.document.write(
       '<td style="width: 52.5547px; height: 22px;"></td>'
@@ -443,18 +422,16 @@ const CheckoutModalComponent = ({
     printWindow.document.write(
       '<td style="width: 100.445px; height: 22px;"></td>'
     );
-    printWindow.document.write(
-      '<td style="width: 465px; height: 22px;"></td>'
-    );
+    printWindow.document.write('<td style="width: 465px; height: 22px;"></td>');
     printWindow.document.write(
       '<td style="width: 73px; height: 22px;">Total</td>'
     );
     printWindow.document.write(
-      '<td style="width: 71px; height: 22px;">₦' + amount + '</td>'
+      '<td style="width: 71px; height: 22px;">₦' + amount + "</td>"
     );
-    printWindow.document.write('</tr>');
-    printWindow.document.write('</tbody>');
-    printWindow.document.write('</table>');
+    printWindow.document.write("</tr>");
+    printWindow.document.write("</tbody>");
+    printWindow.document.write("</table>");
     printWindow.document.write('<div class="small-text">');
     printWindow.document.write('<div class="set-flex">');
     printWindow.document.write('<div class="w-50"></div>');
@@ -464,29 +441,29 @@ const CheckoutModalComponent = ({
     printWindow.document.write('<div class="w-50">');
     printWindow.document.write('<div class="bbt set-flex">');
     printWindow.document.write(
-      '<span>Subtotal: </span><span>₦' + amount + '</span>'
+      "<span>Subtotal: </span><span>₦" + amount + "</span>"
     );
-    printWindow.document.write('</div>');
+    printWindow.document.write("</div>");
     printWindow.document.write(
       '<div class="bbt set-flex"><span>VAT (7.5%): </span><span>' +
         vat +
-        '</span></div>'
+        "</span></div>"
     );
     printWindow.document.write(
       '<div class="bbt set-flex"><span>TOTAL: </span><span>₦' +
         totals +
-        '</span></div>'
+        "</span></div>"
     );
-    printWindow.document.write('</div>');
-    printWindow.document.write('</div>');
-    printWindow.document.write('</div>');
-    printWindow.document.write('</div>');
-    printWindow.document.write('</div>');
-    printWindow.document.write('</div>');
+    printWindow.document.write("</div>");
+    printWindow.document.write("</div>");
+    printWindow.document.write("</div>");
+    printWindow.document.write("</div>");
+    printWindow.document.write("</div>");
+    printWindow.document.write("</div>");
     printWindow.document.write(
       '<div class="center-text"><h4>THANKS FOR YOUR PATRONAGE</h4></div>'
     );
-    printWindow.document.write('</div>');
+    printWindow.document.write("</div>");
     // printWindow.document.write('<h2 style="margin-bottom: 5px; margin-top: 15px">Customers Copy:</h2>');
     printWindow.document.write(
       '<div style="border: 1px solid black;padding: 8px;margin-top: 15px;">'
@@ -500,7 +477,7 @@ const CheckoutModalComponent = ({
     printWindow.document.write(
       '<div class="small-text"><span>ADDRESS: </span><span>' +
         branch +
-        '</span></div>'
+        "</span></div>"
     );
     printWindow.document.write(
       '<div class="small-text"><span>PHONE NUMBER: </span><span>09123183924</span></div>'
@@ -511,7 +488,7 @@ const CheckoutModalComponent = ({
     printWindow.document.write(
       '<div class="small-text"><span>COMPANY WEBSITE: </span><span>https://www.egoras.com</span></div>'
     );
-    printWindow.document.write('</div>');
+    printWindow.document.write("</div>");
     printWindow.document.write('<div class="w-50">');
     printWindow.document.write(
       '<div class="small-text"><h2>INVOICE/SALES RECEIPT</h2></div>'
@@ -519,26 +496,26 @@ const CheckoutModalComponent = ({
     printWindow.document.write(
       '<div class="small-text"><span>INVOICE NO: </span><span>' +
         invoiceNo +
-        '</span></div>'
+        "</span></div>"
     );
     printWindow.document.write(
       '<div class="small-text"><span>DATE: </span><span>' +
         today +
-        '</span></div>'
+        "</span></div>"
     );
     printWindow.document.write(
       '<div class="small-text"><span>SALES REP: </span><span>' +
         adminFullname +
-        '</span></div>'
+        "</span></div>"
     );
-    printWindow.document.write('<br>');
+    printWindow.document.write("<br>");
     printWindow.document.write(
       '<div class="small-text"><span>SOLD TO:</span></div>'
     );
     printWindow.document.write(
       '<div class="small-text"><span>NAME: </span><span>' +
         name +
-        '</span></div>'
+        "</span></div>"
     );
     // printWindow.document.write(
     //   '<div class="small-text"><span>ADDRESS: </span><span>No 23B Adamawu Lane Off Aba Road PH</span></div>'
@@ -546,19 +523,19 @@ const CheckoutModalComponent = ({
     printWindow.document.write(
       '<div class="small-text"><span>PHONE NUMBER: </span><span>' +
         phone_no +
-        '</span></div>'
+        "</span></div>"
     );
     // printWindow.document.write(
     //   '<div class="small-text"><span>PRODUCT ID: </span><span>EG/AGP/SR/00001</span></div>'
     // );
-    printWindow.document.write('</div>');
-    printWindow.document.write('</div>');
-    printWindow.document.write('</div>');
+    printWindow.document.write("</div>");
+    printWindow.document.write("</div>");
+    printWindow.document.write("</div>");
     printWindow.document.write('<div class="small-text">');
     printWindow.document.write(
       '<table style="width: 100%;" class="GeneratedTable">'
     );
-    printWindow.document.write('<tbody>');
+    printWindow.document.write("<tbody>");
     printWindow.document.write('<tr style="height: 23px;">');
     printWindow.document.write(
       '<td style="width: 52.5547px;height: 23px;">QTY</td>'
@@ -575,28 +552,24 @@ const CheckoutModalComponent = ({
     printWindow.document.write(
       '<td style="width: 71px; height: 23px;">AMOUNT</td>'
     );
-    printWindow.document.write('</tr>');
+    printWindow.document.write("</tr>");
     printWindow.document.write('<tr style="height: 80px;">');
     printWindow.document.write(
       '<td style="width: 52.5547px; height: 80px;">1</td>'
     );
     printWindow.document.write(
-      '<td style="width: 100.445px; height: 80px;">' +
-        product_name +
-        '</td>'
+      '<td style="width: 100.445px; height: 80px;">' + product_name + "</td>"
     );
     printWindow.document.write(
-      '<td style="width: 465px; height: 80px;">' +
-        product_name +
-        '</td>'
+      '<td style="width: 465px; height: 80px;">' + product_name + "</td>"
     );
     printWindow.document.write(
-      '<td style="width: 73px; height: 80px;">₦' + amount + '</td>'
+      '<td style="width: 73px; height: 80px;">₦' + amount + "</td>"
     );
     printWindow.document.write(
-      '<td style="width: 71px; height: 80px;">₦' + amount + '</td>'
+      '<td style="width: 71px; height: 80px;">₦' + amount + "</td>"
     );
-    printWindow.document.write('</tr>');
+    printWindow.document.write("</tr>");
     printWindow.document.write('<tr style="height: 22px;">');
     printWindow.document.write(
       '<td style="width: 52.5547px; height: 22px;"></td>'
@@ -604,18 +577,16 @@ const CheckoutModalComponent = ({
     printWindow.document.write(
       '<td style="width: 100.445px; height: 22px;"></td>'
     );
-    printWindow.document.write(
-      '<td style="width: 465px; height: 22px;"></td>'
-    );
+    printWindow.document.write('<td style="width: 465px; height: 22px;"></td>');
     printWindow.document.write(
       '<td style="width: 73px; height: 22px;">Total</td>'
     );
     printWindow.document.write(
-      '<td style="width: 71px; height: 22px;">₦' + amount + '</td>'
+      '<td style="width: 71px; height: 22px;">₦' + amount + "</td>"
     );
-    printWindow.document.write('</tr>');
-    printWindow.document.write('</tbody>');
-    printWindow.document.write('</table>');
+    printWindow.document.write("</tr>");
+    printWindow.document.write("</tbody>");
+    printWindow.document.write("</table>");
     printWindow.document.write('<div class="small-text">');
     printWindow.document.write('<div class="set-flex">');
     printWindow.document.write('<div class="w-50"></div>');
@@ -625,30 +596,30 @@ const CheckoutModalComponent = ({
     printWindow.document.write('<div class="w-50">');
     printWindow.document.write('<div class="bbt set-flex">');
     printWindow.document.write(
-      '<span>Subtotal: </span><span>₦' + amount + '</span></div>'
+      "<span>Subtotal: </span><span>₦" + amount + "</span></div>"
     );
     printWindow.document.write(
       '<div class="bbt set-flex"><span>VAT (7.5%): </span><span>' +
         vat +
-        '</span></div>'
+        "</span></div>"
     );
     printWindow.document.write(
       '<div class="bbt set-flex"><span>TOTAL: </span><span>₦' +
         totals +
-        '</span></div>'
+        "</span></div>"
     );
-    printWindow.document.write('</div>');
-    printWindow.document.write('</div>');
-    printWindow.document.write('</div>');
-    printWindow.document.write('</div>');
-    printWindow.document.write('</div>');
-    printWindow.document.write('</div>');
+    printWindow.document.write("</div>");
+    printWindow.document.write("</div>");
+    printWindow.document.write("</div>");
+    printWindow.document.write("</div>");
+    printWindow.document.write("</div>");
+    printWindow.document.write("</div>");
     printWindow.document.write('<div class="center-text">');
-    printWindow.document.write('<h4>THANKS FOR YOUR PATRONAGE</h4>');
-    printWindow.document.write('</div>');
-    printWindow.document.write('</div>');
-    printWindow.document.write('</body>');
-    printWindow.document.write('</html>');
+    printWindow.document.write("<h4>THANKS FOR YOUR PATRONAGE</h4>");
+    printWindow.document.write("</div>");
+    printWindow.document.write("</div>");
+    printWindow.document.write("</body>");
+    printWindow.document.write("</html>");
     printWindow.document.close();
     printWindow.print();
   };
@@ -698,54 +669,31 @@ const CheckoutModalComponent = ({
           </div> */}
 
           <div className="detailsModalSection1_area2">
-            <div className="detailsModalSection1-area2_title">
-              Review Order
-            </div>
+            <div className="detailsModalSection1-area2_title">Review Order</div>
             <div className="review_order_div">Delivery 1 of 1</div>
-            {/* <div className="signup_input_field1_cont">
-                    <span className="input_title">Role</span>
-                    <div className="toggle_body_area1_cont1_input">
-                      <div className="name_input1a lar_widthh">
-                        <FormControl fullWidth>
-                          <InputLabel id="demo-simple-select-label">
-                            Select Role
-                          </InputLabel>
-                          <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            name="branch"
-                            value={branch}
-                            label="branch"
-                            onChange={onChange}
-                            // onSelect={onChange}
-                          >
-                            <MenuItem value={'kilometer 7 Ikwerre Rd, Rumueme, Agip, Port Harcourt'}>Agip</MenuItem>
-                            <MenuItem value={'No 282 Aba Express Way, Port Harcourt'}>RUMUKWRUSHI</MenuItem>
-                          
-                            
-                          </Select>
-                        </FormControl>
-                      </div>
-                    </div>
-                  </div>
-            <button className="checkout_btn1 py-1 px-2 m-0" onClick={triggerPrint}>Print</button> */}
+
             <div>
               <div class="save_prod_deta">
                 <table className="save_item_table">
                   <thead className="assets-category-titles">
-                    <tr className="assets">
-                      <th className="assets-category-titles-heading1">
-                        Item
-                      </th>
+                    <tr className="assets checked_item">
+                      <th className="assets-category-titles-heading1">Item</th>
                       <th className="assets-category-titles-heading1">
                         Item Details
                       </th>
-                      <th className="assets-category-titles-heading1 quant">
-                        Amount daily
-                      </th>
-                      {/* <th className="assets-category-titles-heading1 quant">
-                              Unit Price
-                            </th> */}
+                      {payment_type == "OUTRIGHT" ? (
+                        <th className="assets-category-titles-heading1 quant">
+                          Total Amount
+                        </th>
+                      ) : (
+                        <th className="assets-category-titles-heading1 quant">
+                          Amount daily
+                        </th>
+                      )}
+
+                      {/* <th className="assets-categordata1y-titles-heading1 quant">
+                        Unit Price
+                      </th> */}
                       <th className="assets-category-titles-heading1_last">
                         Sub Total
                       </th>
@@ -756,9 +704,8 @@ const CheckoutModalComponent = ({
                     className="save_items_cat popular-categories"
                     id="popular-categories"
                   >
-                    {' '}
-                    <tr className="assets-category-row">
-                      <td className="save_item_data">
+                    <tr className=" checked_item_row">
+                      <td className="save_item_data checked_item">
                         <div className="assets-data height_data">
                           <img
                             src={product_image}
@@ -771,35 +718,65 @@ const CheckoutModalComponent = ({
                       {/* ======== */}
                       {/* ======== */}
                       {/* ======== */}
-                      <td className="save_item_data1">
+                      <td className="save_item_data1 checked_item_1">
                         <div className="save_items_details">
                           <div className="save_items_details1">
                             {product_name}
                           </div>
-                          <div className="save_item_days_left">
-                            {days_left} days left
-                          </div>
+                          {payment_type == "OUTRIGHT" ? null : (
+                            <div className="save_item_days_left">
+                              {days_left} days left
+                            </div>
+                          )}
+
                           <div className="save_total_locked_amount">
-                            <span className="items_left_amount">
-                              Total Amount Locked on Item
+                            {payment_type == "OUTRIGHT" ? (
+                              <span className="items_left_amount">
+                                Total Amount
+                              </span>
+                            ) : (
+                              <span className="items_left_amount">
+                                Total Amount Locked on Item
+                              </span>
+                            )}
+                            <span className="init_amount">
+                              ₦
+                              {payment_type == "OUTRIGHT"
+                                ? numberWithCommas(parseInt(amount).toFixed(2))
+                                : numberWithCommas(
+                                    parseInt(initial_deposit).toFixed(2)
+                                  )}
                             </span>
-                            ₦{initial_deposit}
                           </div>
                         </div>
                       </td>
-                      <td className="save_item_data1b">
-                        <div className="assets-data-name_last">
-                          ₦{paymentperweek}
-                        </div>
+                      <td className="save_item_data1b checked_item_data_1b">
+                        {payment_type == "OUTRIGHT" ? (
+                          <div className="assets-data-name_last">
+                            ₦ {numberWithCommas(parseInt(amount).toFixed(2))}
+                          </div>
+                        ) : (
+                          <div className="assets-data-name_last">
+                            ₦{" "}
+                            {numberWithCommas(
+                              parseInt(paymentPerday).toFixed(2)
+                            )}
+                          </div>
+                        )}
                       </td>
                       {/* <td className="save_item_data1b">
-                                <div className="assets-data-name center_name">
-                                  ₦{amount}
-                                </div>
-                              </td> */}
-                      <td className="save_item_data1b">
+                          <div className="assets-data-name center_name">
+                            ₦{amount}
+                          </div>
+                        </td> */}
+                      <td className="save_item_data1b checked_item_data_1b">
                         <div className="assets-data-name_last">
-                          ₦{amount}
+                          ₦{" "}
+                          {payment_type == "OUTRIGHT"
+                            ? numberWithCommas(parseInt(amount).toFixed(2))
+                            : numberWithCommas(
+                                parseInt(initial_deposit).toFixed(2)
+                              )}
                         </div>
                       </td>
                     </tr>
@@ -808,6 +785,44 @@ const CheckoutModalComponent = ({
               </div>
             </div>
           </div>
+          <div className="signup_input_field1_cont">
+            <span className="input_title">Branch</span>
+            <div className="toggle_body_area1_cont1_input">
+              <div className="name_input1a lar_widthh">
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">
+                    Select Branch
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    name="branch"
+                    value={branch}
+                    label="branch"
+                    onChange={onChange}
+                    // onSelect={onChange}
+                  >
+                    <MenuItem
+                      value={
+                        "kilometer 7 Ikwerre Rd, Rumueme, Agip, Port Harcourt"
+                      }
+                    >
+                      Agip
+                    </MenuItem>
+                    <MenuItem value={"No 282 Aba Express Way, Port Harcourt"}>
+                      RUMUKWRUSHI
+                    </MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+            </div>
+          </div>
+          <button
+            className="checkout_btn1 py-1 px-2 m-0"
+            onClick={triggerPrint}
+          >
+            Print
+          </button>
         </div>
         <div className="detailsModalSection2">
           <div className="details_modal_divv">
@@ -825,13 +840,13 @@ const CheckoutModalComponent = ({
             </div> */}
             <div className="cart_area2_select">
               <div className="wit_card">
-                Pay via card{' '}
+                Pay via card{" "}
                 <input
                   type="radio"
                   name="payment"
                   id=""
                   className="checkBox"
-                  style={{ display: 'block', cursor: 'pointer' }}
+                  style={{ display: "block", cursor: "pointer" }}
                   onClick={() => {
                     setOption(0);
                     setWalletBalance(false);
@@ -851,13 +866,13 @@ const CheckoutModalComponent = ({
 
             <div className="cart_area2_select">
               <div className="wit_card">
-                Pay via wallet{' '}
+                Pay via wallet{" "}
                 <input
                   type="radio"
                   name="payment"
                   id=""
                   className="checkBox"
-                  style={{ display: 'block', cursor: 'pointer' }}
+                  style={{ display: "block", cursor: "pointer" }}
                   onClick={() => {
                     setOption(1);
                     setWalletBalance(true);
@@ -866,8 +881,7 @@ const CheckoutModalComponent = ({
               </div>
               {walletBalance == true ? (
                 <div className="wallet_bal_acct">
-                  Wallet Bal: {parseInt(tokenBal).toFixed(3)}{' '}
-                  {tokenSign}
+                  Wallet Bal: {parseInt(tokenBal).toFixed(3)} {tokenSign}
                   {/* Wallet Bal: {hardNumb} {tokenSign} */}
                 </div>
               ) : null}
@@ -901,23 +915,14 @@ const CheckoutModalComponent = ({
               . No minimum or maximum order.
               <br />
               . Make sure your card is still valid.
-              <br />. Ensure sufficient balance to cover this
-              transaction.
+              <br />. Ensure sufficient balance to cover this transaction.
             </div>
             {/* ========== */}
             {/* ========== */}
             {/* ========== */}
             {/* ========== */}
             <div className="sub_total_div">
-              Sub Total:{' '}
-              <span className="sub_total_div_span">₦{amount}</span>
-            </div>
-            {/* ========== */}
-            {/* ========== */}
-            {/* ========== */}
-            {/* ========== */}
-            <div className="sub_total_div">
-              VAT: <span className="sub_total_div_span">₦{vat}</span>
+              Sub Total: <span className="sub_total_div_span">₦{amount}</span>
             </div>
             {/* ========== */}
             {/* ========== */}
@@ -931,20 +936,18 @@ const CheckoutModalComponent = ({
             {/* ========== */}
             {/* ========== */}
             <div className="sub_total_div">
-              Delivery Fee:{' '}
-              <span className="sub_total_div_span">₦0</span>
+              Delivery Fee: <span className="sub_total_div_span">₦0</span>
             </div>
             {/* ========== */}
             {/* ========== */}
             <div className="secure_transac_text">
-              {' '}
+              {" "}
               Transactions are 100% Safe and Secure
             </div>
             {/* ========== */}
             {/* ========== */}
             <div className="transac_secure_div">
-              Total{' '}
-              <span className="sub_total_div_span">₦{totals}</span>
+              Total <span className="sub_total_div_span">₦{totals}</span>
             </div>
             {/* ========== */}
             {/* ========== */}
@@ -961,7 +964,7 @@ const CheckoutModalComponent = ({
           </div>
           <div
             className="signup_input_field1_cont"
-            style={{ marginTop: '15px' }}
+            style={{ marginTop: "15px" }}
           >
             <span className="input_title">Select Branch</span>
             <div className="toggle_body_area1_cont1_input">
@@ -981,14 +984,12 @@ const CheckoutModalComponent = ({
                   >
                     <MenuItem
                       value={
-                        'kilometer 7 Ikwerre Rd, Rumueme, Agip, Port Harcourt'
+                        "kilometer 7 Ikwerre Rd, Rumueme, Agip, Port Harcourt"
                       }
                     >
                       Agip
                     </MenuItem>
-                    <MenuItem
-                      value={'No 282 Aba Express Way, Port Harcourt'}
-                    >
+                    <MenuItem value={"No 282 Aba Express Way, Port Harcourt"}>
                       RUMUKWRUSHI
                     </MenuItem>
                   </Select>
@@ -1015,9 +1016,9 @@ const CheckoutModalComponent = ({
             errorMsgDiv={errorDiv}
             link_btn={true}
             src={
-              payment_type === 'OUTRIGHT'
-                ? '/dashboard/savings'
-                : '/dashboard/products'
+              payment_type === "OUTRIGHT"
+                ? "/super_admin/overview"
+                : "/dashboard/products"
             }
           />
         </div>

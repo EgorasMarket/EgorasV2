@@ -4,6 +4,7 @@ import GroupIcon from "@mui/icons-material/Group";
 import LoadingIcons from "react-loading-icons";
 import "../DashboardStyles/refferal_home.css";
 import { NoDataFoundComponent } from "../NodataFound/NoDataFoundComponent";
+import { numberWithCommas } from "../../../../../static";
 import "../DashboardStyles/dashboard_home.css";
 import { API_URL2 as api_url2 } from "../../../../../actions/types";
 import { connect } from "react-redux";
@@ -20,7 +21,14 @@ const DashBoardRefferalHome = ({ auth }) => {
   const [isLoading2, setIsLoading2] = useState(false);
   const [copyValue, setCopyValue] = useState("");
   const [copyrefferalLink, setCopyRefferalLink] = useState("");
-
+  const [seeMore, setSeeMore] = useState(false);
+  const toggleSeeMore = () => {
+    if (seeMore === false) {
+      setSeeMore(true);
+    } else if (seeMore === true) {
+      setSeeMore(false);
+    }
+  };
   const copyText = () => {
     var copyText = document.getElementById("myInput");
     copyText.select();
@@ -78,6 +86,7 @@ const DashBoardRefferalHome = ({ auth }) => {
       });
   }, []);
   useEffect(() => {
+    console.log("ok");
     setIsLoading(true);
     axios
       .get(api_url2 + "/v1/user/get/my/referals", null, config)
@@ -170,7 +179,72 @@ const DashBoardRefferalHome = ({ auth }) => {
                     <>
                       {referrals.length <= 0 ? (
                         <NoDataFoundComponent />
-                      ) : (
+                      ) : seeMore === true ? (
+                        <div className="expanded_refferals_div">
+                          {referrals.map((data) => (
+                            <div
+                              className="user_refferals_table_body_cont1"
+                              style={
+                                data.subscription_status === "INACTIVE"
+                                  ? {
+                                      border: "solid 1px #ffd5aa",
+                                      background: "#fff",
+                                    }
+                                  : {
+                                      border: "solid 1px #95dab0",
+                                      background: "#fff",
+                                    }
+                              }
+                            >
+                              <span className="reffer_email">{data.email}</span>
+                              <span className="reffer_profit">
+                                ₦
+                                {numberWithCommas(
+                                  parseInt(data.percentageCut).toFixed(2)
+                                )}
+                              </span>
+                              <span className="reffer_transact">
+                                {data.transCount + " transactions"}
+                              </span>
+                              <span className="reffer_activity">
+                                <span
+                                  style={
+                                    data.subscription_status === "INACTIVE"
+                                      ? {
+                                          display: "flex",
+                                          alignItems: "flex-start",
+                                          background: "#fab02d3d",
+                                          padding: " 0.5em 1em",
+                                          borderRadius: "8px",
+                                          fontSize: "11px",
+                                          color: "#db872f",
+                                        }
+                                      : {
+                                          display: "flex",
+                                          alignItems: "flex-start",
+                                          background: "#41ba7130",
+                                          padding: " 0.5em 1em",
+                                          borderRadius: "8px",
+                                          fontSize: "11px",
+                                          color: "#32a861",
+                                        }
+                                  }
+                                >
+                                  {data.subscription_status}{" "}
+                                  {/* <CircleIcon
+                                    className="circle_active"
+                                    style={
+                                      data.subscription_status === "INACTIVE"
+                                        ? { color: " #ff8000" }
+                                        : { color: " #41ba71" }
+                                    }
+                                  /> */}
+                                </span>
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      ) : seeMore === false ? (
                         <>
                           {referrals.slice(0, 5).map((data) => (
                             <div
@@ -188,8 +262,15 @@ const DashBoardRefferalHome = ({ auth }) => {
                               }
                             >
                               <span className="reffer_email">{data.email}</span>
-                              <span className="reffer_profit">+₦0.00</span>
-                              <span className="reffer_transact">0</span>
+                              <span className="reffer_profit">
+                                ₦
+                                {numberWithCommas(
+                                  parseInt(data.percentageCut).toFixed(2)
+                                )}
+                              </span>
+                              <span className="reffer_transact">
+                                {data.transCount + " transactions"}
+                              </span>
                               <span className="reffer_activity">
                                 <span
                                   style={
@@ -228,9 +309,14 @@ const DashBoardRefferalHome = ({ auth }) => {
                             </div>
                           ))}
                         </>
-                      )}
+                      ) : null}
                     </>
                   )}
+                  <div className="see_more_btn_div">
+                    <button className="toggle_seemore" onClick={toggleSeeMore}>
+                      {seeMore === true ? "Collapse" : "Expand"}
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
