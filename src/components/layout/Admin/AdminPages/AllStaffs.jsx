@@ -111,11 +111,15 @@ const AllStaffs = ({ auth }) => {
                       </th>
 
                       <th className="assets-category-titles-heading1 right_align">
+                        Staff ID
+                      </th>
+
+                      <th className="assets-category-titles-heading1 right_align">
                         Wallet Balance
                       </th>
 
                       <th className="assets-category-titles-heading1 right_align">
-                        Staff ID
+                        Action
                       </th>
                     </tr>
                   </thead>
@@ -158,16 +162,16 @@ const AllStaffs = ({ auth }) => {
                           </div>
                         </td>
 
+                        <td className="assets-category-data1 float-right">
+                          <div className="assets-data-name">{user.staffId}</div>
+                        </td>
+
                         <td className="assets-category-data1">
-                          <div className="assets-data-name">
+                          <div className="assets-data-name float-right">
                             {user.balance == null
                               ? "0.0"
                               : parseFloat(user.balance)}
                           </div>
-                        </td>
-
-                        <td className="assets-category-data1">
-                          <div className="assets-data-name">{user.staffId}</div>
                         </td>
 
                         <td
@@ -178,7 +182,7 @@ const AllStaffs = ({ auth }) => {
                             <button
                               style={{ background: "#87ddab" }}
                               disabled={true}
-                              className="checkout_btn1 py-1 px-2 m-0"
+                              className="checkout_btn1 py-1 px-2 m-0 float-right"
                             >
                               Current User{" "}
                             </button>
@@ -189,7 +193,7 @@ const AllStaffs = ({ auth }) => {
                                 onClick={(e) =>
                                   saveCustomerId(user.id, user.fullname)
                                 }
-                                className="checkout_btn1 py-1 px-2 m-0"
+                                className="checkout_btn1 py-1 px-2 m-0 float-right"
                               >
                                 See Wallet{" "}
                               </button>

@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from "react";
-import Slider from "react-slick";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import Carousel from "react-multi-carousel";
-import { connect } from "react-redux";
-import SellIcon from "@mui/icons-material/Sell";
-import Countdown from "react-countdown";
-import { countdown } from "../../../../actions/countdown";
-import DisplayMoney from "../../../DisplayMoney";
-import "./market.css";
+import React, { useState, useEffect } from 'react';
+import Slider from 'react-slick';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import Carousel from 'react-multi-carousel';
+import { connect } from 'react-redux';
+import SellIcon from '@mui/icons-material/Sell';
+import Countdown from 'react-countdown';
+import { countdown } from '../../../../actions/countdown';
+import DisplayMoney from '../../../DisplayMoney';
+import './market.css';
 import {
   PRODUCT_LOADED,
   API_URL2 as api_url2,
-} from "../../../../actions/types";
-import axios from "axios";
+} from '../../../../actions/types';
+import axios from 'axios';
 
-import { numberWithCommas } from "../../../../static";
-import { NoDataFoundComponent } from "../Dashboard/NodataFound/NoDataFoundComponent";
+import { numberWithCommas } from '../../../../static';
+import { NoDataFoundComponent } from '../Dashboard/NodataFound/NoDataFoundComponent';
 const responsive8 = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
@@ -56,7 +56,7 @@ const Market = ({ auth, countdown }) => {
 
   const config = {
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   };
 
@@ -64,31 +64,38 @@ const Market = ({ auth, countdown }) => {
 
   const [item, setItem] = useState([]);
 
-  const [furniture, setFurniture] = useState("Furnitures");
+  const [furniture, setFurniture] = useState('Furnitures');
   const [ComputerAccessories, setComputerAccessories] = useState(
-    "Computer & Accessories"
+    'Computer & Accessories'
   );
-  const [ComputerAccessoriesData, setComputerAccessoriesData] = useState([]);
-  const [homeAppliances, setHomeAppliances] = useState("Home Appliances");
+  const [ComputerAccessoriesData, setComputerAccessoriesData] =
+    useState([]);
+  const [homeAppliances, setHomeAppliances] =
+    useState('Home Appliances');
   const [homeAppliancesData, setHomeAppliancesData] = useState([]);
-  const [electronics, setElectronics] = useState("Electronics");
+  const [electronics, setElectronics] = useState('Electronics');
   const [electronicsData, setElectronicsData] = useState([]);
   const [awoof, setAwoof] = useState([]);
-  const [phonesTablets, setPhoneTablets] = useState("Phones & Tablet");
+  const [phonesTablets, setPhoneTablets] =
+    useState('Phones & Tablet');
   const [phonesTabletsData, setPhoneTabletsData] = useState([]);
-  const [musicalEquipment, setMusicalEquipment] =
-    useState("Musical Equipments");
-  const [musicalEquipmentData, setMusicalEquipmentData] = useState([]);
-  const [industrialEquipments, setIndustrialEquipments] = useState(
-    "Industral Equipments"
+  const [musicalEquipment, setMusicalEquipment] = useState(
+    'Musical Equipments'
   );
-  const [industrialEquipmentsData, setIndustrialEquipmentsData] = useState([]);
+  const [musicalEquipmentData, setMusicalEquipmentData] = useState(
+    []
+  );
+  const [industrialEquipments, setIndustrialEquipments] = useState(
+    'Industral Equipments'
+  );
+  const [industrialEquipmentsData, setIndustrialEquipmentsData] =
+    useState([]);
   const [counterReady, setCounterReady] = useState(false);
   const [counterArray, setCounterArray] = useState([]);
 
   const [counterDuration, setCounterDuration] = useState(0);
-  const [placeHolder, setPlaceHolder] = useState("");
-  const [wrap, setWrap] = useState({ code: "" });
+  const [placeHolder, setPlaceHolder] = useState('');
+  const [wrap, setWrap] = useState({ code: '' });
   const { code } = wrap;
 
   // const [cItem,setCItem] =useState([])
@@ -97,7 +104,11 @@ const Market = ({ auth, countdown }) => {
   const [category, setCategory] = useState([]);
   useEffect(() => {
     axios
-      .get(api_url2 + "/v1/product/retrieve/outright/products", null, config)
+      .get(
+        api_url2 + '/v1/product/retrieve/outright/products',
+        null,
+        config
+      )
       .then((data) => {
         // console.log(data.data.data, "powerful");
 
@@ -113,7 +124,7 @@ const Market = ({ auth, countdown }) => {
   useEffect(() => {
     axios
       .get(
-        api_url2 + "/v1/product/retrieve/products/byId/" + "Awoof",
+        api_url2 + '/v1/product/retrieve/products/byId/' + 'Awoof',
         null,
         config
       )
@@ -121,7 +132,7 @@ const Market = ({ auth, countdown }) => {
         // console.log(data.data, "item detail component ");
 
         setAwoof(data.data.data);
-        console.log(data.data, "awoof log");
+        console.log(data.data, 'awoof log');
 
         // setTerm(data.data.data)
       })
@@ -132,7 +143,9 @@ const Market = ({ auth, countdown }) => {
   useEffect(() => {
     axios
       .get(
-        api_url2 + "/v1/product/retrieve/products/byId/" + phonesTablets,
+        api_url2 +
+          '/v1/product/retrieve/products/byId/' +
+          phonesTablets,
         null,
         config
       )
@@ -146,7 +159,9 @@ const Market = ({ auth, countdown }) => {
       });
     axios
       .get(
-        api_url2 + "/v1/product/retrieve/products/byId/" + homeAppliances,
+        api_url2 +
+          '/v1/product/retrieve/products/byId/' +
+          homeAppliances,
         null,
         config
       )
@@ -159,7 +174,9 @@ const Market = ({ auth, countdown }) => {
       });
     axios
       .get(
-        api_url2 + "/v1/product/retrieve/products/byId/" + electronics,
+        api_url2 +
+          '/v1/product/retrieve/products/byId/' +
+          electronics,
         null,
         config
       )
@@ -172,7 +189,9 @@ const Market = ({ auth, countdown }) => {
       });
     axios
       .get(
-        api_url2 + "/v1/product/retrieve/products/byId/" + ComputerAccessories,
+        api_url2 +
+          '/v1/product/retrieve/products/byId/' +
+          ComputerAccessories,
         null,
         config
       )
@@ -185,12 +204,14 @@ const Market = ({ auth, countdown }) => {
       });
     axios
       .get(
-        api_url2 + "/v1/product/retrieve/products/byId/" + musicalEquipment,
+        api_url2 +
+          '/v1/product/retrieve/products/byId/' +
+          musicalEquipment,
         null,
         config
       )
       .then((data) => {
-        console.log(data.data.data.length, "powerful");
+        console.log(data.data.data.length, 'powerful');
         setMusicalEquipmentData(data.data.data);
       })
       .catch((err) => {
@@ -198,7 +219,9 @@ const Market = ({ auth, countdown }) => {
       });
     axios
       .get(
-        api_url2 + "/v1/product/retrieve/products/byId/" + industrialEquipments,
+        api_url2 +
+          '/v1/product/retrieve/products/byId/' +
+          industrialEquipments,
         null,
         config
       )
@@ -216,7 +239,7 @@ const Market = ({ auth, countdown }) => {
 
   function phoneTab() {
     axios
-      .get(api_url2 + "/v1/product/retrieve/category", null, config)
+      .get(api_url2 + '/v1/product/retrieve/category', null, config)
       .then((data) => {
         //console.log(data.data.data, "king");
         setCategory(data.data.data);
@@ -226,10 +249,10 @@ const Market = ({ auth, countdown }) => {
       });
   }
 
-  const [prodBody, setProdBody] = useState("not_product_body");
-  const [dropBtn, setDropBtn] = useState("dropHead");
-  const [height20, setHeight20] = useState("0px");
-  const [rap, setRap] = useState("#electronics");
+  const [prodBody, setProdBody] = useState('not_product_body');
+  const [dropBtn, setDropBtn] = useState('dropHead');
+  const [height20, setHeight20] = useState('0px');
+  const [rap, setRap] = useState('#electronics');
   const settings = {
     dots: true,
     fade: true,
@@ -243,10 +266,10 @@ const Market = ({ auth, countdown }) => {
     slidesToScroll: 1,
   };
   const height = {
-    position: "absolute",
-    top: "1000px",
+    position: 'absolute',
+    top: '1000px',
   };
-  const text = "No Products Yet.";
+  const text = 'No Products Yet.';
   // ==============
   // ==============
   // ==============
@@ -283,9 +306,12 @@ const Market = ({ auth, countdown }) => {
     const today = new Date();
     const endDate = new Date(getData.dropDate);
     const days = parseInt((endDate - today) / (1000 * 60 * 60 * 24));
-    const hours = parseInt((Math.abs(endDate - today) / (1000 * 60 * 60)) % 24);
+    const hours = parseInt(
+      (Math.abs(endDate - today) / (1000 * 60 * 60)) % 24
+    );
     const minutes = parseInt(
-      (Math.abs(endDate.getTime() - today.getTime()) / (1000 * 60)) % 60
+      (Math.abs(endDate.getTime() - today.getTime()) / (1000 * 60)) %
+        60
     );
     const seconds = parseInt(
       (Math.abs(endDate.getTime() - today.getTime()) / 1000) % 60
@@ -298,14 +324,15 @@ const Market = ({ auth, countdown }) => {
     let minutescount = minutes * 60 * 1000;
     let secondscount = seconds * 1000;
 
-    let totalMiliseconds = dayscount + hourscount + minutescount + secondscount;
+    let totalMiliseconds =
+      dayscount + hourscount + minutescount + secondscount;
 
     console.log(totalMiliseconds);
 
-    if (getData.countType === "WEEKLY") {
-      setPlaceHolder("Opens In");
+    if (getData.countType === 'WEEKLY') {
+      setPlaceHolder('Opens In');
     } else {
-      setPlaceHolder("Closes In");
+      setPlaceHolder('Closes In');
     }
     setCounterDuration(totalMiliseconds);
     setCounterReady(true);
@@ -316,18 +343,22 @@ const Market = ({ auth, countdown }) => {
 
   useEffect(() => {
     const timeInterval = setInterval(() => {
-      console.log(counterArray, "okkkkk");
+      console.log(counterArray, 'okkkkk');
       let getData = counterArray[0];
       // let convertToDate = Date(getData.dropDate);
 
       const today = new Date();
       const endDate = new Date(getData.dropDate);
-      const days = parseInt((endDate - today) / (1000 * 60 * 60 * 24));
+      const days = parseInt(
+        (endDate - today) / (1000 * 60 * 60 * 24)
+      );
       const hours = parseInt(
         (Math.abs(endDate - today) / (1000 * 60 * 60)) % 24
       );
       const minutes = parseInt(
-        (Math.abs(endDate.getTime() - today.getTime()) / (1000 * 60)) % 60
+        (Math.abs(endDate.getTime() - today.getTime()) /
+          (1000 * 60)) %
+          60
       );
       const seconds = parseInt(
         (Math.abs(endDate.getTime() - today.getTime()) / 1000) % 60
@@ -349,7 +380,7 @@ const Market = ({ auth, countdown }) => {
       console.log(completeCount, newEndDate);
       // 1654532579461 1654532594462
       if (completeCount >= newEndDate) {
-        console.log("time up", new Date());
+        console.log('time up', new Date());
 
         callCounter();
 
@@ -362,19 +393,19 @@ const Market = ({ auth, countdown }) => {
         setCounterReady(true);
 
         if (counterArray === undefined || counterArray.length == 0) {
-          console.log("empty array");
+          console.log('empty array');
         } else {
-          if (getData.countType === "WEEKLY") {
-            console.log("Market Opens In WEEKLY");
-            setPlaceHolder("Market Opens In");
+          if (getData.countType === 'WEEKLY') {
+            console.log('Market Opens In WEEKLY');
+            setPlaceHolder('Market Opens In');
             // setCounterDuration(newMinutes);
           } else {
-            console.log("Market Opens In DAILY");
-            setPlaceHolder("Market Closes In");
+            console.log('Market Opens In DAILY');
+            setPlaceHolder('Market Closes In');
           }
         }
       } else {
-        console.log("still counting", Date.now());
+        console.log('still counting', Date.now());
       }
     }, 3000);
     return () => {
@@ -518,14 +549,14 @@ const Market = ({ auth, countdown }) => {
             <div className="products_display_body_heading heading_color_2a">
               <span className="awoof_sale_icon_market_cont">
                 <SellIcon className="awoof_sale_icon" />
-                Awoof Sales{" "}
+                Awoof Sales{' '}
               </span>
 
               <>
                 {counterReady ? (
                   <div>
                     <span className="startsIn_market">
-                      {placeHolder}:{" "}
+                      {placeHolder}:{' '}
                       <div className="count_down_shopping_market">
                         <Countdown
                           className="countdownDiv_market"
@@ -552,12 +583,16 @@ const Market = ({ auth, countdown }) => {
                 <>
                   <div className="show_prods_on_mobile">
                     {awoof.slice(0, 10).map((asset, index5) => {
-                      if (asset.payment_type == "OUTRIGHT")
+                      if (asset.payment_type == 'OUTRIGHT')
                         return (
                           <a
+                            key={asset.id}
                             href={`/products/details/${
                               asset.id
-                            }/${asset.product_name.replace(/\s+/g, "-")}`}
+                            }/${asset.product_name.replace(
+                              /\s+/g,
+                              '-'
+                            )}`}
                             // href={`/products/details/${asset.id}/${asset.product_name.replace( '','-')}`}
                             // key={index.toString()}
                           >
@@ -572,9 +607,9 @@ const Market = ({ auth, countdown }) => {
                                   <button
                                     className="out_right_install_tag_btn"
                                     style={{
-                                      background: "#000",
-                                      borderColor: "#000",
-                                      color: "#fff",
+                                      background: '#000',
+                                      borderColor: '#000',
+                                      color: '#fff',
                                     }}
                                   >
                                     Awoof
@@ -586,11 +621,15 @@ const Market = ({ auth, countdown }) => {
                                   </div>
                                   <div className="asset_title">
                                     <span className="init_amount">
-                                      <DisplayMoney amount={asset.amount} />{" "}
+                                      <DisplayMoney
+                                        amount={asset.amount}
+                                      />{' '}
                                     </span>
 
                                     <span className="slashed_price">
-                                      <DisplayMoney amount={asset.amount * 2} />
+                                      <DisplayMoney
+                                        amount={asset.amount * 2}
+                                      />
                                     </span>
                                   </div>
                                 </div>
@@ -608,20 +647,24 @@ const Market = ({ auth, countdown }) => {
                     //   infinite={false}
                     autoPlay={false}
                     autoPlaySpeed={6000}
-                    transitionDelay={"2s"}
+                    transitionDelay={'2s'}
                     infinite={true}
                     draggable={true}
                     // transitionDuration={500}
                     swipeable={true}
-                    style={{ height: "25em" }}
+                    style={{ height: '25em' }}
                   >
                     {awoof.slice(0, 10).map((asset, index5) => {
-                      if (asset.payment_type == "OUTRIGHT")
+                      if (asset.payment_type == 'OUTRIGHT')
                         return (
                           <a
+                            key={asset.id}
                             href={`/products/details/${
                               asset.id
-                            }/${asset.product_name.replace(/\s+/g, "-")}`}
+                            }/${asset.product_name.replace(
+                              /\s+/g,
+                              '-'
+                            )}`}
                             // href={`/products/details/${asset.id}/${asset.product_name.replace( '','-')}`}
                             // key={index.toString()}
                           >
@@ -636,9 +679,9 @@ const Market = ({ auth, countdown }) => {
                                   <button
                                     className="out_right_install_tag_btn"
                                     style={{
-                                      background: "#000",
-                                      borderColor: "#000",
-                                      color: "#fff",
+                                      background: '#000',
+                                      borderColor: '#000',
+                                      color: '#fff',
                                     }}
                                   >
                                     Awoof
@@ -651,11 +694,15 @@ const Market = ({ auth, countdown }) => {
                                   </div>
                                   <div className="asset_title">
                                     <span className="init_amount">
-                                      <DisplayMoney amount={asset.amount} />{" "}
+                                      <DisplayMoney
+                                        amount={asset.amount}
+                                      />{' '}
                                     </span>
 
                                     <span className="slashed_price">
-                                      <DisplayMoney amount={asset.amount * 2} />
+                                      <DisplayMoney
+                                        amount={asset.amount * 2}
+                                      />
                                     </span>
                                   </div>
                                 </div>
@@ -678,7 +725,7 @@ const Market = ({ auth, countdown }) => {
 
           <div className="products_display_body">
             <div className="products_display_body_heading">
-              Outright Buy{" "}
+              Outright Buy{' '}
               {/* <a
                 href={`/products/categories/${code}`}
                 className="se_all_btnn"
@@ -694,15 +741,21 @@ const Market = ({ auth, countdown }) => {
                 <>
                   <div className="show_prods_on_mobile">
                     {item
-                      .filter((person) => person.sales_type == "SHOWROOM")
+                      .filter(
+                        (person) => person.sales_type == 'SHOWROOM'
+                      )
                       .slice(0, 10)
                       .map((asset, index5) => {
-                        if (asset.payment_type == "OUTRIGHT")
+                        if (asset.payment_type == 'OUTRIGHT')
                           return (
                             <a
+                              key={asset.id}
                               href={`/products/details/${
                                 asset.id
-                              }/${asset.product_name.replace(/\s+/g, "-")}`}
+                              }/${asset.product_name.replace(
+                                /\s+/g,
+                                '-'
+                              )}`}
                               // href={`/products/details/${asset.id}/${asset.product_name.replace( '','-')}`}
                               // key={index.toString()}
                             >
@@ -713,13 +766,14 @@ const Market = ({ auth, countdown }) => {
                                     backgroundImage: `url(${asset.product_image})`,
                                   }}
                                 >
-                                  {asset.payment_type == "OUTRIGHT" ? (
+                                  {asset.payment_type ==
+                                  'OUTRIGHT' ? (
                                     <div className="out_right_install_tag">
                                       <button
                                         className="out_right_install_tag_btn"
                                         style={{
-                                          background: "#3ebc6e",
-                                          borderColor: "#3ebc6e",
+                                          background: '#3ebc6e',
+                                          borderColor: '#3ebc6e',
                                         }}
                                       >
                                         Outright
@@ -738,7 +792,9 @@ const Market = ({ auth, countdown }) => {
                                     </div>
                                     <div className="asset_title">
                                       <span className="init_amount">
-                                        <DisplayMoney amount={asset.amount} />{" "}
+                                        <DisplayMoney
+                                          amount={asset.amount}
+                                        />{' '}
                                       </span>
 
                                       <span className="slashed_price">
@@ -762,23 +818,29 @@ const Market = ({ auth, countdown }) => {
                     //   infinite={false}
                     autoPlay={false}
                     autoPlaySpeed={6000}
-                    transitionDelay={"2s"}
+                    transitionDelay={'2s'}
                     infinite={true}
                     draggable={true}
                     // transitionDuration={500}
                     swipeable={true}
-                    style={{ height: "25em" }}
+                    style={{ height: '25em' }}
                   >
                     {item
-                      .filter((person) => person.sales_type == "SHOWROOM")
+                      .filter(
+                        (person) => person.sales_type == 'SHOWROOM'
+                      )
                       .slice(0, 10)
                       .map((asset, index5) => {
-                        if (asset.payment_type == "OUTRIGHT")
+                        if (asset.payment_type == 'OUTRIGHT')
                           return (
                             <a
+                              key={asset.id}
                               href={`/products/details/${
                                 asset.id
-                              }/${asset.product_name.replace(/\s+/g, "-")}`}
+                              }/${asset.product_name.replace(
+                                /\s+/g,
+                                '-'
+                              )}`}
                               // href={`/products/details/${asset.id}/${asset.product_name.replace( '','-')}`}
                               // key={index.toString()}
                             >
@@ -789,13 +851,14 @@ const Market = ({ auth, countdown }) => {
                                     backgroundImage: `url(${asset.product_image})`,
                                   }}
                                 >
-                                  {asset.payment_type == "OUTRIGHT" ? (
+                                  {asset.payment_type ==
+                                  'OUTRIGHT' ? (
                                     <div className="out_right_install_tag">
                                       <button
                                         className="out_right_install_tag_btn"
                                         style={{
-                                          background: "#3ebc6e",
-                                          borderColor: "#3ebc6e",
+                                          background: '#3ebc6e',
+                                          borderColor: '#3ebc6e',
                                         }}
                                       >
                                         Outright
@@ -815,7 +878,9 @@ const Market = ({ auth, countdown }) => {
                                     </div>
                                     <div className="asset_title">
                                       <span className="init_amount">
-                                        <DisplayMoney amount={asset.amount} />{" "}
+                                        <DisplayMoney
+                                          amount={asset.amount}
+                                        />{' '}
                                       </span>
 
                                       <span className="slashed_price">
@@ -851,7 +916,10 @@ const Market = ({ auth, countdown }) => {
           {/* =========[[[[[[[[[]]]]]]]]] */}
           {/* =========[[[[[[[[[]]]]]]]]] */}
 
-          <div className="products_display_body no_pad" id="phonesTab">
+          <div
+            className="products_display_body no_pad"
+            id="phonesTab"
+          >
             <div className="products_display_body_heading heading_color_2">
               {phonesTablets}
               <a
@@ -877,14 +945,20 @@ const Market = ({ auth, countdown }) => {
                   <>
                     <div className="show_prods_on_mobile">
                       {phonesTabletsData
-                        .filter((person) => person.sales_type == "SHOWROOM")
+                        .filter(
+                          (person) => person.sales_type == 'SHOWROOM'
+                        )
                         .slice(0, 10)
                         .map((asset) => {
                           return (
                             <a
+                              key={asset.id}
                               href={`/products/details/${
                                 asset.id
-                              }/${asset.product_name.replace(/\s+/g, "-")}`}
+                              }/${asset.product_name.replace(
+                                /\s+/g,
+                                '-'
+                              )}`}
                               // key={index.toString()}
                             >
                               <li className="carous_list no_marg inventory_cards">
@@ -894,13 +968,14 @@ const Market = ({ auth, countdown }) => {
                                     backgroundImage: `url(${asset.product_image})`,
                                   }}
                                 >
-                                  {asset.payment_type == "OUTRIGHT" ? (
+                                  {asset.payment_type ==
+                                  'OUTRIGHT' ? (
                                     <div className="out_right_install_tag">
                                       <button
                                         className="out_right_install_tag_btn"
                                         style={{
-                                          background: "#3ebc6e",
-                                          borderColor: "#3ebc6e",
+                                          background: '#3ebc6e',
+                                          borderColor: '#3ebc6e',
                                         }}
                                       >
                                         Outright
@@ -917,37 +992,46 @@ const Market = ({ auth, countdown }) => {
                                     <div className="asset_name">
                                       {asset.product_name}
                                     </div>
-                                    <div class="asset_prices_div">
+                                    <div className="asset_prices_div">
                                       <div className="asset_title">
-                                        {asset.payment_type == "OUTRIGHT" ? (
+                                        {asset.payment_type ==
+                                        'OUTRIGHT' ? (
                                           <span className="init_amount">
                                             <DisplayMoney
                                               amount={asset.amount}
-                                            />{" "}
+                                            />{' '}
                                           </span>
                                         ) : (
                                           <span className="init_amount">
                                             <DisplayMoney
-                                              amount={asset.roundedAmount}
-                                            />{" "}
+                                              amount={
+                                                asset.roundedAmount
+                                              }
+                                            />{' '}
                                           </span>
                                         )}
-                                        {asset.payment_type == "OUTRIGHT" ? (
+                                        {asset.payment_type ==
+                                        'OUTRIGHT' ? (
                                           <span className="slashed_price">
                                             <DisplayMoney
-                                              amount={asset.amount * 2}
+                                              amount={
+                                                asset.amount * 2
+                                              }
                                             />
                                           </span>
                                         ) : (
                                           <span className="slashed_price">
                                             <DisplayMoney
-                                              amount={asset.roundedAmount * 2}
+                                              amount={
+                                                asset.roundedAmount *
+                                                2
+                                              }
                                             />
                                           </span>
                                         )}
                                       </div>
                                       {asset.payment_type ==
-                                      "OUTRIGHT" ? null : (
+                                      'OUTRIGHT' ? null : (
                                         <div className="amount_per_day_div">
                                           <DisplayMoney
                                             amount={
@@ -956,7 +1040,7 @@ const Market = ({ auth, countdown }) => {
                                             }
                                           />
                                           <span className="per_day_symbol">
-                                            {" "}
+                                            {' '}
                                             / perweek
                                           </span>
                                         </div>
@@ -978,22 +1062,28 @@ const Market = ({ auth, countdown }) => {
                       //   infinite={false}
                       autoPlay={false}
                       autoPlaySpeed={6000}
-                      transitionDelay={"2s"}
+                      transitionDelay={'2s'}
                       infinite={false}
                       draggable={true}
                       // transitionDuration={500}
                       swipeable={true}
-                      style={{ height: "25em" }}
+                      style={{ height: '25em' }}
                     >
                       {phonesTabletsData
-                        .filter((person) => person.sales_type == "SHOWROOM")
+                        .filter(
+                          (person) => person.sales_type == 'SHOWROOM'
+                        )
                         .slice(0, 10)
                         .map((asset) => {
                           return (
                             <a
+                              key={asset.id}
                               href={`/products/details/${
                                 asset.id
-                              }/${asset.product_name.replace(/\s+/g, "-")}`}
+                              }/${asset.product_name.replace(
+                                /\s+/g,
+                                '-'
+                              )}`}
                               // key={index.toString()}
                             >
                               <li className="carous_list no_marg inventory_cards inventory_cards">
@@ -1003,13 +1093,14 @@ const Market = ({ auth, countdown }) => {
                                     backgroundImage: `url(${asset.product_image})`,
                                   }}
                                 >
-                                  {asset.payment_type == "OUTRIGHT" ? (
+                                  {asset.payment_type ==
+                                  'OUTRIGHT' ? (
                                     <div className="out_right_install_tag">
                                       <button
                                         className="out_right_install_tag_btn"
                                         style={{
-                                          background: "#3ebc6e",
-                                          borderColor: "#3ebc6e",
+                                          background: '#3ebc6e',
+                                          borderColor: '#3ebc6e',
                                         }}
                                       >
                                         Outright
@@ -1026,37 +1117,46 @@ const Market = ({ auth, countdown }) => {
                                     <div className="asset_name">
                                       {asset.product_name}
                                     </div>
-                                    <div class="asset_prices_div">
+                                    <div className="asset_prices_div">
                                       <div className="asset_title">
-                                        {asset.payment_type == "OUTRIGHT" ? (
+                                        {asset.payment_type ==
+                                        'OUTRIGHT' ? (
                                           <span className="init_amount">
                                             <DisplayMoney
                                               amount={asset.amount}
-                                            />{" "}
+                                            />{' '}
                                           </span>
                                         ) : (
                                           <span className="init_amount">
                                             <DisplayMoney
-                                              amount={asset.roundedAmount}
-                                            />{" "}
+                                              amount={
+                                                asset.roundedAmount
+                                              }
+                                            />{' '}
                                           </span>
                                         )}
-                                        {asset.payment_type == "OUTRIGHT" ? (
+                                        {asset.payment_type ==
+                                        'OUTRIGHT' ? (
                                           <span className="slashed_price">
                                             <DisplayMoney
-                                              amount={asset.amount * 2}
+                                              amount={
+                                                asset.amount * 2
+                                              }
                                             />
                                           </span>
                                         ) : (
                                           <span className="slashed_price">
                                             <DisplayMoney
-                                              amount={asset.roundedAmount * 2}
+                                              amount={
+                                                asset.roundedAmount *
+                                                2
+                                              }
                                             />
                                           </span>
                                         )}
                                       </div>
                                       {asset.payment_type ==
-                                      "OUTRIGHT" ? null : (
+                                      'OUTRIGHT' ? null : (
                                         <div className="amount_per_day_div">
                                           <DisplayMoney
                                             amount={
@@ -1065,7 +1165,7 @@ const Market = ({ auth, countdown }) => {
                                             }
                                           />
                                           <span className="per_day_symbol">
-                                            {" "}
+                                            {' '}
                                             / perweek
                                           </span>
                                         </div>
@@ -1087,22 +1187,28 @@ const Market = ({ auth, countdown }) => {
                       //   infinite={false}
                       autoPlay={false}
                       autoPlaySpeed={6000}
-                      transitionDelay={"2s"}
+                      transitionDelay={'2s'}
                       infinite={false}
                       draggable={true}
                       // transitionDuration={500}
                       swipeable={true}
-                      style={{ height: "25em" }}
+                      style={{ height: '25em' }}
                     >
                       {phonesTabletsData
-                        .filter((person) => person.sales_type == "SHOWROOM")
+                        .filter(
+                          (person) => person.sales_type == 'SHOWROOM'
+                        )
                         .slice(0, 10)
                         .map((asset) => {
                           return (
                             <a
+                              key={asset.id}
                               href={`/products/details/${
                                 asset.id
-                              }/${asset.product_name.replace(/\s+/g, "-")}`}
+                              }/${asset.product_name.replace(
+                                /\s+/g,
+                                '-'
+                              )}`}
                               // key={index.toString()}
                             >
                               <li className="carous_list no_marg inventory_cards inventory_cards">
@@ -1112,13 +1218,14 @@ const Market = ({ auth, countdown }) => {
                                     backgroundImage: `url(${asset.product_image})`,
                                   }}
                                 >
-                                  {asset.payment_type == "OUTRIGHT" ? (
+                                  {asset.payment_type ==
+                                  'OUTRIGHT' ? (
                                     <div className="out_right_install_tag">
                                       <button
                                         className="out_right_install_tag_btn"
                                         style={{
-                                          background: "#3ebc6e",
-                                          borderColor: "#3ebc6e",
+                                          background: '#3ebc6e',
+                                          borderColor: '#3ebc6e',
                                         }}
                                       >
                                         Outright
@@ -1135,37 +1242,46 @@ const Market = ({ auth, countdown }) => {
                                     <div className="asset_name">
                                       {asset.product_name}
                                     </div>
-                                    <div class="asset_prices_div">
+                                    <div className="asset_prices_div">
                                       <div className="asset_title">
-                                        {asset.payment_type == "OUTRIGHT" ? (
+                                        {asset.payment_type ==
+                                        'OUTRIGHT' ? (
                                           <span className="init_amount">
                                             <DisplayMoney
                                               amount={asset.amount}
-                                            />{" "}
+                                            />{' '}
                                           </span>
                                         ) : (
                                           <span className="init_amount">
                                             <DisplayMoney
-                                              amount={asset.roundedAmount}
-                                            />{" "}
+                                              amount={
+                                                asset.roundedAmount
+                                              }
+                                            />{' '}
                                           </span>
                                         )}
-                                        {asset.payment_type == "OUTRIGHT" ? (
+                                        {asset.payment_type ==
+                                        'OUTRIGHT' ? (
                                           <span className="slashed_price">
                                             <DisplayMoney
-                                              amount={asset.amount * 2}
+                                              amount={
+                                                asset.amount * 2
+                                              }
                                             />
                                           </span>
                                         ) : (
                                           <span className="slashed_price">
                                             <DisplayMoney
-                                              amount={asset.roundedAmount * 2}
+                                              amount={
+                                                asset.roundedAmount *
+                                                2
+                                              }
                                             />
                                           </span>
                                         )}
                                       </div>
                                       {asset.payment_type ==
-                                      "OUTRIGHT" ? null : (
+                                      'OUTRIGHT' ? null : (
                                         <div className="amount_per_day_div">
                                           <DisplayMoney
                                             amount={
@@ -1174,7 +1290,7 @@ const Market = ({ auth, countdown }) => {
                                             }
                                           />
                                           <span className="per_day_symbol">
-                                            {" "}
+                                            {' '}
                                             / perweek
                                           </span>
                                         </div>
@@ -1219,14 +1335,20 @@ const Market = ({ auth, countdown }) => {
                 <>
                   <div className="show_prods_on_mobile">
                     {homeAppliancesData
-                      .filter((person) => person.sales_type == "SHOWROOM")
+                      .filter(
+                        (person) => person.sales_type == 'SHOWROOM'
+                      )
                       .slice(0, 10)
                       .map((asset, index5) => {
                         return (
                           <a
+                            key={asset.id}
                             href={`/products/details/${
                               asset.id
-                            }/${asset.product_name.replace(/\s+/g, "-")}`}
+                            }/${asset.product_name.replace(
+                              /\s+/g,
+                              '-'
+                            )}`}
                             key={index5.toString()}
                           >
                             <li className="carous_list no_marg inventory_cards">
@@ -1244,13 +1366,13 @@ const Market = ({ auth, countdown }) => {
                                   //   backgroundPositionY: "center",
                                 }}
                               >
-                                {asset.payment_type == "OUTRIGHT" ? (
+                                {asset.payment_type == 'OUTRIGHT' ? (
                                   <div className="out_right_install_tag">
                                     <button
                                       className="out_right_install_tag_btn"
                                       style={{
-                                        background: "#3ebc6e",
-                                        borderColor: "#3ebc6e",
+                                        background: '#3ebc6e',
+                                        borderColor: '#3ebc6e',
                                       }}
                                     >
                                       Outright
@@ -1269,18 +1391,24 @@ const Market = ({ auth, countdown }) => {
                                   </div>
                                   <div className="asset_prices_div">
                                     <div className="asset_title">
-                                      {asset.payment_type == "OUTRIGHT" ? (
+                                      {asset.payment_type ==
+                                      'OUTRIGHT' ? (
                                         <span className="init_amount">
-                                          <DisplayMoney amount={asset.amount} />{" "}
+                                          <DisplayMoney
+                                            amount={asset.amount}
+                                          />{' '}
                                         </span>
                                       ) : (
                                         <span className="init_amount">
                                           <DisplayMoney
-                                            amount={asset.roundedAmount}
-                                          />{" "}
+                                            amount={
+                                              asset.roundedAmount
+                                            }
+                                          />{' '}
                                         </span>
                                       )}
-                                      {asset.payment_type == "OUTRIGHT" ? (
+                                      {asset.payment_type ==
+                                      'OUTRIGHT' ? (
                                         <span className="slashed_price">
                                           <DisplayMoney
                                             amount={asset.amount * 2}
@@ -1289,12 +1417,15 @@ const Market = ({ auth, countdown }) => {
                                       ) : (
                                         <span className="slashed_price">
                                           <DisplayMoney
-                                            amount={asset.roundedAmount * 2}
+                                            amount={
+                                              asset.roundedAmount * 2
+                                            }
                                           />
                                         </span>
                                       )}
                                     </div>
-                                    {asset.payment_type == "OUTRIGHT" ? null : (
+                                    {asset.payment_type ==
+                                    'OUTRIGHT' ? null : (
                                       <div className="amount_per_day_div">
                                         <DisplayMoney
                                           amount={
@@ -1303,7 +1434,7 @@ const Market = ({ auth, countdown }) => {
                                           }
                                         />
                                         <span className="per_day_symbol">
-                                          {" "}
+                                          {' '}
                                           / perweek
                                         </span>
                                       </div>
@@ -1324,22 +1455,28 @@ const Market = ({ auth, countdown }) => {
                     //   infinite={false}
                     autoPlay={false}
                     autoPlaySpeed={6000}
-                    transitionDelay={"2s"}
+                    transitionDelay={'2s'}
                     infinite={true}
                     draggable={true}
                     // transitionDuration={500}
                     swipeable={true}
-                    style={{ height: "25em" }}
+                    style={{ height: '25em' }}
                   >
                     {homeAppliancesData
-                      .filter((person) => person.sales_type == "SHOWROOM")
+                      .filter(
+                        (person) => person.sales_type == 'SHOWROOM'
+                      )
                       .slice(0, 10)
                       .map((asset, index5) => {
                         return (
                           <a
+                            key={asset.id}
                             href={`/products/details/${
                               asset.id
-                            }/${asset.product_name.replace(/\s+/g, "-")}`}
+                            }/${asset.product_name.replace(
+                              /\s+/g,
+                              '-'
+                            )}`}
                             key={index5.toString()}
                           >
                             <li className="carous_list no_marg inventory_cards">
@@ -1357,13 +1494,13 @@ const Market = ({ auth, countdown }) => {
                                   //   backgroundPositionY: "center",
                                 }}
                               >
-                                {asset.payment_type == "OUTRIGHT" ? (
+                                {asset.payment_type == 'OUTRIGHT' ? (
                                   <div className="out_right_install_tag">
                                     <button
                                       className="out_right_install_tag_btn"
                                       style={{
-                                        background: "#3ebc6e",
-                                        borderColor: "#3ebc6e",
+                                        background: '#3ebc6e',
+                                        borderColor: '#3ebc6e',
                                       }}
                                     >
                                       Outright
@@ -1382,18 +1519,24 @@ const Market = ({ auth, countdown }) => {
                                   </div>
                                   <div className="asset_prices_div">
                                     <div className="asset_title">
-                                      {asset.payment_type == "OUTRIGHT" ? (
+                                      {asset.payment_type ==
+                                      'OUTRIGHT' ? (
                                         <span className="init_amount">
-                                          <DisplayMoney amount={asset.amount} />{" "}
+                                          <DisplayMoney
+                                            amount={asset.amount}
+                                          />{' '}
                                         </span>
                                       ) : (
                                         <span className="init_amount">
                                           <DisplayMoney
-                                            amount={asset.roundedAmount}
-                                          />{" "}
+                                            amount={
+                                              asset.roundedAmount
+                                            }
+                                          />{' '}
                                         </span>
                                       )}
-                                      {asset.payment_type == "OUTRIGHT" ? (
+                                      {asset.payment_type ==
+                                      'OUTRIGHT' ? (
                                         <span className="slashed_price">
                                           <DisplayMoney
                                             amount={asset.amount * 2}
@@ -1402,12 +1545,15 @@ const Market = ({ auth, countdown }) => {
                                       ) : (
                                         <span className="slashed_price">
                                           <DisplayMoney
-                                            amount={asset.roundedAmount * 2}
+                                            amount={
+                                              asset.roundedAmount * 2
+                                            }
                                           />
                                         </span>
                                       )}
                                     </div>
-                                    {asset.payment_type == "OUTRIGHT" ? null : (
+                                    {asset.payment_type ==
+                                    'OUTRIGHT' ? null : (
                                       <div className="amount_per_day_div">
                                         <DisplayMoney
                                           amount={
@@ -1416,7 +1562,7 @@ const Market = ({ auth, countdown }) => {
                                           }
                                         />
                                         <span className="per_day_symbol">
-                                          {" "}
+                                          {' '}
                                           / perweek
                                         </span>
                                       </div>
@@ -1449,7 +1595,10 @@ const Market = ({ auth, countdown }) => {
           {/* =========[[[[[[[[[]]]]]]]]] */}
           {/* =========[[[[[[[[[]]]]]]]]] */}
 
-          <div className="products_display_body no_pad" id="Electronics">
+          <div
+            className="products_display_body no_pad"
+            id="Electronics"
+          >
             <div className="products_display_body_heading heading_color_2">
               {electronics}
               <a
@@ -1475,14 +1624,20 @@ const Market = ({ auth, countdown }) => {
                   <>
                     <div className="show_prods_on_mobile">
                       {electronicsData
-                        .filter((person) => person.sales_type == "SHOWROOM")
+                        .filter(
+                          (person) => person.sales_type == 'SHOWROOM'
+                        )
                         .slice(0, 10)
                         .map((asset) => {
                           return (
                             <a
+                              key={asset.id}
                               href={`/products/details/${
                                 asset.id
-                              }/${asset.product_name.replace(/\s+/g, "-")}`}
+                              }/${asset.product_name.replace(
+                                /\s+/g,
+                                '-'
+                              )}`}
                               // key={index.toString()}
                             >
                               <li className="carous_list no_marg inventory_cards">
@@ -1492,13 +1647,14 @@ const Market = ({ auth, countdown }) => {
                                     backgroundImage: `url(${asset.product_image})`,
                                   }}
                                 >
-                                  {asset.payment_type == "OUTRIGHT" ? (
+                                  {asset.payment_type ==
+                                  'OUTRIGHT' ? (
                                     <div className="out_right_install_tag">
                                       <button
                                         className="out_right_install_tag_btn"
                                         style={{
-                                          background: "#3ebc6e",
-                                          borderColor: "#3ebc6e",
+                                          background: '#3ebc6e',
+                                          borderColor: '#3ebc6e',
                                         }}
                                       >
                                         Outright
@@ -1515,37 +1671,46 @@ const Market = ({ auth, countdown }) => {
                                     <div className="asset_name">
                                       {asset.product_name}
                                     </div>
-                                    <div class="asset_prices_div">
+                                    <div className="asset_prices_div">
                                       <div className="asset_title">
-                                        {asset.payment_type == "OUTRIGHT" ? (
+                                        {asset.payment_type ==
+                                        'OUTRIGHT' ? (
                                           <span className="init_amount">
                                             <DisplayMoney
                                               amount={asset.amount}
-                                            />{" "}
+                                            />{' '}
                                           </span>
                                         ) : (
                                           <span className="init_amount">
                                             <DisplayMoney
-                                              amount={asset.roundedAmount}
-                                            />{" "}
+                                              amount={
+                                                asset.roundedAmount
+                                              }
+                                            />{' '}
                                           </span>
                                         )}
-                                        {asset.payment_type == "OUTRIGHT" ? (
+                                        {asset.payment_type ==
+                                        'OUTRIGHT' ? (
                                           <span className="slashed_price">
                                             <DisplayMoney
-                                              amount={asset.amount * 2}
+                                              amount={
+                                                asset.amount * 2
+                                              }
                                             />
                                           </span>
                                         ) : (
                                           <span className="slashed_price">
                                             <DisplayMoney
-                                              amount={asset.roundedAmount * 2}
+                                              amount={
+                                                asset.roundedAmount *
+                                                2
+                                              }
                                             />
                                           </span>
                                         )}
                                       </div>
                                       {asset.payment_type ==
-                                      "OUTRIGHT" ? null : (
+                                      'OUTRIGHT' ? null : (
                                         <div className="amount_per_day_div">
                                           <DisplayMoney
                                             amount={
@@ -1554,7 +1719,7 @@ const Market = ({ auth, countdown }) => {
                                             }
                                           />
                                           <span className="per_day_symbol">
-                                            {" "}
+                                            {' '}
                                             / perweek
                                           </span>
                                         </div>
@@ -1576,22 +1741,28 @@ const Market = ({ auth, countdown }) => {
                       //   infinite={false}
                       autoPlay={false}
                       autoPlaySpeed={6000}
-                      transitionDelay={"2s"}
+                      transitionDelay={'2s'}
                       infinite={false}
                       draggable={true}
                       // transitionDuration={500}
                       swipeable={true}
-                      style={{ height: "25em" }}
+                      style={{ height: '25em' }}
                     >
                       {electronicsData
-                        .filter((person) => person.sales_type == "SHOWROOM")
+                        .filter(
+                          (person) => person.sales_type == 'SHOWROOM'
+                        )
                         .slice(0, 10)
                         .map((asset) => {
                           return (
                             <a
+                              key={asset.id}
                               href={`/products/details/${
                                 asset.id
-                              }/${asset.product_name.replace(/\s+/g, "-")}`}
+                              }/${asset.product_name.replace(
+                                /\s+/g,
+                                '-'
+                              )}`}
                               // key={index.toString()}
                             >
                               <li className="carous_list no_marg inventory_cards inventory_cards">
@@ -1601,13 +1772,14 @@ const Market = ({ auth, countdown }) => {
                                     backgroundImage: `url(${asset.product_image})`,
                                   }}
                                 >
-                                  {asset.payment_type == "OUTRIGHT" ? (
+                                  {asset.payment_type ==
+                                  'OUTRIGHT' ? (
                                     <div className="out_right_install_tag">
                                       <button
                                         className="out_right_install_tag_btn"
                                         style={{
-                                          background: "#3ebc6e",
-                                          borderColor: "#3ebc6e",
+                                          background: '#3ebc6e',
+                                          borderColor: '#3ebc6e',
                                         }}
                                       >
                                         Outright
@@ -1624,37 +1796,46 @@ const Market = ({ auth, countdown }) => {
                                     <div className="asset_name">
                                       {asset.product_name}
                                     </div>
-                                    <div class="asset_prices_div">
+                                    <div className="asset_prices_div">
                                       <div className="asset_title">
-                                        {asset.payment_type == "OUTRIGHT" ? (
+                                        {asset.payment_type ==
+                                        'OUTRIGHT' ? (
                                           <span className="init_amount">
                                             <DisplayMoney
                                               amount={asset.amount}
-                                            />{" "}
+                                            />{' '}
                                           </span>
                                         ) : (
                                           <span className="init_amount">
                                             <DisplayMoney
-                                              amount={asset.roundedAmount}
-                                            />{" "}
+                                              amount={
+                                                asset.roundedAmount
+                                              }
+                                            />{' '}
                                           </span>
                                         )}
-                                        {asset.payment_type == "OUTRIGHT" ? (
+                                        {asset.payment_type ==
+                                        'OUTRIGHT' ? (
                                           <span className="slashed_price">
                                             <DisplayMoney
-                                              amount={asset.amount * 2}
+                                              amount={
+                                                asset.amount * 2
+                                              }
                                             />
                                           </span>
                                         ) : (
                                           <span className="slashed_price">
                                             <DisplayMoney
-                                              amount={asset.roundedAmount * 2}
+                                              amount={
+                                                asset.roundedAmount *
+                                                2
+                                              }
                                             />
                                           </span>
                                         )}
                                       </div>
                                       {asset.payment_type ==
-                                      "OUTRIGHT" ? null : (
+                                      'OUTRIGHT' ? null : (
                                         <div className="amount_per_day_div">
                                           <DisplayMoney
                                             amount={
@@ -1663,7 +1844,7 @@ const Market = ({ auth, countdown }) => {
                                             }
                                           />
                                           <span className="per_day_symbol">
-                                            {" "}
+                                            {' '}
                                             / perweek
                                           </span>
                                         </div>
@@ -1685,22 +1866,28 @@ const Market = ({ auth, countdown }) => {
                       //   infinite={false}
                       autoPlay={false}
                       autoPlaySpeed={6000}
-                      transitionDelay={"2s"}
+                      transitionDelay={'2s'}
                       infinite={false}
                       draggable={true}
                       // transitionDuration={500}
                       swipeable={true}
-                      style={{ height: "25em" }}
+                      style={{ height: '25em' }}
                     >
                       {electronicsData
-                        .filter((person) => person.sales_type == "SHOWROOM")
+                        .filter(
+                          (person) => person.sales_type == 'SHOWROOM'
+                        )
                         .slice(0, 10)
                         .map((asset) => {
                           return (
                             <a
+                              key={asset.id}
                               href={`/products/details/${
                                 asset.id
-                              }/${asset.product_name.replace(/\s+/g, "-")}`}
+                              }/${asset.product_name.replace(
+                                /\s+/g,
+                                '-'
+                              )}`}
                               // key={index.toString()}
                             >
                               <li className="carous_list no_marg inventory_cards inventory_cards">
@@ -1710,13 +1897,14 @@ const Market = ({ auth, countdown }) => {
                                     backgroundImage: `url(${asset.product_image})`,
                                   }}
                                 >
-                                  {asset.payment_type == "OUTRIGHT" ? (
+                                  {asset.payment_type ==
+                                  'OUTRIGHT' ? (
                                     <div className="out_right_install_tag">
                                       <button
                                         className="out_right_install_tag_btn"
                                         style={{
-                                          background: "#3ebc6e",
-                                          borderColor: "#3ebc6e",
+                                          background: '#3ebc6e',
+                                          borderColor: '#3ebc6e',
                                         }}
                                       >
                                         Outright
@@ -1733,37 +1921,46 @@ const Market = ({ auth, countdown }) => {
                                     <div className="asset_name">
                                       {asset.product_name}
                                     </div>
-                                    <div class="asset_prices_div">
+                                    <div className="asset_prices_div">
                                       <div className="asset_title">
-                                        {asset.payment_type == "OUTRIGHT" ? (
+                                        {asset.payment_type ==
+                                        'OUTRIGHT' ? (
                                           <span className="init_amount">
                                             <DisplayMoney
                                               amount={asset.amount}
-                                            />{" "}
+                                            />{' '}
                                           </span>
                                         ) : (
                                           <span className="init_amount">
                                             <DisplayMoney
-                                              amount={asset.roundedAmount}
-                                            />{" "}
+                                              amount={
+                                                asset.roundedAmount
+                                              }
+                                            />{' '}
                                           </span>
                                         )}
-                                        {asset.payment_type == "OUTRIGHT" ? (
+                                        {asset.payment_type ==
+                                        'OUTRIGHT' ? (
                                           <span className="slashed_price">
                                             <DisplayMoney
-                                              amount={asset.amount * 2}
+                                              amount={
+                                                asset.amount * 2
+                                              }
                                             />
                                           </span>
                                         ) : (
                                           <span className="slashed_price">
                                             <DisplayMoney
-                                              amount={asset.roundedAmount * 2}
+                                              amount={
+                                                asset.roundedAmount *
+                                                2
+                                              }
                                             />
                                           </span>
                                         )}
                                       </div>
                                       {asset.payment_type ==
-                                      "OUTRIGHT" ? null : (
+                                      'OUTRIGHT' ? null : (
                                         <div className="amount_per_day_div">
                                           <DisplayMoney
                                             amount={
@@ -1772,7 +1969,7 @@ const Market = ({ auth, countdown }) => {
                                             }
                                           />
                                           <span className="per_day_symbol">
-                                            {" "}
+                                            {' '}
                                             / perweek
                                           </span>
                                         </div>
@@ -1816,15 +2013,19 @@ const Market = ({ auth, countdown }) => {
                 <>
                   <div className="show_prods_on_mobile">
                     {ComputerAccessoriesData.filter(
-                      (person) => person.sales_type == "SHOWROOM"
+                      (person) => person.sales_type == 'SHOWROOM'
                     )
                       .slice(0, 10)
                       .map((asset, index5) => {
                         return (
                           <a
+                            key={asset.id}
                             href={`/products/details/${
                               asset.id
-                            }/${asset.product_name.replace(/\s+/g, "-")}`}
+                            }/${asset.product_name.replace(
+                              /\s+/g,
+                              '-'
+                            )}`}
                             key={index5.toString()}
                           >
                             <li className="carous_list no_marg inventory_cards">
@@ -1842,13 +2043,13 @@ const Market = ({ auth, countdown }) => {
                                   //   backgroundPositionY: "center",
                                 }}
                               >
-                                {asset.payment_type == "OUTRIGHT" ? (
+                                {asset.payment_type == 'OUTRIGHT' ? (
                                   <div className="out_right_install_tag">
                                     <button
                                       className="out_right_install_tag_btn"
                                       style={{
-                                        background: "#3ebc6e",
-                                        borderColor: "#3ebc6e",
+                                        background: '#3ebc6e',
+                                        borderColor: '#3ebc6e',
                                       }}
                                     >
                                       Outright
@@ -1867,18 +2068,24 @@ const Market = ({ auth, countdown }) => {
                                   </div>
                                   <div className="asset_prices_div">
                                     <div className="asset_title">
-                                      {asset.payment_type == "OUTRIGHT" ? (
+                                      {asset.payment_type ==
+                                      'OUTRIGHT' ? (
                                         <span className="init_amount">
-                                          <DisplayMoney amount={asset.amount} />{" "}
+                                          <DisplayMoney
+                                            amount={asset.amount}
+                                          />{' '}
                                         </span>
                                       ) : (
                                         <span className="init_amount">
                                           <DisplayMoney
-                                            amount={asset.roundedAmount}
-                                          />{" "}
+                                            amount={
+                                              asset.roundedAmount
+                                            }
+                                          />{' '}
                                         </span>
                                       )}
-                                      {asset.payment_type == "OUTRIGHT" ? (
+                                      {asset.payment_type ==
+                                      'OUTRIGHT' ? (
                                         <span className="slashed_price">
                                           <DisplayMoney
                                             amount={asset.amount * 2}
@@ -1887,12 +2094,15 @@ const Market = ({ auth, countdown }) => {
                                       ) : (
                                         <span className="slashed_price">
                                           <DisplayMoney
-                                            amount={asset.roundedAmount * 2}
+                                            amount={
+                                              asset.roundedAmount * 2
+                                            }
                                           />
                                         </span>
                                       )}
                                     </div>
-                                    {asset.payment_type == "OUTRIGHT" ? null : (
+                                    {asset.payment_type ==
+                                    'OUTRIGHT' ? null : (
                                       <div className="amount_per_day_div">
                                         <DisplayMoney
                                           amount={
@@ -1901,7 +2111,7 @@ const Market = ({ auth, countdown }) => {
                                           }
                                         />
                                         <span className="per_day_symbol">
-                                          {" "}
+                                          {' '}
                                           / perweek
                                         </span>
                                       </div>
@@ -1922,23 +2132,27 @@ const Market = ({ auth, countdown }) => {
                     //   infinite={false}
                     autoPlay={false}
                     autoPlaySpeed={6000}
-                    transitionDelay={"2s"}
+                    transitionDelay={'2s'}
                     infinite={true}
                     draggable={true}
                     // transitionDuration={500}
                     swipeable={true}
-                    style={{ height: "25em" }}
+                    style={{ height: '25em' }}
                   >
                     {ComputerAccessoriesData.filter(
-                      (person) => person.sales_type == "SHOWROOM"
+                      (person) => person.sales_type == 'SHOWROOM'
                     )
                       .slice(0, 10)
                       .map((asset, index5) => {
                         return (
                           <a
+                            key={asset.id}
                             href={`/products/details/${
                               asset.id
-                            }/${asset.product_name.replace(/\s+/g, "-")}`}
+                            }/${asset.product_name.replace(
+                              /\s+/g,
+                              '-'
+                            )}`}
                             key={index5.toString()}
                           >
                             <li className="carous_list no_marg inventory_cards">
@@ -1956,13 +2170,13 @@ const Market = ({ auth, countdown }) => {
                                   //   backgroundPositionY: "center",
                                 }}
                               >
-                                {asset.payment_type == "OUTRIGHT" ? (
+                                {asset.payment_type == 'OUTRIGHT' ? (
                                   <div className="out_right_install_tag">
                                     <button
                                       className="out_right_install_tag_btn"
                                       style={{
-                                        background: "#3ebc6e",
-                                        borderColor: "#3ebc6e",
+                                        background: '#3ebc6e',
+                                        borderColor: '#3ebc6e',
                                       }}
                                     >
                                       Outright
@@ -1981,18 +2195,24 @@ const Market = ({ auth, countdown }) => {
                                   </div>
                                   <div className="asset_prices_div">
                                     <div className="asset_title">
-                                      {asset.payment_type == "OUTRIGHT" ? (
+                                      {asset.payment_type ==
+                                      'OUTRIGHT' ? (
                                         <span className="init_amount">
-                                          <DisplayMoney amount={asset.amount} />{" "}
+                                          <DisplayMoney
+                                            amount={asset.amount}
+                                          />{' '}
                                         </span>
                                       ) : (
                                         <span className="init_amount">
                                           <DisplayMoney
-                                            amount={asset.roundedAmount}
-                                          />{" "}
+                                            amount={
+                                              asset.roundedAmount
+                                            }
+                                          />{' '}
                                         </span>
                                       )}
-                                      {asset.payment_type == "OUTRIGHT" ? (
+                                      {asset.payment_type ==
+                                      'OUTRIGHT' ? (
                                         <span className="slashed_price">
                                           <DisplayMoney
                                             amount={asset.amount * 2}
@@ -2001,12 +2221,15 @@ const Market = ({ auth, countdown }) => {
                                       ) : (
                                         <span className="slashed_price">
                                           <DisplayMoney
-                                            amount={asset.roundedAmount * 2}
+                                            amount={
+                                              asset.roundedAmount * 2
+                                            }
                                           />
                                         </span>
                                       )}
                                     </div>
-                                    {asset.payment_type == "OUTRIGHT" ? null : (
+                                    {asset.payment_type ==
+                                    'OUTRIGHT' ? null : (
                                       <div className="amount_per_day_div">
                                         <DisplayMoney
                                           amount={
@@ -2015,7 +2238,7 @@ const Market = ({ auth, countdown }) => {
                                           }
                                         />
                                         <span className="per_day_symbol">
-                                          {" "}
+                                          {' '}
                                           / perweek
                                         </span>
                                       </div>
@@ -2049,7 +2272,10 @@ const Market = ({ auth, countdown }) => {
           {/* =========[[[[[[[[[]]]]]]]]] */}
           {/* =========[[[[[[[[[]]]]]]]]] */}
 
-          <div className="products_display_body no_pad" id="MusicEquip">
+          <div
+            className="products_display_body no_pad"
+            id="MusicEquip"
+          >
             <div className="products_display_body_heading heading_color_2">
               {musicalEquipment}
               <a
@@ -2075,14 +2301,20 @@ const Market = ({ auth, countdown }) => {
                   <>
                     <div className="show_prods_on_mobile">
                       {musicalEquipmentData
-                        .filter((person) => person.sales_type == "SHOWROOM")
+                        .filter(
+                          (person) => person.sales_type == 'SHOWROOM'
+                        )
                         .slice(0, 10)
                         .map((asset) => {
                           return (
                             <a
+                              key={asset.id}
                               href={`/products/details/${
                                 asset.id
-                              }/${asset.product_name.replace(/\s+/g, "-")}`}
+                              }/${asset.product_name.replace(
+                                /\s+/g,
+                                '-'
+                              )}`}
                               // key={index.toString()}
                             >
                               <li className="carous_list no_marg inventory_cards">
@@ -2092,13 +2324,14 @@ const Market = ({ auth, countdown }) => {
                                     backgroundImage: `url(${asset.product_image})`,
                                   }}
                                 >
-                                  {asset.payment_type == "OUTRIGHT" ? (
+                                  {asset.payment_type ==
+                                  'OUTRIGHT' ? (
                                     <div className="out_right_install_tag">
                                       <button
                                         className="out_right_install_tag_btn"
                                         style={{
-                                          background: "#3ebc6e",
-                                          borderColor: "#3ebc6e",
+                                          background: '#3ebc6e',
+                                          borderColor: '#3ebc6e',
                                         }}
                                       >
                                         Outright
@@ -2115,37 +2348,46 @@ const Market = ({ auth, countdown }) => {
                                     <div className="asset_name">
                                       {asset.product_name}
                                     </div>
-                                    <div class="asset_prices_div">
+                                    <div className="asset_prices_div">
                                       <div className="asset_title">
-                                        {asset.payment_type == "OUTRIGHT" ? (
+                                        {asset.payment_type ==
+                                        'OUTRIGHT' ? (
                                           <span className="init_amount">
                                             <DisplayMoney
                                               amount={asset.amount}
-                                            />{" "}
+                                            />{' '}
                                           </span>
                                         ) : (
                                           <span className="init_amount">
                                             <DisplayMoney
-                                              amount={asset.roundedAmount}
-                                            />{" "}
+                                              amount={
+                                                asset.roundedAmount
+                                              }
+                                            />{' '}
                                           </span>
                                         )}
-                                        {asset.payment_type == "OUTRIGHT" ? (
+                                        {asset.payment_type ==
+                                        'OUTRIGHT' ? (
                                           <span className="slashed_price">
                                             <DisplayMoney
-                                              amount={asset.amount * 2}
+                                              amount={
+                                                asset.amount * 2
+                                              }
                                             />
                                           </span>
                                         ) : (
                                           <span className="slashed_price">
                                             <DisplayMoney
-                                              amount={asset.roundedAmount * 2}
+                                              amount={
+                                                asset.roundedAmount *
+                                                2
+                                              }
                                             />
                                           </span>
                                         )}
                                       </div>
                                       {asset.payment_type ==
-                                      "OUTRIGHT" ? null : (
+                                      'OUTRIGHT' ? null : (
                                         <div className="amount_per_day_div">
                                           <DisplayMoney
                                             amount={
@@ -2154,7 +2396,7 @@ const Market = ({ auth, countdown }) => {
                                             }
                                           />
                                           <span className="per_day_symbol">
-                                            {" "}
+                                            {' '}
                                             / perweek
                                           </span>
                                         </div>
@@ -2176,22 +2418,28 @@ const Market = ({ auth, countdown }) => {
                       //   infinite={false}
                       autoPlay={false}
                       autoPlaySpeed={6000}
-                      transitionDelay={"2s"}
+                      transitionDelay={'2s'}
                       infinite={false}
                       draggable={true}
                       // transitionDuration={500}
                       swipeable={true}
-                      style={{ height: "25em" }}
+                      style={{ height: '25em' }}
                     >
                       {musicalEquipmentData
-                        .filter((person) => person.sales_type == "SHOWROOM")
+                        .filter(
+                          (person) => person.sales_type == 'SHOWROOM'
+                        )
                         .slice(0, 10)
                         .map((asset) => {
                           return (
                             <a
+                              key={asset.id}
                               href={`/products/details/${
                                 asset.id
-                              }/${asset.product_name.replace(/\s+/g, "-")}`}
+                              }/${asset.product_name.replace(
+                                /\s+/g,
+                                '-'
+                              )}`}
                               // key={index.toString()}
                             >
                               <li className="carous_list no_marg inventory_cards inventory_cards">
@@ -2201,13 +2449,14 @@ const Market = ({ auth, countdown }) => {
                                     backgroundImage: `url(${asset.product_image})`,
                                   }}
                                 >
-                                  {asset.payment_type == "OUTRIGHT" ? (
+                                  {asset.payment_type ==
+                                  'OUTRIGHT' ? (
                                     <div className="out_right_install_tag">
                                       <button
                                         className="out_right_install_tag_btn"
                                         style={{
-                                          background: "#3ebc6e",
-                                          borderColor: "#3ebc6e",
+                                          background: '#3ebc6e',
+                                          borderColor: '#3ebc6e',
                                         }}
                                       >
                                         Outright
@@ -2224,37 +2473,46 @@ const Market = ({ auth, countdown }) => {
                                     <div className="asset_name">
                                       {asset.product_name}
                                     </div>
-                                    <div class="asset_prices_div">
+                                    <div className="asset_prices_div">
                                       <div className="asset_title">
-                                        {asset.payment_type == "OUTRIGHT" ? (
+                                        {asset.payment_type ==
+                                        'OUTRIGHT' ? (
                                           <span className="init_amount">
                                             <DisplayMoney
                                               amount={asset.amount}
-                                            />{" "}
+                                            />{' '}
                                           </span>
                                         ) : (
                                           <span className="init_amount">
                                             <DisplayMoney
-                                              amount={asset.roundedAmount}
-                                            />{" "}
+                                              amount={
+                                                asset.roundedAmount
+                                              }
+                                            />{' '}
                                           </span>
                                         )}
-                                        {asset.payment_type == "OUTRIGHT" ? (
+                                        {asset.payment_type ==
+                                        'OUTRIGHT' ? (
                                           <span className="slashed_price">
                                             <DisplayMoney
-                                              amount={asset.amount * 2}
+                                              amount={
+                                                asset.amount * 2
+                                              }
                                             />
                                           </span>
                                         ) : (
                                           <span className="slashed_price">
                                             <DisplayMoney
-                                              amount={asset.roundedAmount * 2}
+                                              amount={
+                                                asset.roundedAmount *
+                                                2
+                                              }
                                             />
                                           </span>
                                         )}
                                       </div>
                                       {asset.payment_type ==
-                                      "OUTRIGHT" ? null : (
+                                      'OUTRIGHT' ? null : (
                                         <div className="amount_per_day_div">
                                           <DisplayMoney
                                             amount={
@@ -2263,7 +2521,7 @@ const Market = ({ auth, countdown }) => {
                                             }
                                           />
                                           <span className="per_day_symbol">
-                                            {" "}
+                                            {' '}
                                             / perweek
                                           </span>
                                         </div>
@@ -2285,19 +2543,23 @@ const Market = ({ auth, countdown }) => {
                       //   infinite={false}
                       autoPlay={false}
                       autoPlaySpeed={6000}
-                      transitionDelay={"2s"}
+                      transitionDelay={'2s'}
                       infinite={false}
                       draggable={true}
                       // transitionDuration={500}
                       swipeable={true}
-                      style={{ height: "25em" }}
+                      style={{ height: '25em' }}
                     >
                       {musicalEquipmentData.map((asset) => {
                         return (
                           <a
+                            key={asset.id}
                             href={`/products/details/${
                               asset.id
-                            }/${asset.product_name.replace(/\s+/g, "-")}`}
+                            }/${asset.product_name.replace(
+                              /\s+/g,
+                              '-'
+                            )}`}
                             // key={index.toString()}
                           >
                             <li className="carous_list no_marg inventory_cards inventory_cards">
@@ -2307,13 +2569,13 @@ const Market = ({ auth, countdown }) => {
                                   backgroundImage: `url(${asset.product_image})`,
                                 }}
                               >
-                                {asset.payment_type == "OUTRIGHT" ? (
+                                {asset.payment_type == 'OUTRIGHT' ? (
                                   <div className="out_right_install_tag">
                                     <button
                                       className="out_right_install_tag_btn"
                                       style={{
-                                        background: "#3ebc6e",
-                                        borderColor: "#3ebc6e",
+                                        background: '#3ebc6e',
+                                        borderColor: '#3ebc6e',
                                       }}
                                     >
                                       Outright
@@ -2330,20 +2592,26 @@ const Market = ({ auth, countdown }) => {
                                   <div className="asset_name">
                                     {asset.product_name}
                                   </div>
-                                  <div class="asset_prices_div">
+                                  <div className="asset_prices_div">
                                     <div className="asset_title">
-                                      {asset.payment_type == "OUTRIGHT" ? (
+                                      {asset.payment_type ==
+                                      'OUTRIGHT' ? (
                                         <span className="init_amount">
-                                          <DisplayMoney amount={asset.amount} />{" "}
+                                          <DisplayMoney
+                                            amount={asset.amount}
+                                          />{' '}
                                         </span>
                                       ) : (
                                         <span className="init_amount">
                                           <DisplayMoney
-                                            amount={asset.roundedAmount}
-                                          />{" "}
+                                            amount={
+                                              asset.roundedAmount
+                                            }
+                                          />{' '}
                                         </span>
                                       )}
-                                      {asset.payment_type == "OUTRIGHT" ? (
+                                      {asset.payment_type ==
+                                      'OUTRIGHT' ? (
                                         <span className="slashed_price">
                                           <DisplayMoney
                                             amount={asset.amount * 2}
@@ -2352,12 +2620,15 @@ const Market = ({ auth, countdown }) => {
                                       ) : (
                                         <span className="slashed_price">
                                           <DisplayMoney
-                                            amount={asset.roundedAmount * 2}
+                                            amount={
+                                              asset.roundedAmount * 2
+                                            }
                                           />
                                         </span>
                                       )}
                                     </div>
-                                    {asset.payment_type == "OUTRIGHT" ? null : (
+                                    {asset.payment_type ==
+                                    'OUTRIGHT' ? null : (
                                       <div className="amount_per_day_div">
                                         <DisplayMoney
                                           amount={
@@ -2366,7 +2637,7 @@ const Market = ({ auth, countdown }) => {
                                           }
                                         />
                                         <span className="per_day_symbol">
-                                          {" "}
+                                          {' '}
                                           / perweek
                                         </span>
                                       </div>
@@ -2391,7 +2662,10 @@ const Market = ({ auth, countdown }) => {
           {/* =========[[[[[[[[[]]]]]]]]] */}
           {/* =========[[[[[[[[[]]]]]]]]] */}
 
-          <div className="products_display_body" id="computersAccessories">
+          <div
+            className="products_display_body"
+            id="computersAccessories"
+          >
             <div className="products_display_body_heading">
               {industrialEquipments}
               <a
@@ -2413,9 +2687,13 @@ const Market = ({ auth, countdown }) => {
                       .map((asset, index5) => {
                         return (
                           <a
+                            key={asset.id}
                             href={`/products/details/${
                               asset.id
-                            }/${asset.product_name.replace(/\s+/g, "-")}`}
+                            }/${asset.product_name.replace(
+                              /\s+/g,
+                              '-'
+                            )}`}
                             key={index5.toString()}
                           >
                             <li className="carous_list no_marg inventory_cards">
@@ -2433,13 +2711,13 @@ const Market = ({ auth, countdown }) => {
                                   //   backgroundPositionY: "center",
                                 }}
                               >
-                                {asset.payment_type == "OUTRIGHT" ? (
+                                {asset.payment_type == 'OUTRIGHT' ? (
                                   <div className="out_right_install_tag">
                                     <button
                                       className="out_right_install_tag_btn"
                                       style={{
-                                        background: "#3ebc6e",
-                                        borderColor: "#3ebc6e",
+                                        background: '#3ebc6e',
+                                        borderColor: '#3ebc6e',
                                       }}
                                     >
                                       Outright
@@ -2458,18 +2736,24 @@ const Market = ({ auth, countdown }) => {
                                   </div>
                                   <div className="asset_prices_div">
                                     <div className="asset_title">
-                                      {asset.payment_type == "OUTRIGHT" ? (
+                                      {asset.payment_type ==
+                                      'OUTRIGHT' ? (
                                         <span className="init_amount">
-                                          <DisplayMoney amount={asset.amount} />{" "}
+                                          <DisplayMoney
+                                            amount={asset.amount}
+                                          />{' '}
                                         </span>
                                       ) : (
                                         <span className="init_amount">
                                           <DisplayMoney
-                                            amount={asset.roundedAmount}
-                                          />{" "}
+                                            amount={
+                                              asset.roundedAmount
+                                            }
+                                          />{' '}
                                         </span>
                                       )}
-                                      {asset.payment_type == "OUTRIGHT" ? (
+                                      {asset.payment_type ==
+                                      'OUTRIGHT' ? (
                                         <span className="slashed_price">
                                           <DisplayMoney
                                             amount={asset.amount * 2}
@@ -2478,12 +2762,15 @@ const Market = ({ auth, countdown }) => {
                                       ) : (
                                         <span className="slashed_price">
                                           <DisplayMoney
-                                            amount={asset.roundedAmount * 2}
+                                            amount={
+                                              asset.roundedAmount * 2
+                                            }
                                           />
                                         </span>
                                       )}
                                     </div>
-                                    {asset.payment_type == "OUTRIGHT" ? null : (
+                                    {asset.payment_type ==
+                                    'OUTRIGHT' ? null : (
                                       <div className="amount_per_day_div">
                                         <DisplayMoney
                                           amount={
@@ -2492,7 +2779,7 @@ const Market = ({ auth, countdown }) => {
                                           }
                                         />
                                         <span className="per_day_symbol">
-                                          {" "}
+                                          {' '}
                                           / perweek
                                         </span>
                                       </div>
@@ -2513,21 +2800,25 @@ const Market = ({ auth, countdown }) => {
                     //   infinite={false}
                     autoPlay={false}
                     autoPlaySpeed={6000}
-                    transitionDelay={"2s"}
+                    transitionDelay={'2s'}
                     infinite={true}
                     draggable={true}
                     // transitionDuration={500}
                     swipeable={true}
-                    style={{ height: "25em" }}
+                    style={{ height: '25em' }}
                   >
                     {industrialEquipmentsData
                       .slice(0, 10)
                       .map((asset, index5) => {
                         return (
                           <a
+                            key={asset.id}
                             href={`/products/details/${
                               asset.id
-                            }/${asset.product_name.replace(/\s+/g, "-")}`}
+                            }/${asset.product_name.replace(
+                              /\s+/g,
+                              '-'
+                            )}`}
                             key={index5.toString()}
                           >
                             <li className="carous_list no_marg inventory_cards">
@@ -2545,13 +2836,13 @@ const Market = ({ auth, countdown }) => {
                                   //   backgroundPositionY: "center",
                                 }}
                               >
-                                {asset.payment_type == "OUTRIGHT" ? (
+                                {asset.payment_type == 'OUTRIGHT' ? (
                                   <div className="out_right_install_tag">
                                     <button
                                       className="out_right_install_tag_btn"
                                       style={{
-                                        background: "#3ebc6e",
-                                        borderColor: "#3ebc6e",
+                                        background: '#3ebc6e',
+                                        borderColor: '#3ebc6e',
                                       }}
                                     >
                                       Outright
@@ -2570,18 +2861,24 @@ const Market = ({ auth, countdown }) => {
                                   </div>
                                   <div className="asset_prices_div">
                                     <div className="asset_title">
-                                      {asset.payment_type == "OUTRIGHT" ? (
+                                      {asset.payment_type ==
+                                      'OUTRIGHT' ? (
                                         <span className="init_amount">
-                                          <DisplayMoney amount={asset.amount} />{" "}
+                                          <DisplayMoney
+                                            amount={asset.amount}
+                                          />{' '}
                                         </span>
                                       ) : (
                                         <span className="init_amount">
                                           <DisplayMoney
-                                            amount={asset.roundedAmount}
-                                          />{" "}
+                                            amount={
+                                              asset.roundedAmount
+                                            }
+                                          />{' '}
                                         </span>
                                       )}
-                                      {asset.payment_type == "OUTRIGHT" ? (
+                                      {asset.payment_type ==
+                                      'OUTRIGHT' ? (
                                         <span className="slashed_price">
                                           <DisplayMoney
                                             amount={asset.amount * 2}
@@ -2590,12 +2887,15 @@ const Market = ({ auth, countdown }) => {
                                       ) : (
                                         <span className="slashed_price">
                                           <DisplayMoney
-                                            amount={asset.roundedAmount * 2}
+                                            amount={
+                                              asset.roundedAmount * 2
+                                            }
                                           />
                                         </span>
                                       )}
                                     </div>
-                                    {asset.payment_type == "OUTRIGHT" ? null : (
+                                    {asset.payment_type ==
+                                    'OUTRIGHT' ? null : (
                                       <div className="amount_per_day_div">
                                         <DisplayMoney
                                           amount={
@@ -2604,7 +2904,7 @@ const Market = ({ auth, countdown }) => {
                                           }
                                         />
                                         <span className="per_day_symbol">
-                                          {" "}
+                                          {' '}
                                           / perweek
                                         </span>
                                       </div>

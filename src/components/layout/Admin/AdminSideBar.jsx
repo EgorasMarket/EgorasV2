@@ -383,7 +383,7 @@ const AdminSideBar = ({ auth }) => {
                         }
                       >
                         <ViewListIcon className="sidebarIcon" />
-                        All Products
+                        My New Products
                       </li>
                     </a>
                   </>

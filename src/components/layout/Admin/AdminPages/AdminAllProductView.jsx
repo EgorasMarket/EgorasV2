@@ -109,6 +109,7 @@ function ItemDetailsPage({ auth, match }) {
     unitCount: "",
     product_condition: "",
     paymentperweek: "",
+    product_code: "",
     amount: "",
     approval: "",
     roundedAmount: "",
@@ -166,6 +167,7 @@ function ItemDetailsPage({ auth, match }) {
     product_condition,
     product_category_desc,
     product_type,
+    product_code,
     unitCount,
     amount,
     product_duration,
@@ -200,7 +202,7 @@ function ItemDetailsPage({ auth, match }) {
         const getSlid = data.data.data.product_specifications;
         //  const slipVar = getSlid.split(',');
         //console.log("====================================");
-        console.log(data.data.data.approval);
+        console.log(data.data.data);
         //console.log("====================================");
         setSpec(getSlid);
         // const slipVar = spec.split(',');
@@ -218,6 +220,7 @@ function ItemDetailsPage({ auth, match }) {
           admin_personnel: data.data.data.admin_personnel,
           amount: data.data.data.amount,
           approval: data.data.data.approval,
+          product_code: data.data.data.product_code,
           roundedAmount: data.data.data.roundedAmount,
           product_category_desc: data.data.data.product_category_desc,
           product_duration: data.data.data.product_duration,
@@ -240,16 +243,6 @@ function ItemDetailsPage({ auth, match }) {
         //console.log(err.response); // "oh, no!"
       });
   }, []);
-
-  useEffect(() => {
-    console.log(more_image);
-    if (more_image != null) {
-      // let splited = JSON.parse(more_image);
-      // setMoreImg(more_image);
-      // console.log(more_image.split(','));
-      // console.log(JSON.parse(more_image));
-    }
-  }, [more_image]);
 
   // const iteming = unitCount;
   const changeBg = (e) => {
@@ -515,6 +508,12 @@ function ItemDetailsPage({ auth, match }) {
                   {product_brand}
                   {/* {props.Brand} */}
                 </div>
+                <div className="product_details_code">
+                  <span className="product_code_title">Product Code: </span>
+                  {product_code.split("/")[0] +
+                    "/" +
+                    product_code.split("/")[3]}
+                </div>
                 <div className="amount_item_div total_amount">
                   <span className="sub_total_txt">Price: </span> ₦
                   {numberWithCommas(parseInt(amount).toFixed())}
@@ -522,36 +521,38 @@ function ItemDetailsPage({ auth, match }) {
                 {/* put new code here  */}
                 {payment_type === "INSTALLMENT" ? (
                   <div className="product_details_code">
-                    <span className="product_code_title">Percentage:</span>
+                    <span className="product_code_title">Percentage: </span>
                     {percentage}%
                   </div>
                 ) : null}
                 <div className="product_details_code">
-                  <span className="product_code_title">Payment Type:</span>
+                  <span className="product_code_title">Payment Type: </span>
                   {payment_type}
                 </div>
                 <div className="product_details_code">
                   <span className="product_code_title">
                     Product Category code:
                   </span>
-                  {product_category_code}
+                  {" " + product_category_code}
                 </div>
                 <div className="product_details_code">
-                  <span className="product_code_title">Product Status:</span>
+                  <span className="product_code_title">Product Status: </span>
                   {status}
                 </div>
                 <div className="product_details_code">
-                  <span className="product_code_title">Admin_Personnel:</span>
+                  <span className="product_code_title">Admin_Personnel: </span>
                   {admin_personnel}
                 </div>
                 <div className="product_details_code">
                   <span className="product_code_title">
                     Product Category Description:
                   </span>
-                  {product_category_desc}
+                  {" " + product_category_desc}
                 </div>
                 <div className="product_details_code">
-                  <span className="product_code_title">Product Condition:</span>
+                  <span className="product_code_title">
+                    Product Condition:{" "}
+                  </span>
                   {product_condition}
                 </div>
                 {payment_type === "INSTALLMENT" ? (
@@ -559,7 +560,9 @@ function ItemDetailsPage({ auth, match }) {
                     className="product_details_code"
                     style={{ color: "#239e54" }}
                   >
-                    <span className="product_code_title">Payment Per Day:</span>
+                    <span className="product_code_title">
+                      Payment Per Day:{" "}
+                    </span>
                     ₦{numberWithCommas(parseInt(paymentperweek).toFixed())}
                     {/* {paymentperweek} */}
                   </div>
@@ -569,12 +572,12 @@ function ItemDetailsPage({ auth, match }) {
                     className="product_details_code"
                     style={{ color: "#239e54" }}
                   >
-                    <span className="product_code_title">Rounded amount:</span>₦
-                    {numberWithCommas(parseInt(roundedAmount).toFixed())}
+                    <span className="product_code_title">Rounded amount: </span>
+                    ₦{numberWithCommas(parseInt(roundedAmount).toFixed())}
                   </div>
                 ) : null}
                 <div className="product_details_code">
-                  <span className="product_code_title">Product Duration:</span>
+                  <span className="product_code_title">Product Duration: </span>
                   {product_duration} days
                 </div>
                 <div className="buy_now_btn_div">
