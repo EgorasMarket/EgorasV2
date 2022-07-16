@@ -983,6 +983,7 @@ span.per_day {
 .wrapper {
   width: 600px;
   margin: 0 auto;
+  
 }
 .accordion-wrapper + * {
   margin-top: 0.5em;

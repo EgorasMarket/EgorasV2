@@ -87,12 +87,12 @@ const responsive8 = {
 function DashboardInvestPage({ auth }) {
   // const [item,setItem]=useState({})
 
+
   const config = {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   };
-
   //  const names =["phones $ Tablet","grocery","Home & Kitchen","electronics","computer & electronics"]
 
   const [item, setItem] = useState([]);

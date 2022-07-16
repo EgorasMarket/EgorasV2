@@ -1,40 +1,35 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-} from 'react';
-import { connect } from 'react-redux';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import { connect } from "react-redux";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 // import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import axios from 'axios';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-import GroupsIcon from '@mui/icons-material/Groups';
-import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import Slider from 'react-slick';
-import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
-import CloseIcon from '@mui/icons-material/Close';
-import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices';
-import LocalOfferIcon from '@mui/icons-material/LocalOffer';
-import Countdown from 'react-countdown';
-import { countdown } from '../../../actions/countdown';
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import axios from "axios";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import GroupsIcon from "@mui/icons-material/Groups";
+import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import Slider from "react-slick";
+import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
+import CloseIcon from "@mui/icons-material/Close";
+import MiscellaneousServicesIcon from "@mui/icons-material/MiscellaneousServices";
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import Countdown from "react-countdown";
+import { countdown } from "../../../actions/countdown";
 
-import Carousel from 'react-multi-carousel';
-import '../../../css/market_home.css';
-import '../../../css/about.css';
-import '../../../css/aboutMobile.css';
-import DisplayMoney from '../../DisplayMoney';
-import { API_URL2 as api_url2 } from '../../../actions/types';
-import { numberWithCommas } from '../../../static';
-import { NoDataFoundComponent } from '../Home2/Dashboard/NodataFound/NoDataFoundComponent';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import TravelExploreOutlinedIcon from '@mui/icons-material/TravelExploreOutlined';
-import FlipCountdown from '@rumess/react-flip-countdown';
+import Carousel from "react-multi-carousel";
+import "../../../css/market_home.css";
+import "../../../css/about.css";
+import "../../../css/aboutMobile.css";
+import DisplayMoney from "../../DisplayMoney";
+import { API_URL2 as api_url2 } from "../../../actions/types";
+import { numberWithCommas } from "../../../static";
+import { NoDataFoundComponent } from "../Home2/Dashboard/NodataFound/NoDataFoundComponent";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import TravelExploreOutlinedIcon from "@mui/icons-material/TravelExploreOutlined";
+import FlipCountdown from "@rumess/react-flip-countdown";
 
 const responsive = {
   superLargeDesktop: {
@@ -134,7 +129,7 @@ export const ComputerBody = () => {
               className="trending_switch_body_area1_cont1_img"
             />
             <div className="trending_img_pop_out">
-              <a href={'/products/categories/Computer & Accessories'}>
+              <a href={"/products/categories/Computer & Accessories"}>
                 <button className="shopNow_pop_out_btn">
                   <TravelExploreOutlinedIcon className="shopping_pop_out_cart_icon" />
                   Explore
@@ -151,7 +146,7 @@ export const ComputerBody = () => {
               className="trending_switch_body_area1_cont2_img"
             />
             <div className="trending_img_pop_out">
-              <a href={'/products/categories/Computer & Accessories'}>
+              <a href={"/products/categories/Computer & Accessories"}>
                 <button className="shopNow_pop_out_btn">
                   <TravelExploreOutlinedIcon className="shopping_pop_out_cart_icon" />
                   Explore
@@ -167,7 +162,7 @@ export const ComputerBody = () => {
               className="trending_switch_body_area1_cont2_img"
             />
             <div className="trending_img_pop_out">
-              <a href={'/products/categories/Computer & Accessories'}>
+              <a href={"/products/categories/Computer & Accessories"}>
                 <button className="shopNow_pop_out_btn">
                   <TravelExploreOutlinedIcon className="shopping_pop_out_cart_icon" />
                   Explore
@@ -186,7 +181,7 @@ export const ComputerBody = () => {
               className="trending_switch_body_area1_cont1_img"
             />
             <div className="trending_img_pop_out">
-              <a href={'/products/categories/Computer & Accessories'}>
+              <a href={"/products/categories/Computer & Accessories"}>
                 <button className="shopNow_pop_out_btn">
                   <TravelExploreOutlinedIcon className="shopping_pop_out_cart_icon" />
                   Explore
@@ -203,7 +198,7 @@ export const ComputerBody = () => {
               className="trending_switch_body_area1_cont2_img"
             />
             <div className="trending_img_pop_out">
-              <a href={'/products/categories/Computer & Accessories'}>
+              <a href={"/products/categories/Computer & Accessories"}>
                 <button className="shopNow_pop_out_btn">
                   <TravelExploreOutlinedIcon className="shopping_pop_out_cart_icon" />
                   Explore
@@ -218,7 +213,7 @@ export const ComputerBody = () => {
               className="trending_switch_body_area1_cont2_img"
             />
             <div className="trending_img_pop_out">
-              <a href={'/products/categories/Computer & Accessories'}>
+              <a href={"/products/categories/Computer & Accessories"}>
                 <button className="shopNow_pop_out_btn">
                   <TravelExploreOutlinedIcon className="shopping_pop_out_cart_icon" />
                   Explore
@@ -570,21 +565,21 @@ export const Home_kitchenBody = () => {
 
 const HomeUpdate = ({ countdown }) => {
   const [counterReady, setCounterReady] = useState(false);
-  const [placeHolder, setPlaceHolder] = useState('');
+  const [placeHolder, setPlaceHolder] = useState("");
   const [awoofProds, setAwoofProds] = useState([]);
   const [counterArray, setCounterArray] = useState([]);
 
   const [counterDuration, setCounterDuration] = useState(0);
   const config = {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   };
   const Ref = useRef(null);
   const [aboutVideoModal, setAboutVideoModal] = useState(false);
   const [term, setTerm] = useState([]);
 
-  const [activeTab, setActiveTab] = useState('computers');
+  const [activeTab, setActiveTab] = useState("computers");
   const toggleAboutVideoModal = () => {
     if (aboutVideoModal === true) {
       setAboutVideoModal(false);
@@ -600,25 +595,25 @@ const HomeUpdate = ({ countdown }) => {
 
   const FeaturedLogos = [
     {
-      img: '/img/featured_logos/featured1.svg',
+      img: "/img/featured_logos/featured1.svg",
     },
     {
-      img: '/img/featured_logos/featured2.svg',
+      img: "/img/featured_logos/featured2.svg",
     },
     {
-      img: '/img/featured_logos/featured3.svg',
+      img: "/img/featured_logos/featured3.svg",
     },
     {
-      img: '/img/featured_logos/featured4.svg',
+      img: "/img/featured_logos/featured4.svg",
     },
     {
-      img: '/img/featured_logos/featured5.svg',
+      img: "/img/featured_logos/featured5.svg",
     },
     {
-      img: '/img/featured_logos/featured6.svg',
+      img: "/img/featured_logos/featured6.svg",
     },
     {
-      img: '/img/featured_logos/featured7.svg',
+      img: "/img/featured_logos/featured7.svg",
     },
   ];
   const settings = {
@@ -635,13 +630,9 @@ const HomeUpdate = ({ countdown }) => {
   };
   useEffect(() => {
     axios
-      .get(
-        api_url2 + '/v1/product/retrieve/approved/products',
-        null,
-        config
-      )
+      .get(api_url2 + "/v1/product/retrieve/approved/products", null, config)
       .then((data) => {
-        console.log(data.data, 'item detail component ');
+        console.log(data.data, "item detail component ");
 
         setTerm(data.data.data);
 
@@ -654,7 +645,7 @@ const HomeUpdate = ({ countdown }) => {
   useEffect(() => {
     axios
       .get(
-        api_url2 + '/v1/product/retrieve/products/byId/' + 'Awoof',
+        api_url2 + "/v1/product/retrieve/products/byId/" + "Awoof",
         null,
         config
       )
@@ -662,7 +653,7 @@ const HomeUpdate = ({ countdown }) => {
         // console.log(data.data, "item detail component ");
 
         setAwoofProds(data.data.data);
-        console.log(data.data, 'awoof log');
+        console.log(data.data, "awoof log");
 
         // setTerm(data.data.data)
       })
@@ -670,7 +661,7 @@ const HomeUpdate = ({ countdown }) => {
         //console.log(err); // "oh, no!"
       });
   }, []);
-  const text = 'No Products Found';
+  const text = "No Products Found";
 
   // Update the count down every 1 second
 
@@ -689,12 +680,9 @@ const HomeUpdate = ({ countdown }) => {
     const today = new Date();
     const endDate = new Date(getData.dropDate);
     const days = parseInt((endDate - today) / (1000 * 60 * 60 * 24));
-    const hours = parseInt(
-      (Math.abs(endDate - today) / (1000 * 60 * 60)) % 24
-    );
+    const hours = parseInt((Math.abs(endDate - today) / (1000 * 60 * 60)) % 24);
     const minutes = parseInt(
-      (Math.abs(endDate.getTime() - today.getTime()) / (1000 * 60)) %
-        60
+      (Math.abs(endDate.getTime() - today.getTime()) / (1000 * 60)) % 60
     );
     const seconds = parseInt(
       (Math.abs(endDate.getTime() - today.getTime()) / 1000) % 60
@@ -707,15 +695,14 @@ const HomeUpdate = ({ countdown }) => {
     let minutescount = minutes * 60 * 1000;
     let secondscount = seconds * 1000;
 
-    let totalMiliseconds =
-      dayscount + hourscount + minutescount + secondscount;
+    let totalMiliseconds = dayscount + hourscount + minutescount + secondscount;
 
     console.log(totalMiliseconds);
 
-    if (getData.countType === 'WEEKLY') {
-      setPlaceHolder('Market Opens In');
+    if (getData.countType === "WEEKLY") {
+      setPlaceHolder("Market Opens In");
     } else {
-      setPlaceHolder('Market Closes In');
+      setPlaceHolder("Market Closes In");
     }
     setCounterDuration(totalMiliseconds);
     setCounterReady(true);
@@ -727,22 +714,18 @@ const HomeUpdate = ({ countdown }) => {
 
   useEffect(() => {
     const timeInterval = setInterval(() => {
-      console.log(counterArray, 'okkkkk');
+      console.log(counterArray, "okkkkk");
       let getData = counterArray[0];
       // let convertToDate = Date(getData.dropDate);
 
       const today = new Date();
       const endDate = new Date(getData.dropDate);
-      const days = parseInt(
-        (endDate - today) / (1000 * 60 * 60 * 24)
-      );
+      const days = parseInt((endDate - today) / (1000 * 60 * 60 * 24));
       const hours = parseInt(
         (Math.abs(endDate - today) / (1000 * 60 * 60)) % 24
       );
       const minutes = parseInt(
-        (Math.abs(endDate.getTime() - today.getTime()) /
-          (1000 * 60)) %
-          60
+        (Math.abs(endDate.getTime() - today.getTime()) / (1000 * 60)) % 60
       );
       const seconds = parseInt(
         (Math.abs(endDate.getTime() - today.getTime()) / 1000) % 60
@@ -764,7 +747,7 @@ const HomeUpdate = ({ countdown }) => {
       console.log(completeCount, newEndDate);
       // 1654532579461 1654532594462
       if (completeCount >= newEndDate) {
-        console.log('time up', new Date());
+        console.log("time up", new Date());
 
         callCounter();
 
@@ -777,19 +760,19 @@ const HomeUpdate = ({ countdown }) => {
         setCounterReady(true);
 
         if (counterArray === undefined || counterArray.length == 0) {
-          console.log('empty array');
+          console.log("empty array");
         } else {
-          if (getData.countType === 'WEEKLY') {
-            console.log('Market Opens In WEEKLY');
-            setPlaceHolder('Market Opens In');
+          if (getData.countType === "WEEKLY") {
+            console.log("Market Opens In WEEKLY");
+            setPlaceHolder("Market Opens In");
             // setCounterDuration(newMinutes);
           } else {
-            console.log('Market Opens In DAILY');
-            setPlaceHolder('Market Closes In');
+            console.log("Market Opens In DAILY");
+            setPlaceHolder("Market Closes In");
           }
         }
       } else {
-        console.log('still counting', Date.now());
+        console.log("still counting", Date.now());
       }
     }, 3000);
     return () => {
@@ -806,7 +789,7 @@ const HomeUpdate = ({ countdown }) => {
     </div>
   );
   return (
-    <div style={{ overflow: 'hidden' }}>
+    <div style={{ overflow: "hidden" }}>
       <section className="h_update_hero_section">
         <div className="custom_container z_in">
           <Slider {...settings}>
@@ -820,13 +803,11 @@ const HomeUpdate = ({ countdown }) => {
             <div className="h_update_hero_area">
               <div className="h_update_hero_area1">
                 <div className="h_update_hero_area1_title">
-                  New items at the price of used items with one year
-                  warranty
+                  New items at the price of used items with one year warranty
                 </div>
                 <div className="h_update_hero_area1_para">
-                  Get renewed items at up to 75% discount compared to
-                  new items
-                </div>{' '}
+                  Get renewed items at up to 75% discount compared to new items
+                </div>{" "}
                 <div className="h_update_hero_area1_para_btns">
                   <a href="/market">
                     <button className="h_update_hero_area1_para_btn1">
@@ -859,12 +840,11 @@ const HomeUpdate = ({ countdown }) => {
             <div className="h_update_hero_area">
               <div className="h_update_hero_area1">
                 <div className="h_update_hero_area1_title">
-                  We want your junks whether big or small, working or
-                  not.
+                  We want your junks whether big or small, working or not.
                 </div>
                 <div className="h_update_hero_area1_para">
                   Convert your junks to cash. Help the planet.
-                </div>{' '}
+                </div>{" "}
                 <div className="h_update_hero_area1_para_btns">
                   <a href="https://ella.ng">
                     <button className="h_update_hero_area1_para_btn1">
@@ -900,9 +880,9 @@ const HomeUpdate = ({ countdown }) => {
                   Better ways to borrow & save money.
                 </div>
                 <div className="h_update_hero_area1_para">
-                  Pledge your assets to access interest-free loans
-                  while saving up to get any desired item.
-                </div>{' '}
+                  Pledge your assets to access interest-free loans while saving
+                  up to get any desired item.
+                </div>{" "}
                 <div className="h_update_hero_area1_para_btns">
                   <a href="/loan">
                     <button className="h_update_hero_area1_para_btn1">
@@ -983,11 +963,11 @@ const HomeUpdate = ({ countdown }) => {
                     allow="autoplay; fullscreen; picture-in-picture"
                     allowfullscreen
                     style={{
-                      position: 'absolute',
-                      top: '0',
-                      left: '0',
-                      width: '100%',
-                      height: '100%',
+                      position: "absolute",
+                      top: "0",
+                      left: "0",
+                      width: "100%",
+                      height: "100%",
                     }}
                     // title="EGORAS TRILLER .MP4"
                   />
@@ -997,12 +977,10 @@ const HomeUpdate = ({ countdown }) => {
           ) : null}
 
           <div className="aboutVideo_header_cont">
-            <div className="about_video_header_title">
-              Egoras Documentary
-            </div>
+            <div className="about_video_header_title">Egoras Documentary</div>
             <div className="about_video_header_txt">
-              Watch our documentary to see the extremely high demand
-              for Egoras renewed items.
+              Watch our documentary to see the extremely high demand for Egoras
+              renewed items.
             </div>
           </div>
           <div className="about_video_thumbnail_cont">
@@ -1054,10 +1032,7 @@ const HomeUpdate = ({ countdown }) => {
 
       <section className="productsDisplaySection">
         <div className="custom_container">
-          <div
-            className="home_products_display_cont"
-            id="computerAcc"
-          >
+          <div className="home_products_display_cont" id="computerAcc">
             <div className="home_products_body_head">
               <div className="shop_heading_body awoof_head_body">
                 <a
@@ -1071,7 +1046,7 @@ const HomeUpdate = ({ countdown }) => {
                   {counterReady ? (
                     <div>
                       <span className="startsIn">
-                        {placeHolder}:{' '}
+                        {placeHolder}:{" "}
                         <div className="count_down_shopping_">
                           <Countdown
                             className="countdownDiv"
@@ -1084,8 +1059,7 @@ const HomeUpdate = ({ countdown }) => {
                   ) : null}
                 </div>
                 <span className="shop_heading_para">
-                  Opens Every Saturday by 12:00am and closes on Sunday
-                  12:00am .
+                  Opens Every Saturday by 12:00am and closes on Sunday 12:00am .
                 </span>
               </div>
             </div>
@@ -1103,10 +1077,7 @@ const HomeUpdate = ({ countdown }) => {
                           key={index}
                           href={`/products/details/${
                             asset.id
-                          }/${asset.product_name.replace(
-                            /\s+/g,
-                            '-'
-                          )}`}
+                          }/${asset.product_name.replace(/\s+/g, "-")}`}
                         >
                           <li className="carous_list no_marg inventory_cards">
                             <div
@@ -1127,9 +1098,9 @@ const HomeUpdate = ({ countdown }) => {
                                 <button
                                   className="out_right_install_tag_btn"
                                   style={{
-                                    background: '#000',
-                                    borderColor: '#000',
-                                    color: '#fff',
+                                    background: "#000",
+                                    borderColor: "#000",
+                                    color: "#fff",
                                   }}
                                 >
                                   Awoof
@@ -1142,12 +1113,9 @@ const HomeUpdate = ({ countdown }) => {
                                 </div>
                                 <div className="asset_prices_div">
                                   <div className="asset_title">
-                                    {asset.payment_type ==
-                                    'OUTRIGHT' ? (
+                                    {asset.payment_type == "OUTRIGHT" ? (
                                       <span className="init_amount">
-                                        <DisplayMoney
-                                          amount={asset.amount}
-                                        />
+                                        <DisplayMoney amount={asset.amount} />
                                       </span>
                                     ) : (
                                       <span className="init_amount">
@@ -1156,8 +1124,7 @@ const HomeUpdate = ({ countdown }) => {
                                         />
                                       </span>
                                     )}
-                                    {asset.payment_type ==
-                                    'OUTRIGHT' ? (
+                                    {asset.payment_type == "OUTRIGHT" ? (
                                       <span className="slashed_price">
                                         <DisplayMoney
                                           amount={asset.amount * 2}
@@ -1166,25 +1133,21 @@ const HomeUpdate = ({ countdown }) => {
                                     ) : (
                                       <span className="slashed_price">
                                         <DisplayMoney
-                                          amount={
-                                            asset.roundedAmount * 2
-                                          }
+                                          amount={asset.roundedAmount * 2}
                                         />
                                       </span>
                                     )}
                                   </div>
-                                  {asset.payment_type ==
-                                  'OUTRIGHT' ? null : (
+                                  {asset.payment_type == "OUTRIGHT" ? null : (
                                     <div className="amount_per_day_div">
                                       <DisplayMoney
                                         amount={
-                                          asset.amount /
-                                          asset.product_duration
+                                          asset.amount / asset.product_duration
                                         }
                                       />
 
                                       <span className="per_day_symbol">
-                                        {' '}
+                                        {" "}
                                         / perweek
                                       </span>
                                     </div>
@@ -1206,19 +1169,19 @@ const HomeUpdate = ({ countdown }) => {
                     //   infinite={false}
                     autoPlay={false}
                     autoPlaySpeed={6000}
-                    transitionDelay={'2s'}
+                    transitionDelay={"2s"}
                     infinite={false}
                     draggable={true}
                     // transitionDuration={500}
                     swipeable={true}
-                    style={{ height: '25em' }}
+                    style={{ height: "25em" }}
                   >
                     {awoofProds.slice(0, 15).map((asset) => (
                       <a
                         key={asset.id}
                         href={`/products/details/${
                           asset.id
-                        }/${asset.product_name.replace(/\s+/g, '-')}`}
+                        }/${asset.product_name.replace(/\s+/g, "-")}`}
                       >
                         <li className="carous_list">
                           <div
@@ -1239,9 +1202,9 @@ const HomeUpdate = ({ countdown }) => {
                               <button
                                 className="out_right_install_tag_btn"
                                 style={{
-                                  background: '#000',
-                                  borderColor: '#000',
-                                  color: '#fff',
+                                  background: "#000",
+                                  borderColor: "#000",
+                                  color: "#fff",
                                 }}
                               >
                                 Awoof
@@ -1254,12 +1217,9 @@ const HomeUpdate = ({ countdown }) => {
                               </div>
                               <div className="asset_prices_div">
                                 <div className="asset_title">
-                                  {asset.payment_type ==
-                                  'OUTRIGHT' ? (
+                                  {asset.payment_type == "OUTRIGHT" ? (
                                     <span className="init_amount">
-                                      <DisplayMoney
-                                        amount={asset.amount}
-                                      />
+                                      <DisplayMoney amount={asset.amount} />
                                     </span>
                                   ) : (
                                     <span className="init_amount">
@@ -1268,35 +1228,28 @@ const HomeUpdate = ({ countdown }) => {
                                       />
                                     </span>
                                   )}
-                                  {asset.payment_type ==
-                                  'OUTRIGHT' ? (
+                                  {asset.payment_type == "OUTRIGHT" ? (
                                     <span className="slashed_price">
-                                      <DisplayMoney
-                                        amount={asset.amount * 2}
-                                      />
+                                      <DisplayMoney amount={asset.amount * 2} />
                                     </span>
                                   ) : (
                                     <span className="slashed_price">
                                       <DisplayMoney
-                                        amount={
-                                          asset.roundedAmount * 2
-                                        }
+                                        amount={asset.roundedAmount * 2}
                                       />
                                     </span>
                                   )}
                                 </div>
-                                {asset.payment_type ==
-                                'OUTRIGHT' ? null : (
+                                {asset.payment_type == "OUTRIGHT" ? null : (
                                   <div className="amount_per_day_div">
                                     <DisplayMoney
                                       amount={
-                                        asset.amount /
-                                        asset.product_duration
+                                        asset.amount / asset.product_duration
                                       }
                                     />
 
                                     <span className="per_day_symbol">
-                                      {' '}
+                                      {" "}
                                       / perweek
                                     </span>
                                   </div>
@@ -1325,10 +1278,7 @@ const HomeUpdate = ({ countdown }) => {
 
       <section className="productsDisplaySection">
         <div className="custom_container">
-          <div
-            className="home_products_display_cont"
-            id="computerAcc"
-          >
+          <div className="home_products_display_cont" id="computerAcc">
             <div className="home_products_body_head">
               <a href="/market" className="shop_heading_body">
                 <div className="shop_arrow_div">
@@ -1337,8 +1287,7 @@ const HomeUpdate = ({ countdown }) => {
                 </div>
 
                 <span className="shop_heading_para">
-                  Explore curated inventory hand-picked by Egoras
-                  team.
+                  Explore curated inventory hand-picked by Egoras team.
                 </span>
               </a>
             </div>
@@ -1356,10 +1305,7 @@ const HomeUpdate = ({ countdown }) => {
                           key={asset.id}
                           href={`/products/details/${
                             asset.id
-                          }/${asset.product_name.replace(
-                            /\s+/g,
-                            '-'
-                          )}`}
+                          }/${asset.product_name.replace(/\s+/g, "-")}`}
                         >
                           <li className="carous_list no_marg inventory_cards">
                             <div
@@ -1376,13 +1322,13 @@ const HomeUpdate = ({ countdown }) => {
                                 //   backgroundPositionY: "center",
                               }}
                             >
-                              {asset.payment_type == 'OUTRIGHT' ? (
+                              {asset.payment_type == "OUTRIGHT" ? (
                                 <div className="out_right_install_tag">
                                   <button
                                     className="out_right_install_tag_btn"
                                     style={{
-                                      background: '#3ebc6e',
-                                      borderColor: '#3ebc6e',
+                                      background: "#3ebc6e",
+                                      borderColor: "#3ebc6e",
                                     }}
                                   >
                                     Outright
@@ -1401,12 +1347,9 @@ const HomeUpdate = ({ countdown }) => {
                                 </div>
                                 <div className="asset_prices_div">
                                   <div className="asset_title">
-                                    {asset.payment_type ==
-                                    'OUTRIGHT' ? (
+                                    {asset.payment_type == "OUTRIGHT" ? (
                                       <span className="init_amount">
-                                        <DisplayMoney
-                                          amount={asset.amount}
-                                        />
+                                        <DisplayMoney amount={asset.amount} />
                                       </span>
                                     ) : (
                                       <span className="init_amount">
@@ -1415,8 +1358,7 @@ const HomeUpdate = ({ countdown }) => {
                                         />
                                       </span>
                                     )}
-                                    {asset.payment_type ==
-                                    'OUTRIGHT' ? (
+                                    {asset.payment_type == "OUTRIGHT" ? (
                                       <span className="slashed_price">
                                         <DisplayMoney
                                           amount={asset.amount * 2}
@@ -1425,25 +1367,21 @@ const HomeUpdate = ({ countdown }) => {
                                     ) : (
                                       <span className="slashed_price">
                                         <DisplayMoney
-                                          amount={
-                                            asset.roundedAmount * 2
-                                          }
+                                          amount={asset.roundedAmount * 2}
                                         />
                                       </span>
                                     )}
                                   </div>
-                                  {asset.payment_type ==
-                                  'OUTRIGHT' ? null : (
+                                  {asset.payment_type == "OUTRIGHT" ? null : (
                                     <div className="amount_per_day_div">
                                       <DisplayMoney
                                         amount={
-                                          asset.amount /
-                                          asset.product_duration
+                                          asset.amount / asset.product_duration
                                         }
                                       />
 
                                       <span className="per_day_symbol">
-                                        {' '}
+                                        {" "}
                                         / perweek
                                       </span>
                                     </div>
@@ -1465,19 +1403,19 @@ const HomeUpdate = ({ countdown }) => {
                     //   infinite={false}
                     autoPlay={false}
                     autoPlaySpeed={6000}
-                    transitionDelay={'2s'}
+                    transitionDelay={"2s"}
                     infinite={false}
                     draggable={true}
                     // transitionDuration={500}
                     swipeable={true}
-                    style={{ height: '25em' }}
+                    style={{ height: "25em" }}
                   >
                     {term.slice(0, 15).map((asset) => (
                       <a
                         key={asset.id}
                         href={`/products/details/${
                           asset.id
-                        }/${asset.product_name.replace(/\s+/g, '-')}`}
+                        }/${asset.product_name.replace(/\s+/g, "-")}`}
                       >
                         <li className="carous_list">
                           <div
@@ -1494,13 +1432,13 @@ const HomeUpdate = ({ countdown }) => {
                               //   backgroundPositionY: "center",
                             }}
                           >
-                            {asset.payment_type == 'OUTRIGHT' ? (
+                            {asset.payment_type == "OUTRIGHT" ? (
                               <div className="out_right_install_tag">
                                 <button
                                   className="out_right_install_tag_btn"
                                   style={{
-                                    background: '#3ebc6e',
-                                    borderColor: '#3ebc6e',
+                                    background: "#3ebc6e",
+                                    borderColor: "#3ebc6e",
                                   }}
                                 >
                                   Outright
@@ -1519,12 +1457,9 @@ const HomeUpdate = ({ countdown }) => {
                               </div>
                               <div className="asset_prices_div">
                                 <div className="asset_title">
-                                  {asset.payment_type ==
-                                  'OUTRIGHT' ? (
+                                  {asset.payment_type == "OUTRIGHT" ? (
                                     <span className="init_amount">
-                                      <DisplayMoney
-                                        amount={asset.amount}
-                                      />
+                                      <DisplayMoney amount={asset.amount} />
                                     </span>
                                   ) : (
                                     <span className="init_amount">
@@ -1533,35 +1468,28 @@ const HomeUpdate = ({ countdown }) => {
                                       />
                                     </span>
                                   )}
-                                  {asset.payment_type ==
-                                  'OUTRIGHT' ? (
+                                  {asset.payment_type == "OUTRIGHT" ? (
                                     <span className="slashed_price">
-                                      <DisplayMoney
-                                        amount={asset.amount * 2}
-                                      />
+                                      <DisplayMoney amount={asset.amount * 2} />
                                     </span>
                                   ) : (
                                     <span className="slashed_price">
                                       <DisplayMoney
-                                        amount={
-                                          asset.roundedAmount * 2
-                                        }
+                                        amount={asset.roundedAmount * 2}
                                       />
                                     </span>
                                   )}
                                 </div>
-                                {asset.payment_type ==
-                                'OUTRIGHT' ? null : (
+                                {asset.payment_type == "OUTRIGHT" ? null : (
                                   <div className="amount_per_day_div">
                                     <DisplayMoney
                                       amount={
-                                        asset.amount /
-                                        asset.product_duration
+                                        asset.amount / asset.product_duration
                                       }
                                     />
 
                                     <span className="per_day_symbol">
-                                      {' '}
+                                      {" "}
                                       / perweek
                                     </span>
                                   </div>
@@ -1592,8 +1520,7 @@ const HomeUpdate = ({ countdown }) => {
           <div className="quality_standards_cont">
             <div className="quality_standards_cont1">
               <div className="quality_standards_cont1Txt">
-                Welcome to Egoras, the Liquidity & Recommerce
-                platform.
+                Welcome to Egoras, the Liquidity & Recommerce platform.
               </div>
               <button className="qualityStandard_btn">
                 Our quality standards
@@ -1608,8 +1535,7 @@ const HomeUpdate = ({ countdown }) => {
                     One stop Liquidity.
                   </div>
                   <div className="quality_standards_cont2_card1_text_para">
-                    Buy,sell and collateralise all kinds of
-                    micro-assets easily.
+                    Buy,sell and collateralise all kinds of micro-assets easily.
                   </div>
                 </div>
               </div>
@@ -1621,8 +1547,8 @@ const HomeUpdate = ({ countdown }) => {
                     Guaranteed quality.
                   </div>
                   <div className="quality_standards_cont2_card1_text_para">
-                    All are refurbished by experts and are
-                    continuously monitored
+                    All are refurbished by experts and are continuously
+                    monitored
                   </div>
                 </div>
               </div>
@@ -1634,8 +1560,8 @@ const HomeUpdate = ({ countdown }) => {
                     Awesome service
                   </div>
                   <div className="quality_standards_cont2_card1_text_para">
-                    Shop online or from our Stores close to you to get
-                    the best shopping experience ever.
+                    Shop online or from our Stores close to you to get the best
+                    shopping experience ever.
                   </div>
                 </div>
               </div>
@@ -1647,8 +1573,7 @@ const HomeUpdate = ({ countdown }) => {
                     Positive impact
                   </div>
                   <div className="quality_standards_cont2_card1_text_para">
-                    Shopping refurbished items keeps waste out of
-                    landfills.
+                    Shopping refurbished items keeps waste out of landfills.
                   </div>
                 </div>
               </div>
@@ -1671,9 +1596,7 @@ const HomeUpdate = ({ countdown }) => {
           <div className="trending_section_area">
             <div className="trending_section_txt">
               <div className="trending_section_heading">
-                <span className="trending_section_heading_title">
-                  Explore{' '}
-                </span>{' '}
+                <span className="trending_section_heading_title">Explore </span>{" "}
                 trending categories on Egoras
               </div>
 
@@ -1684,9 +1607,9 @@ const HomeUpdate = ({ countdown }) => {
             <div className="trending_category_switch_tab">
               <div
                 className={
-                  activeTab == 'computers'
-                    ? 'category_switch_tab1_active'
-                    : 'category_switch_tab1'
+                  activeTab == "computers"
+                    ? "category_switch_tab1_active"
+                    : "category_switch_tab1"
                 }
                 id="computers"
                 onClick={ToggleActiveTab}
@@ -1696,9 +1619,9 @@ const HomeUpdate = ({ countdown }) => {
 
               <div
                 className={
-                  activeTab == 'phones'
-                    ? 'category_switch_tab1_active'
-                    : 'category_switch_tab1'
+                  activeTab == "phones"
+                    ? "category_switch_tab1_active"
+                    : "category_switch_tab1"
                 }
                 id="phones"
                 onClick={ToggleActiveTab}
@@ -1707,9 +1630,9 @@ const HomeUpdate = ({ countdown }) => {
               </div>
               <div
                 className={
-                  activeTab == 'electronics'
-                    ? 'category_switch_tab1_active'
-                    : 'category_switch_tab1'
+                  activeTab == "electronics"
+                    ? "category_switch_tab1_active"
+                    : "category_switch_tab1"
                 }
                 id="electronics"
                 onClick={ToggleActiveTab}
@@ -1718,9 +1641,9 @@ const HomeUpdate = ({ countdown }) => {
               </div>
               <div
                 className={
-                  activeTab == 'home_kitchen'
-                    ? 'category_switch_tab1_active'
-                    : 'category_switch_tab1'
+                  activeTab == "home_kitchen"
+                    ? "category_switch_tab1_active"
+                    : "category_switch_tab1"
                 }
                 id="home_kitchen"
                 onClick={ToggleActiveTab}
@@ -1729,12 +1652,10 @@ const HomeUpdate = ({ countdown }) => {
               </div>
             </div>
 
-            {activeTab === 'computers' ? <ComputerBody /> : null}
-            {activeTab === 'phones' ? <PhonesBody /> : null}
-            {activeTab === 'electronics' ? <ElectronicsBody /> : null}
-            {activeTab === 'home_kitchen' ? (
-              <Home_kitchenBody />
-            ) : null}
+            {activeTab === "computers" ? <ComputerBody /> : null}
+            {activeTab === "phones" ? <PhonesBody /> : null}
+            {activeTab === "electronics" ? <ElectronicsBody /> : null}
+            {activeTab === "home_kitchen" ? <Home_kitchenBody /> : null}
           </div>
         </div>
       </section>
@@ -1748,11 +1669,9 @@ const HomeUpdate = ({ countdown }) => {
             <div className="sell_old_tech_area1">
               <div className="ella_banner_writeUp">
                 <div className="quality_standards_cont1Txt">
-                  Got old tech? Take our money.{' '}
+                  Got old tech? Take our money.{" "}
                 </div>
-                <div className="">
-                  Sell your used item in minutes.
-                </div>
+                <div className="">Sell your used item in minutes.</div>
               </div>
               <a href="https://ella.ng" className="ella_link">
                 <button className="ella_banner_btn">Sell Now</button>
@@ -1848,24 +1767,16 @@ const HomeUpdate = ({ countdown }) => {
             >
               {FeaturedLogos.map((data, index) => (
                 <div key={index} className="featured_in_logos_cont">
-                  {' '}
-                  <img
-                    src={data.img}
-                    alt=""
-                    className="featured_logo"
-                  />
+                  {" "}
+                  <img src={data.img} alt="" className="featured_logo" />
                 </div>
               ))}
             </Carousel>
             <div className="featured_logos_mobile">
               {FeaturedLogos.map((data, index) => (
                 <div key={index} className="featured_in_logos_cont">
-                  {' '}
-                  <img
-                    src={data.img}
-                    alt=""
-                    className="featured_logo"
-                  />
+                  {" "}
+                  <img src={data.img} alt="" className="featured_logo" />
                 </div>
               ))}
             </div>

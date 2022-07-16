@@ -20,7 +20,10 @@
   align-items: center;
   justify-content: end;
 }
-
+.filter_table_area {
+    display: flex;
+    justify-content: space-between;
+}
 .toggle_seemore {
   padding: 0.5em 2em;
   border-radius: 8px;

@@ -179,15 +179,9 @@ const DashBoardRefferalHome = ({ auth }) => {
                     <>
                       {referrals.length <= 0 ? (
                         <NoDataFoundComponent />
-<<<<<<< HEAD
                       ) : seeMore === true ? (
                         <div className="expanded_refferals_div">
                           {referrals.map((data) => (
-=======
-                      ) : (
-                        <>
-                          {referrals.slice(0, 5).map((data) => (
->>>>>>> 320b26eb9b72d4c19f02226f6c745a98ca0c019a
                             <div
                               className="user_refferals_table_body_cont1"
                               style={
