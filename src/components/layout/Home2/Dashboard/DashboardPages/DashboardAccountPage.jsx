@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { API_URL2 as api_url2 } from "../../../../../actions/types";
+import { API_URL2, API_URL2 as api_url2 } from "../../../../../actions/types";
 import Stack from "@mui/material/Stack";
 import EditIcon from "@mui/icons-material/Edit";
 import DatePicker from "react-date-picker";
@@ -74,6 +74,7 @@ function DashboardAccountPage({
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [customerAddress, setCustomerAddress] = useState("");
   const [hasValue, setHasValue] = useState(false);
+  const [updateUserInfo, setUpdateUserInfor] = useState(false);
 
   const [customer_image, setcustomer_image] = useState("");
   const [customerBvn1, setCustomerBvn1] = useState("");
@@ -432,10 +433,8 @@ function DashboardAccountPage({
     let res = await sumitGenderAndDate(
       firstnameQ,
       lastnameQ,
-      // phoneNumberQ,
       gender,
       birthDate
-      // dateOfBirth
     );
 
     if (isLoading2 == true) {
@@ -458,17 +457,14 @@ function DashboardAccountPage({
     }
   };
 
-  // const updateInfo = async (e) => {
-  //   let res = await userInfo(firstname1,lastname1,phoneNumber1,email1,BVN1);
-
-  //   //console.log(res);
-
-  //   if (res.data.data.success == true) {
-  //     //console.log("okay Good Server");
-  //   } else {
-  //     setAlert(res.data.data.errors[0].msg, "danger");
-  //   }
-  // };
+  const updateInfo = async (e) => {
+    const body = {};
+    let call = await axios.put(
+      `${API_URL2}/v1/user/update/customer/info/alternative`,
+      body,
+      config
+    );
+  };
 
   useEffect(() => {
     if (relationship.length > 1) {
@@ -853,8 +849,10 @@ function DashboardAccountPage({
                             label="First Name"
                             variant="outlined"
                             // name="firstnameQ"
-                            value={Userfirstname}
-                            // onChange={onChangeFor}
+                            // value={Userfirstname}
+                            // onChange={(e) =>
+                            //   setUserInfo.Userfirstname('sam')
+                            // }
                           />
                           <TextField
                             className="name_input1"
@@ -868,6 +866,7 @@ function DashboardAccountPage({
                         </div>
                       )}
                     </div>
+
                     {/* ============ */}
                     {/* ============ */}
                     {/* ============ */}
@@ -961,31 +960,31 @@ function DashboardAccountPage({
                     {/* ============ */}
                     {/* ============ */}
                     {/* ============ */}
-                    {genderEmpty == true ? (
-                      <div className="toggle_body_area1_cont1">
-                        <div className="toggle_body_area1_cont1_txts"></div>
-                        <div className="toggle_body_area1_cont1_input">
-                          <button
-                            className={fold1}
-                            onClick={sends}
-                            disabled={disable2}
-                          >
-                            {isLoading2 ? (
-                              <span>
-                                Saving
-                                <FontAwesomeIcon
-                                  className="ml-2"
-                                  icon={faSpinner}
-                                  spin
-                                />
-                              </span>
-                            ) : (
-                              <span> Save Changes</span>
-                            )}
-                          </button>
-                        </div>
+                    {/* {genderEmpty == false ? ( */}
+                    <div className="toggle_body_area1_cont1">
+                      <div className="toggle_body_area1_cont1_txts"></div>
+                      <div className="toggle_body_area1_cont1_input">
+                        <button
+                          className={fold1}
+                          onClick={sends}
+                          disabled={disable2}
+                        >
+                          {isLoading2 ? (
+                            <span>
+                              Saving
+                              <FontAwesomeIcon
+                                className="ml-2"
+                                icon={faSpinner}
+                                spin
+                              />
+                            </span>
+                          ) : (
+                            <span> Save Changes</span>
+                          )}
+                        </button>
                       </div>
-                    ) : null}
+                    </div>
+                    {/* ) : null} */}
                     {/* ============ */}
                     {/* ============ */}
                     {/* ============ */}

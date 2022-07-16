@@ -297,6 +297,7 @@ const Market = ({ auth, countdown }) => {
   const callCounter = async () => {
     let res3 = await countdown();
     setCounterArray(res3.data.data);
+    console.log(res3.data.data);
     let getData = res3.data.data[0];
     // console.log(res3.data.data);
     // console.log(getData.countType);
